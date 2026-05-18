@@ -58,14 +58,14 @@ export function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, set
   return (
     <header className={"sp-nav" + (scrolled ? " is-scrolled" : "")}>
       <div className="sp-container sp-nav-inner">
-        <a href="index.html#top" className="sp-nav-brand">
+        <a href="#top" className="sp-nav-brand">
           <Logo variant={logoVariant} size={28} />
         </a>
         <nav className="sp-nav-links">
-          <a href="index.html#suite">{t.products}</a>
-          <a href="index.html#demo">{t.demo}</a>
-          <a href="index.html#pricing">{t.pricing}</a>
-          <a href="index.html#faq">{t.faq}</a>
+          <a href="#suite">{t.products}</a>
+          <a href="#demo">{t.demo}</a>
+          <a href="#pricing">{t.pricing}</a>
+          <a href="#faq">{t.faq}</a>
         </nav>
         <div className="sp-nav-actions">
           <div className="sp-lang-toggle" role="tablist" aria-label="Language">
@@ -84,11 +84,11 @@ export function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, set
       </div>
       {openMobile && (
         <div className="sp-nav-mobile">
-          <a href="index.html#suite" onClick={() => setOpenMobile(false)}>{t.products}</a>
-          <a href="index.html#demo" onClick={() => setOpenMobile(false)}>{t.demo}</a>
-          <a href="index.html#pricing" onClick={() => setOpenMobile(false)}>{t.pricing}</a>
-          <a href="index.html#faq" onClick={() => setOpenMobile(false)}>{t.faq}</a>
-          <a href="index.html#suite" className="sp-btn sp-btn-primary" onClick={() => setOpenMobile(false)}>{t.cta}</a>
+          <a href="#suite" onClick={() => setOpenMobile(false)}>{t.products}</a>
+          <a href="#demo" onClick={() => setOpenMobile(false)}>{t.demo}</a>
+          <a href="#pricing" onClick={() => setOpenMobile(false)}>{t.pricing}</a>
+          <a href="#faq" onClick={() => setOpenMobile(false)}>{t.faq}</a>
+          <a href="#suite" className="sp-btn sp-btn-primary" onClick={() => setOpenMobile(false)}>{t.cta}</a>
         </div>
       )}
     </header>
@@ -394,9 +394,9 @@ function Pricing({ lang }) {
                   <li key={f}><Icon name="check" size={14} /> {f}</li>
                 ))}
               </ul>
-              <button className={"sp-btn " + (p.highlight ? "sp-btn-primary" : "sp-btn-ghost") + " sp-btn-block"}>
+              <a href={p.url} target={p.url && p.url.startsWith("http") ? "_blank" : undefined} rel={p.url && p.url.startsWith("http") ? "noopener" : undefined} className={"sp-btn " + (p.highlight ? "sp-btn-primary" : "sp-btn-ghost") + " sp-btn-block"}>
                 {p.cta}
-              </button>
+              </a>
             </article>
           ))}
         </div>

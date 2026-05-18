@@ -53,7 +53,7 @@ const T = {
           desc: "Bibliothèque de matériaux en expansion, calculatrice pi-po, assistant IA, devis prêt-client en 90 sec.",
           color: "orange",
           cta: "Accéder à l'app",
-          url: "presentation.html",
+          url: "https://calcupro360.seriespro360.com",
         },
         {
           tag: "Bientôt",
@@ -62,7 +62,7 @@ const T = {
           desc: "Un nouvel outil pour accélérer la prise de mesure sur le chantier. Détails à venir.",
           color: "blue",
           cta: "Être notifié",
-          url: "#",
+          url: "#notify",
           placeholder: true,
         },
         {
@@ -72,7 +72,7 @@ const T = {
           desc: "Un outil spécialisé pour les cahiers des charges en construction. Détails à venir.",
           color: "green",
           cta: "Être notifié",
-          url: "#",
+          url: "#notify",
           placeholder: true,
         },
         {
@@ -82,7 +82,7 @@ const T = {
           desc: "Logiciel spécialisé pour la commande et la production de moulures métalliques sur mesure.",
           color: "yellow",
           cta: "Être notifié",
-          url: "#",
+          url: "#notify",
           placeholder: true,
         },
       ],
@@ -253,6 +253,7 @@ const T = {
             "Devis PDF avec filigrane",
           ],
           cta: "Commencer",
+          url: "https://calcupro360.seriespro360.com",
           highlight: false,
         },
         {
@@ -269,6 +270,7 @@ const T = {
             "Support prioritaire",
           ],
           cta: "Passer Pro",
+          url: "https://calcupro360.seriespro360.com",
           highlight: true,
         },
         {
@@ -284,6 +286,7 @@ const T = {
             "Facturation annuelle consolidée",
           ],
           cta: "Nous contacter",
+          url: "mailto:contact@seriespro360.com",
           highlight: false,
         },
       ],
@@ -419,7 +422,7 @@ const T = {
           desc: "Expanding materials library, ft-in calculator, AI assistant, client-ready quote in 90 sec.",
           color: "orange",
           cta: "Open app",
-          url: "presentation.html",
+          url: "https://calcupro360.seriespro360.com",
         },
         {
           tag: "Soon",
@@ -428,7 +431,7 @@ const T = {
           desc: "A new tool to speed up on-site measuring. Details coming soon.",
           color: "blue",
           cta: "Get notified",
-          url: "#",
+          url: "#notify",
           placeholder: true,
         },
         {
@@ -438,7 +441,7 @@ const T = {
           desc: "A specialized tool for construction spec books. Details coming soon.",
           color: "green",
           cta: "Get notified",
-          url: "#",
+          url: "#notify",
           placeholder: true,
         },
         {
@@ -448,7 +451,7 @@ const T = {
           desc: "A calculator for building thermal envelopes. Details coming soon.",
           color: "yellow",
           cta: "Get notified",
-          url: "#",
+          url: "#notify",
           placeholder: true,
         },
       ],
@@ -619,6 +622,7 @@ const T = {
             "PDF quote with watermark",
           ],
           cta: "Get started",
+          url: "https://calcupro360.seriespro360.com",
           highlight: false,
         },
         {
@@ -635,6 +639,7 @@ const T = {
             "Priority support",
           ],
           cta: "Go Pro",
+          url: "https://calcupro360.seriespro360.com",
           highlight: true,
         },
         {
@@ -650,6 +655,7 @@ const T = {
             "Consolidated annual billing",
           ],
           cta: "Contact us",
+          url: "mailto:contact@seriespro360.com",
           highlight: false,
         },
       ],
