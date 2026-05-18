@@ -257,7 +257,7 @@ const T = {
         },
         {
           name: "Pro",
-          price: "14,99$",
+          price: "24,99$",
           cadence: "/ mois CAD",
           desc: "Pour les estimateurs et entrepreneurs actifs.",
           features: [
@@ -360,7 +360,7 @@ const T = {
       "À propos": "SeriesPro360 est une entreprise québécoise dédiée à la création d'outils numériques robustes et précis pour l'industrie de la construction. Notre mission est de numériser les processus d'estimation et de gestion de chantier tout en respectant strictement les normes locales (CNB, CCQ, RBQ).",
       "Blogue chantier": "Le blogue de SeriesPro360 sera bientôt disponible. Nous y partagerons des astuces d'estimation, des mises à jour sur les normes québécoises et des études de cas de nos utilisateurs sur le terrain.",
       "Carrières": "Nous sommes toujours à la recherche de talents passionnés par la construction et la technologie. Bien que nous n'ayons pas de postes ouverts pour le moment, n'hésitez pas à nous contacter.",
-      "Contact": "Besoin d'aide ou envie de discuter ?\n\nÉcrivez-nous à : support@seriespro360.com\nAdresse : Québec, QC, Canada.",
+      "Contact": "Besoin d'aide ou envie de discuter ?\n\nÉcrivez-nous à : contact@seriespro360.com\nAdresse : Québec, QC, Canada.",
       "Conditions d'utilisation": "En utilisant SeriesPro360, vous acceptez de vous conformer à nos règles. Nos outils sont fournis « tels quels » pour vous aider dans vos estimations, mais la validation finale des calculs et la conformité au code demeurent la responsabilité du professionnel (entrepreneur, architecte ou ingénieur) responsable du projet.",
       "Politique de confidentialité": "Vos données vous appartiennent. SeriesPro360 stocke vos estimations et données clients localement dans votre navigateur par défaut. Si vous optez pour la synchronisation Cloud, nous utilisons un cryptage de bout en bout et ne revendons jamais vos informations à des tiers.",
       "Accessibilité": "Nous nous engageons à rendre SeriesPro360 accessible à tous. Nos applications respectent les standards WCAG 2.1 AA, offrent un mode sombre natif pour réduire la fatigue visuelle, et supportent la navigation au clavier et par lecteur d'écran.",
@@ -623,7 +623,7 @@ const T = {
         },
         {
           name: "Pro",
-          price: "$14.99",
+          price: "$24.99",
           cadence: "/ month CAD",
           desc: "For active estimators and contractors.",
           features: [
@@ -726,7 +726,7 @@ const T = {
       "About": "SeriesPro360 is a Quebec-based company dedicated to building robust and precise digital tools for the construction industry. Our mission is to digitize estimating and jobsite management while strictly adhering to local codes (NBC, CCQ, RBQ).",
       "Jobsite blog": "The SeriesPro360 blog is coming soon. We'll be sharing estimating tips, updates on Quebec codes, and case studies from our field users.",
       "Careers": "We are always looking for talent passionate about construction and technology. While we don't have open positions right now, feel free to reach out.",
-      "Contact": "Need help or want to chat?\n\nEmail us at: support@seriespro360.com\nAddress: Quebec City, QC, Canada.",
+      "Contact": "Need help or want to chat?\n\nEmail us at: contact@seriespro360.com\nAddress: Quebec City, QC, Canada.",
       "Terms of service": "By using SeriesPro360, you agree to our rules. Our tools are provided 'as is' to assist you in estimating, but final validation of calculations and code compliance remains the responsibility of the professional (contractor, architect or engineer) signing off on the project.",
       "Privacy policy": "Your data is yours. SeriesPro360 stores your estimates and client data locally in your browser by default. If you opt for Cloud sync, we use end-to-end encryption and never sell your information to third parties.",
       "Accessibility": "We are committed to making SeriesPro360 accessible to everyone. Our apps meet WCAG 2.1 AA standards, offer a native dark mode to reduce eye strain, and support full keyboard and screen reader navigation.",
