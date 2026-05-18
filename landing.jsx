@@ -196,9 +196,88 @@ function Dim({ label, value, accent }) {
 
 
 // ──────────────────────────────────────────────────────────────────────────────
+// NOTIFY MODAL — modale légère pour les apps "Bientôt"
+// ──────────────────────────────────────────────────────────────────────────────
+function NotifyModal({ lang, appName, onClose }) {
+  const t = T[lang].notify;
+  const [form, setForm] = uS({ name: "", email: "", type: t.types[0] });
+  const [status, setStatus] = uS("idle");
+
+  uE(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch(NOTIFY_WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: form.name, email: form.email, type: form.type + " — " + appName }),
+      });
+      const json = await res.json();
+      if (res.ok && json.success) setStatus("success");
+      else setStatus("error");
+    } catch { setStatus("error"); }
+  };
+
+  return (
+    <div style={{ position: "fixed", inset: 0, zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+      <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)" }} onClick={onClose} />
+      <div style={{ position: "relative", background: "var(--sp-card)", border: "1px solid var(--sp-border-2)", borderRadius: 18, padding: "32px 28px", width: "100%", maxWidth: 460, zIndex: 1, boxShadow: "0 24px 64px rgba(0,0,0,0.5)" }}>
+        <button onClick={onClose} aria-label="Fermer" style={{ position: "absolute", top: 14, right: 14, background: "rgba(255,255,255,0.06)", border: "none", color: "var(--sp-muted)", cursor: "pointer", padding: 6, borderRadius: 6, lineHeight: 0 }}>
+          <Icon name="x" size={18} />
+        </button>
+        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--sp-accent)", marginBottom: 10 }}>{appName}</div>
+        <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 8, color: "var(--sp-text)", lineHeight: 1.2 }}>
+          {lang === "fr" ? "Être informé au lancement" : "Get notified at launch"}
+        </h2>
+        <p style={{ fontSize: 13, color: "var(--sp-muted)", marginBottom: 24, lineHeight: 1.6 }}>
+          {lang === "fr" ? "Accès anticipé et tarif de lancement réservés aux inscrits." : "Early access and launch pricing reserved for subscribers."}
+        </p>
+        {status === "success" ? (
+          <div style={{ background: "rgba(16,185,129,0.12)", border: "1px solid rgba(16,185,129,0.4)", color: "var(--sp-text)", padding: "18px 20px", borderRadius: 10, textAlign: "center", fontWeight: 600, fontSize: 15 }}>
+            ✓ {t.success}
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            {[
+              { key: "name", type: "text", label: t.name_label, placeholder: lang === "fr" ? "Jean Tremblay" : "John Smith" },
+              { key: "email", type: "email", label: t.email_label, placeholder: "jean@entreprise.com" },
+            ].map(({ key, type, label, placeholder }) => (
+              <div key={key}>
+                <label style={{ display: "block", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--sp-muted)", marginBottom: 6 }}>{label}</label>
+                <input type={type} required placeholder={placeholder} value={form[key]} onChange={e => setForm({ ...form, [key]: e.target.value })}
+                  style={{ width: "100%", background: "var(--sp-surface)", border: "1px solid var(--sp-border-2)", color: "var(--sp-text)", padding: "10px 14px", borderRadius: 8, fontSize: 14, outline: "none" }} />
+              </div>
+            ))}
+            <div>
+              <label style={{ display: "block", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--sp-muted)", marginBottom: 6 }}>{t.type_label}</label>
+              <select value={form.type} onChange={e => setForm({ ...form, type: e.target.value })}
+                style={{ width: "100%", background: "var(--sp-surface)", border: "1px solid var(--sp-border-2)", color: "var(--sp-text)", padding: "10px 14px", borderRadius: 8, fontSize: 14, appearance: "none" }}>
+                {t.types.map(tp => <option key={tp} value={tp} style={{ color: "#000" }}>{tp}</option>)}
+              </select>
+            </div>
+            <button type="submit" disabled={status === "loading"} className="sp-btn sp-btn-primary" style={{ width: "100%", height: 46, marginTop: 4, fontSize: 15 }}>
+              {status === "loading" ? "…" : t.cta}
+            </button>
+            {status === "error" && <div style={{ color: "#EF4444", fontSize: 13 }}>{t.error}</div>}
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────────────────────
 // SECTION — SUITE
 // ──────────────────────────────────────────────────────────────────────────────
-function Suite({ lang }) {
+function Suite({ lang, onNotify }) {
   const t = T[lang].suite;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
@@ -211,7 +290,8 @@ function Suite({ lang }) {
             const isLive = p.tag === "Actif" || p.tag === "Live";
             const tagClass = isLive ? "live" : (p.placeholder ? "soon" : "beta");
             return (
-              <article key={p.name} className={"sp-product sp-product-" + p.color + (p.placeholder ? " sp-product-placeholder" : "")} style={{ cursor: "pointer" }} onClick={() => { if(p.url && p.url !== "#") window.open(p.url, "_blank"); }}>
+              <article key={p.name} className={"sp-product sp-product-" + p.color + (p.placeholder ? " sp-product-placeholder" : "")} style={{ cursor: "pointer" }}
+                onClick={() => { if (p.placeholder) onNotify(p.name); else if (p.url && p.url !== "#") window.open(p.url, "_blank"); }}>
                 <header className="sp-product-head">
                   <ProductMark kind={p.name} color={p.color} size={44} />
                   <span className={"sp-product-tag sp-product-tag-" + tagClass}>{p.tag}</span>
@@ -222,11 +302,10 @@ function Suite({ lang }) {
                   <p className="sp-product-desc">{p.desc}</p>
                 </div>
                 <a
-                  href={p.url === "#" ? "#!" : p.url}
-                  onClick={(e) => { e.stopPropagation(); if(p.url === "#") e.preventDefault(); }}
-                  role={p.url === "#" ? "button" : undefined}
-                  target={isLive ? "_blank" : "_self"}
-                  rel={isLive ? "noopener" : ""}
+                  href={isLive ? p.url : "#!"}
+                  onClick={(e) => { e.stopPropagation(); if (p.placeholder) { e.preventDefault(); onNotify(p.name); } }}
+                  target={isLive ? "_blank" : undefined}
+                  rel={isLive ? "noopener" : undefined}
                   className={"sp-product-cta " + (isLive ? "sp-product-cta-live" : "sp-product-cta-ghost")}
                 >
                   {p.cta}
@@ -659,6 +738,7 @@ function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [openMobile, setOpenMobile] = uS(false);
   const [activePage, setActivePage] = uS(null);
+  const [notifyApp, setNotifyApp] = uS(null);
 
   // Apply theme + accent CSS vars to html
   uE(() => {
@@ -683,7 +763,7 @@ function App() {
       />
       <main>
         <Hero lang={t.lang} />
-        <Suite lang={t.lang} />
+        <Suite lang={t.lang} onNotify={(appName) => setNotifyApp(appName)} />
         <CalcuPresentation lang={t.lang} minimal={true} />
         <Demo lang={t.lang} />
         <Features lang={t.lang} />
@@ -699,6 +779,9 @@ function App() {
         content={activePage ? T[t.lang].pages[activePage] : null}
         onClose={() => setActivePage(null)}
       />
+      {notifyApp && (
+        <NotifyModal lang={t.lang} appName={notifyApp} onClose={() => setNotifyApp(null)} />
+      )}
 
       <TweaksPanel title="Tweaks">
         <TweakSection label={t.lang === "fr" ? "Apparence" : "Appearance"} />
