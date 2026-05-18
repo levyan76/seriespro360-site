@@ -1,9 +1,10 @@
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 import { buildSync, transformSync } from 'esbuild';
-import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { createHash } from 'crypto';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -38,8 +39,16 @@ const cssResult = transformSync(cssSrc, {
 });
 writeFileSync(join(distDir, 'app.min.css'), cssResult.code);
 
+// Auto-versioning: inject content hash into index.html
+const landingJs = readFileSync(join(distDir, 'landing.js'));
+const hash = createHash('sha256').update(landingJs).digest('hex').slice(0, 8);
+const indexPath = join(root, 'index.html');
+const indexSrc = readFileSync(indexPath, 'utf-8');
+const indexUpdated = indexSrc.replace(/dist\/landing\.js\?v=[^"]+/, `dist/landing.js?v=${hash}`);
+writeFileSync(indexPath, indexUpdated);
+
 const ms = (performance.now() - t0).toFixed(0);
 console.log(`✅ Build completed in ${ms}ms`);
-console.log(`✅ dist/landing.js`);
+console.log(`✅ dist/landing.js (v=${hash})`);
 console.log(`✅ dist/presentation.js`);
 console.log(`✅ dist/app.min.css`);

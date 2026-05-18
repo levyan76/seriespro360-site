@@ -26,7 +26,56 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
 
+<link rel="preload" href="dist/app.min.css" as="style" />
 <link rel="stylesheet" href="dist/app.min.css" />
+<link rel="preload" href="dist/landing.js" as="script" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "CalcuPro360",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web, Android, iOS",
+  "description": "Calculatrice de chantier, estimateur de matériaux et générateur de devis PDF professionnel pour les pros québécois de la construction.",
+  "url": "https://calcupro360.seriespro360.com",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Gratuit",
+      "price": "0",
+      "priceCurrency": "CAD"
+    },
+    {
+      "@type": "Offer",
+      "name": "Pro",
+      "price": "24.99",
+      "priceCurrency": "CAD",
+      "billingIncrement": "P1M"
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "SeriesPro360",
+    "url": "https://www.seriespro360.com",
+    "email": "contact@seriespro360.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "QC",
+      "addressCountry": "CA"
+    }
+  },
+  "inLanguage": ["fr-CA", "en-CA"],
+  "featureList": [
+    "Estimateur de matériaux de construction",
+    "Calculatrice pi-po / métrique",
+    "Génération de devis PDF",
+    "Assistant IA CNB/CCQ",
+    "TPS et TVQ automatiques",
+    "Mode hors-ligne (PWA)"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -37,7 +86,7 @@
 <script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 
 <!-- Pre-compiled JSX bundle (no Babel runtime needed) -->
-<script defer src="dist/landing.js?v=13"></script>
+<script defer src="dist/landing.js?v=4aa51227"></script>
 
 </body>
 </html>
