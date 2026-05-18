@@ -9,6 +9,8 @@ import { createHash } from 'crypto';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 
+const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf-8'));
+
 console.log('⚡ Building SeriesPro360…');
 const t0 = performance.now();
 
@@ -28,7 +30,10 @@ buildSync({
   charset: 'utf8',
   jsxFactory: 'React.createElement',
   jsxFragment: 'React.Fragment',
-  external: ['react', 'react-dom']
+  external: ['react', 'react-dom'],
+  define: {
+    '__APP_VERSION__': JSON.stringify(pkg.version),
+  },
 });
 
 // Process CSS

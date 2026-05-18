@@ -12,7 +12,7 @@ const T = {
       cta: "Accéder aux apps",
     },
     hero: {
-      badge: "v3.0 · La suite chantier #1 au Québec",
+      badge: "v" + __APP_VERSION__ + " · La suite chantier #1 au Québec",
       title_a: "Mesurez",
       title_b: "Calculez",
       title_c: "Livrez",
@@ -381,7 +381,7 @@ const T = {
       cta: "Open apps",
     },
     hero: {
-      badge: "v3.0 · Quebec's #1 jobsite suite",
+      badge: "v" + __APP_VERSION__ + " · Quebec's #1 jobsite suite",
       title_a: "Measure",
       title_b: "Compute",
       title_c: "Deliver",
