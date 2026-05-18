@@ -1,47 +1,45 @@
-import { transformSync } from 'esbuild';
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+import { buildSync, transformSync } from 'esbuild';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 
-// Order matters — globals depend on prior scripts
-const files = [
-  'i18n.jsx',
-  'logos.jsx',
-  'tweaks-panel.jsx',
-  'calculator.jsx',
-  'landing.jsx',
-];
-
 console.log('⚡ Building SeriesPro360…');
 const t0 = performance.now();
 
-// Concatenate all source files
-const combined = files
-  .map(f => {
-    const src = readFileSync(join(root, f), 'utf-8');
-    return `/* ── ${f} ── */\n${src}`;
-  })
-  .join('\n\n');
+const distDir = join(root, 'dist');
+if (!existsSync(distDir)) mkdirSync(distDir, { recursive: true });
 
-// Transpile JSX → JS + minify
-const result = transformSync(combined, {
-  loader: 'jsx',
-  jsxFactory: 'React.createElement',
-  jsxFragment: 'React.Fragment',
+// Build JS entry points
+buildSync({
+  entryPoints: {
+    'landing': join(root, 'landing.jsx'),
+    'presentation': join(root, 'presentation.jsx')
+  },
+  outdir: distDir,
+  bundle: true,
   minify: true,
   target: 'es2020',
   charset: 'utf8',
-  sourcemap: false,
+  jsxFactory: 'React.createElement',
+  jsxFragment: 'React.Fragment',
+  external: ['react', 'react-dom']
 });
 
-// Write output
-const distDir = join(root, 'dist');
-if (!existsSync(distDir)) mkdirSync(distDir, { recursive: true });
-writeFileSync(join(distDir, 'app.min.js'), result.code);
+// Process CSS
+const cssSrc = readFileSync(join(root, 'styles.css'), 'utf-8');
+const cssResult = transformSync(cssSrc, {
+  loader: 'css',
+  minify: true,
+});
+writeFileSync(join(distDir, 'app.min.css'), cssResult.code);
 
-const sizeKB = (Buffer.byteLength(result.code) / 1024).toFixed(1);
 const ms = (performance.now() - t0).toFixed(0);
-console.log(`✅ dist/app.min.js — ${sizeKB} KB (${ms}ms)`);
+console.log(`✅ Build completed in ${ms}ms`);
+console.log(`✅ dist/landing.js`);
+console.log(`✅ dist/presentation.js`);
+console.log(`✅ dist/app.min.css`);

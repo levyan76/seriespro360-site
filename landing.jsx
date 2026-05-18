@@ -1,12 +1,24 @@
+import T from './i18n.jsx';
+import { Logo, ProductMark, Icon } from './logos.jsx';
+import { SlabEstimator, calcSlab, fmtNum, fmtCAD } from './calculator.jsx';
+import { useTweaks, TweaksPanel, TweakSection, TweakToggle, TweakRadio, TweakColor } from './tweaks-panel.jsx';
+
 // landing.jsx — Main SeriesPro360 marketing page
 // Composes: Nav · Hero · Trust · Suite · Live Demo · Features · Workflow · Pricing · FAQ · CTA · Footer
+
+// ──────────────────────────────────────────────────────────────────────────────
+// CLOUDFLARE WORKER — URL du endpoint de notification
+// Après `npx wrangler deploy` dans /worker, remplacer par l'URL réelle.
+// Format : https://seriespro-notify-worker.{account}.workers.dev/notify
+// ──────────────────────────────────────────────────────────────────────────────
+const NOTIFY_WORKER_URL = "https://seriespro-notify-worker.yan-levasseur.workers.dev/notify";
 
 const { useState: uS, useEffect: uE, useRef: uR, useCallback: uC } = React;
 
 // ──────────────────────────────────────────────────────────────────────────────
 // SCROLL REVEAL — IntersectionObserver-based entrance animations
 // ──────────────────────────────────────────────────────────────────────────────
-function useReveal(opts) {
+export function useReveal(opts) {
   const ref = uR(null);
   uE(() => {
     const el = ref.current;
@@ -24,7 +36,7 @@ function useReveal(opts) {
 // ──────────────────────────────────────────────────────────────────────────────
 // TWEAK DEFAULTS
 // ──────────────────────────────────────────────────────────────────────────────
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+export const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "lang": "fr",
   "dark": true,
   "accent": "#FF6B1A",
@@ -35,8 +47,8 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — NAV
 // ──────────────────────────────────────────────────────────────────────────────
-function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMobile }) {
-  const t = window.T[lang].nav;
+export function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMobile }) {
+  const t = T[lang].nav;
   const [scrolled, setScrolled] = uS(false);
   uE(() => {
     const on = () => setScrolled(window.scrollY > 8);
@@ -46,14 +58,14 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
   return (
     <header className={"sp-nav" + (scrolled ? " is-scrolled" : "")}>
       <div className="sp-container sp-nav-inner">
-        <a href="#top" className="sp-nav-brand">
+        <a href="index.html#top" className="sp-nav-brand">
           <Logo variant={logoVariant} size={28} />
         </a>
         <nav className="sp-nav-links">
-          <a href="#suite">{t.products}</a>
-          <a href="#demo">{t.demo}</a>
-          <a href="#pricing">{t.pricing}</a>
-          <a href="#faq">{t.faq}</a>
+          <a href="index.html#suite">{t.products}</a>
+          <a href="index.html#demo">{t.demo}</a>
+          <a href="index.html#pricing">{t.pricing}</a>
+          <a href="index.html#faq">{t.faq}</a>
         </nav>
         <div className="sp-nav-actions">
           <div className="sp-lang-toggle" role="tablist" aria-label="Language">
@@ -63,7 +75,7 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
           <button className="sp-theme-toggle" onClick={() => setDark(!dark)} aria-label="Theme">
             <Icon name={dark ? "sun" : "moon"} size={16} />
           </button>
-          <a href="#" className="sp-btn sp-btn-ghost-sm sp-nav-login">{t.login}</a>
+          <a href="https://calcupro360.seriespro360.com" target="_blank" rel="noopener" className="sp-btn sp-btn-ghost-sm sp-nav-login">{t.login}</a>
           <a href="#suite" className="sp-btn sp-btn-primary sp-btn-sm">{t.cta} <Icon name="arrow-right" size={14} /></a>
           <button className="sp-nav-burger" onClick={() => setOpenMobile(!openMobile)} aria-label="Menu">
             <Icon name={openMobile ? "x" : "menu"} size={18} />
@@ -72,11 +84,11 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
       </div>
       {openMobile && (
         <div className="sp-nav-mobile">
-          <a href="#suite" onClick={() => setOpenMobile(false)}>{t.products}</a>
-          <a href="#demo" onClick={() => setOpenMobile(false)}>{t.demo}</a>
-          <a href="#pricing" onClick={() => setOpenMobile(false)}>{t.pricing}</a>
-          <a href="#faq" onClick={() => setOpenMobile(false)}>{t.faq}</a>
-          <a href="#" className="sp-btn sp-btn-primary" onClick={() => setOpenMobile(false)}>{t.cta}</a>
+          <a href="index.html#suite" onClick={() => setOpenMobile(false)}>{t.products}</a>
+          <a href="index.html#demo" onClick={() => setOpenMobile(false)}>{t.demo}</a>
+          <a href="index.html#pricing" onClick={() => setOpenMobile(false)}>{t.pricing}</a>
+          <a href="index.html#faq" onClick={() => setOpenMobile(false)}>{t.faq}</a>
+          <a href="index.html#suite" className="sp-btn sp-btn-primary" onClick={() => setOpenMobile(false)}>{t.cta}</a>
         </div>
       )}
     </header>
@@ -88,7 +100,7 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
 // Left: copy. Right: technical mockup card with grid, dimensions, live mini-estimate.
 // ──────────────────────────────────────────────────────────────────────────────
 function Hero({ lang }) {
-  const t = window.T[lang].hero;
+  const t = T[lang].hero;
   return (
     <section id="top" className="sp-hero">
       <div className="sp-hero-grid-bg" aria-hidden="true" />
@@ -169,14 +181,6 @@ function HeroMock({ lang, t }) {
         </div>
       </div>
 
-      <div className="sp-hero-mock-float sp-hero-mock-float-1">
-        <Icon name="zap" size={14} />
-        <span>{lang === "fr" ? "Calcul instantané" : "Instant calc"}</span>
-      </div>
-      <div className="sp-hero-mock-float sp-hero-mock-float-2">
-        <Icon name="shield" size={14} />
-        <span>{lang === "fr" ? "Code CNB / CCQ" : "NBC / CCQ"}</span>
-      </div>
     </div>
   );
 }
@@ -190,31 +194,12 @@ function Dim({ label, value, accent }) {
   );
 }
 
-// ──────────────────────────────────────────────────────────────────────────────
-// SECTION — TRUST STRIP
-// ──────────────────────────────────────────────────────────────────────────────
-function TrustStrip({ lang }) {
-  const t = window.T[lang].trust;
-  const r = useReveal();
-  return (
-    <section className="sp-trust">
-      <div className="sp-container sp-reveal" ref={r}>
-        <div className="sp-trust-heading">{t.heading}</div>
-        <div className="sp-trust-row sp-reveal-stagger">
-          {t.logos.map((name) => (
-            <div className="sp-trust-logo" key={name}>{name}</div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — SUITE
 // ──────────────────────────────────────────────────────────────────────────────
 function Suite({ lang }) {
-  const t = window.T[lang].suite;
+  const t = T[lang].suite;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
   return (
@@ -226,7 +211,7 @@ function Suite({ lang }) {
             const isLive = p.tag === "Actif" || p.tag === "Live";
             const tagClass = isLive ? "live" : (p.placeholder ? "soon" : "beta");
             return (
-              <article key={p.name} className={"sp-product sp-product-" + p.color + (p.placeholder ? " sp-product-placeholder" : "")}>
+              <article key={p.name} className={"sp-product sp-product-" + p.color + (p.placeholder ? " sp-product-placeholder" : "")} style={{ cursor: "pointer" }} onClick={() => { if(p.url && p.url !== "#") window.open(p.url, "_blank"); }}>
                 <header className="sp-product-head">
                   <ProductMark kind={p.name} color={p.color} size={44} />
                   <span className={"sp-product-tag sp-product-tag-" + tagClass}>{p.tag}</span>
@@ -238,7 +223,8 @@ function Suite({ lang }) {
                 </div>
                 <a
                   href={p.url === "#" ? "#!" : p.url}
-                  onClick={(e) => { if(p.url === "#") e.preventDefault(); }}
+                  onClick={(e) => { e.stopPropagation(); if(p.url === "#") e.preventDefault(); }}
+                  role={p.url === "#" ? "button" : undefined}
                   target={isLive ? "_blank" : "_self"}
                   rel={isLive ? "noopener" : ""}
                   className={"sp-product-cta " + (isLive ? "sp-product-cta-live" : "sp-product-cta-ghost")}
@@ -260,7 +246,7 @@ function Suite({ lang }) {
 // SECTION — INTERACTIVE DEMO
 // ──────────────────────────────────────────────────────────────────────────────
 function Demo({ lang }) {
-  const t = window.T[lang].demo;
+  const t = T[lang].demo;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05, rootMargin: "0px 0px -20px 0px" });
   return (
@@ -277,7 +263,7 @@ function Demo({ lang }) {
 // SECTION — FEATURES
 // ──────────────────────────────────────────────────────────────────────────────
 function Features({ lang }) {
-  const t = window.T[lang].features;
+  const t = T[lang].features;
   const icons = ["shield", "wifi-off", "cpu", "globe", "zap", "file"];
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
@@ -305,7 +291,7 @@ function Features({ lang }) {
 // SECTION — WORKFLOW (3 steps with mini mockups)
 // ──────────────────────────────────────────────────────────────────────────────
 function Workflow({ lang }) {
-  const t = window.T[lang].workflow;
+  const t = T[lang].workflow;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
   return (
@@ -386,7 +372,7 @@ function FlowMockPDF({ lang }) {
 // SECTION — PRICING
 // ──────────────────────────────────────────────────────────────────────────────
 function Pricing({ lang }) {
-  const t = window.T[lang].pricing;
+  const t = T[lang].pricing;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
   return (
@@ -424,7 +410,7 @@ function Pricing({ lang }) {
 // SECTION — FAQ
 // ──────────────────────────────────────────────────────────────────────────────
 function FAQ({ lang }) {
-  const t = window.T[lang].faq;
+  const t = T[lang].faq;
   const [open, setOpen] = uS(0);
   const r = useReveal();
   return (
@@ -454,26 +440,112 @@ function FAQ({ lang }) {
 // SECTION — CTA BAND + FOOTER
 // ──────────────────────────────────────────────────────────────────────────────
 function CTABand({ lang }) {
-  const t = window.T[lang].cta_band;
+  const t = T[lang].notify;
   const r = useReveal();
+  const [form, setForm] = uS({ name: "", email: "", type: t.types[0] });
+  const [status, setStatus] = uS("idle"); // idle, loading, success, error
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch(NOTIFY_WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: form.name, email: form.email, type: form.type }),
+      });
+      const json = await res.json();
+      if (res.ok && json.success) {
+        setStatus("success");
+      } else {
+        console.error("Worker error:", json.error);
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error("Network error:", err);
+      setStatus("error");
+    }
+  };
+
   return (
-    <section className="sp-cta-band">
+    <section className="sp-cta-band" id="notify">
       <div className="sp-cta-band-bg" aria-hidden="true" />
       <div className="sp-container sp-cta-inner sp-reveal" ref={r}>
-        <h2 className="sp-cta-title">{t.title}</h2>
-        <p className="sp-cta-sub">{t.subtitle}</p>
-        <div className="sp-cta-actions">
-          <a href="#demo" className="sp-btn sp-btn-primary sp-btn-lg">{t.primary} <Icon name="arrow-right" size={16} /></a>
-          <a href="#demo" className="sp-btn sp-btn-ghost-on-dark sp-btn-lg">{t.secondary}</a>
-        </div>
+        <div className="sp-eyebrow" style={{ color: "rgba(255,255,255,0.7)", marginBottom: 12 }}>{t.eyebrow}</div>
+        <h2 className="sp-cta-title" style={{ marginBottom: 16 }}>{t.title}</h2>
+        <p className="sp-cta-sub" style={{ marginBottom: 32, opacity: 0.9 }}>{t.subtitle}</p>
+        
+        {status === "success" ? (
+          <div style={{ background: "rgba(16,185,129,0.15)", border: "1px solid #10B981", color: "#fff", padding: "24px", borderRadius: 12, textAlign: "center", fontSize: 18, fontWeight: 600 }}>
+            <Icon name="check" size={24} style={{ marginBottom: 12 }} />
+            <div>{t.success}</div>
+          </div>
+        ) : (
+          <form className="sp-notify-form" onSubmit={handleSubmit} style={{ 
+            display: "grid", 
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", 
+            gap: 16, 
+            width: "100%", 
+            maxWidth: 900, 
+            margin: "0 auto",
+            textAlign: "left"
+          }}>
+            <div className="sp-form-group">
+              <label style={{ display: "block", color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 600, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>{t.name_label}</label>
+              <input 
+                type="text" 
+                required 
+                className="sp-input"
+                placeholder="Ex: Jean Tremblay"
+                value={form.name}
+                onChange={e => setForm({...form, name: e.target.value})}
+                style={{ width: "100%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", padding: "12px 16px", borderRadius: 8 }}
+              />
+            </div>
+            <div className="sp-form-group">
+              <label style={{ display: "block", color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 600, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>{t.email_label}</label>
+              <input 
+                type="email" 
+                required 
+                className="sp-input"
+                placeholder="jean@entreprise.com"
+                value={form.email}
+                onChange={e => setForm({...form, email: e.target.value})}
+                style={{ width: "100%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", padding: "12px 16px", borderRadius: 8 }}
+              />
+            </div>
+            <div className="sp-form-group">
+              <label style={{ display: "block", color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 600, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>{t.type_label}</label>
+              <select 
+                className="sp-input"
+                value={form.type}
+                onChange={e => setForm({...form, type: e.target.value})}
+                style={{ width: "100%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", padding: "12px 16px", borderRadius: 8, appearance: "none" }}
+              >
+                {t.types.map(type => <option key={type} value={type} style={{ color: "#000" }}>{type}</option>)}
+              </select>
+            </div>
+            <div style={{ display: "flex", alignItems: "flex-end" }}>
+              <button 
+                type="submit" 
+                className="sp-btn sp-btn-primary sp-btn-lg" 
+                disabled={status === "loading"}
+                style={{ width: "100%", height: 50 }}
+              >
+                {status === "loading" ? "..." : t.cta}
+              </button>
+            </div>
+          </form>
+        )}
+        {status === "error" && <div style={{ color: "#EF4444", marginTop: 12, fontSize: 14 }}>{t.error}</div>}
       </div>
     </section>
   );
 }
 
-function Footer({ lang, logoVariant, setActivePage }) {
-  const t = window.T[lang].footer;
-  const pages = window.T[lang].pages;
+export function Footer({ lang, logoVariant, setActivePage }) {
+  const t = T[lang].footer;
+  const pages = T[lang].pages;
 
   const handlePageClick = (e, linkName) => {
     e.preventDefault();
@@ -514,13 +586,69 @@ function Footer({ lang, logoVariant, setActivePage }) {
 // ──────────────────────────────────────────────────────────────────────────────
 // Section header helper
 // ──────────────────────────────────────────────────────────────────────────────
-function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
+export function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
   return (
     <header className={"sp-section-head sp-section-head-" + align}>
       <div className="sp-eyebrow">{eyebrow}</div>
       <h2 className="sp-section-title">{title}</h2>
       {subtitle && <p className="sp-section-sub">{subtitle}</p>}
     </header>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────────────────────
+// SECTION — CALCUPRO PRESENTATION
+// ──────────────────────────────────────────────────────────────────────────────
+export function CalcuPresentation({ lang, minimal = false }) {
+  const t = T[lang].calcu_presentation;
+  const r1 = useReveal();
+  const r2 = useReveal({ threshold: 0.05 });
+  return (
+    <section id="calcupro" className="sp-features" style={{ background: "var(--sp-bg-2)", borderTop: "1px solid var(--sp-border)" }}>
+      <div className="sp-container">
+        <div className="sp-reveal" ref={r1}>
+          <SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} align="center" />
+        </div>
+        <div className="sp-feat-grid sp-reveal sp-reveal-stagger" ref={r2} style={{ marginTop: 40, gap: 24, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" }}>
+          {t.features.map((f, i) => (
+            <article key={i} className="sp-feat" style={{ background: "var(--sp-card)", padding: 24, borderRadius: 12, border: "1px solid var(--sp-border)" }}>
+              <div className="sp-feat-icon" style={{ background: "var(--sp-accent-soft)", color: "var(--sp-accent)", width: 40, height: 40, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
+                <Icon name={f.icon} size={20} stroke="currentColor" />
+              </div>
+              <h3 className="sp-feat-title" style={{ fontSize: 18, marginBottom: (f.punchline ? 4 : 8) }}>{f.title}</h3>
+              {f.punchline && <div style={{ fontSize: 15, fontWeight: 700, color: "var(--sp-text)", marginBottom: 12, lineHeight: 1.2 }}>{f.punchline}</div>}
+              <p className="sp-feat-desc" style={{ fontSize: 14, color: "var(--sp-text-2)", marginBottom: 16 }}>{f.desc}</p>
+              {!minimal && (
+<ul style={{ margin: 0, padding: 0, listStyle: "none", fontSize: 13, color: "var(--sp-muted)", display: "flex", flexDirection: "column", gap: 8 }}>
+                {f.bullets.map((b, j) => {
+                  const isLast = j === f.bullets.length - 1;
+                  const isPromo = b.startsWith("➜");
+                  return (
+                    <li key={j} style={{ 
+                      display: "flex", 
+                      gap: 8, 
+                      alignItems: "flex-start",
+                      marginTop: (isLast && isPromo) ? 12 : 0,
+                      paddingTop: (isLast && isPromo) ? 12 : 0,
+                      borderTop: (isLast && isPromo) ? "1px dashed var(--sp-border)" : "none",
+                      fontSize: (isLast && isPromo) ? 14 : 13,
+                      color: (isLast && isPromo) ? "var(--sp-text-2)" : "var(--sp-muted)",
+                      fontWeight: 400
+                    }}>
+                      <div style={{ color: (isLast && isPromo) ? "var(--sp-accent)" : "var(--sp-green)", flexShrink: 0, marginTop: (isLast && isPromo) ? 4 : 2 }}>
+                        <Icon name={(isLast && isPromo) ? "arrow-right" : "check"} size={12} />
+                      </div>
+                      <span>{b}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -555,8 +683,8 @@ function App() {
       />
       <main>
         <Hero lang={t.lang} />
-        <TrustStrip lang={t.lang} />
         <Suite lang={t.lang} />
+        <CalcuPresentation lang={t.lang} minimal={true} />
         <Demo lang={t.lang} />
         <Features lang={t.lang} />
         <Workflow lang={t.lang} />
@@ -568,7 +696,7 @@ function App() {
 
       <PageModal
         title={activePage}
-        content={activePage ? window.T[t.lang].pages[activePage] : null}
+        content={activePage ? T[t.lang].pages[activePage] : null}
         onClose={() => setActivePage(null)}
       />
 
@@ -653,7 +781,7 @@ function PageModal({ title, content, onClose }) {
   );
 }
 
-function hexAlpha(hex, alpha) {
+export function hexAlpha(hex, alpha) {
   const h = hex.replace("#", "");
   const r = parseInt(h.substring(0, 2), 16);
   const g = parseInt(h.substring(2, 4), 16);

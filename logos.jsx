@@ -136,14 +136,13 @@ function ProductMark({ kind, color, size = 40 }) {
         <line x1="16.1" y1="17.6" x2="17.8" y2="19.3" stroke={c} strokeWidth="1.6" />
       </g>
     )},
-    // ThermoPro — thermometer + heat dot
-    ThermoPro: { color: "yellow", glyph: (c) => (
+        // TrimPro360 — Metal trim / bending profile
+    TrimPro360: { color: "yellow", glyph: (c) => (
       <g stroke={c} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none">
-        {/* Thermometer body */}
-        <path d="M12 4.5 a2 2 0 0 1 2 2 V14 a3 3 0 1 1 -4 0 V6.5 a2 2 0 0 1 2 -2 z" />
-        <circle cx="12" cy="16.5" r="1.4" fill={c} stroke="none" />
-        {/* Bulb level fill — small extra line */}
-        <line x1="12" y1="9" x2="12" y2="14" />
+        {/* Metal bending profile (J-trim or L-trim look) */}
+        <path d="M5 8 H15 V16 H8" />
+        <line x1="15" y1="8" x2="19" y2="4" opacity="0.6" />
+        <path d="M7 12 H13" opacity="0.5" />
       </g>
     )},
   };
@@ -189,9 +188,11 @@ function Icon({ name, size = 16, stroke = "currentColor" }) {
   }
 }
 
-window.Logo = Logo;
-window.LogoStrata = LogoStrata;
-window.LogoCompass = LogoCompass;
-window.LogoBracket = LogoBracket;
-window.ProductMark = ProductMark;
-window.Icon = Icon;
+
+
+
+
+
+
+
+export { Logo, LogoStrata, LogoCompass, LogoBracket, ProductMark, Icon };

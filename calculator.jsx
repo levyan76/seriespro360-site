@@ -1,3 +1,4 @@
+import { Icon } from './logos.jsx';
 // calculator.jsx — Interactive concrete slab estimator
 // Real math, same defaults as CalcuPro360 in production.
 // Quebec taxes: GST 5% + QST 9.975%.
@@ -108,27 +109,30 @@ function fmtNum(n, dig = 2) {
 // Inputs — number stepper with unit suffix
 // ──────────────────────────────────────────────────────────────────────────────
 function NumField({ label, value, onChange, unit, step = 0.5, min = 0, max = 9999 }) {
+  const id = React.useId();
   const inc = (d) => onChange(Math.max(min, Math.min(max, +(value + d * step).toFixed(2))));
   return (
-    <label style={{ display: "block" }}>
-      <div className="sp-input-label">{label}</div>
+    <div style={{ display: "block" }}>
+      <label htmlFor={id} className="sp-input-label">{label}</label>
       <div className="sp-input-stepper">
         <button type="button" className="sp-step" onClick={() => inc(-1)} aria-label="−"><Icon name="minus" size={14} /></button>
         <input
           type="number" value={value} step={step} min={min} max={max}
           onChange={(e) => onChange(e.target.value === "" ? 0 : +e.target.value)}
           className="sp-step-input"
+          id={id}
+          aria-label={label}
         />
         <span className="sp-step-unit">{unit}</span>
         <button type="button" className="sp-step" onClick={() => inc(1)} aria-label="+"><Icon name="plus" size={14} /></button>
       </div>
-    </label>
+    </div>
   );
 }
 
 function ToggleChip({ active, onClick, children }) {
   return (
-    <button type="button" onClick={onClick} className={"sp-chip" + (active ? " is-on" : "")}>
+    <button type="button" role="switch" aria-checked={active} onClick={onClick} className={"sp-chip" + (active ? " is-on" : "")}>
       <span className={"sp-chip-dot" + (active ? " is-on" : "")} />
       {children}
     </button>
@@ -382,7 +386,7 @@ function SlabEstimator({ lang, t, compact = false }) {
             ))}
           </div>
 
-          <div className="sp-totals">
+          <div className="sp-totals" aria-live="polite">
             <div className="sp-totals-row"><span>{t.subtotal}</span><span className="mono">{fmtCAD(est.subtotal, lang)}</span></div>
             <div className="sp-totals-row sp-totals-row-muted"><span>{t.tps}</span><span className="mono">{fmtCAD(est.tps, lang)}</span></div>
             <div className="sp-totals-row sp-totals-row-muted"><span>{t.tvq}</span><span className="mono">{fmtCAD(est.tvq, lang)}</span></div>
@@ -407,7 +411,9 @@ function SlabEstimator({ lang, t, compact = false }) {
   );
 }
 
-window.SlabEstimator = SlabEstimator;
-window.calcSlab = calcSlab;
-window.fmtCAD = fmtCAD;
-window.fmtNum = fmtNum;
+
+
+
+
+
+export { SlabEstimator, calcSlab, fmtNum, fmtCAD };

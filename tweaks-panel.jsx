@@ -1,3 +1,4 @@
+import { Icon } from './logos.jsx';
 
 // tweaks-panel.jsx
 // Reusable Tweaks shell + form-control helpers.
@@ -566,3 +567,5 @@ Object.assign(window, {
   TweakSlider, TweakToggle, TweakRadio, TweakSelect,
   TweakText, TweakNumber, TweakColor, TweakButton,
 });
+
+export { useTweaks, TweaksPanel, TweakSection, TweakToggle, TweakRadio, TweakColor };

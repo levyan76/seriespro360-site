@@ -53,7 +53,7 @@ const T = {
           desc: "Bibliothèque de matériaux en expansion, calculatrice pi-po, assistant IA, devis prêt-client en 90 sec.",
           color: "orange",
           cta: "Accéder à l'app",
-          url: "https://calcupro360.seriespro360.com",
+          url: "presentation.html",
         },
         {
           tag: "Bientôt",
@@ -77,15 +77,78 @@ const T = {
         },
         {
           tag: "Bientôt",
-          name: "ThermoPro",
-          tagline: "Calcul thermique",
-          desc: "Un calculateur pour l'enveloppe thermique du bâtiment. Détails à venir.",
+          name: "TrimPro360",
+          tagline: "Commande & Production",
+          desc: "Logiciel spécialisé pour la commande et la production de moulures métalliques sur mesure.",
           color: "yellow",
           cta: "Être notifié",
           url: "#",
           placeholder: true,
         },
       ],
+    },
+    calcu_presentation: {
+      eyebrow: "Application phare",
+      title: "CalcuPro360 - Assistant Chantier Intelligent",
+      subtitle: "L'outil ultime qui transforme vos relevés de chantier en devis professionnels en moins de 90 secondes. Alliez la précision d'un estimateur senior à la puissance de l'IA pour sécuriser vos marges et gagner plus de contrats.",
+      features: [
+        {
+          icon: "ruler",
+          title: "1. Estimateur de Matériaux",
+          punchline: "Estimez plus vite. Oubliez moins.",
+          desc: "Générez automatiquement quantités, pertes, matériaux et coûts selon votre projet et vos systèmes constructifs.",
+          bullets: [
+            "Génération automatique des matériaux",
+            "Gestion des pertes, joints, entraxes et quincaillerie",
+            "Systèmes complets : toiture, gypse, béton, etc.",
+            "Coûts approximatifs ou personnalisés",
+            "Réduction massive des oublis d'estimation",
+            "➜ Votre méga pense-bête technique pour chantier"
+          ]
+        },
+        {
+          icon: "zap",
+          title: "2. Assistant IA",
+          punchline: "Votre copilote technique chantier.",
+          desc: "Obtenez rapidement de l'aide sur les calculs, méthodes et bonnes pratiques directement dans l'application.",
+          bullets: [
+            "Assistance technique instantanée",
+            "Aide aux calculs complexes",
+            "Explications des méthodes et systèmes",
+            "Suggestions intelligentes selon le contexte",
+            "Support bilingue FR / EN",
+            "➜ Une IA pour assister l'estimateur, pas le remplacer"
+          ]
+        },
+        {
+          icon: "cpu",
+          title: "3. Calculatrice de Construction",
+          punchline: "Le moteur de calcul pensé pour les vrais chantiers.",
+          desc: "Calculs métriques, impériaux, fractions et conversions automatiques dans un workflow rapide et sans friction.",
+          bullets: [
+            "Calculs métriques & impériaux intelligents",
+            "Gestion automatique des fractions et conversions",
+            "Compatible chantier résidentiel & commercial",
+            "Réduction des erreurs de saisie et d'unités",
+            "Workflow ultra rapide, même sur mobile",
+            "➜ Moteur professionnel conçu pour la construction"
+          ]
+        },
+        {
+          icon: "file",
+          title: "4. Dashboard & Export",
+          punchline: "Toutes vos estimations au même endroit.",
+          desc: "Organisez vos projets, vérifiez vos estimations et exportez des PDF professionnels en quelques clics.",
+          bullets: [
+            "Gestion des projets et estimations",
+            "Export PDF professionnel prêt à envoyer",
+            "Export CSV / Excel",
+            "Audit anti-oubli et validation des risques",
+            "Interface optimisée terrain, bureau et tablette",
+            "➜ Du calcul jusqu'au document final en un seul workflow"
+          ]
+        }
+      ]
     },
     demo: {
       eyebrow: "Démo — CalcuPro360",
@@ -262,6 +325,25 @@ const T = {
       primary: "Démarrer gratuitement",
       secondary: "Voir un devis exemple →",
     },
+    notify: {
+      eyebrow: "Lancement prochain",
+      title: "Soyez les premiers informés",
+      subtitle: "Inscrivez-vous pour recevoir les dates de lancement et des accès exclusifs aux prochaines applications de la suite.",
+      name_label: "Nom complet",
+      email_label: "Adresse courriel",
+      type_label: "Type d'entreprise",
+      types: [
+        "Entrepreneur Général",
+        "Entrepreneur Spécialisé",
+        "Artisan / Travailleur autonome",
+        "Architecte / Designer",
+        "Particulier / Autoconstruction",
+        "Autre"
+      ],
+      cta: "M'inscrire à la liste",
+      success: "Merci ! Vous recevrez bientôt de nos nouvelles.",
+      error: "Une erreur est survenue. Veuillez réessayer."
+    },
     footer: {
       tagline: "La suite chantier intelligente pour le marché québécois.",
       product: "Produit",
@@ -278,11 +360,11 @@ const T = {
       "À propos": "SeriesPro360 est une entreprise québécoise dédiée à la création d'outils numériques robustes et précis pour l'industrie de la construction. Notre mission est de numériser les processus d'estimation et de gestion de chantier tout en respectant strictement les normes locales (CNB, CCQ, RBQ).",
       "Blogue chantier": "Le blogue de SeriesPro360 sera bientôt disponible. Nous y partagerons des astuces d'estimation, des mises à jour sur les normes québécoises et des études de cas de nos utilisateurs sur le terrain.",
       "Carrières": "Nous sommes toujours à la recherche de talents passionnés par la construction et la technologie. Bien que nous n'ayons pas de postes ouverts pour le moment, n'hésitez pas à nous contacter.",
-      "Contact": "Besoin d'aide ou envie de discuter ?\n\nÉcrivez-nous à : support@seriespro360.com\nTéléphone : 1-800-555-3600\nAdresse : Québec, QC, Canada.",
+      "Contact": "Besoin d'aide ou envie de discuter ?\n\nÉcrivez-nous à : support@seriespro360.com\nAdresse : Québec, QC, Canada.",
       "Conditions d'utilisation": "En utilisant SeriesPro360, vous acceptez de vous conformer à nos règles. Nos outils sont fournis « tels quels » pour vous aider dans vos estimations, mais la validation finale des calculs et la conformité au code demeurent la responsabilité du professionnel (entrepreneur, architecte ou ingénieur) responsable du projet.",
       "Politique de confidentialité": "Vos données vous appartiennent. SeriesPro360 stocke vos estimations et données clients localement dans votre navigateur par défaut. Si vous optez pour la synchronisation Cloud, nous utilisons un cryptage de bout en bout et ne revendons jamais vos informations à des tiers.",
       "Accessibilité": "Nous nous engageons à rendre SeriesPro360 accessible à tous. Nos applications respectent les standards WCAG 2.1 AA, offrent un mode sombre natif pour réduire la fatigue visuelle, et supportent la navigation au clavier et par lecteur d'écran.",
-      "Statut": "Tous les systèmes sont opérationnels.\n\n• CalcuPro360 : En ligne (100% uptime)\n• MesurePro360 : En développement\n• DevisPro360 : En développement\n• ThermoPro : En développement"
+      "Statut": "Tous les systèmes sont opérationnels.\n\n• CalcuPro360 : En ligne (100% uptime)\n• MesurePro360 : En développement\n• DevisPro360 : En développement\n• TrimPro360 : En développement"
     },
   },
 
@@ -337,7 +419,7 @@ const T = {
           desc: "Expanding materials library, ft-in calculator, AI assistant, client-ready quote in 90 sec.",
           color: "orange",
           cta: "Open app",
-          url: "https://calcupro360.seriespro360.com",
+          url: "presentation.html",
         },
         {
           tag: "Soon",
@@ -361,8 +443,8 @@ const T = {
         },
         {
           tag: "Soon",
-          name: "ThermoPro",
-          tagline: "Thermal calculation",
+          name: "TrimPro360",
+          tagline: "Ordering & Production",
           desc: "A calculator for building thermal envelopes. Details coming soon.",
           color: "yellow",
           cta: "Get notified",
@@ -370,6 +452,69 @@ const T = {
           placeholder: true,
         },
       ],
+    },
+    calcu_presentation: {
+      eyebrow: "Flagship App",
+      title: "CalcuPro360 - Smart Jobsite Assistant",
+      subtitle: "The ultimate tool that transforms your jobsite measurements into professional quotes in under 90 seconds. Combine senior estimator precision with AI power to secure your margins and win more contracts.",
+      features: [
+        {
+          icon: "ruler",
+          title: "1. Material Estimator",
+          punchline: "Estimate faster. Forget less.",
+          desc: "Automatically generate quantities, waste, materials, and costs based on your project and construction systems.",
+          bullets: [
+            "Automatic material generation",
+            "Waste, joints, spacing, and hardware management",
+            "Complete systems: roofing, drywall, concrete, etc.",
+            "Approximate or customized costs",
+            "Massive reduction in estimation oversights",
+            "➜ Your technical jobsite mega-reminder"
+          ]
+        },
+        {
+          icon: "zap",
+          title: "2. AI Assistant",
+          punchline: "Your technical jobsite co-pilot.",
+          desc: "Get quick help with calculations, methods, and best practices directly in the application.",
+          bullets: [
+            "Instant technical assistance",
+            "Help with complex calculations",
+            "Explanations of methods and systems",
+            "Smart context-aware suggestions",
+            "Bilingual support FR / EN",
+            "➜ AI designed to assist the estimator, not replace them"
+          ]
+        },
+        {
+          icon: "cpu",
+          title: "3. Construction Calculator",
+          punchline: "The calculation engine designed for real jobsites.",
+          desc: "Metric, imperial, fractions, and automatic conversions in a fast, frictionless workflow.",
+          bullets: [
+            "Smart metric & imperial calculations",
+            "Automatic fractions and conversions management",
+            "Compatible with residential & commercial sites",
+            "Reduction of input and unit errors",
+            "Ultra-fast workflow, even on mobile",
+            "➜ Professional engine designed for construction"
+          ]
+        },
+        {
+          icon: "file",
+          title: "4. Dashboard & Export",
+          punchline: "All your estimates in one place.",
+          desc: "Organize your projects, verify your estimates, and export professional PDFs in a few clicks.",
+          bullets: [
+            "Project and estimate management",
+            "Professional PDF export ready to send",
+            "CSV / Excel export",
+            "Anti-oversight audit and risk validation",
+            "Optimized interface for field, office, and tablet",
+            "➜ From calculation to final document in one workflow"
+          ]
+        }
+      ]
     },
     demo: {
       eyebrow: "Demo — CalcuPro360",
@@ -546,6 +691,25 @@ const T = {
       primary: "Start free",
       secondary: "See a sample quote →",
     },
+    notify: {
+      eyebrow: "Upcoming Launch",
+      title: "Be the first to know",
+      subtitle: "Sign up to receive launch dates and exclusive early access to upcoming apps in the suite.",
+      name_label: "Full Name",
+      email_label: "Email Address",
+      type_label: "Company Type",
+      types: [
+        "General Contractor",
+        "Specialized Contractor",
+        "Artisan / Freelancer",
+        "Architect / Designer",
+        "Individual / Self-builder",
+        "Other"
+      ],
+      cta: "Join the list",
+      success: "Thank you! We'll be in touch soon.",
+      error: "An error occurred. Please try again."
+    },
     footer: {
       tagline: "The smart jobsite suite for the Quebec market.",
       product: "Product",
@@ -562,13 +726,13 @@ const T = {
       "About": "SeriesPro360 is a Quebec-based company dedicated to building robust and precise digital tools for the construction industry. Our mission is to digitize estimating and jobsite management while strictly adhering to local codes (NBC, CCQ, RBQ).",
       "Jobsite blog": "The SeriesPro360 blog is coming soon. We'll be sharing estimating tips, updates on Quebec codes, and case studies from our field users.",
       "Careers": "We are always looking for talent passionate about construction and technology. While we don't have open positions right now, feel free to reach out.",
-      "Contact": "Need help or want to chat?\n\nEmail us at: support@seriespro360.com\nPhone: 1-800-555-3600\nAddress: Quebec City, QC, Canada.",
+      "Contact": "Need help or want to chat?\n\nEmail us at: support@seriespro360.com\nAddress: Quebec City, QC, Canada.",
       "Terms of service": "By using SeriesPro360, you agree to our rules. Our tools are provided 'as is' to assist you in estimating, but final validation of calculations and code compliance remains the responsibility of the professional (contractor, architect or engineer) signing off on the project.",
       "Privacy policy": "Your data is yours. SeriesPro360 stores your estimates and client data locally in your browser by default. If you opt for Cloud sync, we use end-to-end encryption and never sell your information to third parties.",
       "Accessibility": "We are committed to making SeriesPro360 accessible to everyone. Our apps meet WCAG 2.1 AA standards, offer a native dark mode to reduce eye strain, and support full keyboard and screen reader navigation.",
-      "Status": "All systems operational.\n\n• CalcuPro360: Online (100% uptime)\n• MesurePro360: In development\n• DevisPro360: In development\n• ThermoPro: In development"
+      "Status": "All systems operational.\n\n• CalcuPro360: Online (100% uptime)\n• MesurePro360: In development\n• DevisPro360: In development\n• TrimPro360: In development"
     },
   },
 };
 
-window.T = T;
+export default T;

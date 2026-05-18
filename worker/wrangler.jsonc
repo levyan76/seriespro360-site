@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "seriespro-notify-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-02-04",
+  "send_email": [
+    {
+      "name": "SEND_EMAIL"
+    }
+  ]
+}
