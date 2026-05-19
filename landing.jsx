@@ -740,7 +740,7 @@ function App() {
   const [activePage, setActivePage] = uS(null);
   const [notifyApp, setNotifyApp] = uS(null);
 
-  // Apply theme + accent CSS vars to html
+  // Apply theme + accent CSS vars + lang attribute to html
   uE(() => {
     const html = document.documentElement;
     html.classList.toggle("sp-dark", !!t.dark);
@@ -748,7 +748,8 @@ function App() {
     html.style.setProperty("--sp-accent", t.accent);
     html.style.setProperty("--sp-accent-soft", hexAlpha(t.accent, 0.18));
     html.style.setProperty("--sp-density", t.density);
-  }, [t.dark, t.accent, t.density]);
+    html.lang = t.lang === "en" ? "en-CA" : "fr-CA";
+  }, [t.dark, t.accent, t.density, t.lang]);
 
   return (
     <div className={"sp-app sp-density-" + t.density}>
