@@ -1,5 +1,6 @@
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
+const sharp = require('sharp');
 import { buildSync, transformSync } from 'esbuild';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
@@ -43,6 +44,15 @@ const cssResult = transformSync(cssSrc, {
   minify: true,
 });
 writeFileSync(join(distDir, 'app.min.css'), cssResult.code);
+
+// Optimize og-image → WebP
+const ogSrc = join(root, 'og-image.jpg');
+const ogDest = join(root, 'og-image.webp');
+if (existsSync(ogSrc)) {
+  await sharp(ogSrc).webp({ quality: 82 }).toFile(ogDest);
+  const sizeKB = (require('fs').statSync(ogDest).size / 1024).toFixed(0);
+  console.log(`✅ og-image.webp — ${sizeKB} KB`);
+}
 
 // Auto-versioning: inject content hash into index.html
 const landingJs = readFileSync(join(distDir, 'landing.js'));

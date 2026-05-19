@@ -8,11 +8,12 @@
     "preview": "npx -y serve . -l 3000 --no-clipboard"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.25.0",
+    "sharp": "^0.34.5"
   },
   "optionalDependencies": {
+    "@esbuild/darwin-arm64": "^0.28.0",
     "@esbuild/linux-x64": "^0.28.0",
-    "@esbuild/win32-x64": "^0.28.0",
-    "@esbuild/darwin-arm64": "^0.28.0"
+    "@esbuild/win32-x64": "^0.28.0"
   }
 }
