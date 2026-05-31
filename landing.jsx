@@ -725,6 +725,107 @@ export function TrimPresentation({ lang }) {
   );
 }
 
+export function TrimPricing({ lang }) {
+  const t = T[lang].trim_pricing;
+  const r = useReveal();
+  const ACCENT = "#EAB308";
+  return (
+    <section id="trimpro360-pricing" style={{ background: "var(--sp-bg-2)", borderTop: "1px solid var(--sp-border)", padding: "80px 0" }}>
+      <div className="sp-container">
+        <div className="sp-reveal" ref={r}>
+          <SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} align="center" />
+        </div>
+
+        {/* Grille 3 plans */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24, marginTop: 48 }}>
+          {t.plans.map((plan) => (
+            <div
+              key={plan.id}
+              style={{
+                background: plan.highlight ? ACCENT : "var(--sp-card)",
+                color: plan.highlight ? "#000" : "var(--sp-text)",
+                borderRadius: 16,
+                border: plan.highlight ? "none" : "1px solid var(--sp-border)",
+                padding: 32,
+                display: "flex",
+                flexDirection: "column",
+                gap: 0,
+                boxShadow: plan.highlight ? "0 8px 40px rgba(234,179,8,0.35)" : "none",
+                position: "relative",
+              }}
+            >
+              {/* Badge */}
+              {plan.badge && (
+                <div style={{
+                  position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)",
+                  background: plan.highlight ? "#000" : ACCENT,
+                  color: plan.highlight ? ACCENT : "#000",
+                  fontSize: 11, fontWeight: 700, padding: "4px 14px", borderRadius: 999,
+                  whiteSpace: "nowrap", letterSpacing: "0.05em", textTransform: "uppercase",
+                }}>
+                  {t[plan.badge]}
+                </div>
+              )}
+
+              {/* Nom + desc */}
+              <div style={{ marginBottom: 20 }}>
+                <p style={{ fontSize: 13, fontWeight: 600, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.08em" }}>{plan.name}</p>
+                <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
+                  <span style={{ fontSize: 40, fontWeight: 800, lineHeight: 1 }}>{plan.price}</span>
+                  {plan.period && <span style={{ fontSize: 14, opacity: 0.7 }}>{plan.period}</span>}
+                </div>
+                <p style={{ marginTop: 12, fontSize: 14, opacity: 0.75, lineHeight: 1.5 }}>{plan.desc}</p>
+              </div>
+
+              {/* Séparateur */}
+              <div style={{ height: 1, background: plan.highlight ? "rgba(0,0,0,0.15)" : "var(--sp-border)", margin: "0 0 20px" }} />
+
+              {/* Features */}
+              <ul style={{ margin: 0, padding: 0, listStyle: "none", fontSize: 14, display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
+                {plan.features.map((f, i) => (
+                  <li key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                    <span style={{ color: plan.highlight ? "#000" : ACCENT, flexShrink: 0, marginTop: 2 }}>
+                      <Icon name="check" size={14} />
+                    </span>
+                    <span style={{ opacity: 0.85 }}>{f}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA */}
+              <a
+                href={plan.id === "founder" ? t.cta_founder_url : plan.id === "standard" ? t.cta_standard_url : t.cta_enterprise_url}
+                style={{
+                  marginTop: 28,
+                  display: "block",
+                  textAlign: "center",
+                  padding: "12px 0",
+                  borderRadius: 8,
+                  fontWeight: 700,
+                  fontSize: 15,
+                  textDecoration: "none",
+                  background: plan.highlight ? "#000" : ACCENT,
+                  color: plan.highlight ? ACCENT : "#000",
+                  transition: "opacity .15s",
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = "0.85"}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = "1"}
+              >
+                {plan.id === "founder" ? t.cta_founder : plan.id === "standard" ? t.cta_standard : t.cta_enterprise}
+              </a>
+            </div>
+          ))}
+        </div>
+
+        {/* Note comparatif marché */}
+        <p style={{ textAlign: "center", marginTop: 40, fontSize: 13, color: "var(--sp-muted)", maxWidth: 680, margin: "40px auto 0" }}>
+          💡 {t.note}
+        </p>
+      </div>
+    </section>
+  );
+}
+
 export function CalcuPresentation({ lang, minimal = false }) {
   const t = T[lang].calcu_presentation;
   const r1 = useReveal();
@@ -813,6 +914,7 @@ function App() {
         <Hero lang={t.lang} />
         <Suite lang={t.lang} onNotify={(appName) => setNotifyApp(appName)} />
         <TrimPresentation lang={t.lang} />
+        <TrimPricing lang={t.lang} />
         <CalcuPresentation lang={t.lang} minimal={true} />
         <Demo lang={t.lang} />
         <Features lang={t.lang} />
