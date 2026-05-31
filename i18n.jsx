@@ -76,14 +76,83 @@ const T = {
           placeholder: true,
         },
         {
-          tag: "Bientôt",
+          tag: "En ligne",
           name: "TrimPro360",
           tagline: "Commande & Production",
-          desc: "Logiciel spécialisé pour la commande et la production de moulures métalliques sur mesure.",
+          desc: "Logiciel SaaS pour la commande, la production et le suivi des moulures métalliques sur mesure. Conçu pour les ateliers de tôle, toiture et bardage au Québec.",
           color: "yellow",
-          cta: "Être notifié",
-          url: "#notify",
-          placeholder: true,
+          cta: "Accéder à l'app",
+          url: "https://trimpro360-v3.vercel.app",
+          placeholder: false,
+        },
+      ],
+    },
+    trim_presentation: {
+      eyebrow: "Nouveau produit — En ligne",
+      title: "TrimPro360",
+      subtitle: "La plateforme de gestion de commandes et de production pour les ateliers de moulures métalliques sur mesure. Catalogue de profilés, dessin canvas, workflow de production, inventaire — tout en un.",
+      cta_label: "Accéder à l'application",
+      cta_url: "https://trimpro360-v3.vercel.app",
+      features: [
+        {
+          icon: "layout-grid",
+          title: "Catalogue de profils",
+          desc: "56 profilés standards (J-trim, solin, noue, bardage...) avec prévisualisation SVG, dimensions paramétrables et export PDF.",
+          bullets: [
+            "Dimensions A, B, C configurables",
+            "PDF de dessin technique",
+            "Favoris et profils personnalisés",
+          ],
+        },
+        {
+          icon: "pen-tool",
+          title: "Canvas de dessin",
+          desc: "Éditeur vectoriel pour dessiner des profils custom avec calcul automatique de la longueur développée et export DXF.",
+          bullets: [
+            "Replis INT/EXT configurables",
+            "Système expert de faisabilité",
+            "Export DXF pour CNC",
+          ],
+        },
+        {
+          icon: "package",
+          title: "Gestion des commandes",
+          desc: "Workflow complet de la soumission à la livraison : OUVRIER → Bureau → Production → Client, avec approbations et notifications.",
+          bullets: [
+            "5 statuts de commande",
+            "Login Microsoft / email",
+            "Notifications en temps réel",
+          ],
+        },
+        {
+          icon: "boxes",
+          title: "Inventaire intelligent",
+          desc: "Gestion des stocks par matériau, calibre et finition. Alertes de seuil, transactions traçables, import Excel, bons de commande.",
+          bullets: [
+            "Types : feuille, bobine, rouleau, profilé",
+            "Pricing automatique par pi²/pi linéaire",
+            "Sauvegardes commandes pour ouvriers",
+          ],
+        },
+        {
+          icon: "kanban",
+          title: "Production Kanban",
+          desc: "Tableau de production en temps réel avec glisser-déposer, calendrier de phases et demandes de modification de calendrier.",
+          bullets: [
+            "3 colonnes : À produire / En cours / Terminé",
+            "Calendrier mensuel / hebdo / planning",
+            "Gestion des machines",
+          ],
+        },
+        {
+          icon: "smartphone",
+          title: "PWA mobile pour ouvriers",
+          desc: "Application mobile dédiée aux ouvriers sur le chantier : commander depuis le catalogue, suivre l'historique, voir le calendrier de production.",
+          bullets: [
+            "Photo de profilé → commande",
+            "Sauvegardes personnelles",
+            "Mode hors-ligne (PWA)",
+          ],
         },
       ],
     },
@@ -367,7 +436,7 @@ const T = {
       "Conditions d'utilisation": "En utilisant SeriesPro360, vous acceptez de vous conformer à nos règles. Nos outils sont fournis « tels quels » pour vous aider dans vos estimations, mais la validation finale des calculs et la conformité au code demeurent la responsabilité du professionnel (entrepreneur, architecte ou ingénieur) responsable du projet.",
       "Politique de confidentialité": "Vos données vous appartiennent. SeriesPro360 stocke vos estimations et données clients localement dans votre navigateur par défaut. Si vous optez pour la synchronisation Cloud, nous utilisons un cryptage de bout en bout et ne revendons jamais vos informations à des tiers.",
       "Accessibilité": "Nous nous engageons à rendre SeriesPro360 accessible à tous. Nos applications respectent les standards WCAG 2.1 AA, offrent un mode sombre natif pour réduire la fatigue visuelle, et supportent la navigation au clavier et par lecteur d'écran.",
-      "Statut": "Tous les systèmes sont opérationnels.\n\n• CalcuPro360 : En ligne (100% uptime)\n• MesurePro360 : En développement\n• DevisPro360 : En développement\n• TrimPro360 : En développement"
+      "Statut": "Tous les systèmes sont opérationnels.\n\n• CalcuPro360 : En ligne (100% uptime)\n• TrimPro360 : En ligne (100% uptime)\n• MesurePro360 : En développement\n• DevisPro360 : En développement"
     },
   },
 
@@ -445,14 +514,83 @@ const T = {
           placeholder: true,
         },
         {
-          tag: "Soon",
+          tag: "Live",
           name: "TrimPro360",
           tagline: "Ordering & Production",
-          desc: "A calculator for building thermal envelopes. Details coming soon.",
+          desc: "SaaS software for ordering, production and tracking of custom metal trim profiles. Built for sheet metal, roofing and cladding shops in Quebec.",
           color: "yellow",
-          cta: "Get notified",
-          url: "#notify",
-          placeholder: true,
+          cta: "Access the app",
+          url: "https://trimpro360-v3.vercel.app",
+          placeholder: false,
+        },
+      ],
+    },
+    trim_presentation: {
+      eyebrow: "New product — Live",
+      title: "TrimPro360",
+      subtitle: "The platform for order management and production of custom metal trim profiles. Profile catalog, canvas drawing, production workflow, inventory — all in one.",
+      cta_label: "Access the application",
+      cta_url: "https://trimpro360-v3.vercel.app",
+      features: [
+        {
+          icon: "layout-grid",
+          title: "Profile Catalog",
+          desc: "56 standard profiles (J-trim, flashing, valley, cladding...) with SVG preview, configurable dimensions and PDF export.",
+          bullets: [
+            "Configurable A, B, C dimensions",
+            "Technical drawing PDF",
+            "Favorites and custom profiles",
+          ],
+        },
+        {
+          icon: "pen-tool",
+          title: "Drawing Canvas",
+          desc: "Vector editor to draw custom profiles with automatic developed length calculation and DXF export.",
+          bullets: [
+            "INT/EXT bends configurable",
+            "Manufacturing feasibility expert system",
+            "DXF export for CNC",
+          ],
+        },
+        {
+          icon: "package",
+          title: "Order Management",
+          desc: "Complete workflow from submission to delivery: WORKER → Office → Production → Client, with approvals and notifications.",
+          bullets: [
+            "5 order statuses",
+            "Microsoft / email login",
+            "Real-time notifications",
+          ],
+        },
+        {
+          icon: "boxes",
+          title: "Smart Inventory",
+          desc: "Stock management by material, gauge and finish. Threshold alerts, traceable transactions, Excel import, purchase orders.",
+          bullets: [
+            "Types: sheet, coil, roll, profile",
+            "Automatic pricing per sq.ft / lin.ft",
+            "Order backups for workers",
+          ],
+        },
+        {
+          icon: "kanban",
+          title: "Production Kanban",
+          desc: "Real-time production board with drag-and-drop, phase calendar and schedule change requests.",
+          bullets: [
+            "3 columns: To produce / In progress / Done",
+            "Monthly / weekly / planning calendar",
+            "Machine management",
+          ],
+        },
+        {
+          icon: "smartphone",
+          title: "Mobile PWA for Workers",
+          desc: "Dedicated mobile app for workers in the field: order from the catalog, track history, view production calendar.",
+          bullets: [
+            "Profile photo → order",
+            "Personal backups",
+            "Offline mode (PWA)",
+          ],
         },
       ],
     },
@@ -736,7 +874,7 @@ const T = {
       "Terms of service": "By using SeriesPro360, you agree to our rules. Our tools are provided 'as is' to assist you in estimating, but final validation of calculations and code compliance remains the responsibility of the professional (contractor, architect or engineer) signing off on the project.",
       "Privacy policy": "Your data is yours. SeriesPro360 stores your estimates and client data locally in your browser by default. If you opt for Cloud sync, we use end-to-end encryption and never sell your information to third parties.",
       "Accessibility": "We are committed to making SeriesPro360 accessible to everyone. Our apps meet WCAG 2.1 AA standards, offer a native dark mode to reduce eye strain, and support full keyboard and screen reader navigation.",
-      "Status": "All systems operational.\n\n• CalcuPro360: Online (100% uptime)\n• MesurePro360: In development\n• DevisPro360: In development\n• TrimPro360: In development"
+      "Status": "All systems operational.\n\n• CalcuPro360: Online (100% uptime)\n• TrimPro360: Online (100% uptime)\n• MesurePro360: In development\n• DevisPro360: In development"
     },
   },
 };

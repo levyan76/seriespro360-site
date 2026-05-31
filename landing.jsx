@@ -678,6 +678,53 @@ export function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — CALCUPRO PRESENTATION
 // ──────────────────────────────────────────────────────────────────────────────
+export function TrimPresentation({ lang }) {
+  const t = T[lang].trim_presentation;
+  const r1 = useReveal();
+  const r2 = useReveal({ threshold: 0.05 });
+  return (
+    <section id="trimpro360" className="sp-features" style={{ background: "var(--sp-bg)", borderTop: "1px solid var(--sp-border)" }}>
+      <div className="sp-container">
+        <div className="sp-reveal" ref={r1}>
+          <SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} align="center" />
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 24 }}>
+            <a
+              href={t.cta_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sp-btn sp-btn-primary"
+              style={{ fontSize: 16, padding: "12px 32px", borderRadius: 8, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, background: "#EAB308", color: "#000", fontWeight: 700 }}
+            >
+              {t.cta_label} →
+            </a>
+          </div>
+        </div>
+        <div className="sp-feat-grid sp-reveal sp-reveal-stagger" ref={r2} style={{ marginTop: 48, gap: 24, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}>
+          {t.features.map((f, i) => (
+            <article key={i} className="sp-feat" style={{ background: "var(--sp-card)", padding: 24, borderRadius: 12, border: "1px solid var(--sp-border)" }}>
+              <div className="sp-feat-icon" style={{ background: "rgba(234,179,8,0.15)", color: "#EAB308", width: 40, height: 40, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
+                <Icon name={f.icon} size={20} stroke="currentColor" />
+              </div>
+              <h3 className="sp-feat-title" style={{ fontSize: 18, marginBottom: 8 }}>{f.title}</h3>
+              <p className="sp-feat-desc" style={{ fontSize: 14, color: "var(--sp-text-2)", marginBottom: 16 }}>{f.desc}</p>
+              <ul style={{ margin: 0, padding: 0, listStyle: "none", fontSize: 13, color: "var(--sp-muted)", display: "flex", flexDirection: "column", gap: 8 }}>
+                {f.bullets.map((b, j) => (
+                  <li key={j} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+                    <div style={{ color: "#EAB308", flexShrink: 0, marginTop: 2 }}>
+                      <Icon name="check" size={12} />
+                    </div>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function CalcuPresentation({ lang, minimal = false }) {
   const t = T[lang].calcu_presentation;
   const r1 = useReveal();
@@ -765,6 +812,7 @@ function App() {
       <main>
         <Hero lang={t.lang} />
         <Suite lang={t.lang} onNotify={(appName) => setNotifyApp(appName)} />
+        <TrimPresentation lang={t.lang} />
         <CalcuPresentation lang={t.lang} minimal={true} />
         <Demo lang={t.lang} />
         <Features lang={t.lang} />
