@@ -100,9 +100,29 @@ const PRODUCT_COLORS = {
   yellow: { bg: "#EAB308", on: "#0a0a0a" },
 };
 
+// Map des produits qui ont un vrai logo PNG/WebP dans dist/logos/
+// Le chemin est relatif à index.html (racine du site)
+const PRODUCT_LOGO_URLS = {
+  CalcuPro360: "dist/logos/logo-calcupro360.webp",
+  TrimPro360:  "dist/logos/logo-trimpro360.webp",
+};
+
 function ProductMark({ kind, color, size = 40 }) {
+  // Si un vrai logo existe → l'afficher dans un carré arrondi (même taille que l'icône SVG)
+  if (PRODUCT_LOGO_URLS[kind]) {
+    return (
+      <img
+        src={PRODUCT_LOGO_URLS[kind]}
+        alt={kind}
+        width={size}
+        height={size}
+        style={{ width: size, height: size, objectFit: "contain", borderRadius: 8, background: "transparent" }}
+      />
+    );
+  }
+
   const map = {
-    // CalcuPro360 — 2×2 keypad
+    // CalcuPro360 — fallback SVG (ne devrait plus être utilisé)
     CalcuPro360: { color: "orange", glyph: (c) => (
       <g stroke={c} strokeWidth="1.6" strokeLinecap="round">
         <circle cx="9" cy="9" r="1.4" fill={c} stroke="none" />

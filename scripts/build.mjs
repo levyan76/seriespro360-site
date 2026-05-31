@@ -2,7 +2,7 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const sharp = require('sharp');
 import { buildSync, transformSync } from 'esbuild';
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createHash } from 'crypto';
@@ -44,6 +44,22 @@ const cssResult = transformSync(cssSrc, {
   minify: true,
 });
 writeFileSync(join(distDir, 'app.min.css'), cssResult.code);
+
+// Copy + optimize product logos → dist/logos/
+const logosDistDir = join(distDir, 'logos');
+if (!existsSync(logosDistDir)) mkdirSync(logosDistDir, { recursive: true });
+
+const logosToCopy = [
+  { src: join(root, 'logos/logo-trimpro360.png'),  dest: join(logosDistDir, 'logo-trimpro360.webp'),  w: 200 },
+  { src: join(root, 'logos/logo-calcupro360.png'), dest: join(logosDistDir, 'logo-calcupro360.webp'), w: 200 },
+];
+for (const l of logosToCopy) {
+  if (existsSync(l.src)) {
+    await sharp(l.src).resize(l.w).webp({ quality: 85 }).toFile(l.dest);
+    const kb = (require('fs').statSync(l.dest).size / 1024).toFixed(0);
+    console.log(`✅ ${l.dest.split('/').pop()} — ${kb} KB`);
+  }
+}
 
 // Optimize og-image → WebP
 const ogSrc = join(root, 'og-image.jpg');
