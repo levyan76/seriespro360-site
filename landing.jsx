@@ -89,11 +89,12 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
 // ──────────────────────────────────────────────────────────────────────────────
 function Hero({ lang }) {
   const t = window.T[lang].hero;
+  const td = window.T[lang].demo;
   return (
-    <section id="top" className="sp-hero">
+    <section id="top" className="sp-hero sp-hero-compact">
       <div className="sp-hero-grid-bg" aria-hidden="true" />
-      <div className="sp-container sp-hero-inner">
-        <div className="sp-hero-copy">
+      <div className="sp-container sp-hero-inner sp-hero-inner-wide">
+        <div className="sp-hero-copy sp-hero-copy-compact">
           <div className="sp-hero-badge">
             <span className="sp-hero-badge-dot" />{t.badge}
           </div>
@@ -101,12 +102,10 @@ function Hero({ lang }) {
             <span className="sp-hero-word">{t.title_a}<span className="sp-hero-period">.</span></span>
             <span className="sp-hero-word">{t.title_b}<span className="sp-hero-period">.</span></span>
             <span className="sp-hero-word sp-hero-word-accent">{t.title_c}<span className="sp-hero-period">.</span></span>
-            <span className="sp-hero-tail">{t.title_tail}</span>
           </h1>
-          <p className="sp-hero-sub">{t.subtitle}</p>
+          <p className="sp-hero-sub sp-hero-sub-sm">{t.hero_short || (lang === "fr" ? "Calcul, estimation et devis PDF pour les pros québécois de la construction." : "Material calculation and PDF quotes for Quebec construction pros.")}</p>
           <div className="sp-hero-ctas">
             <a href="#suite" className="sp-btn sp-btn-primary sp-btn-lg">{t.cta_primary} <Icon name="arrow-right" size={16} /></a>
-            <a href="#demo" className="sp-btn sp-btn-ghost sp-btn-lg">{t.cta_secondary}</a>
           </div>
           <ul className="sp-hero-meta">
             <li><Icon name="check" size={14} />{t.meta_1}</li>
@@ -114,7 +113,9 @@ function Hero({ lang }) {
             <li><Icon name="check" size={14} />{t.meta_3}</li>
           </ul>
         </div>
-        <HeroMock lang={lang} t={t} />
+        <div className="sp-hero-demo" id="demo">
+          <SlabEstimator lang={lang} t={td} />
+        </div>
       </div>
     </section>
   );
@@ -560,7 +561,6 @@ function App() {
         <Hero lang={t.lang} />
         <TrustStrip lang={t.lang} />
         <Suite lang={t.lang} />
-        <Demo lang={t.lang} />
         <Features lang={t.lang} />
         <Workflow lang={t.lang} />
         <Pricing lang={t.lang} />

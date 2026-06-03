@@ -577,6 +577,10 @@ html.sp-light .sp-unit-toggle button.is-on {
   overflow: hidden;
 }
 
+.sp-hero.sp-hero-compact {
+  padding: 36px 0 40px;
+}
+
 .sp-hero-grid-bg {
   position: absolute;
   inset: 0;
@@ -598,6 +602,12 @@ html.sp-light .sp-unit-toggle button.is-on {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
   gap: 64px;
   align-items: center;
+}
+
+.sp-hero-inner-wide {
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: 48px;
+  align-items: start;
 }
 
 .sp-hero-badge {
@@ -645,6 +655,10 @@ html.sp-light .sp-unit-toggle button.is-on {
   color: var(--sp-text);
 }
 
+.sp-hero-copy-compact .sp-hero-title {
+  font-size: clamp(32px, 4vw, 52px);
+}
+
 .sp-hero-word {
   display: inline-block;
   margin-right: 0.22em;
@@ -681,11 +695,35 @@ html.sp-light .sp-unit-toggle button.is-on {
   margin: 28px 0 0;
 }
 
+.sp-hero-sub-sm {
+  font-size: 15px;
+  margin: 16px 0 0;
+  max-width: 38ch;
+}
+
 .sp-hero-ctas {
   display: flex;
   gap: 12px;
   margin-top: 36px;
   flex-wrap: wrap;
+}
+
+.sp-hero-copy-compact .sp-hero-ctas {
+  margin-top: 22px;
+}
+
+.sp-hero-copy-compact .sp-hero-meta {
+  margin-top: 18px;
+  gap: 12px;
+}
+
+.sp-hero-demo {
+  position: relative;
+  z-index: 2;
+}
+
+.sp-hero-demo .sp-estimator {
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
 }
 
 .sp-hero-meta {
@@ -960,6 +998,11 @@ html.sp-light .sp-unit-toggle button.is-on {
   .sp-hero-inner {
     grid-template-columns: 1fr;
     gap: 56px;
+  }
+
+  .sp-hero-inner-wide {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .sp-hero-mock-frame {
