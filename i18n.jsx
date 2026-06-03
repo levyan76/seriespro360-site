@@ -12,7 +12,7 @@ const T = {
       cta: "Accéder aux apps",
     },
     hero: {
-      badge: "v" + __APP_VERSION__ + " · La suite chantier #1 au Québec",
+      badge: "v3.0 · La suite chantier #1 au Québec",
       title_a: "Mesurez",
       title_b: "Calculez",
       title_c: "Livrez",
@@ -21,8 +21,8 @@ const T = {
         "SeriesPro360 développe des outils numériques spécialisés pour les pros québécois de la construction. CalcuPro360, notre calculateur de matériaux et générateur de devis, est déjà en ligne. D'autres apps arrivent bientôt.",
       cta_primary: "Découvrir CalcuPro360",
       cta_secondary: "Essayer la démo ↓",
-      meta_1: "Gratuit : 1 projet · 5 estimations",
-      meta_2: "Pro illimité · carte requise",
+      meta_1: "5 estimés/mois gratuits",
+      meta_2: "Aucune carte de crédit",
       meta_3: "Installable mobile/desktop",
       mock_title: "Dalle de garage — 24'×22'×4\"",
       mock_volume: "Volume net",
@@ -47,16 +47,6 @@ const T = {
         "SeriesPro360 bâtit une suite d'outils numériques pour les pros québécois de la construction. Commencez avec CalcuPro360 — les prochains outils seront annoncés à leur lancement.",
       products: [
         {
-          tag: "En ligne",
-          name: "TrimPro360",
-          tagline: "Commande & Production",
-          desc: "Logiciel SaaS pour la commande, la production et le suivi des moulures métalliques sur mesure. Conçu pour les ateliers de tôle, toiture et bardage au Québec.",
-          color: "yellow",
-          cta: "Accéder à l'app",
-          url: "https://trimpro360-v3.vercel.app",
-          placeholder: false,
-        },
-        {
           tag: "Actif",
           name: "CalcuPro360",
           tagline: "Calcul, estimation, devis PDF",
@@ -72,7 +62,7 @@ const T = {
           desc: "Un nouvel outil pour accélérer la prise de mesure sur le chantier. Détails à venir.",
           color: "blue",
           cta: "Être notifié",
-          url: "#notify",
+          url: "#",
           placeholder: true,
         },
         {
@@ -82,209 +72,20 @@ const T = {
           desc: "Un outil spécialisé pour les cahiers des charges en construction. Détails à venir.",
           color: "green",
           cta: "Être notifié",
-          url: "#notify",
+          url: "#",
+          placeholder: true,
+        },
+        {
+          tag: "Bientôt",
+          name: "ThermoPro",
+          tagline: "Calcul thermique",
+          desc: "Un calculateur pour l'enveloppe thermique du bâtiment. Détails à venir.",
+          color: "yellow",
+          cta: "Être notifié",
+          url: "#",
           placeholder: true,
         },
       ],
-    },
-    trim_presentation: {
-      eyebrow: "Nouveau produit — En ligne",
-      title: "TrimPro360",
-      subtitle: "La plateforme de gestion de commandes et de production pour les ateliers de moulures métalliques sur mesure. Catalogue de profilés, dessin canvas, workflow de production, inventaire — tout en un.",
-      cta_label: "Accéder à l'application",
-      cta_url: "https://trimpro360-v3.vercel.app",
-      features: [
-        {
-          icon: "layout-grid",
-          title: "Catalogue de profils",
-          desc: "56 profilés standards (J-trim, solin, noue, bardage...) avec prévisualisation SVG, dimensions paramétrables et export PDF.",
-          bullets: [
-            "Dimensions A, B, C configurables",
-            "PDF de dessin technique",
-            "Favoris et profils personnalisés",
-          ],
-        },
-        {
-          icon: "pen-tool",
-          title: "Canvas de dessin",
-          desc: "Éditeur vectoriel pour dessiner des profils custom avec calcul automatique de la longueur développée et export DXF.",
-          bullets: [
-            "Replis INT/EXT configurables",
-            "Système expert de faisabilité",
-            "Export DXF pour CNC",
-          ],
-        },
-        {
-          icon: "package",
-          title: "Gestion des commandes",
-          desc: "Workflow complet de la soumission à la livraison : OUVRIER → Bureau → Production → Client, avec approbations et notifications.",
-          bullets: [
-            "5 statuts de commande",
-            "Login Microsoft / email",
-            "Notifications en temps réel",
-          ],
-        },
-        {
-          icon: "boxes",
-          title: "Inventaire intelligent",
-          desc: "Gestion des stocks par matériau, calibre et finition. Alertes de seuil, transactions traçables, import Excel, bons de commande.",
-          bullets: [
-            "Types : feuille, bobine, rouleau, profilé",
-            "Pricing automatique par pi²/pi linéaire",
-            "Sauvegardes commandes pour ouvriers",
-          ],
-        },
-        {
-          icon: "kanban",
-          title: "Production Kanban",
-          desc: "Tableau de production en temps réel avec glisser-déposer, calendrier de phases et demandes de modification de calendrier.",
-          bullets: [
-            "3 colonnes : À produire / En cours / Terminé",
-            "Calendrier mensuel / hebdo / planning",
-            "Gestion des machines",
-          ],
-        },
-        {
-          icon: "smartphone",
-          title: "PWA mobile pour ouvriers",
-          desc: "Application mobile dédiée aux ouvriers sur le chantier : commander depuis le catalogue, suivre l'historique, voir le calendrier de production.",
-          bullets: [
-            "Photo de profilé → commande",
-            "Sauvegardes personnelles",
-            "Mode hors-ligne (PWA)",
-          ],
-        },
-      ],
-    },
-    trim_pricing: {
-      eyebrow: "Tarification simple",
-      title: "Un seul prix. Tout inclus.",
-      subtitle: "Aucune implantation, aucune formation obligatoire. Opérationnel le jour 1.",
-      badge_founder: "10 places seulement",
-      badge_popular: "Le plus populaire",
-      cta_founder: "Demander une place Fondateur",
-      cta_standard: "Commencer maintenant",
-      cta_enterprise: "Nous contacter",
-      cta_founder_url: "mailto:info@seriespro360.com?subject=Cercle%20Fondateur%20TrimPro360",
-      cta_standard_url: "https://trimpro360-v3.vercel.app",
-      cta_enterprise_url: "mailto:info@seriespro360.com?subject=TrimPro360%20Enterprise",
-      note: "Comparatif : Paradigm ERP (le concurrent direct en rollforming) facture 495$/mois minimum + 7 950$ d'implantation. TrimPro360 démarre le jour 1, sans frais d'entrée.",
-      plans: [
-        {
-          id: "founder",
-          name: "Cercle Fondateur",
-          price: "149$",
-          period: "/mois à vie",
-          highlight: false,
-          badge: "badge_founder",
-          desc: "Pour les 10 premières entreprises qui façonnent le produit avec nous.",
-          features: [
-            "Accès complet — version actuelle et futures",
-            "3 utilisateurs inclus",
-            "Support prioritaire direct",
-            "Votre feedback influence la roadmap",
-            "Badge « Fondateur » dans l'application",
-            "Prix verrouillé à vie",
-          ],
-        },
-        {
-          id: "standard",
-          name: "Standard",
-          price: "299$",
-          period: "/mois",
-          highlight: true,
-          badge: "badge_popular",
-          desc: "La version complète pour les ateliers qui veulent une solution sans compromis.",
-          features: [
-            "Accès complet — toutes les fonctions",
-            "10 utilisateurs inclus",
-            "Catalogue 56 profils + canvas custom",
-            "Workflow OUVRIER → Bureau → Production",
-            "Inventaire, Kanban, PDF, DXF",
-            "PWA mobile pour ouvriers",
-          ],
-        },
-        {
-          id: "enterprise",
-          name: "Enterprise",
-          price: "Sur soumission",
-          period: "",
-          highlight: false,
-          badge: null,
-          desc: "Pour les manufacturiers avec plusieurs ateliers, intégrations ERP ou volume élevé.",
-          features: [
-            "Utilisateurs illimités",
-            "Multi-sites / multi-ateliers",
-            "Intégration ERP sur mesure",
-            "SLA garanti",
-            "Formation et onboarding dédié",
-            "Facturation annuelle disponible",
-          ],
-        },
-      ],
-    },
-    calcu_presentation: {
-      eyebrow: "Application phare",
-      title: "CalcuPro360 - Assistant Chantier Intelligent",
-      subtitle: "L'outil ultime qui transforme vos relevés de chantier en devis professionnels en moins de 90 secondes. Alliez la précision d'un estimateur senior à la puissance de l'IA pour sécuriser vos marges et gagner plus de contrats.",
-      features: [
-        {
-          icon: "ruler",
-          title: "1. Estimateur de Matériaux",
-          punchline: "Estimez plus vite. Oubliez moins.",
-          desc: "Générez automatiquement quantités, pertes, matériaux et coûts selon votre projet et vos systèmes constructifs.",
-          bullets: [
-            "Génération automatique des matériaux",
-            "Gestion des pertes, joints, entraxes et quincaillerie",
-            "Systèmes complets : toiture, gypse, béton, etc.",
-            "Coûts approximatifs ou personnalisés",
-            "Réduction massive des oublis d'estimation",
-            "➜ Votre méga pense-bête technique pour chantier"
-          ]
-        },
-        {
-          icon: "zap",
-          title: "2. Assistant IA",
-          punchline: "Votre copilote technique chantier.",
-          desc: "Obtenez rapidement de l'aide sur les calculs, méthodes et bonnes pratiques directement dans l'application.",
-          bullets: [
-            "Assistance technique instantanée",
-            "Aide aux calculs complexes",
-            "Explications des méthodes et systèmes",
-            "Suggestions intelligentes selon le contexte",
-            "Support bilingue FR / EN",
-            "➜ Une IA pour assister l'estimateur, pas le remplacer"
-          ]
-        },
-        {
-          icon: "cpu",
-          title: "3. Calculatrice de Construction",
-          punchline: "Le moteur de calcul pensé pour les vrais chantiers.",
-          desc: "Calculs métriques, impériaux, fractions et conversions automatiques dans un workflow rapide et sans friction.",
-          bullets: [
-            "Calculs métriques & impériaux intelligents",
-            "Gestion automatique des fractions et conversions",
-            "Compatible chantier résidentiel & commercial",
-            "Réduction des erreurs de saisie et d'unités",
-            "Workflow ultra rapide, même sur mobile",
-            "➜ Moteur professionnel conçu pour la construction"
-          ]
-        },
-        {
-          icon: "file",
-          title: "4. Dashboard & Export",
-          punchline: "Toutes vos estimations au même endroit.",
-          desc: "Organisez vos projets, vérifiez vos estimations et exportez des PDF professionnels en quelques clics.",
-          bullets: [
-            "Gestion des projets et estimations",
-            "Export PDF professionnel prêt à envoyer",
-            "Export CSV / Excel",
-            "Audit anti-oubli et validation des risques",
-            "Interface optimisée terrain, bureau et tablette",
-            "➜ Du calcul jusqu'au document final en un seul workflow"
-          ]
-        }
-      ]
     },
     demo: {
       eyebrow: "Démo — CalcuPro360",
@@ -318,24 +119,6 @@ const T = {
       explain_body:
         "Volume = L × l × ép. Conversion en m³, application des pertes (commande arrondie au 0,5 m³), prix par défaut 185 $/m³ (Béton Provincial QC 2025), taxes TPS 5% + TVQ 9,975%.",
       saved: "Devis enregistré dans le dashboard",
-      tab_concrete: "CalcuPro360 (Dalle Béton)",
-      tab_trim: "TrimPro360 (Pliage Tôle)",
-      trim_title: "Estimateur de Pliage de Tôle",
-      trim_subtitle: "Configurez les dimensions du profilé fascia. Le coût et le développé de tôle s'actualisent en temps réel.",
-      trim_dim_a: "Vertical (A)",
-      trim_dim_b: "Horizontal (B)",
-      trim_dim_c: "Retombée (C)",
-      trim_dim_d: "Goutte d'eau (D)",
-      trim_dim_e: "Pli sécurité (E)",
-      trim_gauge: "Calibre métal",
-      trim_color: "Couleur / Finition",
-      trim_qty: "Quantité (10′)",
-      trim_dev_width: "Largeur développée",
-      trim_total_len: "Longueur totale",
-      trim_total_area: "Superficie totale",
-      trim_generate: "Générer commande pliage →",
-      trim_explain: "Méthode d'estimation",
-      trim_explain_body: "Le développé est la somme brute des segments A+B+C+D+E. Le prix estimé est basé sur la superficie totale en pieds carrés (pi²) multipliée par le coût unitaire du calibre choisi (ex: 2.25$/pi² pour l'acier 24ga).",
     },
     features: {
       eyebrow: "Pourquoi SeriesPro360",
@@ -400,19 +183,18 @@ const T = {
           cadence: "/ mois",
           desc: "Pour découvrir l'app et estimer occasionnellement.",
           features: [
-            "1 projet · 5 estimations",
+            "5 estimés / mois",
             "21 matériaux complets",
             "Calculatrice pi-po",
             "Assistant IA (10 questions/mois)",
             "Devis PDF avec filigrane",
           ],
           cta: "Commencer",
-          url: "https://calcupro360.seriespro360.com",
           highlight: false,
         },
         {
           name: "Pro",
-          price: "24,99$",
+          price: "14,99$",
           cadence: "/ mois CAD",
           desc: "Pour les estimateurs et entrepreneurs actifs.",
           features: [
@@ -424,7 +206,6 @@ const T = {
             "Support prioritaire",
           ],
           cta: "Passer Pro",
-          url: "https://calcupro360.seriespro360.com",
           highlight: true,
         },
         {
@@ -440,7 +221,6 @@ const T = {
             "Facturation annuelle consolidée",
           ],
           cta: "Nous contacter",
-          url: "mailto:contact@seriespro360.com",
           highlight: false,
         },
       ],
@@ -478,33 +258,14 @@ const T = {
     },
     cta_band: {
       title: "Arrêtez de calculer dans Excel à 22h.",
-      subtitle: "Essaie CalcuPro360 maintenant. 1 projet et 5 estimations gratuits, sans carte.",
+      subtitle: "Essaie CalcuPro360 maintenant. 5 estimés gratuits, aucune carte requise.",
       primary: "Démarrer gratuitement",
       secondary: "Voir un devis exemple →",
-    },
-    notify: {
-      eyebrow: "Lancement prochain",
-      title: "Soyez les premiers informés",
-      subtitle: "Inscrivez-vous pour recevoir les dates de lancement et des accès exclusifs aux prochaines applications de la suite.",
-      name_label: "Nom complet",
-      email_label: "Adresse courriel",
-      type_label: "Type d'entreprise",
-      types: [
-        "Entrepreneur Général",
-        "Entrepreneur Spécialisé",
-        "Artisan / Travailleur autonome",
-        "Architecte / Designer",
-        "Particulier / Autoconstruction",
-        "Autre"
-      ],
-      cta: "M'inscrire à la liste",
-      success: "Merci ! Vous recevrez bientôt de nos nouvelles.",
-      error: "Une erreur est survenue. Veuillez réessayer."
     },
     footer: {
       tagline: "La suite chantier intelligente pour le marché québécois.",
       product: "Produit",
-      product_links: ["CalcuPro360", "TrimPro360", "Suite (bientôt)"],
+      product_links: ["CalcuPro360", "Suite (bientôt)"],
       company: "Compagnie",
       company_links: ["À propos", "Blogue chantier", "Carrières", "Contact"],
       legal: "Légal",
@@ -517,11 +278,11 @@ const T = {
       "À propos": "SeriesPro360 est une entreprise québécoise dédiée à la création d'outils numériques robustes et précis pour l'industrie de la construction. Notre mission est de numériser les processus d'estimation et de gestion de chantier tout en respectant strictement les normes locales (CNB, CCQ, RBQ).",
       "Blogue chantier": "Le blogue de SeriesPro360 sera bientôt disponible. Nous y partagerons des astuces d'estimation, des mises à jour sur les normes québécoises et des études de cas de nos utilisateurs sur le terrain.",
       "Carrières": "Nous sommes toujours à la recherche de talents passionnés par la construction et la technologie. Bien que nous n'ayons pas de postes ouverts pour le moment, n'hésitez pas à nous contacter.",
-      "Contact": "Besoin d'aide ou envie de discuter ?\n\nÉcrivez-nous à : contact@seriespro360.com\nAdresse : Québec, QC, Canada.",
+      "Contact": "Besoin d'aide ou envie de discuter ?\n\nÉcrivez-nous à : support@seriespro360.com\nTéléphone : 1-800-555-3600\nAdresse : Québec, QC, Canada.",
       "Conditions d'utilisation": "En utilisant SeriesPro360, vous acceptez de vous conformer à nos règles. Nos outils sont fournis « tels quels » pour vous aider dans vos estimations, mais la validation finale des calculs et la conformité au code demeurent la responsabilité du professionnel (entrepreneur, architecte ou ingénieur) responsable du projet.",
       "Politique de confidentialité": "Vos données vous appartiennent. SeriesPro360 stocke vos estimations et données clients localement dans votre navigateur par défaut. Si vous optez pour la synchronisation Cloud, nous utilisons un cryptage de bout en bout et ne revendons jamais vos informations à des tiers.",
       "Accessibilité": "Nous nous engageons à rendre SeriesPro360 accessible à tous. Nos applications respectent les standards WCAG 2.1 AA, offrent un mode sombre natif pour réduire la fatigue visuelle, et supportent la navigation au clavier et par lecteur d'écran.",
-      "Statut": "Tous les systèmes sont opérationnels.\n\n• CalcuPro360 : En ligne (100% uptime)\n• TrimPro360 : En ligne (100% uptime)\n• MesurePro360 : En développement\n• DevisPro360 : En développement"
+      "Statut": "Tous les systèmes sont opérationnels.\n\n• CalcuPro360 : En ligne (100% uptime)\n• MesurePro360 : En développement\n• DevisPro360 : En développement\n• ThermoPro : En développement"
     },
   },
 
@@ -535,7 +296,7 @@ const T = {
       cta: "Open apps",
     },
     hero: {
-      badge: "v" + __APP_VERSION__ + " · Quebec's #1 jobsite suite",
+      badge: "v3.0 · Quebec's #1 jobsite suite",
       title_a: "Measure",
       title_b: "Compute",
       title_c: "Deliver",
@@ -544,8 +305,8 @@ const T = {
         "SeriesPro360 builds specialized digital tools for Quebec construction pros. CalcuPro360, our material calculator and quote generator, is live now. More apps coming soon.",
       cta_primary: "Try CalcuPro360",
       cta_secondary: "Try the demo ↓",
-      meta_1: "Free: 1 project · 5 estimates",
-      meta_2: "Pro unlimited · card required",
+      meta_1: "5 estimates/month free",
+      meta_2: "No credit card",
       meta_3: "Installable on mobile/desktop",
       mock_title: "Garage slab — 24'×22'×4\"",
       mock_volume: "Net volume",
@@ -571,16 +332,6 @@ const T = {
       products: [
         {
           tag: "Live",
-          name: "TrimPro360",
-          tagline: "Ordering & Production",
-          desc: "SaaS software for ordering, production and tracking of custom metal trim profiles. Built for sheet metal, roofing and cladding shops in Quebec.",
-          color: "yellow",
-          cta: "Access the app",
-          url: "https://trimpro360-v3.vercel.app",
-          placeholder: false,
-        },
-        {
-          tag: "Live",
           name: "CalcuPro360",
           tagline: "Calc, estimating, PDF quotes",
           desc: "Expanding materials library, ft-in calculator, AI assistant, client-ready quote in 90 sec.",
@@ -595,7 +346,7 @@ const T = {
           desc: "A new tool to speed up on-site measuring. Details coming soon.",
           color: "blue",
           cta: "Get notified",
-          url: "#notify",
+          url: "#",
           placeholder: true,
         },
         {
@@ -605,209 +356,20 @@ const T = {
           desc: "A specialized tool for construction spec books. Details coming soon.",
           color: "green",
           cta: "Get notified",
-          url: "#notify",
+          url: "#",
+          placeholder: true,
+        },
+        {
+          tag: "Soon",
+          name: "ThermoPro",
+          tagline: "Thermal calculation",
+          desc: "A calculator for building thermal envelopes. Details coming soon.",
+          color: "yellow",
+          cta: "Get notified",
+          url: "#",
           placeholder: true,
         },
       ],
-    },
-    trim_presentation: {
-      eyebrow: "New product — Live",
-      title: "TrimPro360",
-      subtitle: "The platform for order management and production of custom metal trim profiles. Profile catalog, canvas drawing, production workflow, inventory — all in one.",
-      cta_label: "Access the application",
-      cta_url: "https://trimpro360-v3.vercel.app",
-      features: [
-        {
-          icon: "layout-grid",
-          title: "Profile Catalog",
-          desc: "56 standard profiles (J-trim, flashing, valley, cladding...) with SVG preview, configurable dimensions and PDF export.",
-          bullets: [
-            "Configurable A, B, C dimensions",
-            "Technical drawing PDF",
-            "Favorites and custom profiles",
-          ],
-        },
-        {
-          icon: "pen-tool",
-          title: "Drawing Canvas",
-          desc: "Vector editor to draw custom profiles with automatic developed length calculation and DXF export.",
-          bullets: [
-            "INT/EXT bends configurable",
-            "Manufacturing feasibility expert system",
-            "DXF export for CNC",
-          ],
-        },
-        {
-          icon: "package",
-          title: "Order Management",
-          desc: "Complete workflow from submission to delivery: WORKER → Office → Production → Client, with approvals and notifications.",
-          bullets: [
-            "5 order statuses",
-            "Microsoft / email login",
-            "Real-time notifications",
-          ],
-        },
-        {
-          icon: "boxes",
-          title: "Smart Inventory",
-          desc: "Stock management by material, gauge and finish. Threshold alerts, traceable transactions, Excel import, purchase orders.",
-          bullets: [
-            "Types: sheet, coil, roll, profile",
-            "Automatic pricing per sq.ft / lin.ft",
-            "Order backups for workers",
-          ],
-        },
-        {
-          icon: "kanban",
-          title: "Production Kanban",
-          desc: "Real-time production board with drag-and-drop, phase calendar and schedule change requests.",
-          bullets: [
-            "3 columns: To produce / In progress / Done",
-            "Monthly / weekly / planning calendar",
-            "Machine management",
-          ],
-        },
-        {
-          icon: "smartphone",
-          title: "Mobile PWA for Workers",
-          desc: "Dedicated mobile app for workers in the field: order from the catalog, track history, view production calendar.",
-          bullets: [
-            "Profile photo → order",
-            "Personal backups",
-            "Offline mode (PWA)",
-          ],
-        },
-      ],
-    },
-    trim_pricing: {
-      eyebrow: "Simple pricing",
-      title: "One price. Everything included.",
-      subtitle: "No implementation fees, no mandatory training. Up and running on day 1.",
-      badge_founder: "10 spots only",
-      badge_popular: "Most popular",
-      cta_founder: "Request a Founder spot",
-      cta_standard: "Get started",
-      cta_enterprise: "Contact us",
-      cta_founder_url: "mailto:info@seriespro360.com?subject=TrimPro360%20Founder%20Circle",
-      cta_standard_url: "https://trimpro360-v3.vercel.app",
-      cta_enterprise_url: "mailto:info@seriespro360.com?subject=TrimPro360%20Enterprise",
-      note: "Comparison: Paradigm ERP (the direct competitor in rollforming) charges $495/month minimum + $7,950 implementation. TrimPro360 starts day 1, no upfront cost.",
-      plans: [
-        {
-          id: "founder",
-          name: "Founder Circle",
-          price: "$149",
-          period: "/month for life",
-          highlight: false,
-          badge: "badge_founder",
-          desc: "For the first 10 companies shaping the product with us.",
-          features: [
-            "Full access — current and future versions",
-            "3 users included",
-            "Priority direct support",
-            "Your feedback shapes the roadmap",
-            "\"Founder\" badge in the application",
-            "Price locked for life",
-          ],
-        },
-        {
-          id: "standard",
-          name: "Standard",
-          price: "$299",
-          period: "/month",
-          highlight: true,
-          badge: "badge_popular",
-          desc: "The complete version for shops that want a no-compromise solution.",
-          features: [
-            "Full access — all features",
-            "10 users included",
-            "56-profile catalog + custom canvas",
-            "WORKER → Office → Production workflow",
-            "Inventory, Kanban, PDF, DXF",
-            "Mobile PWA for workers",
-          ],
-        },
-        {
-          id: "enterprise",
-          name: "Enterprise",
-          price: "Custom quote",
-          period: "",
-          highlight: false,
-          badge: null,
-          desc: "For manufacturers with multiple shops, ERP integrations or high volume.",
-          features: [
-            "Unlimited users",
-            "Multi-site / multi-shop",
-            "Custom ERP integration",
-            "Guaranteed SLA",
-            "Dedicated training and onboarding",
-            "Annual billing available",
-          ],
-        },
-      ],
-    },
-    calcu_presentation: {
-      eyebrow: "Flagship App",
-      title: "CalcuPro360 - Smart Jobsite Assistant",
-      subtitle: "The ultimate tool that transforms your jobsite measurements into professional quotes in under 90 seconds. Combine senior estimator precision with AI power to secure your margins and win more contracts.",
-      features: [
-        {
-          icon: "ruler",
-          title: "1. Material Estimator",
-          punchline: "Estimate faster. Forget less.",
-          desc: "Automatically generate quantities, waste, materials, and costs based on your project and construction systems.",
-          bullets: [
-            "Automatic material generation",
-            "Waste, joints, spacing, and hardware management",
-            "Complete systems: roofing, drywall, concrete, etc.",
-            "Approximate or customized costs",
-            "Massive reduction in estimation oversights",
-            "➜ Your technical jobsite mega-reminder"
-          ]
-        },
-        {
-          icon: "zap",
-          title: "2. AI Assistant",
-          punchline: "Your technical jobsite co-pilot.",
-          desc: "Get quick help with calculations, methods, and best practices directly in the application.",
-          bullets: [
-            "Instant technical assistance",
-            "Help with complex calculations",
-            "Explanations of methods and systems",
-            "Smart context-aware suggestions",
-            "Bilingual support FR / EN",
-            "➜ AI designed to assist the estimator, not replace them"
-          ]
-        },
-        {
-          icon: "cpu",
-          title: "3. Construction Calculator",
-          punchline: "The calculation engine designed for real jobsites.",
-          desc: "Metric, imperial, fractions, and automatic conversions in a fast, frictionless workflow.",
-          bullets: [
-            "Smart metric & imperial calculations",
-            "Automatic fractions and conversions management",
-            "Compatible with residential & commercial sites",
-            "Reduction of input and unit errors",
-            "Ultra-fast workflow, even on mobile",
-            "➜ Professional engine designed for construction"
-          ]
-        },
-        {
-          icon: "file",
-          title: "4. Dashboard & Export",
-          punchline: "All your estimates in one place.",
-          desc: "Organize your projects, verify your estimates, and export professional PDFs in a few clicks.",
-          bullets: [
-            "Project and estimate management",
-            "Professional PDF export ready to send",
-            "CSV / Excel export",
-            "Anti-oversight audit and risk validation",
-            "Optimized interface for field, office, and tablet",
-            "➜ From calculation to final document in one workflow"
-          ]
-        }
-      ]
     },
     demo: {
       eyebrow: "Demo — CalcuPro360",
@@ -841,24 +403,6 @@ const T = {
       explain_body:
         "Volume = L × W × T. Converted to m³, waste applied (order rounded to 0.5 m³), default price $185/m³ (Béton Provincial QC 2025), GST 5% + QST 9.975% applied.",
       saved: "Quote saved to dashboard",
-      tab_concrete: "CalcuPro360 (Concrete Slab)",
-      tab_trim: "TrimPro360 (Metal Bending)",
-      trim_title: "Metal Flashing Estimator",
-      trim_subtitle: "Configure the dimensions of the fascia profile. The cost and developed sheet width update in real time.",
-      trim_dim_a: "Vertical (A)",
-      trim_dim_b: "Horizontal (B)",
-      trim_dim_c: "Drop (C)",
-      trim_dim_d: "Drip Edge (D)",
-      trim_dim_e: "Safety Hem (E)",
-      trim_gauge: "Metal Gauge",
-      trim_color: "Color / Finish",
-      trim_qty: "Quantity (10′)",
-      trim_dev_width: "Developed width",
-      trim_total_len: "Total length",
-      trim_total_area: "Total area",
-      trim_generate: "Generate bending order →",
-      trim_explain: "Estimation method",
-      trim_explain_body: "The developed width is the raw sum of segments A+B+C+D+E. The estimated price is based on the total area in square feet (sq.ft) multiplied by the unit cost of the selected gauge (e.g. $2.25/sq.ft for 24ga steel).",
     },
     features: {
       eyebrow: "Why SeriesPro360",
@@ -923,19 +467,18 @@ const T = {
           cadence: "/ month",
           desc: "To explore the app and estimate occasionally.",
           features: [
-            "1 project · 5 estimates",
+            "5 estimates / month",
             "All 21 materials",
             "Ft-in calculator",
             "AI assistant (10 questions/mo)",
             "PDF quote with watermark",
           ],
           cta: "Get started",
-          url: "https://calcupro360.seriespro360.com",
           highlight: false,
         },
         {
           name: "Pro",
-          price: "$24.99",
+          price: "$14.99",
           cadence: "/ month CAD",
           desc: "For active estimators and contractors.",
           features: [
@@ -947,7 +490,6 @@ const T = {
             "Priority support",
           ],
           cta: "Go Pro",
-          url: "https://calcupro360.seriespro360.com",
           highlight: true,
         },
         {
@@ -963,7 +505,6 @@ const T = {
             "Consolidated annual billing",
           ],
           cta: "Contact us",
-          url: "mailto:contact@seriespro360.com",
           highlight: false,
         },
       ],
@@ -1005,29 +546,10 @@ const T = {
       primary: "Start free",
       secondary: "See a sample quote →",
     },
-    notify: {
-      eyebrow: "Upcoming Launch",
-      title: "Be the first to know",
-      subtitle: "Sign up to receive launch dates and exclusive early access to upcoming apps in the suite.",
-      name_label: "Full Name",
-      email_label: "Email Address",
-      type_label: "Company Type",
-      types: [
-        "General Contractor",
-        "Specialized Contractor",
-        "Artisan / Freelancer",
-        "Architect / Designer",
-        "Individual / Self-builder",
-        "Other"
-      ],
-      cta: "Join the list",
-      success: "Thank you! We'll be in touch soon.",
-      error: "An error occurred. Please try again."
-    },
     footer: {
       tagline: "The smart jobsite suite for the Quebec market.",
       product: "Product",
-      product_links: ["CalcuPro360", "TrimPro360", "Suite (coming soon)"],
+      product_links: ["CalcuPro360", "Suite (coming soon)"],
       company: "Company",
       company_links: ["About", "Jobsite blog", "Careers", "Contact"],
       legal: "Legal",
@@ -1040,13 +562,13 @@ const T = {
       "About": "SeriesPro360 is a Quebec-based company dedicated to building robust and precise digital tools for the construction industry. Our mission is to digitize estimating and jobsite management while strictly adhering to local codes (NBC, CCQ, RBQ).",
       "Jobsite blog": "The SeriesPro360 blog is coming soon. We'll be sharing estimating tips, updates on Quebec codes, and case studies from our field users.",
       "Careers": "We are always looking for talent passionate about construction and technology. While we don't have open positions right now, feel free to reach out.",
-      "Contact": "Need help or want to chat?\n\nEmail us at: contact@seriespro360.com\nAddress: Quebec City, QC, Canada.",
+      "Contact": "Need help or want to chat?\n\nEmail us at: support@seriespro360.com\nPhone: 1-800-555-3600\nAddress: Quebec City, QC, Canada.",
       "Terms of service": "By using SeriesPro360, you agree to our rules. Our tools are provided 'as is' to assist you in estimating, but final validation of calculations and code compliance remains the responsibility of the professional (contractor, architect or engineer) signing off on the project.",
       "Privacy policy": "Your data is yours. SeriesPro360 stores your estimates and client data locally in your browser by default. If you opt for Cloud sync, we use end-to-end encryption and never sell your information to third parties.",
       "Accessibility": "We are committed to making SeriesPro360 accessible to everyone. Our apps meet WCAG 2.1 AA standards, offer a native dark mode to reduce eye strain, and support full keyboard and screen reader navigation.",
-      "Status": "All systems operational.\n\n• CalcuPro360: Online (100% uptime)\n• TrimPro360: Online (100% uptime)\n• MesurePro360: In development\n• DevisPro360: In development"
+      "Status": "All systems operational.\n\n• CalcuPro360: Online (100% uptime)\n• MesurePro360: In development\n• DevisPro360: In development\n• ThermoPro: In development"
     },
   },
 };
 
-export default T;
+window.T = T;

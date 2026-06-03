@@ -100,29 +100,9 @@ const PRODUCT_COLORS = {
   yellow: { bg: "#EAB308", on: "#0a0a0a" },
 };
 
-// Map des produits qui ont un vrai logo PNG/WebP dans dist/logos/
-// Le chemin est relatif à index.html (racine du site)
-const PRODUCT_LOGO_URLS = {
-  CalcuPro360: "dist/logos/logo-calcupro360.webp",
-  TrimPro360:  "dist/logos/logo-trimpro360.webp",
-};
-
 function ProductMark({ kind, color, size = 40 }) {
-  // Si un vrai logo existe → l'afficher dans un carré arrondi (même taille que l'icône SVG)
-  if (PRODUCT_LOGO_URLS[kind]) {
-    return (
-      <img
-        src={PRODUCT_LOGO_URLS[kind]}
-        alt={kind}
-        width={size}
-        height={size}
-        style={{ width: size, height: size, objectFit: "contain", borderRadius: 8, background: "transparent" }}
-      />
-    );
-  }
-
   const map = {
-    // CalcuPro360 — fallback SVG (ne devrait plus être utilisé)
+    // CalcuPro360 — 2×2 keypad
     CalcuPro360: { color: "orange", glyph: (c) => (
       <g stroke={c} strokeWidth="1.6" strokeLinecap="round">
         <circle cx="9" cy="9" r="1.4" fill={c} stroke="none" />
@@ -156,13 +136,14 @@ function ProductMark({ kind, color, size = 40 }) {
         <line x1="16.1" y1="17.6" x2="17.8" y2="19.3" stroke={c} strokeWidth="1.6" />
       </g>
     )},
-        // TrimPro360 — Metal trim / bending profile
-    TrimPro360: { color: "yellow", glyph: (c) => (
+    // ThermoPro — thermometer + heat dot
+    ThermoPro: { color: "yellow", glyph: (c) => (
       <g stroke={c} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none">
-        {/* Metal bending profile (J-trim or L-trim look) */}
-        <path d="M5 8 H15 V16 H8" />
-        <line x1="15" y1="8" x2="19" y2="4" opacity="0.6" />
-        <path d="M7 12 H13" opacity="0.5" />
+        {/* Thermometer body */}
+        <path d="M12 4.5 a2 2 0 0 1 2 2 V14 a3 3 0 1 1 -4 0 V6.5 a2 2 0 0 1 2 -2 z" />
+        <circle cx="12" cy="16.5" r="1.4" fill={c} stroke="none" />
+        {/* Bulb level fill — small extra line */}
+        <line x1="12" y1="9" x2="12" y2="14" />
       </g>
     )},
   };
@@ -204,21 +185,13 @@ function Icon({ name, size = 16, stroke = "currentColor" }) {
     case "x":           return <svg {...props}><line x1="6" y1="6" x2="18" y2="18" /><line x1="6" y1="18" x2="18" y2="6" /></svg>;
     case "chevron-down":return <svg {...props}><polyline points="6 9 12 15 18 9" /></svg>;
     case "star":        return <svg {...props}><polygon points="12 3 14.5 9.5 21 10 16 14.5 17.5 21 12 17.5 6.5 21 8 14.5 3 10 9.5 9.5" /></svg>;
-    case "layout-grid": return <svg {...props}><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>;
-    case "pen-tool":    return <svg {...props}><path d="m12 19 7-7 3 3-7 7-3-3z" /><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18Z" /><path d="m2 2 5 5" /><circle cx="8.5" cy="8.5" r="1.5" /></svg>;
-    case "package":     return <svg {...props}><polygon points="12 2 22 7 12 12 2 7 12 2" /><polyline points="2 17 12 22 22 17" /><line x1="2" y1="7" x2="2" y2="17" /><line x1="22" y1="7" x2="22" y2="17" /><line x1="12" y1="12" x2="12" y2="22" /></svg>;
-    case "boxes":       return <svg {...props}><rect x="2" y="9" width="10" height="10" rx="2" /><rect x="12" y="5" width="10" height="10" rx="2" /></svg>;
-    case "kanban":      return <svg {...props}><rect x="3" y="3" width="18" height="18" rx="2" /><line x1="9" y1="3" x2="9" y2="21" /><line x1="15" y1="3" x2="15" y2="21" /></svg>;
-    case "smartphone":  return <svg {...props}><rect x="5" y="2" width="14" height="20" rx="2" /><path d="M12 18h.01" /></svg>;
     default: return null;
   }
 }
 
-
-
-
-
-
-
-
-export { Logo, LogoStrata, LogoCompass, LogoBracket, ProductMark, Icon };
+window.Logo = Logo;
+window.LogoStrata = LogoStrata;
+window.LogoCompass = LogoCompass;
+window.LogoBracket = LogoBracket;
+window.ProductMark = ProductMark;
+window.Icon = Icon;

@@ -1,24 +1,12 @@
-import T from './i18n.jsx';
-import { Logo, ProductMark, Icon } from './logos.jsx';
-import { SlabEstimator, TrimEstimator, calcSlab, fmtNum, fmtCAD } from './calculator.jsx';
-import { useTweaks, TweaksPanel, TweakSection, TweakToggle, TweakRadio, TweakColor } from './tweaks-panel.jsx';
-
 // landing.jsx — Main SeriesPro360 marketing page
 // Composes: Nav · Hero · Trust · Suite · Live Demo · Features · Workflow · Pricing · FAQ · CTA · Footer
-
-// ──────────────────────────────────────────────────────────────────────────────
-// CLOUDFLARE WORKER — URL du endpoint de notification
-// Après `npx wrangler deploy` dans /worker, remplacer par l'URL réelle.
-// Format : https://seriespro-notify-worker.{account}.workers.dev/notify
-// ──────────────────────────────────────────────────────────────────────────────
-const NOTIFY_WORKER_URL = "https://seriespro-notify-worker.yan-levasseur.workers.dev/notify";
 
 const { useState: uS, useEffect: uE, useRef: uR, useCallback: uC } = React;
 
 // ──────────────────────────────────────────────────────────────────────────────
 // SCROLL REVEAL — IntersectionObserver-based entrance animations
 // ──────────────────────────────────────────────────────────────────────────────
-export function useReveal(opts) {
+function useReveal(opts) {
   const ref = uR(null);
   uE(() => {
     const el = ref.current;
@@ -36,7 +24,7 @@ export function useReveal(opts) {
 // ──────────────────────────────────────────────────────────────────────────────
 // TWEAK DEFAULTS
 // ──────────────────────────────────────────────────────────────────────────────
-export const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "lang": "fr",
   "dark": true,
   "accent": "#FF6B1A",
@@ -47,13 +35,9 @@ export const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — NAV
 // ──────────────────────────────────────────────────────────────────────────────
-export function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMobile }) {
-  const t = T[lang].nav;
+function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMobile }) {
+  const t = window.T[lang].nav;
   const [scrolled, setScrolled] = uS(false);
-
-  const isPresentation = typeof window !== "undefined" && window.location.pathname.includes("presentation.html");
-  const prefix = isPresentation ? "index.html" : "";
-
   uE(() => {
     const on = () => setScrolled(window.scrollY > 8);
     on(); window.addEventListener("scroll", on, { passive: true });
@@ -62,14 +46,14 @@ export function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, set
   return (
     <header className={"sp-nav" + (scrolled ? " is-scrolled" : "")}>
       <div className="sp-container sp-nav-inner">
-        <a href={`${prefix}#top`} className="sp-nav-brand">
+        <a href="#top" className="sp-nav-brand">
           <Logo variant={logoVariant} size={28} />
         </a>
         <nav className="sp-nav-links">
-          <a href={`${prefix}#suite`}>{t.products}</a>
-          <a href={`${prefix}#demo`}>{t.demo}</a>
-          <a href={`${prefix}#pricing`}>{t.pricing}</a>
-          <a href={`${prefix}#faq`}>{t.faq}</a>
+          <a href="#suite">{t.products}</a>
+          <a href="#demo">{t.demo}</a>
+          <a href="#pricing">{t.pricing}</a>
+          <a href="#faq">{t.faq}</a>
         </nav>
         <div className="sp-nav-actions">
           <div className="sp-lang-toggle" role="tablist" aria-label="Language">
@@ -79,8 +63,8 @@ export function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, set
           <button className="sp-theme-toggle" onClick={() => setDark(!dark)} aria-label="Theme">
             <Icon name={dark ? "sun" : "moon"} size={16} />
           </button>
-          <a href="https://calcupro360.seriespro360.com" target="_blank" rel="noopener" className="sp-btn sp-btn-ghost-sm sp-nav-login">{t.login}</a>
-          <a href={`${prefix}#suite`} className="sp-btn sp-btn-primary sp-btn-sm">{t.cta} <Icon name="arrow-right" size={14} /></a>
+          <a href="#" className="sp-btn sp-btn-ghost-sm sp-nav-login">{t.login}</a>
+          <a href="#suite" className="sp-btn sp-btn-primary sp-btn-sm">{t.cta} <Icon name="arrow-right" size={14} /></a>
           <button className="sp-nav-burger" onClick={() => setOpenMobile(!openMobile)} aria-label="Menu">
             <Icon name={openMobile ? "x" : "menu"} size={18} />
           </button>
@@ -88,11 +72,11 @@ export function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, set
       </div>
       {openMobile && (
         <div className="sp-nav-mobile">
-          <a href={`${prefix}#suite`} onClick={() => setOpenMobile(false)}>{t.products}</a>
-          <a href={`${prefix}#demo`} onClick={() => setOpenMobile(false)}>{t.demo}</a>
-          <a href={`${prefix}#pricing`} onClick={() => setOpenMobile(false)}>{t.pricing}</a>
-          <a href={`${prefix}#faq`} onClick={() => setOpenMobile(false)}>{t.faq}</a>
-          <a href={`${prefix}#suite`} className="sp-btn sp-btn-primary" onClick={() => setOpenMobile(false)}>{t.cta}</a>
+          <a href="#suite" onClick={() => setOpenMobile(false)}>{t.products}</a>
+          <a href="#demo" onClick={() => setOpenMobile(false)}>{t.demo}</a>
+          <a href="#pricing" onClick={() => setOpenMobile(false)}>{t.pricing}</a>
+          <a href="#faq" onClick={() => setOpenMobile(false)}>{t.faq}</a>
+          <a href="#" className="sp-btn sp-btn-primary" onClick={() => setOpenMobile(false)}>{t.cta}</a>
         </div>
       )}
     </header>
@@ -104,7 +88,7 @@ export function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, set
 // Left: copy. Right: technical mockup card with grid, dimensions, live mini-estimate.
 // ──────────────────────────────────────────────────────────────────────────────
 function Hero({ lang }) {
-  const t = T[lang].hero;
+  const t = window.T[lang].hero;
   return (
     <section id="top" className="sp-hero">
       <div className="sp-hero-grid-bg" aria-hidden="true" />
@@ -185,6 +169,14 @@ function HeroMock({ lang, t }) {
         </div>
       </div>
 
+      <div className="sp-hero-mock-float sp-hero-mock-float-1">
+        <Icon name="zap" size={14} />
+        <span>{lang === "fr" ? "Calcul instantané" : "Instant calc"}</span>
+      </div>
+      <div className="sp-hero-mock-float sp-hero-mock-float-2">
+        <Icon name="shield" size={14} />
+        <span>{lang === "fr" ? "Code CNB / CCQ" : "NBC / CCQ"}</span>
+      </div>
     </div>
   );
 }
@@ -198,91 +190,31 @@ function Dim({ label, value, accent }) {
   );
 }
 
-
 // ──────────────────────────────────────────────────────────────────────────────
-// NOTIFY MODAL — modale légère pour les apps "Bientôt"
+// SECTION — TRUST STRIP
 // ──────────────────────────────────────────────────────────────────────────────
-function NotifyModal({ lang, appName, onClose }) {
-  const t = T[lang].notify;
-  const [form, setForm] = uS({ name: "", email: "", type: t.types[0] });
-  const [status, setStatus] = uS("idle");
-
-  uE(() => {
-    const onKey = (e) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus("loading");
-    try {
-      const res = await fetch(NOTIFY_WORKER_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: form.name, email: form.email, type: form.type + " — " + appName }),
-      });
-      const json = await res.json();
-      if (res.ok && json.success) setStatus("success");
-      else setStatus("error");
-    } catch { setStatus("error"); }
-  };
-
+function TrustStrip({ lang }) {
+  const t = window.T[lang].trust;
+  const r = useReveal();
   return (
-    <div style={{ position: "fixed", inset: 0, zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-      <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)" }} onClick={onClose} />
-      <div style={{ position: "relative", background: "var(--sp-card)", border: "1px solid var(--sp-border-2)", borderRadius: 18, padding: "32px 28px", width: "100%", maxWidth: 460, zIndex: 1, boxShadow: "0 24px 64px rgba(0,0,0,0.5)" }}>
-        <button onClick={onClose} aria-label="Fermer" style={{ position: "absolute", top: 14, right: 14, background: "rgba(255,255,255,0.06)", border: "none", color: "var(--sp-muted)", cursor: "pointer", padding: 6, borderRadius: 6, lineHeight: 0 }}>
-          <Icon name="x" size={18} />
-        </button>
-        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--sp-accent)", marginBottom: 10 }}>{appName}</div>
-        <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 8, color: "var(--sp-text)", lineHeight: 1.2 }}>
-          {lang === "fr" ? "Être informé au lancement" : "Get notified at launch"}
-        </h2>
-        <p style={{ fontSize: 13, color: "var(--sp-muted)", marginBottom: 24, lineHeight: 1.6 }}>
-          {lang === "fr" ? "Accès anticipé et tarif de lancement réservés aux inscrits." : "Early access and launch pricing reserved for subscribers."}
-        </p>
-        {status === "success" ? (
-          <div style={{ background: "rgba(16,185,129,0.12)", border: "1px solid rgba(16,185,129,0.4)", color: "var(--sp-text)", padding: "18px 20px", borderRadius: 10, textAlign: "center", fontWeight: 600, fontSize: 15 }}>
-            ✓ {t.success}
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            {[
-              { key: "name", type: "text", label: t.name_label, placeholder: lang === "fr" ? "Jean Tremblay" : "John Smith" },
-              { key: "email", type: "email", label: t.email_label, placeholder: "jean@entreprise.com" },
-            ].map(({ key, type, label, placeholder }) => (
-              <div key={key}>
-                <label style={{ display: "block", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--sp-muted)", marginBottom: 6 }}>{label}</label>
-                <input type={type} required placeholder={placeholder} value={form[key]} onChange={e => setForm({ ...form, [key]: e.target.value })}
-                  style={{ width: "100%", background: "var(--sp-surface)", border: "1px solid var(--sp-border-2)", color: "var(--sp-text)", padding: "10px 14px", borderRadius: 8, fontSize: 14, outline: "none" }} />
-              </div>
-            ))}
-            <div>
-              <label style={{ display: "block", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--sp-muted)", marginBottom: 6 }}>{t.type_label}</label>
-              <select value={form.type} onChange={e => setForm({ ...form, type: e.target.value })}
-                style={{ width: "100%", background: "var(--sp-surface)", border: "1px solid var(--sp-border-2)", color: "var(--sp-text)", padding: "10px 14px", borderRadius: 8, fontSize: 14, appearance: "none" }}>
-                {t.types.map(tp => <option key={tp} value={tp} style={{ color: "#000" }}>{tp}</option>)}
-              </select>
-            </div>
-            <button type="submit" disabled={status === "loading"} className="sp-btn sp-btn-primary" style={{ width: "100%", height: 46, marginTop: 4, fontSize: 15 }}>
-              {status === "loading" ? "…" : t.cta}
-            </button>
-            {status === "error" && <div style={{ color: "#EF4444", fontSize: 13 }}>{t.error}</div>}
-          </form>
-        )}
+    <section className="sp-trust">
+      <div className="sp-container sp-reveal" ref={r}>
+        <div className="sp-trust-heading">{t.heading}</div>
+        <div className="sp-trust-row sp-reveal-stagger">
+          {t.logos.map((name) => (
+            <div className="sp-trust-logo" key={name}>{name}</div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — SUITE
 // ──────────────────────────────────────────────────────────────────────────────
-function Suite({ lang, onNotify }) {
-  const t = T[lang].suite;
+function Suite({ lang }) {
+  const t = window.T[lang].suite;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
   return (
@@ -294,8 +226,7 @@ function Suite({ lang, onNotify }) {
             const isLive = p.tag === "Actif" || p.tag === "Live";
             const tagClass = isLive ? "live" : (p.placeholder ? "soon" : "beta");
             return (
-              <article key={p.name} className={"sp-product sp-product-" + p.color + (p.placeholder ? " sp-product-placeholder" : "")} style={{ cursor: "pointer" }}
-                onClick={() => { if (p.placeholder) onNotify(p.name); else if (p.url && p.url !== "#") window.open(p.url, "_blank"); }}>
+              <article key={p.name} className={"sp-product sp-product-" + p.color + (p.placeholder ? " sp-product-placeholder" : "")}>
                 <header className="sp-product-head">
                   <ProductMark kind={p.name} color={p.color} size={44} />
                   <span className={"sp-product-tag sp-product-tag-" + tagClass}>{p.tag}</span>
@@ -306,10 +237,10 @@ function Suite({ lang, onNotify }) {
                   <p className="sp-product-desc">{p.desc}</p>
                 </div>
                 <a
-                  href={isLive ? p.url : "#!"}
-                  onClick={(e) => { e.stopPropagation(); if (p.placeholder) { e.preventDefault(); onNotify(p.name); } }}
-                  target={isLive ? "_blank" : undefined}
-                  rel={isLive ? "noopener" : undefined}
+                  href={p.url === "#" ? "#!" : p.url}
+                  onClick={(e) => { if(p.url === "#") e.preventDefault(); }}
+                  target={isLive ? "_blank" : "_self"}
+                  rel={isLive ? "noopener" : ""}
                   className={"sp-product-cta " + (isLive ? "sp-product-cta-live" : "sp-product-cta-ghost")}
                 >
                   {p.cta}
@@ -329,47 +260,14 @@ function Suite({ lang, onNotify }) {
 // SECTION — INTERACTIVE DEMO
 // ──────────────────────────────────────────────────────────────────────────────
 function Demo({ lang }) {
-  const tDemo = T[lang].demo;
+  const t = window.T[lang].demo;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05, rootMargin: "0px 0px -20px 0px" });
-  const [activeTab, setActiveTab] = uS("calcu");
-
   return (
     <section id="demo" className="sp-demo">
       <div className="sp-container">
-        <div className="sp-reveal" ref={r1}>
-          <SectionHeader
-            eyebrow={lang === "fr" ? "Démo en direct" : "Live Demo"}
-            title={lang === "fr" ? "Deux outils. Une seule logique chantier." : "Two tools. One jobsite logic."}
-            subtitle={lang === "fr" ? "Essayez CalcuPro360 ou TrimPro360 directement ici — le même moteur de calcul qu'en production." : "Try CalcuPro360 or TrimPro360 right here — the same engine as production."}
-            align="center"
-          />
-          {/* Tab switcher */}
-          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginBottom: 32 }}>
-            <button
-              onClick={() => setActiveTab("calcu")}
-              className={"sp-btn sp-btn-sm" + (activeTab === "calcu" ? " sp-btn-primary" : " sp-btn-ghost")}
-              style={activeTab === "calcu" ? {} : {}}
-            >
-              <img src="dist/logos/logo-calcupro360.webp" alt="CalcuPro360" style={{ width: 18, height: 18, borderRadius: 4, objectFit: "contain" }} />
-              {tDemo.tab_concrete}
-            </button>
-            <button
-              onClick={() => setActiveTab("trim")}
-              className={"sp-btn sp-btn-sm" + (activeTab === "trim" ? " sp-btn-primary" : " sp-btn-ghost")}
-              style={activeTab === "trim" ? { background: "#EAB308", borderColor: "#EAB308", color: "#000" } : {}}
-            >
-              <img src="dist/logos/logo-trimpro360.webp" alt="TrimPro360" style={{ width: 18, height: 18, borderRadius: 4, objectFit: "contain" }} />
-              {tDemo.tab_trim}
-            </button>
-          </div>
-        </div>
-        <div className="sp-reveal" ref={r2}>
-          {activeTab === "calcu"
-            ? <SlabEstimator lang={lang} t={tDemo} />
-            : <TrimEstimator lang={lang} t={tDemo} />
-          }
-        </div>
+        <div className="sp-reveal" ref={r1}><SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} align="center" /></div>
+        <div className="sp-reveal" ref={r2}><SlabEstimator lang={lang} t={t} /></div>
       </div>
     </section>
   );
@@ -379,7 +277,7 @@ function Demo({ lang }) {
 // SECTION — FEATURES
 // ──────────────────────────────────────────────────────────────────────────────
 function Features({ lang }) {
-  const t = T[lang].features;
+  const t = window.T[lang].features;
   const icons = ["shield", "wifi-off", "cpu", "globe", "zap", "file"];
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
@@ -407,7 +305,7 @@ function Features({ lang }) {
 // SECTION — WORKFLOW (3 steps with mini mockups)
 // ──────────────────────────────────────────────────────────────────────────────
 function Workflow({ lang }) {
-  const t = T[lang].workflow;
+  const t = window.T[lang].workflow;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
   return (
@@ -488,7 +386,7 @@ function FlowMockPDF({ lang }) {
 // SECTION — PRICING
 // ──────────────────────────────────────────────────────────────────────────────
 function Pricing({ lang }) {
-  const t = T[lang].pricing;
+  const t = window.T[lang].pricing;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
   return (
@@ -510,9 +408,9 @@ function Pricing({ lang }) {
                   <li key={f}><Icon name="check" size={14} /> {f}</li>
                 ))}
               </ul>
-              <a href={p.url} target={p.url && p.url.startsWith("http") ? "_blank" : undefined} rel={p.url && p.url.startsWith("http") ? "noopener" : undefined} className={"sp-btn " + (p.highlight ? "sp-btn-primary" : "sp-btn-ghost") + " sp-btn-block"}>
+              <button className={"sp-btn " + (p.highlight ? "sp-btn-primary" : "sp-btn-ghost") + " sp-btn-block"}>
                 {p.cta}
-              </a>
+              </button>
             </article>
           ))}
         </div>
@@ -526,7 +424,7 @@ function Pricing({ lang }) {
 // SECTION — FAQ
 // ──────────────────────────────────────────────────────────────────────────────
 function FAQ({ lang }) {
-  const t = T[lang].faq;
+  const t = window.T[lang].faq;
   const [open, setOpen] = uS(0);
   const r = useReveal();
   return (
@@ -556,158 +454,37 @@ function FAQ({ lang }) {
 // SECTION — CTA BAND + FOOTER
 // ──────────────────────────────────────────────────────────────────────────────
 function CTABand({ lang }) {
-  const t = T[lang].notify;
+  const t = window.T[lang].cta_band;
   const r = useReveal();
-  const [form, setForm] = uS({ name: "", email: "", type: t.types[0] });
-  const [status, setStatus] = uS("idle"); // idle, loading, success, error
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus("loading");
-    try {
-      const res = await fetch(NOTIFY_WORKER_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: form.name, email: form.email, type: form.type }),
-      });
-      const json = await res.json();
-      if (res.ok && json.success) {
-        setStatus("success");
-      } else {
-        console.error("Worker error:", json.error);
-        setStatus("error");
-      }
-    } catch (err) {
-      console.error("Network error:", err);
-      setStatus("error");
-    }
-  };
-
   return (
-    <section className="sp-cta-band" id="notify">
+    <section className="sp-cta-band">
       <div className="sp-cta-band-bg" aria-hidden="true" />
       <div className="sp-container sp-cta-inner sp-reveal" ref={r}>
-        <div className="sp-eyebrow" style={{ color: "rgba(255,255,255,0.7)", marginBottom: 12 }}>{t.eyebrow}</div>
-        <h2 className="sp-cta-title" style={{ marginBottom: 16 }}>{t.title}</h2>
-        <p className="sp-cta-sub" style={{ marginBottom: 32, opacity: 0.9 }}>{t.subtitle}</p>
-        
-        {status === "success" ? (
-          <div style={{ background: "rgba(16,185,129,0.15)", border: "1px solid #10B981", color: "#fff", padding: "24px", borderRadius: 12, textAlign: "center", fontSize: 18, fontWeight: 600 }}>
-            <Icon name="check" size={24} style={{ marginBottom: 12 }} />
-            <div>{t.success}</div>
-          </div>
-        ) : (
-          <form className="sp-notify-form" onSubmit={handleSubmit} style={{ 
-            display: "grid", 
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", 
-            gap: 16, 
-            width: "100%", 
-            maxWidth: 900, 
-            margin: "0 auto",
-            textAlign: "left"
-          }}>
-            <div className="sp-form-group">
-              <label style={{ display: "block", color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 600, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>{t.name_label}</label>
-              <input 
-                type="text" 
-                required 
-                className="sp-input"
-                placeholder="Ex: Jean Tremblay"
-                value={form.name}
-                onChange={e => setForm({...form, name: e.target.value})}
-                style={{ width: "100%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", padding: "12px 16px", borderRadius: 8 }}
-              />
-            </div>
-            <div className="sp-form-group">
-              <label style={{ display: "block", color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 600, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>{t.email_label}</label>
-              <input 
-                type="email" 
-                required 
-                className="sp-input"
-                placeholder="jean@entreprise.com"
-                value={form.email}
-                onChange={e => setForm({...form, email: e.target.value})}
-                style={{ width: "100%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", padding: "12px 16px", borderRadius: 8 }}
-              />
-            </div>
-            <div className="sp-form-group">
-              <label style={{ display: "block", color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 600, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>{t.type_label}</label>
-              <select 
-                className="sp-input"
-                value={form.type}
-                onChange={e => setForm({...form, type: e.target.value})}
-                style={{ width: "100%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", padding: "12px 16px", borderRadius: 8, appearance: "none" }}
-              >
-                {t.types.map(type => <option key={type} value={type} style={{ color: "#000" }}>{type}</option>)}
-              </select>
-            </div>
-            <div style={{ display: "flex", alignItems: "flex-end" }}>
-              <button 
-                type="submit" 
-                className="sp-btn sp-btn-primary sp-btn-lg" 
-                disabled={status === "loading"}
-                style={{ width: "100%", height: 50 }}
-              >
-                {status === "loading" ? "..." : t.cta}
-              </button>
-            </div>
-          </form>
-        )}
-        {status === "error" && <div style={{ color: "#EF4444", marginTop: 12, fontSize: 14 }}>{t.error}</div>}
+        <h2 className="sp-cta-title">{t.title}</h2>
+        <p className="sp-cta-sub">{t.subtitle}</p>
+        <div className="sp-cta-actions">
+          <a href="#demo" className="sp-btn sp-btn-primary sp-btn-lg">{t.primary} <Icon name="arrow-right" size={16} /></a>
+          <a href="#demo" className="sp-btn sp-btn-ghost-on-dark sp-btn-lg">{t.secondary}</a>
+        </div>
       </div>
     </section>
   );
 }
 
-export function Footer({ lang, logoVariant, setActivePage }) {
-  const t = T[lang].footer;
-  const pages = T[lang].pages;
-
-  const isPresentation = typeof window !== "undefined" && window.location.pathname.includes("presentation.html");
-  const prefix = isPresentation ? "index.html" : "";
+function Footer({ lang, logoVariant, setActivePage }) {
+  const t = window.T[lang].footer;
+  const pages = window.T[lang].pages;
 
   const handlePageClick = (e, linkName) => {
-    if (pages[linkName]) {
-      e.preventDefault();
-      setActivePage(linkName);
-    } else {
-      const lower = linkName.toLowerCase();
-      let anchor = "";
-      if (lower.includes("calcupro")) {
-        anchor = "#top";
-      } else if (lower.includes("trimpro")) {
-        anchor = "#trimpro360";
-      } else if (lower.includes("suite")) {
-        anchor = "#suite";
-      }
-
-      if (anchor) {
-        if (isPresentation) {
-          window.location.href = `${prefix}${anchor}`;
-        } else {
-          e.preventDefault();
-          const el = document.getElementById(anchor.replace("#", ""));
-          if (el) el.scrollIntoView({ behavior: "smooth" });
-        }
-      } else {
-        e.preventDefault();
-      }
-    }
+    e.preventDefault();
+    if (pages[linkName]) setActivePage(linkName);
   };
 
   return (
     <footer className="sp-footer">
       <div className="sp-container sp-footer-inner">
         <div className="sp-footer-brand">
-          <a href={`${prefix}#top`} onClick={(e) => {
-            if (!isPresentation) {
-              e.preventDefault();
-              const el = document.getElementById("top");
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }
-          }} style={{ display: "inline-flex" }}>
-            <Logo variant={logoVariant} size={28} />
-          </a>
+          <Logo variant={logoVariant} size={28} />
           <p>{t.tagline}</p>
           <div className="sp-footer-meta">{t.made_in}</div>
         </div>
@@ -737,7 +514,7 @@ export function Footer({ lang, logoVariant, setActivePage }) {
 // ──────────────────────────────────────────────────────────────────────────────
 // Section header helper
 // ──────────────────────────────────────────────────────────────────────────────
-export function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
+function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
   return (
     <header className={"sp-section-head sp-section-head-" + align}>
       <div className="sp-eyebrow">{eyebrow}</div>
@@ -748,219 +525,14 @@ export function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
-// SECTION — CALCUPRO PRESENTATION
-// ──────────────────────────────────────────────────────────────────────────────
-export function TrimPresentation({ lang }) {
-  const t = T[lang].trim_presentation;
-  const r1 = useReveal();
-  const r2 = useReveal({ threshold: 0.05 });
-  return (
-    <section id="trimpro360" className="sp-features" style={{ background: "var(--sp-bg)", borderTop: "1px solid var(--sp-border)" }}>
-      <div className="sp-container">
-        <div className="sp-reveal" ref={r1}>
-          <SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} align="center" />
-          <div style={{ display: "flex", justifyContent: "center", marginTop: 24 }}>
-            <a
-              href={t.cta_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sp-btn sp-btn-primary"
-              style={{ fontSize: 16, padding: "12px 32px", borderRadius: 8, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, background: "#EAB308", color: "#000", fontWeight: 700 }}
-            >
-              {t.cta_label} →
-            </a>
-          </div>
-        </div>
-        <div className="sp-feat-grid sp-reveal sp-reveal-stagger" ref={r2} style={{ marginTop: 48, gap: 24, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}>
-          {t.features.map((f, i) => (
-            <article key={i} className="sp-feat" style={{ background: "var(--sp-card)", padding: 24, borderRadius: 12, border: "1px solid var(--sp-border)" }}>
-              <div className="sp-feat-icon" style={{ background: "rgba(234,179,8,0.15)", color: "#EAB308", width: 40, height: 40, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
-                <Icon name={f.icon} size={20} stroke="currentColor" />
-              </div>
-              <h3 className="sp-feat-title" style={{ fontSize: 18, marginBottom: 8 }}>{f.title}</h3>
-              <p className="sp-feat-desc" style={{ fontSize: 14, color: "var(--sp-text-2)", marginBottom: 16 }}>{f.desc}</p>
-              <ul style={{ margin: 0, padding: 0, listStyle: "none", fontSize: 13, color: "var(--sp-muted)", display: "flex", flexDirection: "column", gap: 8 }}>
-                {f.bullets.map((b, j) => (
-                  <li key={j} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
-                    <div style={{ color: "#EAB308", flexShrink: 0, marginTop: 2 }}>
-                      <Icon name="check" size={12} />
-                    </div>
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function TrimPricing({ lang }) {
-  const t = T[lang].trim_pricing;
-  const r = useReveal();
-  const ACCENT = "#EAB308";
-  return (
-    <section id="trimpro360-pricing" style={{ background: "var(--sp-bg-2)", borderTop: "1px solid var(--sp-border)", padding: "80px 0" }}>
-      <div className="sp-container">
-        <div className="sp-reveal" ref={r}>
-          <SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} align="center" />
-        </div>
-
-        {/* Grille 3 plans */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24, marginTop: 48 }}>
-          {t.plans.map((plan) => (
-            <div
-              key={plan.id}
-              style={{
-                background: plan.highlight ? ACCENT : "var(--sp-card)",
-                color: plan.highlight ? "#000" : "var(--sp-text)",
-                borderRadius: 16,
-                border: plan.highlight ? "none" : "1px solid var(--sp-border)",
-                padding: 32,
-                display: "flex",
-                flexDirection: "column",
-                gap: 0,
-                boxShadow: plan.highlight ? "0 8px 40px rgba(234,179,8,0.35)" : "none",
-                position: "relative",
-              }}
-            >
-              {/* Badge */}
-              {plan.badge && (
-                <div style={{
-                  position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)",
-                  background: plan.highlight ? "#000" : ACCENT,
-                  color: plan.highlight ? ACCENT : "#000",
-                  fontSize: 11, fontWeight: 700, padding: "4px 14px", borderRadius: 999,
-                  whiteSpace: "nowrap", letterSpacing: "0.05em", textTransform: "uppercase",
-                }}>
-                  {t[plan.badge]}
-                </div>
-              )}
-
-              {/* Nom + desc */}
-              <div style={{ marginBottom: 20 }}>
-                <p style={{ fontSize: 13, fontWeight: 600, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.08em" }}>{plan.name}</p>
-                <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-                  <span style={{ fontSize: 40, fontWeight: 800, lineHeight: 1 }}>{plan.price}</span>
-                  {plan.period && <span style={{ fontSize: 14, opacity: 0.7 }}>{plan.period}</span>}
-                </div>
-                <p style={{ marginTop: 12, fontSize: 14, opacity: 0.75, lineHeight: 1.5 }}>{plan.desc}</p>
-              </div>
-
-              {/* Séparateur */}
-              <div style={{ height: 1, background: plan.highlight ? "rgba(0,0,0,0.15)" : "var(--sp-border)", margin: "0 0 20px" }} />
-
-              {/* Features */}
-              <ul style={{ margin: 0, padding: 0, listStyle: "none", fontSize: 14, display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
-                {plan.features.map((f, i) => (
-                  <li key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-                    <span style={{ color: plan.highlight ? "#000" : ACCENT, flexShrink: 0, marginTop: 2 }}>
-                      <Icon name="check" size={14} />
-                    </span>
-                    <span style={{ opacity: 0.85 }}>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* CTA */}
-              <a
-                href={plan.id === "founder" ? t.cta_founder_url : plan.id === "standard" ? t.cta_standard_url : t.cta_enterprise_url}
-                style={{
-                  marginTop: 28,
-                  display: "block",
-                  textAlign: "center",
-                  padding: "12px 0",
-                  borderRadius: 8,
-                  fontWeight: 700,
-                  fontSize: 15,
-                  textDecoration: "none",
-                  background: plan.highlight ? "#000" : ACCENT,
-                  color: plan.highlight ? ACCENT : "#000",
-                  transition: "opacity .15s",
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.opacity = "0.85"}
-                onMouseLeave={(e) => e.currentTarget.style.opacity = "1"}
-              >
-                {plan.id === "founder" ? t.cta_founder : plan.id === "standard" ? t.cta_standard : t.cta_enterprise}
-              </a>
-            </div>
-          ))}
-        </div>
-
-        {/* Note comparatif marché */}
-        <p style={{ textAlign: "center", marginTop: 40, fontSize: 13, color: "var(--sp-muted)", maxWidth: 680, margin: "40px auto 0" }}>
-          💡 {t.note}
-        </p>
-      </div>
-    </section>
-  );
-}
-
-export function CalcuPresentation({ lang, minimal = false }) {
-  const t = T[lang].calcu_presentation;
-  const r1 = useReveal();
-  const r2 = useReveal({ threshold: 0.05 });
-  return (
-    <section id="calcupro" className="sp-features" style={{ background: "var(--sp-bg-2)", borderTop: "1px solid var(--sp-border)" }}>
-      <div className="sp-container">
-        <div className="sp-reveal" ref={r1}>
-          <SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} align="center" />
-        </div>
-        <div className="sp-feat-grid sp-reveal sp-reveal-stagger" ref={r2} style={{ marginTop: 40, gap: 24, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" }}>
-          {t.features.map((f, i) => (
-            <article key={i} className="sp-feat" style={{ background: "var(--sp-card)", padding: 24, borderRadius: 12, border: "1px solid var(--sp-border)" }}>
-              <div className="sp-feat-icon" style={{ background: "var(--sp-accent-soft)", color: "var(--sp-accent)", width: 40, height: 40, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
-                <Icon name={f.icon} size={20} stroke="currentColor" />
-              </div>
-              <h3 className="sp-feat-title" style={{ fontSize: 18, marginBottom: (f.punchline ? 4 : 8) }}>{f.title}</h3>
-              {f.punchline && <div style={{ fontSize: 15, fontWeight: 700, color: "var(--sp-text)", marginBottom: 12, lineHeight: 1.2 }}>{f.punchline}</div>}
-              <p className="sp-feat-desc" style={{ fontSize: 14, color: "var(--sp-text-2)", marginBottom: 16 }}>{f.desc}</p>
-              {!minimal && (
-<ul style={{ margin: 0, padding: 0, listStyle: "none", fontSize: 13, color: "var(--sp-muted)", display: "flex", flexDirection: "column", gap: 8 }}>
-                {f.bullets.map((b, j) => {
-                  const isLast = j === f.bullets.length - 1;
-                  const isPromo = b.startsWith("➜");
-                  return (
-                    <li key={j} style={{ 
-                      display: "flex", 
-                      gap: 8, 
-                      alignItems: "flex-start",
-                      marginTop: (isLast && isPromo) ? 12 : 0,
-                      paddingTop: (isLast && isPromo) ? 12 : 0,
-                      borderTop: (isLast && isPromo) ? "1px dashed var(--sp-border)" : "none",
-                      fontSize: (isLast && isPromo) ? 14 : 13,
-                      color: (isLast && isPromo) ? "var(--sp-text-2)" : "var(--sp-muted)",
-                      fontWeight: 400
-                    }}>
-                      <div style={{ color: (isLast && isPromo) ? "var(--sp-accent)" : "var(--sp-green)", flexShrink: 0, marginTop: (isLast && isPromo) ? 4 : 2 }}>
-                        <Icon name={(isLast && isPromo) ? "arrow-right" : "check"} size={12} />
-                      </div>
-                      <span>{b}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-              )}
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ──────────────────────────────────────────────────────────────────────────────
 // APP ROOT
 // ──────────────────────────────────────────────────────────────────────────────
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [openMobile, setOpenMobile] = uS(false);
   const [activePage, setActivePage] = uS(null);
-  const [notifyApp, setNotifyApp] = uS(null);
 
-  // Apply theme + accent CSS vars + lang attribute to html
+  // Apply theme + accent CSS vars to html
   uE(() => {
     const html = document.documentElement;
     html.classList.toggle("sp-dark", !!t.dark);
@@ -968,8 +540,7 @@ function App() {
     html.style.setProperty("--sp-accent", t.accent);
     html.style.setProperty("--sp-accent-soft", hexAlpha(t.accent, 0.18));
     html.style.setProperty("--sp-density", t.density);
-    html.lang = t.lang === "en" ? "en-CA" : "fr-CA";
-  }, [t.dark, t.accent, t.density, t.lang]);
+  }, [t.dark, t.accent, t.density]);
 
   return (
     <div className={"sp-app sp-density-" + t.density}>
@@ -984,10 +555,8 @@ function App() {
       />
       <main>
         <Hero lang={t.lang} />
-        <Suite lang={t.lang} onNotify={(appName) => setNotifyApp(appName)} />
-        <TrimPresentation lang={t.lang} />
-        <TrimPricing lang={t.lang} />
-        <CalcuPresentation lang={t.lang} minimal={true} />
+        <TrustStrip lang={t.lang} />
+        <Suite lang={t.lang} />
         <Demo lang={t.lang} />
         <Features lang={t.lang} />
         <Workflow lang={t.lang} />
@@ -999,12 +568,9 @@ function App() {
 
       <PageModal
         title={activePage}
-        content={activePage ? T[t.lang].pages[activePage] : null}
+        content={activePage ? window.T[t.lang].pages[activePage] : null}
         onClose={() => setActivePage(null)}
       />
-      {notifyApp && (
-        <NotifyModal lang={t.lang} appName={notifyApp} onClose={() => setNotifyApp(null)} />
-      )}
 
       <TweaksPanel title="Tweaks">
         <TweakSection label={t.lang === "fr" ? "Apparence" : "Appearance"} />
@@ -1087,7 +653,7 @@ function PageModal({ title, content, onClose }) {
   );
 }
 
-export function hexAlpha(hex, alpha) {
+function hexAlpha(hex, alpha) {
   const h = hex.replace("#", "");
   const r = parseInt(h.substring(0, 2), 16);
   const g = parseInt(h.substring(2, 4), 16);
