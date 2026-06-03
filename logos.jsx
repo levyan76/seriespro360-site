@@ -204,6 +204,12 @@ function Icon({ name, size = 16, stroke = "currentColor" }) {
     case "x":           return <svg {...props}><line x1="6" y1="6" x2="18" y2="18" /><line x1="6" y1="18" x2="18" y2="6" /></svg>;
     case "chevron-down":return <svg {...props}><polyline points="6 9 12 15 18 9" /></svg>;
     case "star":        return <svg {...props}><polygon points="12 3 14.5 9.5 21 10 16 14.5 17.5 21 12 17.5 6.5 21 8 14.5 3 10 9.5 9.5" /></svg>;
+    case "layout-grid": return <svg {...props}><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>;
+    case "pen-tool":    return <svg {...props}><path d="m12 19 7-7 3 3-7 7-3-3z" /><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18Z" /><path d="m2 2 5 5" /><circle cx="8.5" cy="8.5" r="1.5" /></svg>;
+    case "package":     return <svg {...props}><polygon points="12 2 22 7 12 12 2 7 12 2" /><polyline points="2 17 12 22 22 17" /><line x1="2" y1="7" x2="2" y2="17" /><line x1="22" y1="7" x2="22" y2="17" /><line x1="12" y1="12" x2="12" y2="22" /></svg>;
+    case "boxes":       return <svg {...props}><rect x="2" y="9" width="10" height="10" rx="2" /><rect x="12" y="5" width="10" height="10" rx="2" /></svg>;
+    case "kanban":      return <svg {...props}><rect x="3" y="3" width="18" height="18" rx="2" /><line x1="9" y1="3" x2="9" y2="21" /><line x1="15" y1="3" x2="15" y2="21" /></svg>;
+    case "smartphone":  return <svg {...props}><rect x="5" y="2" width="14" height="20" rx="2" /><path d="M12 18h.01" /></svg>;
     default: return null;
   }
 }

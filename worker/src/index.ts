@@ -22,7 +22,12 @@ export interface Env {
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const origin = request.headers.get("Origin") || "";
-    const allowedOrigins = ["https://seriespro360.com", "https://www.seriespro360.com"];
+    const allowedOrigins = [
+      "https://seriespro360.com",
+      "https://www.seriespro360.com",
+      "http://localhost:3000",
+      "http://localhost:5173"
+    ];
     const corsHeaders = {
       "Access-Control-Allow-Origin": allowedOrigins.includes(origin) ? origin : allowedOrigins[0],
       "Access-Control-Allow-Methods": "POST, OPTIONS",

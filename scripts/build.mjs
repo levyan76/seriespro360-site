@@ -52,6 +52,7 @@ if (!existsSync(logosDistDir)) mkdirSync(logosDistDir, { recursive: true });
 const logosToCopy = [
   { src: join(root, 'logos/logo-trimpro360.png'),  dest: join(logosDistDir, 'logo-trimpro360.webp'),  w: 200 },
   { src: join(root, 'logos/logo-calcupro360.png'), dest: join(logosDistDir, 'logo-calcupro360.webp'), w: 200 },
+  { src: join(root, 'logos/profile-fascia.png'),   dest: join(logosDistDir, 'profile-fascia.webp'),   w: 600 },
 ];
 for (const l of logosToCopy) {
   if (existsSync(l.src)) {

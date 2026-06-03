@@ -1,6 +1,6 @@
 import T from './i18n.jsx';
 import { Logo, ProductMark, Icon } from './logos.jsx';
-import { SlabEstimator, calcSlab, fmtNum, fmtCAD } from './calculator.jsx';
+import { SlabEstimator, TrimEstimator, calcSlab, fmtNum, fmtCAD } from './calculator.jsx';
 import { useTweaks, TweaksPanel, TweakSection, TweakToggle, TweakRadio, TweakColor } from './tweaks-panel.jsx';
 
 // landing.jsx — Main SeriesPro360 marketing page
@@ -50,6 +50,10 @@ export const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 export function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMobile }) {
   const t = T[lang].nav;
   const [scrolled, setScrolled] = uS(false);
+
+  const isPresentation = typeof window !== "undefined" && window.location.pathname.includes("presentation.html");
+  const prefix = isPresentation ? "index.html" : "";
+
   uE(() => {
     const on = () => setScrolled(window.scrollY > 8);
     on(); window.addEventListener("scroll", on, { passive: true });
@@ -58,14 +62,14 @@ export function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, set
   return (
     <header className={"sp-nav" + (scrolled ? " is-scrolled" : "")}>
       <div className="sp-container sp-nav-inner">
-        <a href="#top" className="sp-nav-brand">
+        <a href={`${prefix}#top`} className="sp-nav-brand">
           <Logo variant={logoVariant} size={28} />
         </a>
         <nav className="sp-nav-links">
-          <a href="#suite">{t.products}</a>
-          <a href="#demo">{t.demo}</a>
-          <a href="#pricing">{t.pricing}</a>
-          <a href="#faq">{t.faq}</a>
+          <a href={`${prefix}#suite`}>{t.products}</a>
+          <a href={`${prefix}#demo`}>{t.demo}</a>
+          <a href={`${prefix}#pricing`}>{t.pricing}</a>
+          <a href={`${prefix}#faq`}>{t.faq}</a>
         </nav>
         <div className="sp-nav-actions">
           <div className="sp-lang-toggle" role="tablist" aria-label="Language">
@@ -76,7 +80,7 @@ export function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, set
             <Icon name={dark ? "sun" : "moon"} size={16} />
           </button>
           <a href="https://calcupro360.seriespro360.com" target="_blank" rel="noopener" className="sp-btn sp-btn-ghost-sm sp-nav-login">{t.login}</a>
-          <a href="#suite" className="sp-btn sp-btn-primary sp-btn-sm">{t.cta} <Icon name="arrow-right" size={14} /></a>
+          <a href={`${prefix}#suite`} className="sp-btn sp-btn-primary sp-btn-sm">{t.cta} <Icon name="arrow-right" size={14} /></a>
           <button className="sp-nav-burger" onClick={() => setOpenMobile(!openMobile)} aria-label="Menu">
             <Icon name={openMobile ? "x" : "menu"} size={18} />
           </button>
@@ -84,11 +88,11 @@ export function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, set
       </div>
       {openMobile && (
         <div className="sp-nav-mobile">
-          <a href="#suite" onClick={() => setOpenMobile(false)}>{t.products}</a>
-          <a href="#demo" onClick={() => setOpenMobile(false)}>{t.demo}</a>
-          <a href="#pricing" onClick={() => setOpenMobile(false)}>{t.pricing}</a>
-          <a href="#faq" onClick={() => setOpenMobile(false)}>{t.faq}</a>
-          <a href="#suite" className="sp-btn sp-btn-primary" onClick={() => setOpenMobile(false)}>{t.cta}</a>
+          <a href={`${prefix}#suite`} onClick={() => setOpenMobile(false)}>{t.products}</a>
+          <a href={`${prefix}#demo`} onClick={() => setOpenMobile(false)}>{t.demo}</a>
+          <a href={`${prefix}#pricing`} onClick={() => setOpenMobile(false)}>{t.pricing}</a>
+          <a href={`${prefix}#faq`} onClick={() => setOpenMobile(false)}>{t.faq}</a>
+          <a href={`${prefix}#suite`} className="sp-btn sp-btn-primary" onClick={() => setOpenMobile(false)}>{t.cta}</a>
         </div>
       )}
     </header>
@@ -325,14 +329,47 @@ function Suite({ lang, onNotify }) {
 // SECTION — INTERACTIVE DEMO
 // ──────────────────────────────────────────────────────────────────────────────
 function Demo({ lang }) {
-  const t = T[lang].demo;
+  const tDemo = T[lang].demo;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05, rootMargin: "0px 0px -20px 0px" });
+  const [activeTab, setActiveTab] = uS("calcu");
+
   return (
     <section id="demo" className="sp-demo">
       <div className="sp-container">
-        <div className="sp-reveal" ref={r1}><SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} align="center" /></div>
-        <div className="sp-reveal" ref={r2}><SlabEstimator lang={lang} t={t} /></div>
+        <div className="sp-reveal" ref={r1}>
+          <SectionHeader
+            eyebrow={lang === "fr" ? "Démo en direct" : "Live Demo"}
+            title={lang === "fr" ? "Deux outils. Une seule logique chantier." : "Two tools. One jobsite logic."}
+            subtitle={lang === "fr" ? "Essayez CalcuPro360 ou TrimPro360 directement ici — le même moteur de calcul qu'en production." : "Try CalcuPro360 or TrimPro360 right here — the same engine as production."}
+            align="center"
+          />
+          {/* Tab switcher */}
+          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginBottom: 32 }}>
+            <button
+              onClick={() => setActiveTab("calcu")}
+              className={"sp-btn sp-btn-sm" + (activeTab === "calcu" ? " sp-btn-primary" : " sp-btn-ghost")}
+              style={activeTab === "calcu" ? {} : {}}
+            >
+              <img src="dist/logos/logo-calcupro360.webp" alt="CalcuPro360" style={{ width: 18, height: 18, borderRadius: 4, objectFit: "contain" }} />
+              {tDemo.tab_concrete}
+            </button>
+            <button
+              onClick={() => setActiveTab("trim")}
+              className={"sp-btn sp-btn-sm" + (activeTab === "trim" ? " sp-btn-primary" : " sp-btn-ghost")}
+              style={activeTab === "trim" ? { background: "#EAB308", borderColor: "#EAB308", color: "#000" } : {}}
+            >
+              <img src="dist/logos/logo-trimpro360.webp" alt="TrimPro360" style={{ width: 18, height: 18, borderRadius: 4, objectFit: "contain" }} />
+              {tDemo.tab_trim}
+            </button>
+          </div>
+        </div>
+        <div className="sp-reveal" ref={r2}>
+          {activeTab === "calcu"
+            ? <SlabEstimator lang={lang} t={tDemo} />
+            : <TrimEstimator lang={lang} t={tDemo} />
+          }
+        </div>
       </div>
     </section>
   );
@@ -626,16 +663,51 @@ export function Footer({ lang, logoVariant, setActivePage }) {
   const t = T[lang].footer;
   const pages = T[lang].pages;
 
+  const isPresentation = typeof window !== "undefined" && window.location.pathname.includes("presentation.html");
+  const prefix = isPresentation ? "index.html" : "";
+
   const handlePageClick = (e, linkName) => {
-    e.preventDefault();
-    if (pages[linkName]) setActivePage(linkName);
+    if (pages[linkName]) {
+      e.preventDefault();
+      setActivePage(linkName);
+    } else {
+      const lower = linkName.toLowerCase();
+      let anchor = "";
+      if (lower.includes("calcupro")) {
+        anchor = "#top";
+      } else if (lower.includes("trimpro")) {
+        anchor = "#trimpro360";
+      } else if (lower.includes("suite")) {
+        anchor = "#suite";
+      }
+
+      if (anchor) {
+        if (isPresentation) {
+          window.location.href = `${prefix}${anchor}`;
+        } else {
+          e.preventDefault();
+          const el = document.getElementById(anchor.replace("#", ""));
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        e.preventDefault();
+      }
+    }
   };
 
   return (
     <footer className="sp-footer">
       <div className="sp-container sp-footer-inner">
         <div className="sp-footer-brand">
-          <Logo variant={logoVariant} size={28} />
+          <a href={`${prefix}#top`} onClick={(e) => {
+            if (!isPresentation) {
+              e.preventDefault();
+              const el = document.getElementById("top");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }
+          }} style={{ display: "inline-flex" }}>
+            <Logo variant={logoVariant} size={28} />
+          </a>
           <p>{t.tagline}</p>
           <div className="sp-footer-meta">{t.made_in}</div>
         </div>

@@ -416,4 +416,230 @@ function SlabEstimator({ lang, t, compact = false }) {
 
 
 
-export { SlabEstimator, calcSlab, fmtNum, fmtCAD };
+// ──────────────────────────────────────────────────────────────────────────────
+// TRIM ESTIMATOR — Fascia profile metal bending estimator
+// Uses a static technical drawing image (no SVG generation).
+// Dimensions A, B, C, D, E → developed width → price estimation.
+// ──────────────────────────────────────────────────────────────────────────────
+
+const TRIM_GAUGES = [
+  { id: "24ga-steel", label: "Acier galvanisé 24ga", label_en: "24ga Galv. Steel", pricePerFt2: 2.25 },
+  { id: "26ga-steel", label: "Acier galvanisé 26ga", label_en: "26ga Galv. Steel", pricePerFt2: 1.95 },
+  { id: "26ga-pb",    label: "Acier prélaqué 26ga",  label_en: "26ga Pre-painted Steel", pricePerFt2: 2.65 },
+  { id: "032-alum",   label: "Aluminium 0.032″",     label_en: "Aluminum 0.032″", pricePerFt2: 3.10 },
+];
+
+const TRIM_COLORS = {
+  fr: ["Blanc", "Brun", "Bronze", "Beige", "Noir", "Galvanisé brut"],
+  en: ["White", "Brown", "Bronze", "Beige", "Black", "Raw Galvanized"],
+};
+
+function calcTrim({ a, b, c, d, e, gauge, qty }) {
+  // All dims in inches. Sum = developed width in inches.
+  const devInches = (+a || 0) + (+b || 0) + (+c || 0) + (+d || 0) + (+e || 0);
+  const devFt = devInches / 12;
+  const pieceLen = 10; // standard 10-foot piece
+  const totalLenFt = (+qty || 0) * pieceLen;
+  const areaFt2 = totalLenFt * devFt;
+  const g = TRIM_GAUGES.find(g => g.id === gauge) || TRIM_GAUGES[0];
+  const subtotal = areaFt2 * g.pricePerFt2;
+  const tps = subtotal * 0.05;
+  const tvq = subtotal * 0.09975;
+  const total = subtotal + tps + tvq;
+  return { devInches, devFt, totalLenFt, areaFt2, subtotal, tps, tvq, total };
+}
+
+function TrimEstimator({ lang, t }) {
+  const [dims, setDims] = useState({ a: 4, b: 5, c: 3, d: 1.5, e: 0.75 });
+  const [gauge, setGauge] = useState(TRIM_GAUGES[0].id);
+  const [qty, setQty] = useState(10);
+  const [colorIdx, setColorIdx] = useState(0);
+
+  const result = useMemo(() => calcTrim({ ...dims, gauge, qty }), [dims, gauge, qty]);
+
+  const setDim = (key, val) => setDims(d => ({ ...d, [key]: Math.max(0.25, +val || 0) }));
+  const dimKeys = ["a", "b", "c", "d", "e"];
+  const dimLabels = {
+    a: t.trim_dim_a, b: t.trim_dim_b, c: t.trim_dim_c, d: t.trim_dim_d, e: t.trim_dim_e
+  };
+  const gaugeName = lang === "fr"
+    ? (TRIM_GAUGES.find(g => g.id === gauge) || TRIM_GAUGES[0]).label
+    : (TRIM_GAUGES.find(g => g.id === gauge) || TRIM_GAUGES[0]).label_en;
+  const colors = TRIM_COLORS[lang] || TRIM_COLORS.fr;
+
+  return (
+    <div className="sp-estimator">
+      <div className="sp-est-grid" style={{ gridTemplateColumns: "minmax(0,1.1fr) minmax(0,1fr)" }}>
+
+        {/* LEFT — INPUTS */}
+        <div className="sp-est-inputs">
+          <div className="sp-est-header">
+            <div>
+              <div className="sp-eyebrow-mini">TrimPro360 / {lang === "fr" ? "Profilé Fascia" : "Fascia Profile"}</div>
+              <h3 className="sp-est-title">{t.trim_title}</h3>
+            </div>
+          </div>
+
+          {/* Profile image + dimension callouts */}
+          <div style={{
+            position: "relative",
+            background: "var(--sp-bg)",
+            border: "1px solid var(--sp-border)",
+            borderRadius: 12,
+            padding: 16,
+            marginBottom: 20,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
+            <img
+              src="dist/logos/profile-fascia.webp"
+              alt={lang === "fr" ? "Profilé fascia technique" : "Fascia profile technical drawing"}
+              style={{ maxHeight: 220, maxWidth: "100%", objectFit: "contain", filter: "var(--sp-dark, none)" }}
+            />
+          </div>
+
+          {/* A–E dimension steppers */}
+          <div className="sp-input-row" style={{ gridTemplateColumns: "repeat(5, 1fr)", gap: 10, marginBottom: 14 }}>
+            {dimKeys.map(k => (
+              <div key={k} style={{ display: "block" }}>
+                <div className="sp-input-label">{dimLabels[k]}</div>
+                <div className="sp-input-stepper" style={{ height: 40 }}>
+                  <button type="button" className="sp-step" style={{ width: 28 }}
+                    onClick={() => setDim(k, +(dims[k] - 0.25).toFixed(2))} aria-label="−">
+                    <Icon name="minus" size={12} />
+                  </button>
+                  <input
+                    type="number" value={dims[k]} step={0.25} min={0.25} max={36}
+                    onChange={e => setDim(k, e.target.value)}
+                    className="sp-step-input" style={{ fontSize: 13 }}
+                    aria-label={dimLabels[k]}
+                  />
+                  <button type="button" className="sp-step" style={{ width: 28 }}
+                    onClick={() => setDim(k, +(dims[k] + 0.25).toFixed(2))} aria-label="+">
+                    <Icon name="plus" size={12} />
+                  </button>
+                </div>
+                <div style={{ fontSize: 10, color: "var(--sp-muted)", textAlign: "center", marginTop: 3 }}>in</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Gauge + Color + Quantity */}
+          <div className="sp-input-row sp-input-row-2" style={{ marginBottom: 14 }}>
+            <div>
+              <div className="sp-input-label">{t.trim_gauge}</div>
+              <select
+                value={gauge}
+                onChange={e => setGauge(e.target.value)}
+                style={{
+                  width: "100%", background: "var(--sp-bg)", border: "1px solid var(--sp-border)",
+                  color: "var(--sp-text)", padding: "10px 12px", borderRadius: 10, fontSize: 13,
+                  height: 44, appearance: "none",
+                }}
+              >
+                {TRIM_GAUGES.map(g => (
+                  <option key={g.id} value={g.id} style={{ color: "#000" }}>
+                    {lang === "fr" ? g.label : g.label_en}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <div className="sp-input-label">{t.trim_color}</div>
+              <div className="sp-opts-row" style={{ flexWrap: "wrap", gap: 6 }}>
+                {colors.map((c, i) => (
+                  <button
+                    key={c} type="button"
+                    onClick={() => setColorIdx(i)}
+                    className={"sp-chip" + (colorIdx === i ? " is-on" : "")}
+                    style={{ padding: "6px 10px", fontSize: 11.5 }}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <NumField
+            label={`${t.trim_qty} (${lang === "fr" ? "bandes" : "pieces"})`}
+            value={qty}
+            onChange={setQty}
+            unit={lang === "fr" ? "bandes" : "pcs"}
+            step={1}
+            min={1}
+            max={999}
+          />
+
+          <details className="sp-explain" style={{ marginTop: 14 }}>
+            <summary>{t.trim_explain}</summary>
+            <p>{t.trim_explain_body}</p>
+          </details>
+        </div>
+
+        {/* RIGHT — RESULTS */}
+        <div className="sp-est-result">
+          <div className="sp-est-result-head">
+            <div className="sp-eyebrow-mini sp-eyebrow-on-accent">{lang === "fr" ? "Estimé pliage" : "Bending estimate"}</div>
+            <div className="sp-est-livedot"><span /> {lang === "fr" ? "Calcul en direct" : "Live"}</div>
+          </div>
+
+          {/* Key stats */}
+          <div className="sp-stat-grid" style={{ gridTemplateColumns: "1fr 1fr", marginBottom: 18 }}>
+            <div className="sp-stat">
+              <div className="sp-stat-label">{t.trim_dev_width}</div>
+              <div className="sp-stat-value">
+                <span className="sp-stat-num">{fmtNum(result.devInches, 2)}</span>
+                <span className="sp-stat-unit">in</span>
+              </div>
+              <div className="sp-stat-sub">{fmtNum(result.devFt, 3)} ft</div>
+            </div>
+            <div className="sp-stat">
+              <div className="sp-stat-label">{t.trim_total_len}</div>
+              <div className="sp-stat-value">
+                <span className="sp-stat-num">{fmtNum(result.totalLenFt, 0)}</span>
+                <span className="sp-stat-unit">ft</span>
+              </div>
+              <div className="sp-stat-sub">{qty} × 10′</div>
+            </div>
+          </div>
+          <div className="sp-stat" style={{ marginBottom: 18 }}>
+            <div className="sp-stat-label">{t.trim_total_area}</div>
+            <div className="sp-stat-value">
+              <span className="sp-stat-num">{fmtNum(result.areaFt2, 1)}</span>
+              <span className="sp-stat-unit">pi²</span>
+            </div>
+            <div className="sp-stat-sub">{gaugeName} · {colors[colorIdx]}</div>
+          </div>
+
+          {/* Cost breakdown */}
+          <div className="sp-totals" aria-live="polite">
+            <div className="sp-totals-row"><span>{lang === "fr" ? "Sous-total" : "Subtotal"}</span><span className="mono">{fmtCAD(result.subtotal, lang)}</span></div>
+            <div className="sp-totals-row sp-totals-row-muted"><span>{lang === "fr" ? "TPS (5%)" : "GST (5%)"}</span><span className="mono">{fmtCAD(result.tps, lang)}</span></div>
+            <div className="sp-totals-row sp-totals-row-muted"><span>{lang === "fr" ? "TVQ (9,975%)" : "QST (9.975%)"}</span><span className="mono">{fmtCAD(result.tvq, lang)}</span></div>
+            <div className="sp-totals-row sp-totals-grand">
+              <span>{lang === "fr" ? "Total estimé" : "Total estimate"}</span>
+              <span className="mono">{fmtCAD(result.total, lang)}</span>
+            </div>
+          </div>
+
+          <div className="sp-est-actions" style={{ marginTop: 20 }}>
+            <a
+              href="https://trimpro360-v3.vercel.app"
+              target="_blank" rel="noopener"
+              className="sp-btn sp-btn-primary"
+              style={{ width: "100%", justifyContent: "center", height: 46, fontSize: 14, background: "#EAB308", borderColor: "#EAB308", color: "#000" }}
+            >
+              {t.trim_generate}
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+export { SlabEstimator, TrimEstimator, calcSlab, fmtNum, fmtCAD };
+
