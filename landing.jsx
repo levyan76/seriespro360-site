@@ -205,25 +205,26 @@ function TrustStrip({ lang }) {
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — SUITE
 // ──────────────────────────────────────────────────────────────────────────────
-function Suite({ lang, onProductClick }) {
+function Suite({ lang }) {
   const t = window.T[lang].suite;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
+  const slugMap = { "TrimPro360": "trimpro360", "CalcuPro360": "calcupro360", "MesurePro360": "mesuropro360", "DevisPro360": "devispro360" };
   return (
     <section id="suite" className="sp-suite">
       <div className="sp-container">
         <div className="sp-reveal" ref={r1}><SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} /></div>
         <div className="sp-suite-grid sp-reveal sp-reveal-stagger" ref={r2}>
           {t.products.map((p) => {
-            const isLive = p.tag === "Actif" || p.tag === "Live";
+            const isLive = p.tag === "Actif" || p.tag === "En ligne" || p.tag === "Live";
             const tagClass = isLive ? "live" : (p.placeholder ? "soon" : "beta");
+            const pageUrl = "/" + (slugMap[p.name] || p.name.toLowerCase().replace(/[^a-z0-9]/g, ""));
             return (
-              <article
+              <a
                 key={p.name}
+                href={pageUrl}
                 className={"sp-product sp-product-" + p.color + (p.placeholder ? " sp-product-placeholder" : "") + " sp-product-clickable"}
-                onClick={() => onProductClick && onProductClick(p)}
-                role="button" tabIndex={0}
-                onKeyDown={(e) => e.key === "Enter" && onProductClick && onProductClick(p)}
+                style={{ textDecoration: "none", display: "block" }}
               >
                 <header className="sp-product-head">
                   <ProductMark kind={p.name} color={p.color} size={44} />
@@ -240,7 +241,7 @@ function Suite({ lang, onProductClick }) {
                   </span>
                 </div>
                 <div className={"sp-product-bar sp-product-bar-" + p.color} />
-              </article>
+              </a>
             );
           })}
         </div>
@@ -653,7 +654,7 @@ function App() {
       />
       <main>
         <Hero lang={t.lang} />
-        <Suite lang={t.lang} onProductClick={(p) => setActiveProduct(p)} />
+        <Suite lang={t.lang} />
       </main>
       <Footer lang={t.lang} logoVariant={t.logoVariant} setActivePage={setActivePage} />
 

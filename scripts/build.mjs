@@ -6,6 +6,32 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 
+// ── Build config
+const esbuildOpts = {
+  loader: 'jsx',
+  jsxFactory: 'React.createElement',
+  jsxFragment: 'React.Fragment',
+  minify: true,
+  target: 'es2020',
+  charset: 'utf8',
+  sourcemap: false,
+};
+
+const distDir = join(root, 'dist');
+if (!existsSync(distDir)) mkdirSync(distDir, { recursive: true });
+
+function buildBundle(outputName, sourceFiles) {
+  const combined = sourceFiles.map(f => {
+    const src = readFileSync(join(root, f), 'utf-8');
+    return `/* ── ${f} ── */\n${src}`;
+  }).join('\n\n');
+  const result = transformSync(combined, esbuildOpts);
+  writeFileSync(join(distDir, outputName), result.code);
+  const kb = (Buffer.byteLength(result.code) / 1024).toFixed(1);
+  console.log(`✅ dist/${outputName} — ${kb} KB`);
+  return result.code;
+}
+
 // Order matters — globals depend on prior scripts
 const files = [
   'i18n.jsx',
@@ -18,33 +44,16 @@ const files = [
 console.log('⚡ Building SeriesPro360…');
 const t0 = performance.now();
 
-// Concatenate all source files
-const combined = files
-  .map(f => {
-    const src = readFileSync(join(root, f), 'utf-8');
-    return `/* ── ${f} ── */\n${src}`;
-  })
-  .join('\n\n');
+// ── Bundle 1: landing page principale
+buildBundle('app.min.js', files);
 
-// Transpile JSX → JS + minify
-const result = transformSync(combined, {
-  loader: 'jsx',
-  jsxFactory: 'React.createElement',
-  jsxFragment: 'React.Fragment',
-  minify: true,
-  target: 'es2020',
-  charset: 'utf8',
-  sourcemap: false,
-});
+// ── Bundle 2: i18n seul (partagé par les pages produit)
+buildBundle('i18n.min.js', ['i18n.jsx']);
 
-// Write output
-const distDir = join(root, 'dist');
-if (!existsSync(distDir)) mkdirSync(distDir, { recursive: true });
-writeFileSync(join(distDir, 'app.min.js'), result.code);
+// ── Bundle 3: page produit (logos + product-page)
+buildBundle('product-page.min.js', ['logos.jsx', 'product-page.jsx']);
 
-const sizeKB = (Buffer.byteLength(result.code) / 1024).toFixed(1);
 const ms = (performance.now() - t0).toFixed(0);
-console.log(`✅ dist/app.min.js — ${sizeKB} KB (${ms}ms)`);
 
 // Auto-update cache-buster in index.html
 const hash = Date.now().toString(36);
@@ -54,3 +63,4 @@ html = html.replace(/dist\/app\.min\.js\?v=[^"]+/, `dist/app.min.js?v=${hash}`);
 html = html.replace(/dist\/landing\.js[^"]*/, `dist/app.min.js?v=${hash}`);
 writeFileSync(indexPath, html);
 console.log(`✅ index.html cache-buster → v=${hash}`);
+console.log(`⚡ Done in ${ms}ms`);
