@@ -35,7 +35,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — NAV
 // ──────────────────────────────────────────────────────────────────────────────
-function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMobile }) {
+function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMobile, openLogin }) {
   const t = window.T[lang].nav;
   const [scrolled, setScrolled] = uS(false);
   uE(() => {
@@ -63,7 +63,7 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
           <button className="sp-theme-toggle" onClick={() => setDark(!dark)} aria-label="Theme">
             <Icon name={dark ? "sun" : "moon"} size={16} />
           </button>
-          <a href="#" className="sp-btn sp-btn-ghost-sm sp-nav-login">{t.login}</a>
+          <button className="sp-btn sp-btn-ghost-sm sp-nav-login" onClick={openLogin}>{t.login}</button>
           <a href="#suite" className="sp-btn sp-btn-primary sp-btn-sm">{t.cta} <Icon name="arrow-right" size={14} /></a>
           <button className="sp-nav-burger" onClick={() => setOpenMobile(!openMobile)} aria-label="Menu">
             <Icon name={openMobile ? "x" : "menu"} size={18} />
@@ -532,6 +532,7 @@ function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [openMobile, setOpenMobile] = uS(false);
   const [activePage, setActivePage] = uS(null);
+  const [loginOpen, setLoginOpen] = uS(false);
 
   // Apply theme + accent CSS vars to html
   uE(() => {
@@ -553,6 +554,7 @@ function App() {
         logoVariant={t.logoVariant}
         openMobile={openMobile}
         setOpenMobile={setOpenMobile}
+        openLogin={() => setLoginOpen(true)}
       />
       <main>
         <Hero lang={t.lang} />
@@ -572,6 +574,7 @@ function App() {
         content={activePage ? window.T[t.lang].pages[activePage] : null}
         onClose={() => setActivePage(null)}
       />
+      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} lang={t.lang} />
 
       <TweaksPanel title="Tweaks">
         <TweakSection label={t.lang === "fr" ? "Apparence" : "Appearance"} />
@@ -613,6 +616,132 @@ function LogoPreview({ kind, active, onClick }) {
       <Logo variant={kind} wordmark={false} size={22} color="#1a1a1a" accent="#FF6B1A" />
       <span style={{ fontSize: 9, opacity: 0.7, textTransform: "capitalize" }}>{kind}</span>
     </button>
+  );
+}
+
+function LoginModal({ open, onClose, lang }) {
+  const [tab, setTab] = uS("login");
+  const [email, setEmail] = uS("");
+  const [pwd, setPwd] = uS("");
+  const [sent, setSent] = uS(false);
+  if (!open) return null;
+
+  const fr = lang === "fr";
+  const APPS = [
+    { name: "CalcuPro360", url: "https://calcupro360.seriespro360.com", color: "#FF6B1A" },
+  ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSent(true);
+  };
+
+  return (
+    <div className="sp-modal-backdrop" onClick={onClose} style={{ zIndex: 9999 }}>
+      <div className="sp-login-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true" aria-label={fr ? "Connexion" : "Sign in"}>
+        <button className="sp-login-close" onClick={onClose} aria-label="Close"><Icon name="x" size={16} /></button>
+
+        <div className="sp-login-brand">
+          <Logo variant="strata" size={28} />
+        </div>
+
+        <div className="sp-login-tabs">
+          <button className={"sp-login-tab" + (tab === "login" ? " is-active" : "")} onClick={() => { setTab("login"); setSent(false); }}>
+            {fr ? "Connexion" : "Sign in"}
+          </button>
+          <button className={"sp-login-tab" + (tab === "register" ? " is-active" : "")} onClick={() => { setTab("register"); setSent(false); }}>
+            {fr ? "Créer un compte" : "Create account"}
+          </button>
+        </div>
+
+        {sent ? (
+          <div className="sp-login-sent">
+            <div className="sp-login-sent-icon"><Icon name="check" size={22} /></div>
+            <p>{fr ? "Lien envoyé à" : "Link sent to"} <strong>{email}</strong></p>
+            <p className="sp-login-sent-sub">{fr ? "Vérifie ta boîte courriel pour continuer." : "Check your inbox to continue."}</p>
+            <button className="sp-btn sp-btn-ghost" style={{ marginTop: 16, width: "100%", justifyContent: "center" }} onClick={() => { setSent(false); setEmail(""); }}>
+              {fr ? "Utiliser une autre adresse" : "Use another address"}
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="sp-login-sso">
+              <a href="https://calcupro360.seriespro360.com?auth=google" className="sp-login-sso-btn">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615Z" fill="#4285F4" />
+                  <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18Z" fill="#34A853" />
+                  <path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332Z" fill="#FBBC05" />
+                  <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58Z" fill="#EA4335" />
+                </svg>
+                {fr ? "Continuer avec Google" : "Continue with Google"}
+              </a>
+              <a href="https://calcupro360.seriespro360.com?auth=microsoft" className="sp-login-sso-btn">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <rect x="0" y="0" width="8.5" height="8.5" fill="#F25022" />
+                  <rect x="9.5" y="0" width="8.5" height="8.5" fill="#7FBA00" />
+                  <rect x="0" y="9.5" width="8.5" height="8.5" fill="#00A4EF" />
+                  <rect x="9.5" y="9.5" width="8.5" height="8.5" fill="#FFB900" />
+                </svg>
+                {fr ? "Continuer avec Microsoft" : "Continue with Microsoft"}
+              </a>
+            </div>
+
+            <div className="sp-login-divider"><span>{fr ? "ou par courriel" : "or by email"}</span></div>
+
+            <form className="sp-login-form" onSubmit={handleSubmit}>
+              <div className="sp-login-field">
+                <label>{fr ? "Adresse courriel" : "Email address"}</label>
+                <input
+                  type="email" required
+                  placeholder={fr ? "vous@entreprise.com" : "you@company.com"}
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                />
+              </div>
+              {tab === "login" && (
+                <div className="sp-login-field">
+                  <label>{fr ? "Mot de passe" : "Password"}</label>
+                  <input
+                    type="password" required
+                    placeholder="••••••••"
+                    value={pwd}
+                    onChange={e => setPwd(e.target.value)}
+                  />
+                </div>
+              )}
+              <button type="submit" className="sp-btn sp-btn-primary" style={{ width: "100%", justifyContent: "center", padding: "13px 16px", fontSize: 14 }}>
+                {tab === "login"
+                  ? (fr ? "Se connecter" : "Sign in")
+                  : (fr ? "Créer mon compte" : "Create my account")
+                }
+                <Icon name="arrow-right" size={15} />
+              </button>
+              {tab === "login" && (
+                <button type="button" className="sp-login-magic" onClick={() => { if (email) setSent(true); }}>
+                  {fr ? "Recevoir un lien magique ↗" : "Send magic link ↗"}
+                </button>
+              )}
+            </form>
+          </>
+        )}
+
+        <p className="sp-login-note">
+          {fr
+            ? "En continuant, tu acceptes nos "
+            : "By continuing, you agree to our "
+          }
+          <a href="#!">{fr ? "Conditions d'utilisation" : "Terms of use"}</a>
+          {" & "}
+          <a href="#!">{fr ? "Politique de confidentialité" : "Privacy policy"}</a>.
+        </p>
+      </div>
+      <style>{`
+        @keyframes sp-login-in {
+          from { opacity: 0; transform: translateY(12px) scale(0.97); }
+          to   { opacity: 1; transform: translateY(0)  scale(1); }
+        }
+      `}</style>
+    </div>
   );
 }
 
