@@ -45,3 +45,12 @@ writeFileSync(join(distDir, 'app.min.js'), result.code);
 const sizeKB = (Buffer.byteLength(result.code) / 1024).toFixed(1);
 const ms = (performance.now() - t0).toFixed(0);
 console.log(`✅ dist/app.min.js — ${sizeKB} KB (${ms}ms)`);
+
+// Auto-update cache-buster in index.html
+const hash = Date.now().toString(36);
+const indexPath = join(root, 'index.html');
+let html = readFileSync(indexPath, 'utf-8');
+html = html.replace(/dist\/app\.min\.js\?v=[^"]+/, `dist/app.min.js?v=${hash}`);
+html = html.replace(/dist\/landing\.js[^"]*/, `dist/app.min.js?v=${hash}`);
+writeFileSync(indexPath, html);
+console.log(`✅ index.html cache-buster → v=${hash}`);
