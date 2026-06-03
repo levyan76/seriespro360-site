@@ -142,7 +142,7 @@ function HeroMock({ lang, t }) {
 
           <div className="sp-hero-mock-dims">
             <Dim label="L" value="24′ 0″" />
-            <Dim label="l"  value="22′ 0″" />
+            <Dim label="l" value="22′ 0″" />
             <Dim label="ép." value="4″" accent />
           </div>
 
@@ -238,7 +238,7 @@ function Suite({ lang }) {
                 </div>
                 <a
                   href={p.url === "#" ? "#!" : p.url}
-                  onClick={(e) => { if(p.url === "#") e.preventDefault(); }}
+                  onClick={(e) => { if (p.url === "#") e.preventDefault(); }}
                   target={isLive ? "_blank" : "_self"}
                   rel={isLive ? "noopener" : ""}
                   className={"sp-product-cta " + (isLive ? "sp-product-cta-live" : "sp-product-cta-ghost")}
@@ -288,8 +288,9 @@ function Features({ lang }) {
         <div className="sp-feat-grid sp-reveal sp-reveal-stagger" ref={r2}>
           {t.items.map((it, i) => (
             <article key={it.title} className="sp-feat">
+              <span className="sp-feat-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
               <div className="sp-feat-icon">
-                <Icon name={icons[i]} size={20} />
+                <Icon name={icons[i]} size={22} />
               </div>
               <h3 className="sp-feat-title">{it.title}</h3>
               <p className="sp-feat-desc">{it.desc}</p>
@@ -575,9 +576,9 @@ function App() {
       <TweaksPanel title="Tweaks">
         <TweakSection label={t.lang === "fr" ? "Apparence" : "Appearance"} />
         <TweakToggle label={t.lang === "fr" ? "Mode sombre" : "Dark mode"} value={t.dark} onChange={(v) => setTweak("dark", v)} />
-        <TweakRadio  label={t.lang === "fr" ? "Langue" : "Language"} value={t.lang} options={["fr", "en"]} onChange={(v) => setTweak("lang", v)} />
-        <TweakRadio  label={t.lang === "fr" ? "Densité" : "Density"} value={t.density} options={["compact", "regular", "comfy"]} onChange={(v) => setTweak("density", v)} />
-        <TweakColor  label={t.lang === "fr" ? "Couleur d'accent" : "Accent"}
+        <TweakRadio label={t.lang === "fr" ? "Langue" : "Language"} value={t.lang} options={["fr", "en"]} onChange={(v) => setTweak("lang", v)} />
+        <TweakRadio label={t.lang === "fr" ? "Densité" : "Density"} value={t.density} options={["compact", "regular", "comfy"]} onChange={(v) => setTweak("density", v)} />
+        <TweakColor label={t.lang === "fr" ? "Couleur d'accent" : "Accent"}
           value={t.accent}
           options={["#FF6B1A", "#EAB308", "#3B82F6", "#10B981", "#EF4444"]}
           onChange={(v) => setTweak("accent", v)} />
@@ -590,7 +591,7 @@ function App() {
           onChange={(v) => setTweak("logoVariant", v)}
         />
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 6, padding: "4px 0" }}>
-          <LogoPreview kind="strata"  active={t.logoVariant === "strata"}  onClick={() => setTweak("logoVariant", "strata")} />
+          <LogoPreview kind="strata" active={t.logoVariant === "strata"} onClick={() => setTweak("logoVariant", "strata")} />
           <LogoPreview kind="compass" active={t.logoVariant === "compass"} onClick={() => setTweak("logoVariant", "compass")} />
           <LogoPreview kind="bracket" active={t.logoVariant === "bracket"} onClick={() => setTweak("logoVariant", "bracket")} />
         </div>
