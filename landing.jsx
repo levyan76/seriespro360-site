@@ -2,6 +2,7 @@
 // Composes: Nav · Hero · Trust · Suite · Live Demo · Features · Workflow · Pricing · FAQ · CTA · Footer
 
 const { useState: uS, useEffect: uE, useRef: uR, useCallback: uC } = React;
+const { createPortal } = ReactDOM;
 
 // ──────────────────────────────────────────────────────────────────────────────
 // SCROLL REVEAL — IntersectionObserver-based entrance animations
@@ -251,94 +252,97 @@ function Suite({ lang, onProductClick }) {
 function ProductModal({ product, lang, onClose }) {
   if (!product) return null;
   const m = product.modal;
-  if (!m) {
+  const content = (() => {
+    if (!m) {
+      const isLive = product.tag === "Actif" || product.tag === "Live";
+      return (
+        <div className="sp-modal-backdrop" onClick={onClose} style={{ zIndex: 9000 }}>
+          <div className="sp-product-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
+            <button className="sp-login-close" onClick={onClose} aria-label="Close"><Icon name="x" size={16} /></button>
+            <div className="sp-pm-header">
+              <div className="sp-pm-header-left">
+                <ProductMark kind={product.name} color={product.color} size={52} />
+                <div><h2 className="sp-pm-name">{product.name}</h2><div className="sp-pm-tagline">{product.tagline}</div></div>
+              </div>
+            </div>
+            <div className="sp-pm-body"><p className="sp-pm-about">{product.desc}</p></div>
+          </div>
+        </div>
+      );
+    }
     const isLive = product.tag === "Actif" || product.tag === "Live";
+    const fr = lang === "fr";
+    const colorMap = { orange: "#FF6B1A", blue: "#3B82F6", green: "#10B981", yellow: "#EAB308" };
+    const accentColor = colorMap[product.color] || "#FF6B1A";
     return (
       <div className="sp-modal-backdrop" onClick={onClose} style={{ zIndex: 9000 }}>
-        <div className="sp-product-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
+        <div
+          className="sp-product-modal"
+          onClick={e => e.stopPropagation()}
+          role="dialog" aria-modal="true"
+          style={{ "--pm-accent": accentColor }}
+        >
           <button className="sp-login-close" onClick={onClose} aria-label="Close"><Icon name="x" size={16} /></button>
-          <div className="sp-pm-header">
+          <div className="sp-pm-header" style={{ borderBottom: `1px solid color-mix(in srgb, ${accentColor} 25%, transparent)` }}>
             <div className="sp-pm-header-left">
               <ProductMark kind={product.name} color={product.color} size={52} />
-              <div><h2 className="sp-pm-name">{product.name}</h2><div className="sp-pm-tagline">{product.tagline}</div></div>
+              <div>
+                <h2 className="sp-pm-name">{product.name}</h2>
+                <div className="sp-pm-tagline">{product.tagline}</div>
+              </div>
             </div>
+            {isLive && (
+              <a href={product.url} target="_blank" rel="noopener" className="sp-btn sp-btn-primary" style={{ flexShrink: 0 }}>
+                {product.cta} <Icon name="arrow-right" size={14} />
+              </a>
+            )}
           </div>
-          <div className="sp-pm-body"><p className="sp-pm-about">{product.desc}</p></div>
+          <div className="sp-pm-body">
+            <p className="sp-pm-headline">{m.headline}</p>
+            <p className="sp-pm-about">{m.about}</p>
+            <h3 className="sp-pm-section-title">{fr ? "Fonctionnalités" : "Features"}</h3>
+            <div className="sp-pm-features">
+              {m.features.map((f) => (
+                <div key={f.title} className="sp-pm-feat">
+                  <div className="sp-pm-feat-icon" style={{ background: `color-mix(in srgb, ${accentColor} 14%, transparent)`, color: accentColor }}>
+                    <Icon name={f.icon} size={18} />
+                  </div>
+                  <div>
+                    <div className="sp-pm-feat-title">{f.title}</div>
+                    <div className="sp-pm-feat-desc">{f.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {m.steps && m.steps.length > 0 && (
+              <>
+                <h3 className="sp-pm-section-title">{fr ? "Comment ça marche" : "How it works"}</h3>
+                <ol className="sp-pm-steps">
+                  {m.steps.map((s, i) => (
+                    <li key={i} className="sp-pm-step">
+                      <span className="sp-pm-step-num" style={{ color: accentColor }}>{String(i + 1).padStart(2, "0")}</span>
+                      <span>{s}</span>
+                    </li>
+                  ))}
+                </ol>
+              </>
+            )}
+            <div className="sp-pm-pricing-note"><Icon name="tag" size={14} />{m.pricing_note}</div>
+            {!isLive && (
+              <div className="sp-pm-notify">
+                <p>{fr ? "Sois parmi les premiers informés du lancement." : "Be among the first to know when it launches."}</p>
+                <form className="sp-pm-notify-form" onSubmit={e => e.preventDefault()}>
+                  <input type="email" placeholder={fr ? "ton@courriel.com" : "your@email.com"} required />
+                  <button type="submit" className="sp-btn sp-btn-primary">{fr ? "M'avertir" : "Notify me"} <Icon name="bell" size={14} /></button>
+                </form>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );
-  }
-  const isLive = product.tag === "Actif" || product.tag === "Live";
-  const fr = lang === "fr";
-  const colorMap = { orange: "#FF6B1A", blue: "#3B82F6", green: "#10B981", yellow: "#EAB308" };
-  const accentColor = colorMap[product.color] || "#FF6B1A";
-  return (
-    <div className="sp-modal-backdrop" onClick={onClose} style={{ zIndex: 9000 }}>
-      <div
-        className="sp-product-modal"
-        onClick={e => e.stopPropagation()}
-        role="dialog" aria-modal="true"
-        style={{ "--pm-accent": accentColor }}
-      >
-        <button className="sp-login-close" onClick={onClose} aria-label="Close"><Icon name="x" size={16} /></button>
-        <div className="sp-pm-header" style={{ borderBottom: `1px solid color-mix(in srgb, ${accentColor} 25%, transparent)` }}>
-          <div className="sp-pm-header-left">
-            <ProductMark kind={product.name} color={product.color} size={52} />
-            <div>
-              <h2 className="sp-pm-name">{product.name}</h2>
-              <div className="sp-pm-tagline">{product.tagline}</div>
-            </div>
-          </div>
-          {isLive && (
-            <a href={product.url} target="_blank" rel="noopener" className="sp-btn sp-btn-primary" style={{ flexShrink: 0 }}>
-              {product.cta} <Icon name="arrow-right" size={14} />
-            </a>
-          )}
-        </div>
-        <div className="sp-pm-body">
-          <p className="sp-pm-headline">{m.headline}</p>
-          <p className="sp-pm-about">{m.about}</p>
-          <h3 className="sp-pm-section-title">{fr ? "Fonctionnalités" : "Features"}</h3>
-          <div className="sp-pm-features">
-            {m.features.map((f) => (
-              <div key={f.title} className="sp-pm-feat">
-                <div className="sp-pm-feat-icon" style={{ background: `color-mix(in srgb, ${accentColor} 14%, transparent)`, color: accentColor }}>
-                  <Icon name={f.icon} size={18} />
-                </div>
-                <div>
-                  <div className="sp-pm-feat-title">{f.title}</div>
-                  <div className="sp-pm-feat-desc">{f.desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          {m.steps && m.steps.length > 0 && (
-            <>
-              <h3 className="sp-pm-section-title">{fr ? "Comment ça marche" : "How it works"}</h3>
-              <ol className="sp-pm-steps">
-                {m.steps.map((s, i) => (
-                  <li key={i} className="sp-pm-step">
-                    <span className="sp-pm-step-num" style={{ color: accentColor }}>{String(i + 1).padStart(2, "0")}</span>
-                    <span>{s}</span>
-                  </li>
-                ))}
-              </ol>
-            </>
-          )}
-          <div className="sp-pm-pricing-note"><Icon name="tag" size={14} />{m.pricing_note}</div>
-          {!isLive && (
-            <div className="sp-pm-notify">
-              <p>{fr ? "Sois parmi les premiers informés du lancement." : "Be among the first to know when it launches."}</p>
-              <form className="sp-pm-notify-form" onSubmit={e => e.preventDefault()}>
-                <input type="email" placeholder={fr ? "ton@courriel.com" : "your@email.com"} required />
-                <button type="submit" className="sp-btn sp-btn-primary">{fr ? "M'avertir" : "Notify me"} <Icon name="bell" size={14} /></button>
-              </form>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+  })();
+  return createPortal(content, document.body);
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
