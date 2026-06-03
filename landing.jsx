@@ -104,8 +104,8 @@ function Hero({ lang }) {
         <p className="sp-hero-tail mono">{t.title_tail}</p>
         <p className="sp-hero-sub sp-hero-sub-centered">{t.subtitle}</p>
         <div className="sp-hero-ctas sp-hero-ctas-centered">
-          <a href="#suite" className="sp-btn sp-btn-primary sp-btn-lg">{t.cta_primary} <Icon name="arrow-right" size={16} /></a>
-          <a href="#suite" className="sp-btn sp-btn-ghost sp-btn-lg">{lang === "fr" ? "Voir les apps" : "See the apps"} <Icon name="grid" size={16} /></a>
+          <a href="https://trimpro360-v3.vercel.app" target="_blank" rel="noopener" className="sp-btn sp-btn-primary sp-btn-lg">{t.cta_primary} <Icon name="arrow-right" size={16} /></a>
+          <a href="#suite" className="sp-btn sp-btn-ghost sp-btn-lg">{t.cta_secondary} <Icon name="grid" size={16} /></a>
         </div>
         <ul className="sp-hero-meta sp-hero-meta-centered">
           <li><Icon name="check" size={14} />{t.meta_1}</li>
