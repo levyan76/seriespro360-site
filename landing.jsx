@@ -645,7 +645,6 @@ function App() {
       <main>
         <Hero lang={t.lang} />
         <Suite lang={t.lang} onProductClick={(p) => setActiveProduct(p)} />
-        <Pricing lang={t.lang} />
       </main>
       <Footer lang={t.lang} logoVariant={t.logoVariant} setActivePage={setActivePage} />
 
