@@ -43,7 +43,8 @@ const T = {
     suite: {
       eyebrow: "La suite SeriesPro360",
       title: "CalcuPro360 est en ligne. D'autres outils arrivent.",
-      subtitle: "Cliquez sur une app pour en savoir plus.",
+      subtitle:
+        "SeriesPro360 bâtit une suite d'outils numériques pour les pros québécois de la construction. Commencez avec CalcuPro360 — les prochains outils seront annoncés à leur lancement.",
       products: [
         {
           tag: "Actif",
@@ -53,51 +54,6 @@ const T = {
           color: "orange",
           cta: "Accéder à l'app",
           url: "https://calcupro360.seriespro360.com",
-          modal: {
-            headline: "Estimer. Calculer. Livrer en 90 secondes.",
-            about: "CalcuPro360 est le premier outil de la suite SeriesPro360. Conçu spécifiquement pour les pros québécois de la construction, il remplace les feuilles Excel et les calculs à la main par une interface rapide, précise et conforme aux normes locales.",
-            features: [
-              { icon: "package", title: "21 matériaux complets", desc: "Béton, bois, isolation, revêtement, toiture, excavation — avec prix QC mis à jour." },
-              { icon: "cpu", title: "Assistant IA Gemini 2.5", desc: "Pose des questions sur les codes CNB, CCQ, RBQ. Réponses sourcées, pas d'inventions." },
-              { icon: "file", title: "Devis PDF en 1 clic", desc: "Logo, coordonnées client, lignes détaillées, TPS+TVQ, conditions — prêt à envoyer." },
-              { icon: "wifi-off", title: "Hors-ligne natif (PWA)", desc: "Fonctionne sans réseau au sous-sol ou en région éloignée. Installe comme une app native." },
-              { icon: "calculator", title: "Calculatrice pi-po intégrée", desc: "Conversion pi-po ↔ métrique instantanée. Zéro erreur de conversion." },
-              { icon: "globe", title: "Bilingue FR / EN", desc: "Bascule instantanée. Devis en français comme l'exige la Loi 96." },
-            ],
-            steps: [
-              "Crée un projet (nom chantier, client, adresse)",
-              "Choisis un matériau et entre les dimensions",
-              "Ajuste les options (pertes, armature, gravier…)",
-              "Génère le devis PDF et envoie par courriel",
-            ],
-            pricing_note: "Gratuit jusqu'à 5 estimés/mois. Plan Pro à 14,99 $/mois CAD.",
-          },
-        },
-        {
-          tag: "Actif",
-          name: "TrimPro360",
-          tagline: "Calcul de profilés et bardage",
-          desc: "Estimateur de profilés fascia en acier galvanisé ou aluminium — développé, surface, coût total avec TPS+TVQ.",
-          color: "yellow",
-          cta: "Accéder à l'app",
-          url: "https://trimpro360-v3.vercel.app",
-          modal: {
-            headline: "Profilés de précision. Estimés en secondes.",
-            about: "TrimPro360 calcule les profilés fascia et bardage en acier galvanisé (24ga, 26ga) ou aluminium avec développé exact, surface totale et coût complet TPS+TVQ. Conçu pour les couvreurs et bardeurs québécois.",
-            features: [
-              { icon: "ruler", title: "5 dimensions de pliage", desc: "Cotes A, B, C, D, E configurables — développé calculé à 0,01 po près." },
-              { icon: "package", title: "4 jauges de métal", desc: "Acier galvanisé 24ga / 26ga, acier prélaqué 26ga, aluminium 0,032 po." },
-              { icon: "file", title: "Coût total avec taxes", desc: "Sous-total, TPS 5%, TVQ 9,975% calculés automatiquement." },
-              { icon: "globe", title: "Bilingue FR / EN", desc: "Bascule instantanée, comme toute la suite SeriesPro360." },
-            ],
-            steps: [
-              "Entre les 5 cotes du profilé (A à E en pouces)",
-              "Choisis la jauge de métal et la couleur",
-              "Saisis le nombre de bandes de 10 pi",
-              "Le coût total avec taxes s'affiche en temps réel",
-            ],
-            pricing_note: "Accès gratuit — aucun compte requis.",
-          },
         },
         {
           tag: "Bientôt",
@@ -108,17 +64,6 @@ const T = {
           cta: "Être notifié",
           url: "#",
           placeholder: true,
-          modal: {
-            headline: "Mesurer vite. Mesurer juste. Sur le terrain.",
-            about: "MesurePro360 accélérera la prise de mesure sur chantier avec des outils visuels et des exports directs vers CalcuPro360. Détails à venir lors du lancement.",
-            features: [
-              { icon: "ruler", title: "Prise de mesure guidée", desc: "Interface optimisée pour entrer les dimensions rapidement avec des gants." },
-              { icon: "zap", title: "Export vers CalcuPro360", desc: "Mesures transférées directement dans l'estimateur sans recopie." },
-              { icon: "wifi-off", title: "Hors-ligne natif", desc: "Fonctionnel sans réseau, comme toute la suite SeriesPro360." },
-            ],
-            steps: [],
-            pricing_note: "Tarification à annoncer au lancement.",
-          },
         },
         {
           tag: "Bientôt",
@@ -129,17 +74,6 @@ const T = {
           cta: "Être notifié",
           url: "#",
           placeholder: true,
-          modal: {
-            headline: "Des devis professionnels. Sans les maux de tête.",
-            about: "DevisPro360 centralisera la gestion des devis de construction — des cahiers de charges aux soumissions formelles, avec suivi client intégré.",
-            features: [
-              { icon: "file", title: "Gabarits de devis CCQ", desc: "Modèles conformes aux exigences de la Commission de la construction du Québec." },
-              { icon: "users", title: "Suivi client intégré", desc: "Statuts, révisions, approbations — tout en un seul endroit." },
-              { icon: "zap", title: "Intégration CalcuPro360", desc: "Importe les estimations directement depuis CalcuPro360." },
-            ],
-            steps: [],
-            pricing_note: "Tarification à annoncer au lancement.",
-          },
         },
         {
           tag: "Bientôt",
@@ -150,17 +84,6 @@ const T = {
           cta: "Être notifié",
           url: "#",
           placeholder: true,
-          modal: {
-            headline: "L'enveloppe thermique. Calculée selon les codes QC.",
-            about: "ThermoPro calculera la performance thermique de l'enveloppe du bâtiment selon les normes CNB 9.36 et les exigences RBQ québécoises.",
-            features: [
-              { icon: "thermometer", title: "Calcul selon CNB 9.36", desc: "Valeurs RSI, transmission thermique, ponts thermiques." },
-              { icon: "shield", title: "Conformité RBQ intégrée", desc: "Vérification automatique des seuils réglementaires québécois." },
-              { icon: "file", title: "Rapport PDF d'inspection", desc: "Export du rapport thermique pour le dossier de permis." },
-            ],
-            steps: [],
-            pricing_note: "Tarification à annoncer au lancement.",
-          },
         },
       ],
     },
@@ -404,7 +327,8 @@ const T = {
     suite: {
       eyebrow: "The SeriesPro360 suite",
       title: "CalcuPro360 is live. More tools coming.",
-      subtitle: "Click any app to learn more.",
+      subtitle:
+        "SeriesPro360 is building a suite of digital tools for Quebec construction pros. Start with CalcuPro360 — upcoming tools will be announced at launch.",
       products: [
         {
           tag: "Live",
@@ -414,51 +338,6 @@ const T = {
           color: "orange",
           cta: "Open app",
           url: "https://calcupro360.seriespro360.com",
-          modal: {
-            headline: "Estimate. Calculate. Deliver in 90 seconds.",
-            about: "CalcuPro360 is the first tool in the SeriesPro360 suite. Built specifically for Quebec construction pros, it replaces Excel sheets and manual calculations with a fast, accurate interface that follows local codes.",
-            features: [
-              { icon: "package", title: "21 complete materials", desc: "Concrete, wood, insulation, cladding, roofing, excavation — with updated QC prices." },
-              { icon: "cpu", title: "Gemini 2.5 AI assistant", desc: "Ask questions about NBC, CCQ, RBQ codes. Sourced answers, no hallucinations." },
-              { icon: "file", title: "PDF quote in 1 click", desc: "Logo, client info, itemized lines, GST+QST, terms — ready to send." },
-              { icon: "wifi-off", title: "Native offline (PWA)", desc: "Works without network in basements or remote areas. Installs like a native app." },
-              { icon: "calculator", title: "Built-in ft-in calculator", desc: "Instant ft-in ↔ metric conversion. Zero conversion errors." },
-              { icon: "globe", title: "Native FR / EN bilingual", desc: "Instant switch. Quotes in French as required by Bill 96." },
-            ],
-            steps: [
-              "Create a project (site name, client, address)",
-              "Pick a material and enter dimensions",
-              "Adjust options (waste, reinforcement, gravel…)",
-              "Generate the PDF quote and send by email",
-            ],
-            pricing_note: "Free up to 5 estimates/month. Pro plan at $14.99/month CAD.",
-          },
-        },
-        {
-          tag: "Live",
-          name: "TrimPro360",
-          tagline: "Metal trim & cladding calculator",
-          desc: "Fascia profile estimator for galvanized steel or aluminum — developed length, area, total cost with GST+QST.",
-          color: "yellow",
-          cta: "Open app",
-          url: "https://trimpro360-v3.vercel.app",
-          modal: {
-            headline: "Precision profiles. Estimated in seconds.",
-            about: "TrimPro360 calculates fascia and cladding profiles in galvanized steel (24ga, 26ga) or aluminum with exact developed length, total area and full cost including GST+QST. Built for Quebec roofers and cladding contractors.",
-            features: [
-              { icon: "ruler", title: "5 bending dimensions", desc: "A, B, C, D, E legs configurable — developed length calculated to 0.01 in." },
-              { icon: "package", title: "4 metal gauges", desc: "Galvanized steel 24ga / 26ga, pre-painted steel 26ga, aluminum 0.032 in." },
-              { icon: "file", title: "Full cost with taxes", desc: "Subtotal, GST 5%, QST 9.975% calculated automatically." },
-              { icon: "globe", title: "Native FR / EN bilingual", desc: "Instant language switch, like the entire SeriesPro360 suite." },
-            ],
-            steps: [
-              "Enter the 5 profile legs (A to E in inches)",
-              "Choose metal gauge and color",
-              "Enter the number of 10-ft strips",
-              "Total cost with taxes updates live",
-            ],
-            pricing_note: "Free access — no account required.",
-          },
         },
         {
           tag: "Soon",
@@ -469,17 +348,6 @@ const T = {
           cta: "Get notified",
           url: "#",
           placeholder: true,
-          modal: {
-            headline: "Measure fast. Measure right. On site.",
-            about: "MesurePro360 will accelerate on-site measuring with visual tools and direct exports to CalcuPro360. Details coming at launch.",
-            features: [
-              { icon: "ruler", title: "Guided measurement input", desc: "Interface optimized to enter dimensions quickly, even with gloves on." },
-              { icon: "zap", title: "Export to CalcuPro360", desc: "Measurements transferred directly into the estimator, no re-typing." },
-              { icon: "wifi-off", title: "Native offline", desc: "Works without network, like the entire SeriesPro360 suite." },
-            ],
-            steps: [],
-            pricing_note: "Pricing to be announced at launch.",
-          },
         },
         {
           tag: "Soon",
@@ -490,17 +358,6 @@ const T = {
           cta: "Get notified",
           url: "#",
           placeholder: true,
-          modal: {
-            headline: "Professional quotes. Without the headaches.",
-            about: "DevisPro360 will centralize construction quote management — from spec books to formal bids, with integrated client tracking.",
-            features: [
-              { icon: "file", title: "CCQ quote templates", desc: "Templates compliant with Commission de la construction du Québec requirements." },
-              { icon: "users", title: "Integrated client tracking", desc: "Statuses, revisions, approvals — all in one place." },
-              { icon: "zap", title: "CalcuPro360 integration", desc: "Import estimates directly from CalcuPro360." },
-            ],
-            steps: [],
-            pricing_note: "Pricing to be announced at launch.",
-          },
         },
         {
           tag: "Soon",
@@ -511,17 +368,6 @@ const T = {
           cta: "Get notified",
           url: "#",
           placeholder: true,
-          modal: {
-            headline: "Thermal envelope. Calculated to QC code.",
-            about: "ThermoPro will calculate building envelope thermal performance per NBC 9.36 and Quebec RBQ requirements.",
-            features: [
-              { icon: "thermometer", title: "NBC 9.36 compliant calc", desc: "RSI values, thermal transmittance, thermal bridges." },
-              { icon: "shield", title: "Built-in RBQ compliance", desc: "Automatic check against Quebec regulatory thresholds." },
-              { icon: "file", title: "Inspection PDF report", desc: "Export the thermal report for the permit file." },
-            ],
-            steps: [],
-            pricing_note: "Pricing to be announced at launch.",
-          },
         },
       ],
     },
