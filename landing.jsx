@@ -96,12 +96,7 @@ function Hero({ lang }) {
         <div className="sp-hero-badge">
           <span className="sp-hero-badge-dot" />{t.badge}
         </div>
-        <h1 className="sp-hero-title">
-          <span className="sp-hero-word">{t.title_a}<span className="sp-hero-period">.</span></span>
-          <span className="sp-hero-word">{t.title_b}<span className="sp-hero-period">.</span></span>
-          <span className="sp-hero-word sp-hero-word-accent">{t.title_c}<span className="sp-hero-period">.</span></span>
-        </h1>
-        <p className="sp-hero-tail mono">{t.title_tail}</p>
+        <h1 className="sp-hero-headline">{t.headline}</h1>
         <p className="sp-hero-sub sp-hero-sub-centered">{t.subtitle}</p>
         <div className="sp-hero-ctas sp-hero-ctas-centered">
           <a href="#suite" className="sp-btn sp-btn-primary sp-btn-lg">{t.cta_primary} <Icon name="arrow-down" size={16} /></a>

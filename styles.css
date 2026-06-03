@@ -589,11 +589,23 @@ html.sp-light .sp-unit-toggle button.is-on {
 .sp-hero-center-inner {
   position: relative;
   z-index: 2;
-  max-width: 760px;
+  max-width: 700px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.sp-hero-headline {
+  font-family: var(--sp-font-display);
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 700;
+  color: var(--sp-text);
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  text-align: center;
+  margin: 20px 0 0;
+  max-width: 18ch;
 }
 
 .sp-hero-centered .sp-hero-title {
