@@ -605,8 +605,8 @@ html.sp-light .sp-unit-toggle button.is-on {
 }
 
 .sp-hero-inner-wide {
-  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
-  gap: 48px;
+  grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.35fr);
+  gap: 40px;
   align-items: start;
 }
 
@@ -720,10 +720,15 @@ html.sp-light .sp-unit-toggle button.is-on {
 .sp-hero-demo {
   position: relative;
   z-index: 2;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .sp-hero-demo .sp-estimator {
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  border-radius: var(--sp-rad-lg);
 }
 
 .sp-hero-meta {
