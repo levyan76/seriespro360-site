@@ -89,33 +89,29 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
 // ──────────────────────────────────────────────────────────────────────────────
 function Hero({ lang }) {
   const t = window.T[lang].hero;
-  const td = window.T[lang].demo;
   return (
-    <section id="top" className="sp-hero sp-hero-compact">
+    <section id="top" className="sp-hero sp-hero-centered">
       <div className="sp-hero-grid-bg" aria-hidden="true" />
-      <div className="sp-container sp-hero-inner sp-hero-inner-wide">
-        <div className="sp-hero-copy sp-hero-copy-compact">
-          <div className="sp-hero-badge">
-            <span className="sp-hero-badge-dot" />{t.badge}
-          </div>
-          <h1 className="sp-hero-title">
-            <span className="sp-hero-word">{t.title_a}<span className="sp-hero-period">.</span></span>
-            <span className="sp-hero-word">{t.title_b}<span className="sp-hero-period">.</span></span>
-            <span className="sp-hero-word sp-hero-word-accent">{t.title_c}<span className="sp-hero-period">.</span></span>
-          </h1>
-          <p className="sp-hero-sub sp-hero-sub-sm">{t.hero_short || (lang === "fr" ? "Calcul, estimation et devis PDF pour les pros québécois de la construction." : "Material calculation and PDF quotes for Quebec construction pros.")}</p>
-          <div className="sp-hero-ctas">
-            <a href="#suite" className="sp-btn sp-btn-primary sp-btn-lg">{t.cta_primary} <Icon name="arrow-right" size={16} /></a>
-          </div>
-          <ul className="sp-hero-meta">
-            <li><Icon name="check" size={14} />{t.meta_1}</li>
-            <li><Icon name="check" size={14} />{t.meta_2}</li>
-            <li><Icon name="check" size={14} />{t.meta_3}</li>
-          </ul>
+      <div className="sp-container sp-hero-center-inner">
+        <div className="sp-hero-badge">
+          <span className="sp-hero-badge-dot" />{t.badge}
         </div>
-        <div className="sp-hero-demo" id="demo">
-          <SlabEstimator lang={lang} t={td} />
+        <h1 className="sp-hero-title">
+          <span className="sp-hero-word">{t.title_a}<span className="sp-hero-period">.</span></span>
+          <span className="sp-hero-word">{t.title_b}<span className="sp-hero-period">.</span></span>
+          <span className="sp-hero-word sp-hero-word-accent">{t.title_c}<span className="sp-hero-period">.</span></span>
+        </h1>
+        <p className="sp-hero-tail mono">{t.title_tail}</p>
+        <p className="sp-hero-sub sp-hero-sub-centered">{t.subtitle}</p>
+        <div className="sp-hero-ctas sp-hero-ctas-centered">
+          <a href="#suite" className="sp-btn sp-btn-primary sp-btn-lg">{t.cta_primary} <Icon name="arrow-right" size={16} /></a>
+          <a href="#suite" className="sp-btn sp-btn-ghost sp-btn-lg">{lang === "fr" ? "Voir les apps" : "See the apps"} <Icon name="grid" size={16} /></a>
         </div>
+        <ul className="sp-hero-meta sp-hero-meta-centered">
+          <li><Icon name="check" size={14} />{t.meta_1}</li>
+          <li><Icon name="check" size={14} />{t.meta_2}</li>
+          <li><Icon name="check" size={14} />{t.meta_3}</li>
+        </ul>
       </div>
     </section>
   );
@@ -214,7 +210,7 @@ function TrustStrip({ lang }) {
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — SUITE
 // ──────────────────────────────────────────────────────────────────────────────
-function Suite({ lang }) {
+function Suite({ lang, onProductClick }) {
   const t = window.T[lang].suite;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
@@ -227,7 +223,13 @@ function Suite({ lang }) {
             const isLive = p.tag === "Actif" || p.tag === "Live";
             const tagClass = isLive ? "live" : (p.placeholder ? "soon" : "beta");
             return (
-              <article key={p.name} className={"sp-product sp-product-" + p.color + (p.placeholder ? " sp-product-placeholder" : "")}>
+              <article
+                key={p.name}
+                className={"sp-product sp-product-" + p.color + (p.placeholder ? " sp-product-placeholder" : "") + " sp-product-clickable"}
+                onClick={() => onProductClick && onProductClick(p)}
+                role="button" tabIndex={0}
+                onKeyDown={(e) => e.key === "Enter" && onProductClick && onProductClick(p)}
+              >
                 <header className="sp-product-head">
                   <ProductMark kind={p.name} color={p.color} size={44} />
                   <span className={"sp-product-tag sp-product-tag-" + tagClass}>{p.tag}</span>
@@ -237,16 +239,11 @@ function Suite({ lang }) {
                   <div className="sp-product-tagline">{p.tagline}</div>
                   <p className="sp-product-desc">{p.desc}</p>
                 </div>
-                <a
-                  href={p.url === "#" ? "#!" : p.url}
-                  onClick={(e) => { if (p.url === "#") e.preventDefault(); }}
-                  target={isLive ? "_blank" : "_self"}
-                  rel={isLive ? "noopener" : ""}
-                  className={"sp-product-cta " + (isLive ? "sp-product-cta-live" : "sp-product-cta-ghost")}
-                >
-                  {p.cta}
-                  <Icon name="arrow-right" size={14} />
-                </a>
+                <div className="sp-product-footer">
+                  <span className="sp-product-learn">
+                    {lang === "fr" ? "En savoir plus" : "Learn more"} <Icon name="arrow-right" size={13} />
+                  </span>
+                </div>
                 <div className={"sp-product-bar sp-product-bar-" + p.color} />
               </article>
             );
@@ -254,6 +251,99 @@ function Suite({ lang }) {
         </div>
       </div>
     </section>
+  );
+}
+
+function ProductModal({ product, lang, onClose }) {
+  if (!product) return null;
+  const m = product.modal;
+  if (!m) {
+    const isLive = product.tag === "Actif" || product.tag === "Live";
+    return (
+      <div className="sp-modal-backdrop" onClick={onClose} style={{ zIndex: 9000 }}>
+        <div className="sp-product-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
+          <button className="sp-login-close" onClick={onClose} aria-label="Close"><Icon name="x" size={16} /></button>
+          <div className="sp-pm-header">
+            <div className="sp-pm-header-left">
+              <ProductMark kind={product.name} color={product.color} size={52} />
+              <div><h2 className="sp-pm-name">{product.name}</h2><div className="sp-pm-tagline">{product.tagline}</div></div>
+            </div>
+          </div>
+          <div className="sp-pm-body"><p className="sp-pm-about">{product.desc}</p></div>
+        </div>
+      </div>
+    );
+  }
+  const isLive = product.tag === "Actif" || product.tag === "Live";
+  const fr = lang === "fr";
+  const colorMap = { orange: "#FF6B1A", blue: "#3B82F6", green: "#10B981", yellow: "#EAB308" };
+  const accentColor = colorMap[product.color] || "#FF6B1A";
+  return (
+    <div className="sp-modal-backdrop" onClick={onClose} style={{ zIndex: 9000 }}>
+      <div
+        className="sp-product-modal"
+        onClick={e => e.stopPropagation()}
+        role="dialog" aria-modal="true"
+        style={{ "--pm-accent": accentColor }}
+      >
+        <button className="sp-login-close" onClick={onClose} aria-label="Close"><Icon name="x" size={16} /></button>
+        <div className="sp-pm-header" style={{ borderBottom: `1px solid color-mix(in srgb, ${accentColor} 25%, transparent)` }}>
+          <div className="sp-pm-header-left">
+            <ProductMark kind={product.name} color={product.color} size={52} />
+            <div>
+              <h2 className="sp-pm-name">{product.name}</h2>
+              <div className="sp-pm-tagline">{product.tagline}</div>
+            </div>
+          </div>
+          {isLive && (
+            <a href={product.url} target="_blank" rel="noopener" className="sp-btn sp-btn-primary" style={{ flexShrink: 0 }}>
+              {product.cta} <Icon name="arrow-right" size={14} />
+            </a>
+          )}
+        </div>
+        <div className="sp-pm-body">
+          <p className="sp-pm-headline">{m.headline}</p>
+          <p className="sp-pm-about">{m.about}</p>
+          <h3 className="sp-pm-section-title">{fr ? "Fonctionnalités" : "Features"}</h3>
+          <div className="sp-pm-features">
+            {m.features.map((f) => (
+              <div key={f.title} className="sp-pm-feat">
+                <div className="sp-pm-feat-icon" style={{ background: `color-mix(in srgb, ${accentColor} 14%, transparent)`, color: accentColor }}>
+                  <Icon name={f.icon} size={18} />
+                </div>
+                <div>
+                  <div className="sp-pm-feat-title">{f.title}</div>
+                  <div className="sp-pm-feat-desc">{f.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          {m.steps && m.steps.length > 0 && (
+            <>
+              <h3 className="sp-pm-section-title">{fr ? "Comment ça marche" : "How it works"}</h3>
+              <ol className="sp-pm-steps">
+                {m.steps.map((s, i) => (
+                  <li key={i} className="sp-pm-step">
+                    <span className="sp-pm-step-num" style={{ color: accentColor }}>{String(i + 1).padStart(2, "0")}</span>
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ol>
+            </>
+          )}
+          <div className="sp-pm-pricing-note"><Icon name="tag" size={14} />{m.pricing_note}</div>
+          {!isLive && (
+            <div className="sp-pm-notify">
+              <p>{fr ? "Sois parmi les premiers informés du lancement." : "Be among the first to know when it launches."}</p>
+              <form className="sp-pm-notify-form" onSubmit={e => e.preventDefault()}>
+                <input type="email" placeholder={fr ? "ton@courriel.com" : "your@email.com"} required />
+                <button type="submit" className="sp-btn sp-btn-primary">{fr ? "M'avertir" : "Notify me"} <Icon name="bell" size={14} /></button>
+              </form>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -534,6 +624,7 @@ function App() {
   const [openMobile, setOpenMobile] = uS(false);
   const [activePage, setActivePage] = uS(null);
   const [loginOpen, setLoginOpen] = uS(false);
+  const [activeProduct, setActiveProduct] = uS(null);
 
   // Apply theme + accent CSS vars to html
   uE(() => {
@@ -559,13 +650,8 @@ function App() {
       />
       <main>
         <Hero lang={t.lang} />
-        <TrustStrip lang={t.lang} />
-        <Suite lang={t.lang} />
-        <Features lang={t.lang} />
-        <Workflow lang={t.lang} />
+        <Suite lang={t.lang} onProductClick={(p) => setActiveProduct(p)} />
         <Pricing lang={t.lang} />
-        <FAQ lang={t.lang} />
-        <CTABand lang={t.lang} />
       </main>
       <Footer lang={t.lang} logoVariant={t.logoVariant} setActivePage={setActivePage} />
 
@@ -575,6 +661,7 @@ function App() {
         onClose={() => setActivePage(null)}
       />
       <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} lang={t.lang} />
+      <ProductModal product={activeProduct} lang={t.lang} onClose={() => setActiveProduct(null)} />
 
       <TweaksPanel title="Tweaks">
         <TweakSection label={t.lang === "fr" ? "Apparence" : "Appearance"} />
