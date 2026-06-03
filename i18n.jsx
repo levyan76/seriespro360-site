@@ -317,7 +317,7 @@ const T = {
     footer: {
       tagline: "La suite chantier intelligente pour le marché québécois.",
       product: "Produit",
-      product_links: ["CalcuPro360", "Suite (bientôt)"],
+      product_links: ["TrimPro360", "CalcuPro360", "Suite (bientôt)"],
       company: "Compagnie",
       company_links: ["À propos", "Blogue chantier", "Carrières", "Contact"],
       legal: "Légal",
@@ -656,7 +656,7 @@ const T = {
     footer: {
       tagline: "The smart jobsite suite for the Quebec market.",
       product: "Product",
-      product_links: ["CalcuPro360", "Suite (coming soon)"],
+      product_links: ["TrimPro360", "CalcuPro360", "Suite (coming soon)"],
       company: "Company",
       company_links: ["About", "Jobsite blog", "Careers", "Contact"],
       legal: "Legal",

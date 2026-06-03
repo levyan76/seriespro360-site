@@ -577,7 +577,12 @@ function Footer({ lang, logoVariant, setActivePage }) {
         <div className="sp-footer-cols">
           <div>
             <div className="sp-footer-col-title">{t.product}</div>
-            <ul>{t.product_links.map((l) => <li key={l}><a href="#!" onClick={(e) => handlePageClick(e, l)}>{l}</a></li>)}</ul>
+            <ul>{t.product_links.map((l) => {
+              const appUrls = { "TrimPro360": "https://trimpro360-v3.vercel.app", "CalcuPro360": "https://calcupro360.seriespro360.com" };
+              return appUrls[l]
+                ? <li key={l}><a href={appUrls[l]} target="_blank" rel="noopener">{l}</a></li>
+                : <li key={l}><a href="#!" onClick={(e) => handlePageClick(e, l)}>{l}</a></li>;
+            })}</ul>
           </div>
           <div>
             <div className="sp-footer-col-title">{t.company}</div>
