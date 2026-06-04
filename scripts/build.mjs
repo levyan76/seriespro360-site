@@ -44,6 +44,12 @@ const files = [
 console.log('⚡ Building SeriesPro360…');
 const t0 = performance.now();
 
+// ── CSS: minify styles.css → dist/app.min.css
+const cssRaw = readFileSync(join(root, 'styles.css'), 'utf-8');
+const cssResult = transformSync(cssRaw, { loader: 'css', minify: true });
+writeFileSync(join(distDir, 'app.min.css'), cssResult.code);
+console.log(`✅ dist/app.min.css — ${(Buffer.byteLength(cssResult.code) / 1024).toFixed(1)} KB`);
+
 // ── Bundle 1: landing page principale
 buildBundle('app.min.js', files);
 
