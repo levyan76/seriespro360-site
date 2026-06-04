@@ -8,9 +8,7 @@ const { createRoot } = ReactDOM;
 function getProduct(lang) {
   const slug = document.getElementById("root")?.dataset?.product || "";
   const suite = window.T[lang].suite.products;
-  const slugOverride = { "mesuropro360": "mesurepro360", "devispro360": "devispro360" };
-  const normalized = slugOverride[slug] || slug;
-  return suite.find(p => p.name.toLowerCase().replace(/[^a-z0-9]/g, "") === normalized) || suite[0];
+  return suite.find(p => p.name.toLowerCase().replace(/[^a-z0-9]/g, "") === slug) || suite[0];
 }
 
 // ── Icônes SVG inline légers
