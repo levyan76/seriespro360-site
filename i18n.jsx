@@ -133,15 +133,15 @@ const T = {
         {
           tag: "Bientôt",
           name: "MesurePro360",
-          tagline: "Prise de mesure vocale → dessin CAD en temps réel",
-          desc: "Parle. MesurePro360 t'écoute et dessine directement. Fini le carnet, fini la ressaisie — la mesure devient un plan CAD exportable en quelques minutes.",
+          tagline: "Ton assistant de mesure et de croquis sur le terrain",
+          desc: "Pour quiconque doit prendre des mesures et faire un croquis — couvreur, charpentier, menuisier, estimateur. Parle. MesurePro360 t'écoute et dessine en temps réel.",
           color: "blue",
           cta: "Être notifié",
           url: "#",
           placeholder: true,
           modal: {
-            headline: "Parle. Mesure. Exporte en CAD.",
-            about: "MesurePro360 transforme la prise de mesure sur chantier en dessin technique. L'utilisateur dicte ses mesures à voix haute — l'application les interprète et les dessine en temps réel sous forme de plan CAD. Plus de carnet froissé, plus de ressaisie, plus d'erreur de transcription. Le plan est prêt à exporter directement dans CalcuPro360 ou TrimPro360.",
+            headline: "Ton helper de mesure. Pour tout le monde sur le chantier.",
+            about: "MesurePro360 est l'assistant de terrain pour toute personne qui prend des mesures et doit en faire un croquis — couvreur, charpentier, menuisier, estimateur, rénovateur. Tu parles, l'application dessine en temps réel. Plus de carnet froissé, plus de ressaisie, plus d'erreur de transcription. Le croquis devient un plan CAD exportable en quelques minutes.",
             features: [
               { icon: "cpu", title: "Saisie vocale intelligente", desc: "Dicte tes mesures à voix haute. MesurePro360 reconnaît les dimensions, les unités et les commandes en temps réel.", detail: ["Reconnaissance vocale optimisée pour le vocabulaire de la construction (pieds, pouces, mètres, segments, angles…)", "Fonctionne avec les accents québécois et le vocabulaire de métier", "Confirmation audio et visuelle de chaque mesure captée", "Commandes vocales : 'suivant', 'corriger', 'annuler', 'exporter'", "Mode mains-libres complet — aucun besoin de toucher l'écran"] },
               { icon: "zap", title: "Dessin CAD en temps réel", desc: "Chaque mesure dictée est tracée instantanément sur le plan. Le dessin se construit segment par segment pendant que tu parcours le chantier.", detail: ["Tracé vectoriel en temps réel — chaque cote apparaît immédiatement", "Gestion des angles droits, diagonales et segments libres", "Cotation automatique visible sur le dessin", "Annulation et correction à la voix ou au toucher", "Vue 2D du plan qui se construit au fur et à mesure"] },
@@ -515,15 +515,15 @@ const T = {
         {
           tag: "Soon",
           name: "MesurePro360",
-          tagline: "Voice measurement → real-time CAD drawing",
-          desc: "Speak. MesurePro360 listens and draws directly. No more notebook, no re-typing — your measurements become an exportable CAD plan in minutes.",
+          tagline: "Your measurement & sketch helper on the jobsite",
+          desc: "For anyone who needs to take measurements and make a sketch — roofer, carpenter, joiner, estimator. Speak. MesurePro360 listens and draws in real time.",
           color: "blue",
           cta: "Get notified",
           url: "#",
           placeholder: true,
           modal: {
-            headline: "Speak. Measure. Export to CAD.",
-            about: "MesurePro360 turns on-site measurement into a technical drawing. The user dictates measurements out loud — the app interprets them and draws in real time as a CAD plan. No crumpled notepad, no re-typing, no transcription errors. The plan is ready to export directly into CalcuPro360 or TrimPro360.",
+            headline: "Your measurement helper. For everyone on the jobsite.",
+            about: "MesurePro360 is the field assistant for anyone who takes measurements and needs to sketch them — roofer, carpenter, joiner, estimator, renovator. You speak, the app draws in real time. No crumpled notepad, no re-typing, no transcription errors. The sketch becomes an exportable CAD plan in minutes.",
             features: [
               { icon: "cpu", title: "Smart voice input", desc: "Dictate your measurements out loud. MesurePro360 recognizes dimensions, units and commands in real time.", detail: ["Voice recognition optimized for construction vocabulary (feet, inches, metres, segments, angles…)", "Works with Quebec French accents and trade-specific terms", "Audio and visual confirmation for every captured measurement", "Voice commands: 'next', 'correct', 'cancel', 'export'", "Full hands-free mode — no need to touch the screen"] },
               { icon: "zap", title: "Real-time CAD drawing", desc: "Every dictated measurement is instantly traced on the plan. The drawing builds segment by segment as you walk the site.", detail: ["Real-time vector tracing — each dimension appears immediately", "Right angles, diagonals and free segments supported", "Automatic dimension labels visible on the drawing", "Undo and correct by voice or touch", "2D plan view that builds as you go"] },
