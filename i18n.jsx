@@ -67,6 +67,16 @@ const T = {
               "Suis le statut en temps réel de la commande jusqu'à la livraison",
             ],
             pricing_note: "Accès gratuit pour les clients et installateurs. Plan entreprise disponible.",
+            modules: [
+              { icon: "cpu", title: "Canvas vectoriel", desc: "Dessine n'importe quel profilé segment par segment. Replis simples/doubles, angles libres, K-factor automatique, export DXF + PDF technique." },
+              { icon: "package", title: "Catalogue 56 profils", desc: "J-trim, solin, noue, bardage, faîtière, coin. Prévisualisation annotée. Commande en moins de 2 minutes sans redessiner." },
+              { icon: "zap", title: "Commandes & workflow", desc: "De BROUILLON à LIVRÉ. Validation serveur stricte, notifications automatiques, historique horodaté, rappels si non traité." },
+              { icon: "users", title: "Bureau & coordination", desc: "Tableau de bord opérationnel pour les chargés de projet. Validation, révision, approbation et transfert vers la production." },
+              { icon: "file", title: "Gestion de production", desc: "Tableau Kanban, calendrier, jalons, ressources et équipements. Connexion directe commandes → atelier → livraison." },
+              { icon: "tag", title: "Inventaire intelligent", desc: "Gestion des stocks de matières premières. Alertes, réservation, suivi des mouvements, intégration directe avec la production." },
+              { icon: "star", title: "App mobile terrain", desc: "Accès catalogue, commandes et calendrier depuis le chantier. Conçue pour les installateurs, ouvriers et contremaîtres." },
+              { icon: "globe", title: "Bilingue natif FR / EN", desc: "Bascule instantanée sur toute la plateforme. Devis et communications conformes à la Loi 96." },
+            ],
           },
         },
         {
@@ -408,6 +418,16 @@ const T = {
               "Track your order status in real time from approval to delivery",
             ],
             pricing_note: "Free access for clients and installers. Enterprise plan available.",
+            modules: [
+              { icon: "cpu", title: "Vector Canvas", desc: "Draw any profile segment by segment. Simple/double folds, free angles, automatic K-factor, DXF + technical PDF export." },
+              { icon: "package", title: "56-profile catalog", desc: "J-trim, drip edge, valley, cladding, ridge, corner. Annotated preview. Order in under 2 minutes without redrawing." },
+              { icon: "zap", title: "Orders & workflow", desc: "From DRAFT to DELIVERED. Strict server-side validation, automatic notifications, timestamped history, unhandled-order reminders." },
+              { icon: "users", title: "Office & coordination", desc: "Operational dashboard for project managers. Validation, review, approval and handoff to production." },
+              { icon: "file", title: "Production management", desc: "Kanban board, calendar, milestones, resources and equipment. Direct link orders → shop floor → delivery." },
+              { icon: "tag", title: "Smart inventory", desc: "Raw material stock management. Alerts, reservations, movement tracking, direct integration with production." },
+              { icon: "star", title: "Mobile field app", desc: "Catalog, orders and calendar access from the jobsite. Built for installers, workers and site supervisors." },
+              { icon: "globe", title: "Native FR / EN bilingual", desc: "Instant switch across the entire platform. Documents and communications compliant with Bill 96." },
+            ],
           },
         },
         {

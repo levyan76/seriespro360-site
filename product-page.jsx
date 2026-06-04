@@ -155,8 +155,33 @@ function ProductPage() {
       )
     ),
 
+    // ── MODULES COMPLETS
+    m.modules && m.modules.length > 0 && React.createElement("section", { className: "pp-section pp-section-alt" },
+      React.createElement("div", { className: "pp-section-inner" },
+        React.createElement("h2", { className: "pp-section-title" },
+          fr ? "Tous les modules" : "All modules"
+        ),
+        React.createElement("p", { className: "pp-modules-sub" },
+          fr ? "Une plateforme complète. Chaque module est fonctionnel et intégré." : "A complete platform. Every module is live and fully integrated."
+        ),
+        React.createElement("div", { className: "pp-modules-grid" },
+          m.modules.map((mod) =>
+            React.createElement("div", { key: mod.title, className: "pp-module-row" },
+              React.createElement("div", { className: "pp-module-icon", style: { background: colors.soft, color: colors.accent } },
+                React.createElement(Icon, { name: mod.icon, size: 18 })
+              ),
+              React.createElement("div", null,
+                React.createElement("div", { className: "pp-module-title" }, mod.title),
+                React.createElement("div", { className: "pp-module-desc" }, mod.desc),
+              )
+            )
+          )
+        )
+      )
+    ),
+
     // ── COMMENT ÇA MARCHE
-    m.steps && m.steps.length > 0 && React.createElement("section", { className: "pp-section pp-section-alt" },
+    m.steps && m.steps.length > 0 && React.createElement("section", { className: "pp-section" },
       React.createElement("div", { className: "pp-section-inner" },
         React.createElement("h2", { className: "pp-section-title" },
           fr ? "Comment ça marche" : "How it works"
