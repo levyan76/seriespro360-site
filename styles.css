@@ -3625,6 +3625,49 @@ html.sp-light .sp-login-tab.is-active {
   margin: 0;
 }
 
+/* FEAT CARD CLICKABLE */
+.pp-feat-card-clickable {
+  cursor: pointer;
+  user-select: none;
+}
+.pp-feat-card-clickable:hover { border-color: rgba(255,255,255,0.18); }
+.pp-feat-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.pp-feat-card-text { flex: 1; }
+.pp-feat-chevron {
+  flex-shrink: 0;
+  margin-top: 2px;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+.pp-feat-card-open .pp-feat-chevron { opacity: 1; }
+.pp-feat-detail {
+  margin-top: 16px;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pp-feat-detail-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(240,242,245,0.65);
+  line-height: 1.55;
+  margin: 0;
+}
+.pp-feat-detail-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
 /* MODULES */
 .pp-modules-sub {
   text-align: center;

@@ -16,6 +16,8 @@ function Icon({ name, size = 16 }) {
   const icons = {
     "arrow-left": "M19 12H5M12 19l-7-7 7-7",
     "arrow-right": "M5 12h14M12 5l7 7-7 7",
+    "arrow-up": "M12 19V5M5 12l7-7 7 7",
+    "arrow-down": "M12 5v14M5 12l7 7 7-7",
     "check": "M20 6L9 17l-5-5",
     "external-link": "M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3",
     "ruler": "M2 12h20M2 6h4M2 18h4M18 6h4M18 18h4",
@@ -64,11 +66,44 @@ const COLOR_MAP = {
   green:  { accent: "#10B981", soft: "rgba(16,185,129,0.12)", grad: "linear-gradient(135deg, rgba(16,185,129,0.15) 0%, transparent 60%)" },
 };
 
+// ── Carte fonctionnalité cliquable avec expansion
+function FeatCard({ f, colors, expanded, onToggle }) {
+  const detail = f.detail || null;
+  return React.createElement("div", {
+    key: f.title,
+    className: "pp-feat-card pp-feat-card-clickable" + (expanded ? " pp-feat-card-open" : ""),
+    onClick: onToggle,
+    role: "button",
+    tabIndex: 0,
+    onKeyDown: (e) => e.key === "Enter" && onToggle(),
+  },
+    React.createElement("div", { className: "pp-feat-card-top" },
+      React.createElement("div", { className: "pp-feat-icon", style: { background: colors.soft, color: colors.accent } },
+        React.createElement(Icon, { name: f.icon, size: 22 })
+      ),
+      React.createElement("div", { className: "pp-feat-card-text" },
+        React.createElement("h3", { className: "pp-feat-title" }, f.title),
+        React.createElement("p", { className: "pp-feat-desc" }, f.desc),
+      ),
+      React.createElement("div", { className: "pp-feat-chevron", style: { color: colors.accent } },
+        React.createElement(Icon, { name: expanded ? "arrow-up" : "arrow-down", size: 16 })
+      ),
+    ),
+    expanded && detail && React.createElement("div", { className: "pp-feat-detail", style: { borderTop: `1px solid ${colors.soft}` } },
+      detail.map((line, i) => React.createElement("p", { key: i, className: "pp-feat-detail-line" },
+        React.createElement("span", { className: "pp-feat-detail-dot", style: { background: colors.accent } }),
+        line
+      ))
+    )
+  );
+}
+
 // ── Page produit complète
 function ProductPage() {
   const [lang, setLang] = uS(() => {
     try { return localStorage.getItem("sp-lang") || "fr"; } catch { return "fr"; }
   });
+  const [openFeat, setOpenFeat] = uS(null);
   uE(() => {
     try { localStorage.setItem("sp-lang", lang); } catch {}
     document.documentElement.lang = lang === "fr" ? "fr-CA" : "en-CA";
@@ -142,14 +177,14 @@ function ProductPage() {
           fr ? "Fonctionnalités" : "Features"
         ),
         React.createElement("div", { className: "pp-features-grid" },
-          m.features.map((f) =>
-            React.createElement("div", { key: f.title, className: "pp-feat-card" },
-              React.createElement("div", { className: "pp-feat-icon", style: { background: colors.soft, color: colors.accent } },
-                React.createElement(Icon, { name: f.icon, size: 22 })
-              ),
-              React.createElement("h3", { className: "pp-feat-title" }, f.title),
-              React.createElement("p", { className: "pp-feat-desc" }, f.desc),
-            )
+          m.features.map((f, i) =>
+            React.createElement(FeatCard, {
+              key: f.title,
+              f,
+              colors,
+              expanded: openFeat === i,
+              onToggle: () => setOpenFeat(openFeat === i ? null : i),
+            })
           )
         )
       )
