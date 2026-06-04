@@ -244,7 +244,7 @@ function Suite({ lang }) {
   const t = window.T[lang].suite;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
-  const slugMap = { "TrimPro360": "trimpro360", "CalcuPro360": "calcupro360", "MesurePro360": "mesurepro360", "DevisPro360": "devispro360" };
+  const slugMap = { "TrimPro360": "trimpro360", "CalcuPro360": "calcupro360", "MesurePro360": "mesuropro360", "DevisPro360": "devispro360" };
   return (
     <section id="suite" className="sp-suite">
       <div className="sp-container">
