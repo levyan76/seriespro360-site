@@ -27,8 +27,8 @@ const T = {
     },
     origin: {
       eyebrow: "Pourquoi SeriesPro360 existe",
-      headline: "Construit par un pro du terrain. Pas par un développeur.",
-      story: "Je m'appelle Yan Levasseur. J'ai passé 7 ans dans le revêtement extérieur — dessinateur, chargé de projet, opérateur de plieuses. J'ai attendu après des dessins oubliés, cherché des infos perdues dans des courriels, vu des commandes incomplètes ralentir la production. Alors j'ai décidé de construire l'outil que j'aurais aimé avoir.",
+      headline: "Né sur le chantier. Testé dans l'atelier.",
+      story: "Je m'appelle Yan Levasseur. J'ai passé près de 10 ans dans le revêtement extérieur — dessinateur, chargé de projet, opérateur de plieuses. Moi-même, j'ai oublié des dessins, perdu des infos dans mes courriels, envoyé des commandes incomplètes. SeriesPro360 est né de ces erreurs — pour que ça n'arrive plus, à moi comme à vous.",
       positioning: [
         { icon: "cpu", label: "AutoCAD fait le dessin. Un ERP gère la production.", sub: "TrimPro360 fait les deux — connectés — pour une PME, sans budget entreprise." },
         { icon: "users", label: "Le client commande. L'atelier produit. Les deux suivent.", sub: "Même endroit, en temps réel. Comme les grandes plateformes, appliqué au revêtement extérieur." },
@@ -401,8 +401,8 @@ const T = {
     },
     origin: {
       eyebrow: "Why SeriesPro360 exists",
-      headline: "Built by a tradesperson. Not a developer.",
-      story: "My name is Yan Levasseur. I spent 7 years in exterior cladding — drafter, project manager, brake press operator and programmer. I waited for forgotten drawings, searched for info lost in email chains, watched incomplete orders stall production. So I decided to build the tool I wished I'd had.",
+      headline: "Born on the jobsite. Tested in the shop.",
+      story: "My name is Yan Levasseur. I spent nearly 10 years in exterior cladding — drafter, project manager, brake press operator and programmer. I myself forgot drawings, lost info in my own email chains, sent incomplete orders. SeriesPro360 was born from those mistakes — so they don't happen again, to me or to you.",
       positioning: [
         { icon: "cpu", label: "AutoCAD handles drawings. An ERP handles production.", sub: "TrimPro360 does both — connected — for a small shop, without an enterprise budget." },
         { icon: "users", label: "Client orders. Shop produces. Both track it.", sub: "Same place, in real time. Like the big platforms, applied to exterior cladding." },
