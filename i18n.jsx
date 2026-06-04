@@ -25,6 +25,17 @@ const T = {
       mock_with_waste: "Avec pertes 10%",
       mock_total: "Total avec taxes",
     },
+    origin: {
+      eyebrow: "Pourquoi SeriesPro360 existe",
+      headline: "Construit par un pro du terrain. Pas par un développeur.",
+      story: "Je m'appelle Yan Levasseur. J'ai passé 7 ans dans le revêtement extérieur — dessinateur, chargé de projet, opérateur de plieuses. J'ai attendu après des dessins oubliés, cherché des infos perdues dans des courriels, vu des commandes incomplètes ralentir la production. Alors j'ai décidé de construire l'outil que j'aurais aimé avoir.",
+      positioning: [
+        { icon: "cpu", label: "AutoCAD fait le dessin. Un ERP gère la production.", sub: "TrimPro360 fait les deux — connectés — pour une PME, sans budget entreprise." },
+        { icon: "users", label: "Le client commande. L'atelier produit. Les deux suivent.", sub: "Même endroit, en temps réel. Comme les grandes plateformes, appliqué au revêtement extérieur." },
+        { icon: "zap", label: "Démarrez en quelques minutes.", sub: "Pas de formation de semaines. Pas de frais d'implantation. Juste l'outil." },
+      ],
+      cta: "Voir TrimPro360",
+    },
     trust: {
       heading: "Adopté par des pros qui n'ont pas le temps pour les surprises de chantier",
       logos: [
@@ -77,6 +88,18 @@ const T = {
               { icon: "star", title: "App mobile terrain", desc: "Accès catalogue, commandes et calendrier depuis le chantier. Conçue pour les installateurs, ouvriers et contremaîtres." },
               { icon: "globe", title: "Bilingue natif FR / EN", desc: "Bascule instantanée sur toute la plateforme. Devis et communications conformes à la Loi 96." },
             ],
+            comparison: {
+              title: "TrimPro360 vs les alternatives",
+              rows: [
+                { feature: "Dessin de profilés", trimpro: "Canvas vectoriel intégré", other: "AutoCAD (licence séparée)" },
+                { feature: "Gestion de production", trimpro: "Incluse — Kanban, jalons, ressources", other: "ERP séparé (Paradigm, JobBOSS…)" },
+                { feature: "Commandes client", trimpro: "Portail client intégré", other: "Email / téléphone / Excel" },
+                { feature: "Démarrage", trimpro: "Quelques minutes", other: "Semaines de formation" },
+                { feature: "Coût d'entrée", trimpro: "Gratuit pour les clients", other: "Paradigm : 7 950$ d'implantation" },
+                { feature: "Abonnement mensuel", trimpro: "Plan entreprise abordable", other: "Paradigm : 495$/mois minimum" },
+              ],
+              note: "* Données Paradigm ERP issues de leur grille tarifaire publique.",
+            },
           },
         },
         {
@@ -376,6 +399,17 @@ const T = {
       mock_with_waste: "With 10% waste",
       mock_total: "Total with taxes",
     },
+    origin: {
+      eyebrow: "Why SeriesPro360 exists",
+      headline: "Built by a tradesperson. Not a developer.",
+      story: "My name is Yan Levasseur. I spent 7 years in exterior cladding — drafter, project manager, brake press operator and programmer. I waited for forgotten drawings, searched for info lost in email chains, watched incomplete orders stall production. So I decided to build the tool I wished I'd had.",
+      positioning: [
+        { icon: "cpu", label: "AutoCAD handles drawings. An ERP handles production.", sub: "TrimPro360 does both — connected — for a small shop, without an enterprise budget." },
+        { icon: "users", label: "Client orders. Shop produces. Both track it.", sub: "Same place, in real time. Like the big platforms, applied to exterior cladding." },
+        { icon: "zap", label: "Up and running in minutes.", sub: "No weeks of training. No implementation fees. Just the tool." },
+      ],
+      cta: "See TrimPro360",
+    },
     trust: {
       heading: "Used by pros who have no time for jobsite surprises",
       logos: [
@@ -428,6 +462,18 @@ const T = {
               { icon: "star", title: "Mobile field app", desc: "Catalog, orders and calendar access from the jobsite. Built for installers, workers and site supervisors." },
               { icon: "globe", title: "Native FR / EN bilingual", desc: "Instant switch across the entire platform. Documents and communications compliant with Bill 96." },
             ],
+            comparison: {
+              title: "TrimPro360 vs the alternatives",
+              rows: [
+                { feature: "Profile drawing", trimpro: "Built-in vector Canvas", other: "AutoCAD (separate licence)" },
+                { feature: "Production management", trimpro: "Included — Kanban, milestones, resources", other: "Separate ERP (Paradigm, JobBOSS…)" },
+                { feature: "Client orders", trimpro: "Integrated client portal", other: "Email / phone / Excel" },
+                { feature: "Onboarding", trimpro: "Up and running in minutes", other: "Weeks of training" },
+                { feature: "Entry cost", trimpro: "Free for clients", other: "Paradigm: $7,950 implementation fee" },
+                { feature: "Monthly subscription", trimpro: "Affordable enterprise plan", other: "Paradigm: $495/month minimum" },
+              ],
+              note: "* Paradigm ERP data based on their public pricing.",
+            },
           },
         },
         {

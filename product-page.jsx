@@ -234,6 +234,31 @@ function ProductPage() {
       )
     ),
 
+    // ── COMPARAISON
+    m.comparison && React.createElement("section", { className: "pp-section pp-section-alt" },
+      React.createElement("div", { className: "pp-section-inner" },
+        React.createElement("h2", { className: "pp-section-title" }, m.comparison.title),
+        React.createElement("div", { className: "pp-compare-table" },
+          React.createElement("div", { className: "pp-compare-head" },
+            React.createElement("div", { className: "pp-compare-col-feature" }),
+            React.createElement("div", { className: "pp-compare-col pp-compare-col-us", style: { color: colors.accent } }, product.name),
+            React.createElement("div", { className: "pp-compare-col pp-compare-col-other" }, fr ? "Alternatives" : "Alternatives"),
+          ),
+          m.comparison.rows.map((row, i) =>
+            React.createElement("div", { key: i, className: "pp-compare-row" },
+              React.createElement("div", { className: "pp-compare-col-feature" }, row.feature),
+              React.createElement("div", { className: "pp-compare-col pp-compare-col-us" },
+                React.createElement("span", { className: "pp-compare-check", style: { color: colors.accent } }, "✓ "),
+                row.trimpro
+              ),
+              React.createElement("div", { className: "pp-compare-col pp-compare-col-other" }, row.other),
+            )
+          )
+        ),
+        React.createElement("p", { className: "pp-compare-note" }, m.comparison.note)
+      )
+    ),
+
     // ── TARIFICATION / NOTE
     React.createElement("section", { className: "pp-section" },
       React.createElement("div", { className: "pp-section-inner pp-pricing-note" },

@@ -203,6 +203,41 @@ function TrustStrip({ lang }) {
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
+// SECTION — ORIGIN (histoire Yan + positionnement)
+// ──────────────────────────────────────────────────────────────────────────────
+function Origin({ lang }) {
+  const t = window.T[lang].origin;
+  const r1 = useReveal();
+  const r2 = useReveal({ threshold: 0.05 });
+  return (
+    <section className="sp-origin">
+      <div className="sp-container">
+        <div className="sp-reveal" ref={r1}>
+          <SectionHeader eyebrow={t.eyebrow} title={t.headline} />
+          <p className="sp-origin-story">{t.story}</p>
+        </div>
+        <div className="sp-origin-grid sp-reveal sp-reveal-stagger" ref={r2}>
+          {t.positioning.map((p) => (
+            <div key={p.label} className="sp-origin-card">
+              <div className="sp-origin-icon"><Icon name={p.icon} size={20} /></div>
+              <div>
+                <div className="sp-origin-label">{p.label}</div>
+                <div className="sp-origin-sub">{p.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="sp-reveal sp-origin-cta" ref={useReveal()}>
+          <a href="/trimpro360" className="sp-btn sp-btn-primary">
+            {t.cta} <Icon name="arrow-right" size={14} />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────────────────────
 // SECTION — SUITE
 // ──────────────────────────────────────────────────────────────────────────────
 function Suite({ lang }) {
@@ -654,6 +689,7 @@ function App() {
       />
       <main>
         <Hero lang={t.lang} />
+        <Origin lang={t.lang} />
         <Suite lang={t.lang} />
       </main>
       <Footer lang={t.lang} logoVariant={t.logoVariant} setActivePage={setActivePage} />
