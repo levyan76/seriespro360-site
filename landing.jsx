@@ -36,7 +36,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — NAV
 // ──────────────────────────────────────────────────────────────────────────────
-function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMobile, openLogin }) {
+function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMobile, openLogin, user }) {
   const t = window.T[lang].nav;
   const [scrolled, setScrolled] = uS(false);
   uE(() => {
@@ -64,7 +64,14 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
           <button className="sp-theme-toggle" onClick={() => setDark(!dark)} aria-label="Theme">
             <Icon name={dark ? "sun" : "moon"} size={16} />
           </button>
-          <button className="sp-btn sp-btn-ghost-sm sp-nav-login" onClick={openLogin}>{t.login}</button>
+          {user ? (
+            <button className="sp-btn sp-btn-ghost-sm sp-nav-login sp-nav-user" onClick={openLogin}>
+              <span className="sp-nav-avatar">{(user.email || "?")[0].toUpperCase()}</span>
+              <span className="sp-nav-user-email">{user.email}</span>
+            </button>
+          ) : (
+            <button className="sp-btn sp-btn-ghost-sm sp-nav-login" onClick={openLogin}>{t.login}</button>
+          )}
           <a href="#suite" className="sp-btn sp-btn-primary sp-btn-sm">{t.cta} <Icon name="arrow-right" size={14} /></a>
           <button className="sp-nav-burger" onClick={() => setOpenMobile(!openMobile)} aria-label="Menu">
             <Icon name={openMobile ? "x" : "menu"} size={18} />
@@ -658,12 +665,27 @@ function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
 // ──────────────────────────────────────────────────────────────────────────────
 // APP ROOT
 // ──────────────────────────────────────────────────────────────────────────────
+function getSupabase() {
+  if (!window.supabase || !window.SP_CONFIG || !window.SP_CONFIG.supabaseUrl || window.SP_CONFIG.supabaseUrl.includes("VOTRE")) return null;
+  if (!window._sb) window._sb = window.supabase.createClient(window.SP_CONFIG.supabaseUrl, window.SP_CONFIG.supabaseKey);
+  return window._sb;
+}
+
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [openMobile, setOpenMobile] = uS(false);
   const [activePage, setActivePage] = uS(null);
   const [loginOpen, setLoginOpen] = uS(false);
   const [activeProduct, setActiveProduct] = uS(null);
+  const [user, setUser] = uS(null);
+
+  uE(() => {
+    const sb = getSupabase();
+    if (!sb) return;
+    sb.auth.getSession().then(({ data }) => { if (data.session) setUser(data.session.user); });
+    const { data: listener } = sb.auth.onAuthStateChange((_e, session) => setUser(session ? session.user : null));
+    return () => listener.subscription.unsubscribe();
+  }, []);
 
   // Apply theme + accent CSS vars to html
   uE(() => {
@@ -686,6 +708,7 @@ function App() {
         openMobile={openMobile}
         setOpenMobile={setOpenMobile}
         openLogin={() => setLoginOpen(true)}
+        user={user}
       />
       <main>
         <Hero lang={t.lang} />
@@ -699,7 +722,7 @@ function App() {
         content={activePage ? window.T[t.lang].pages[activePage] : null}
         onClose={() => setActivePage(null)}
       />
-      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} lang={t.lang} />
+      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} lang={t.lang} user={user} setUser={setUser} />
       <ProductModal product={activeProduct} lang={t.lang} onClose={() => setActiveProduct(null)} />
 
       <TweaksPanel title="Tweaks">
@@ -745,21 +768,50 @@ function LogoPreview({ kind, active, onClick }) {
   );
 }
 
-function LoginModal({ open, onClose, lang }) {
+function LoginModal({ open, onClose, lang, user, setUser }) {
   const [tab, setTab] = uS("login");
   const [email, setEmail] = uS("");
   const [pwd, setPwd] = uS("");
-  const [sent, setSent] = uS(false);
+  const [loading, setLoading] = uS(false);
+  const [error, setError] = uS(null);
   if (!open) return null;
 
   const fr = lang === "fr";
-  const APPS = [
-    { name: "CalcuPro360", url: "https://calcupro360.seriespro360.com", color: "#FF6B1A" },
-  ];
+  const sb = getSupabase();
+  const APPS = (window.SP_CONFIG && window.SP_CONFIG.apps) || [];
 
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setSent(true);
+    if (!sb) return;
+    setLoading(true); setError(null);
+    const { data, error: err } = await sb.auth.signInWithPassword({ email, password: pwd });
+    setLoading(false);
+    if (err) { setError(err.message); return; }
+    if (data.user) setUser(data.user);
+  };
+
+  const handleMicrosoft = async () => {
+    if (!sb) return;
+    setLoading(true); setError(null);
+    const { error: err } = await sb.auth.signInWithOAuth({
+      provider: "azure",
+      options: { scopes: "email", redirectTo: window.location.origin },
+    });
+    if (err) { setError(err.message); setLoading(false); }
+  };
+
+  const handleLogout = async () => {
+    if (sb) await sb.auth.signOut();
+    setUser(null);
+  };
+
+  const openApp = async (app) => {
+    if (!sb) { window.open(app.url, "_blank"); return; }
+    const { data } = await sb.auth.getSession();
+    const token = data?.session?.access_token;
+    const refresh = data?.session?.refresh_token;
+    const url = token ? `${app.url}/auth/token?access_token=${token}&refresh_token=${refresh}` : app.url;
+    window.open(url, "_blank");
   };
 
   return (
@@ -771,28 +823,51 @@ function LoginModal({ open, onClose, lang }) {
           <Logo variant="strata" size={28} />
         </div>
 
-        <div className="sp-login-tabs">
-          <button className={"sp-login-tab" + (tab === "login" ? " is-active" : "")} onClick={() => { setTab("login"); setSent(false); }}>
-            {fr ? "Connexion" : "Sign in"}
-          </button>
-          <button className={"sp-login-tab" + (tab === "register" ? " is-active" : "")} onClick={() => { setTab("register"); setSent(false); }}>
-            {fr ? "Créer un compte" : "Create account"}
-          </button>
-        </div>
-
-        {sent ? (
-          <div className="sp-login-sent">
-            <div className="sp-login-sent-icon"><Icon name="check" size={22} /></div>
-            <p>{fr ? "Lien envoyé à" : "Link sent to"} <strong>{email}</strong></p>
-            <p className="sp-login-sent-sub">{fr ? "Vérifie ta boîte courriel pour continuer." : "Check your inbox to continue."}</p>
-            <button className="sp-btn sp-btn-ghost" style={{ marginTop: 16, width: "100%", justifyContent: "center" }} onClick={() => { setSent(false); setEmail(""); }}>
-              {fr ? "Utiliser une autre adresse" : "Use another address"}
+        {user ? (
+          <div className="sp-login-dashboard">
+            <div className="sp-login-welcome">
+              <div className="sp-login-avatar-lg">{(user.email || "?")[0].toUpperCase()}</div>
+              <div>
+                <p className="sp-login-welcome-name">{user.email}</p>
+                <p className="sp-login-welcome-sub">{fr ? "Connecté à SeriesPro360" : "Signed in to SeriesPro360"}</p>
+              </div>
+            </div>
+            <p className="sp-login-apps-label">{fr ? "Mes applications" : "My applications"}</p>
+            <div className="sp-login-apps">
+              {APPS.length === 0 && (
+                <p style={{ color: "var(--sp-text-2)", fontSize: 13, textAlign: "center", padding: "12px 0" }}>
+                  {fr ? "Aucune application active pour ce compte." : "No active applications for this account."}
+                </p>
+              )}
+              {APPS.map(app => (
+                <button key={app.name} className="sp-login-app-btn" onClick={() => openApp(app)}>
+                  <span className="sp-login-app-icon" style={{ background: app.color + "22", color: app.color }}>
+                    <Icon name={app.icon || "zap"} size={18} />
+                  </span>
+                  <span className="sp-login-app-name">{app.name}</span>
+                  <Icon name="arrow-right" size={14} />
+                </button>
+              ))}
+            </div>
+            <button className="sp-login-signout" onClick={handleLogout}>
+              {fr ? "Se déconnecter" : "Sign out"}
             </button>
           </div>
         ) : (
           <>
+            <div className="sp-login-tabs">
+              <button className={"sp-login-tab" + (tab === "login" ? " is-active" : "")} onClick={() => { setTab("login"); setError(null); }}>
+                {fr ? "Connexion" : "Sign in"}
+              </button>
+              <button className={"sp-login-tab" + (tab === "register" ? " is-active" : "")} onClick={() => { setTab("register"); setError(null); }}>
+                {fr ? "Créer un compte" : "Create account"}
+              </button>
+            </div>
+
+            {error && <div className="sp-login-error">{error}</div>}
+
             <div className="sp-login-sso">
-              <a href="https://calcupro360.seriespro360.com?auth=microsoft" className="sp-login-sso-btn">
+              <button className="sp-login-sso-btn" onClick={handleMicrosoft} disabled={loading}>
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
                   <rect x="0" y="0" width="8.5" height="8.5" fill="#F25022" />
                   <rect x="9.5" y="0" width="8.5" height="8.5" fill="#7FBA00" />
@@ -800,12 +875,12 @@ function LoginModal({ open, onClose, lang }) {
                   <rect x="9.5" y="9.5" width="8.5" height="8.5" fill="#FFB900" />
                 </svg>
                 {fr ? "Continuer avec Microsoft" : "Continue with Microsoft"}
-              </a>
+              </button>
             </div>
 
             <div className="sp-login-divider"><span>{fr ? "ou par courriel" : "or by email"}</span></div>
 
-            <form className="sp-login-form" onSubmit={handleSubmit}>
+            <form className="sp-login-form" onSubmit={handleLogin}>
               <div className="sp-login-field">
                 <label>{fr ? "Adresse courriel" : "Email address"}</label>
                 <input
@@ -826,31 +901,20 @@ function LoginModal({ open, onClose, lang }) {
                   />
                 </div>
               )}
-              <button type="submit" className="sp-btn sp-btn-primary" style={{ width: "100%", justifyContent: "center", padding: "13px 16px", fontSize: 14 }}>
-                {tab === "login"
-                  ? (fr ? "Se connecter" : "Sign in")
-                  : (fr ? "Créer mon compte" : "Create my account")
-                }
-                <Icon name="arrow-right" size={15} />
+              <button type="submit" className="sp-btn sp-btn-primary" disabled={loading} style={{ width: "100%", justifyContent: "center", padding: "13px 16px", fontSize: 14 }}>
+                {loading ? (fr ? "Connexion…" : "Signing in…") : tab === "login" ? (fr ? "Se connecter" : "Sign in") : (fr ? "Créer mon compte" : "Create my account")}
+                {!loading && <Icon name="arrow-right" size={15} />}
               </button>
-              {tab === "login" && (
-                <button type="button" className="sp-login-magic" onClick={() => { if (email) setSent(true); }}>
-                  {fr ? "Recevoir un lien magique ↗" : "Send magic link ↗"}
-                </button>
-              )}
             </form>
+
+            <p className="sp-login-note">
+              {fr ? "En continuant, tu acceptes nos " : "By continuing, you agree to our "}
+              <a href="#!">{fr ? "Conditions d'utilisation" : "Terms of use"}</a>
+              {" & "}
+              <a href="#!">{fr ? "Politique de confidentialité" : "Privacy policy"}</a>.
+            </p>
           </>
         )}
-
-        <p className="sp-login-note">
-          {fr
-            ? "En continuant, tu acceptes nos "
-            : "By continuing, you agree to our "
-          }
-          <a href="#!">{fr ? "Conditions d'utilisation" : "Terms of use"}</a>
-          {" & "}
-          <a href="#!">{fr ? "Politique de confidentialité" : "Privacy policy"}</a>.
-        </p>
       </div>
       <style>{`
         @keyframes sp-login-in {

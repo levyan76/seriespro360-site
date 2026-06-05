@@ -100,13 +100,28 @@
 
   <div id="root"></div>
 
+  <!-- Supabase config — remplacer par les vraies valeurs de production -->
+  <script>
+    window.SP_CONFIG = {
+      supabaseUrl: "https://VOTRE_PROJECT_REF.supabase.co",
+      supabaseKey: "VOTRE_ANON_KEY",
+      apps: [
+        { name: "CalcuPro360", url: "https://calcupro360.seriespro360.com", color: "#FF6B1A", icon: "calculator", plan: "calcupro360" },
+        { name: "TrimPro360",  url: "https://trimpro360.seriespro360.com",  color: "#3B82F6", icon: "package",    plan: "trimpro360"  },
+      ]
+    };
+  </script>
+
+  <!-- Supabase JS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" crossorigin="anonymous"></script>
+
   <!-- Production React 18 (minified, ~40KB vs ~300KB dev) -->
   <script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
   <script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"
     crossorigin="anonymous"></script>
 
   <!-- Pre-compiled JSX bundle (no Babel runtime needed) -->
-  <script defer src="dist/app.min.js?v=mpyvat2j"></script>
+  <script defer src="dist/app.min.js?v=mq0b7fbs"></script>
 
 </body>
 

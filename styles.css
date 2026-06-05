@@ -3394,6 +3394,167 @@ html.sp-light .sp-login-tab.is-active {
   color: var(--sp-text);
 }
 
+/* ── Erreur login */
+.sp-login-error {
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.25);
+  color: #f87171;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+/* ── Nav avatar (connecté) */
+.sp-nav-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 180px;
+}
+
+.sp-nav-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--sp-accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sp-nav-user-email {
+  font-size: 12px;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+/* ── Dashboard apps (vue connectée) */
+.sp-login-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sp-login-welcome {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--sp-border);
+}
+
+.sp-login-avatar-lg {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--sp-accent);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sp-login-welcome-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sp-text);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 260px;
+}
+
+.sp-login-welcome-sub {
+  font-size: 12px;
+  color: var(--sp-muted);
+}
+
+.sp-login-apps-label {
+  font-family: var(--sp-font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--sp-muted);
+  margin-bottom: 10px;
+}
+
+.sp-login-apps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.sp-login-app-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--sp-card);
+  border: 1px solid var(--sp-border);
+  border-radius: 12px;
+  color: var(--sp-text);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+  width: 100%;
+  text-align: left;
+}
+
+.sp-login-app-btn:hover {
+  background: var(--sp-card-hi);
+  border-color: var(--sp-border-2);
+  transform: translateX(2px);
+}
+
+.sp-login-app-btn svg:last-child {
+  margin-left: auto;
+  opacity: 0.4;
+}
+
+.sp-login-app-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sp-login-app-name {
+  flex: 1;
+}
+
+.sp-login-signout {
+  background: none;
+  border: 1px solid var(--sp-border);
+  border-radius: 10px;
+  color: var(--sp-muted);
+  font-size: 13px;
+  padding: 10px 14px;
+  width: 100%;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.sp-login-signout:hover {
+  border-color: rgba(239,68,68,0.4);
+  color: #f87171;
+}
+
 /* ================================================================
    PRODUCT PAGE (pp-*)
    ================================================================ */
