@@ -98,22 +98,27 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
 function Hero({ lang }) {
   const t = window.T[lang].hero;
   return (
-    <section id="top" className="sp-hero sp-hero-centered">
-      <div className="sp-hero-grid-bg" aria-hidden="true" />
-      <div className="sp-container sp-hero-center-inner">
-        <div className="sp-hero-badge">
-          <span className="sp-hero-badge-dot" />{t.badge}
+    <section id="top" className="sp-hero sp-hero-split">
+      <div className="sp-container sp-hero-split-inner">
+        <div className="sp-hero-left">
+          <div className="sp-hero-badge">
+            <span className="sp-hero-badge-dot" />{t.badge}
+          </div>
+          <h1 className="sp-hero-headline">{t.headline}</h1>
+          <p className="sp-hero-sub">{t.subtitle}</p>
+          <div className="sp-hero-ctas">
+            <a href="#suite" className="sp-btn sp-btn-primary sp-btn-lg">{t.cta_primary} <Icon name="arrow-right" size={16} /></a>
+            <a href="#demo" className="sp-btn sp-btn-ghost-sm sp-btn-lg">{lang === "fr" ? "Voir la démo" : "Watch demo"}</a>
+          </div>
+          <ul className="sp-hero-meta">
+            <li><Icon name="check" size={14} />{t.meta_1}</li>
+            <li><Icon name="check" size={14} />{t.meta_2}</li>
+            <li><Icon name="check" size={14} />{t.meta_3}</li>
+          </ul>
         </div>
-        <h1 className="sp-hero-headline">{t.headline}</h1>
-        <p className="sp-hero-sub sp-hero-sub-centered">{t.subtitle}</p>
-        <div className="sp-hero-ctas sp-hero-ctas-centered">
-          <a href="#suite" className="sp-btn sp-btn-primary sp-btn-lg">{t.cta_primary} <Icon name="arrow-down" size={16} /></a>
+        <div className="sp-hero-right">
+          <HeroMock lang={lang} t={t} />
         </div>
-        <ul className="sp-hero-meta sp-hero-meta-centered">
-          <li><Icon name="check" size={14} />{t.meta_1}</li>
-          <li><Icon name="check" size={14} />{t.meta_2}</li>
-          <li><Icon name="check" size={14} />{t.meta_3}</li>
-        </ul>
       </div>
     </section>
   );
@@ -198,6 +203,14 @@ function TrustStrip({ lang }) {
   return (
     <section className="sp-trust">
       <div className="sp-container sp-reveal" ref={r}>
+        <div className="sp-trust-stats">
+          {t.stats.map((s) => (
+            <div key={s.value} className="sp-trust-stat">
+              <div className="sp-trust-stat-value">{s.value}</div>
+              <div className="sp-trust-stat-label">{s.label}</div>
+            </div>
+          ))}
+        </div>
         <div className="sp-trust-heading">{t.heading}</div>
         <div className="sp-trust-row sp-reveal-stagger">
           {t.logos.map((name) => (
@@ -652,6 +665,74 @@ function Footer({ lang, logoVariant, setActivePage }) {
 // ──────────────────────────────────────────────────────────────────────────────
 // Section header helper
 // ──────────────────────────────────────────────────────────────────────────────
+function Testimonials({ lang }) {
+  const t = window.T[lang].testimonials;
+  const r1 = useReveal();
+  const r2 = useReveal({ threshold: 0.05 });
+  return (
+    <section className="sp-testimonials">
+      <div className="sp-container">
+        <div className="sp-reveal" ref={r1}>
+          <SectionHeader eyebrow={t.eyebrow} title={t.title} align="center" />
+        </div>
+        <div className="sp-testi-grid sp-reveal sp-reveal-stagger" ref={r2}>
+          {t.items.map((item) => (
+            <article key={item.name} className="sp-testi-card">
+              <div className="sp-testi-quote">&ldquo;{item.quote}&rdquo;</div>
+              <div className="sp-testi-author">
+                <div className="sp-testi-avatar">{item.initials}</div>
+                <div>
+                  <div className="sp-testi-name">{item.name}</div>
+                  <div className="sp-testi-role">{item.role}</div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function VsExcel({ lang }) {
+  const t = window.T[lang].vs_excel;
+  const r1 = useReveal();
+  const r2 = useReveal({ threshold: 0.05 });
+  return (
+    <section className="sp-vs-excel">
+      <div className="sp-container">
+        <div className="sp-reveal" ref={r1}>
+          <SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} align="center" />
+        </div>
+        <div className="sp-vs-table sp-reveal" ref={r2}>
+          <div className="sp-vs-header">
+            <div className="sp-vs-col-label"></div>
+            <div className="sp-vs-col sp-vs-col-excel">
+              <Icon name="file" size={16} /> Excel
+            </div>
+            <div className="sp-vs-col sp-vs-col-sp360">
+              <Logo variant="strata" wordmark={false} size={18} color="#fff" accent="#FF6B1A" /> SeriesPro360
+            </div>
+          </div>
+          {t.rows.map((row, i) => (
+            <div key={i} className="sp-vs-row">
+              <div className="sp-vs-col-label">{row.label}</div>
+              <div className="sp-vs-col sp-vs-col-excel">
+                <Icon name="x" size={14} className="sp-vs-no" />
+                {row.excel}
+              </div>
+              <div className="sp-vs-col sp-vs-col-sp360">
+                <Icon name="check" size={14} className="sp-vs-yes" />
+                {row.sp360}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
   return (
     <header className={"sp-section-head sp-section-head-" + align}>
@@ -712,8 +793,11 @@ function App() {
       />
       <main>
         <Hero lang={t.lang} />
-        <Origin lang={t.lang} />
+        <TrustStrip lang={t.lang} />
         <Suite lang={t.lang} />
+        <VsExcel lang={t.lang} />
+        <Origin lang={t.lang} />
+        <Testimonials lang={t.lang} />
       </main>
       <Footer lang={t.lang} logoVariant={t.logoVariant} setActivePage={setActivePage} />
 

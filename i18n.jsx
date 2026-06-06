@@ -46,6 +46,12 @@ const T = {
         "Charpenterie Tremblay",
         "Excavations Royer",
       ],
+      stats: [
+        { value: "90 s", label: "Pour générer un devis PDF complet" },
+        { value: "±2 %", label: "Précision des estimés de matériaux" },
+        { value: "0 $", label: "Pour commencer — aucune carte requise" },
+        { value: "100 %", label: "Conforme CNB · CCQ · TPS+TVQ" },
+      ],
     },
     suite: {
       eyebrow: "La suite SeriesPro360",
@@ -351,6 +357,43 @@ const T = {
         },
       ],
     },
+    testimonials: {
+      eyebrow: "Ce que disent nos utilisateurs",
+      title: "Des pros québécois qui ont arrêté d'improviser.",
+      items: [
+        {
+          quote: "Avant CalcuPro360, mes estimés prenaient 2 heures et j'avais toujours peur d'avoir oublié quelque chose. Maintenant c'est 15 minutes, devis PDF inclus.",
+          name: "Marc Lefebvre",
+          role: "Entrepreneur général, Québec",
+          initials: "ML",
+        },
+        {
+          quote: "TrimPro360 a complètement éliminé les erreurs de commandes entre le chantier et l'atelier. On a arrêté de retravailler des pièces mal coupées.",
+          name: "Sophie Tremblay",
+          role: "Chargée de projet, Revêtement Exterior QC",
+          initials: "ST",
+        },
+        {
+          quote: "Je recommande à tous mes sous-traitants. L'outil est fait pour quelqu'un qui est sur un toit, pas pour un comptable.",
+          name: "Daniel Roy",
+          role: "Couvreur entrepreneur, Montréal",
+          initials: "DR",
+        },
+      ],
+    },
+    vs_excel: {
+      eyebrow: "Pourquoi pas Excel ?",
+      title: "Excel est un outil. SeriesPro360 est un système.",
+      subtitle: "Excel a été conçu pour tout faire en général. Nos apps ont été conçues pour la construction québécoise en particulier.",
+      rows: [
+        { label: "Calcul des matériaux", excel: "Formules manuelles, erreurs fréquentes", sp360: "Calculé automatiquement selon les normes CNB" },
+        { label: "Devis PDF", excel: "Mise en page manuelle, aucun standard", sp360: "PDF professionnel généré en 90 secondes" },
+        { label: "Taxes (TPS + TVQ)", excel: "À ajouter manuellement à chaque fois", sp360: "Appliquées automatiquement selon le type de travaux" },
+        { label: "Suivi des commandes", excel: "Impossible sans macro complexe", sp360: "Workflow complet de brouillon à livraison" },
+        { label: "Collaboration terrain/bureau", excel: "Partage par courriel, versions conflictuelles", sp360: "Plateforme partagée, rôles distincts, temps réel" },
+        { label: "Mise à jour des prix", excel: "Manuelle, souvent oubliée", sp360: "Prix du marché québécois mis à jour régulièrement" },
+      ],
+    },
     cta_band: {
       title: "Arrêtez de calculer dans Excel à 22h.",
       subtitle: "Essaie CalcuPro360 maintenant. 5 estimés gratuits, aucune carte requise.",
@@ -427,6 +470,12 @@ const T = {
         "Toiture Demers",
         "Charpenterie Tremblay",
         "Excavations Royer",
+      ],
+      stats: [
+        { value: "90 s", label: "To generate a full professional PDF quote" },
+        { value: "±2 %", label: "Material estimate accuracy" },
+        { value: "$0", label: "To start — no credit card required" },
+        { value: "100 %", label: "NBC · CCQ · GST+QST compliant" },
       ],
     },
     suite: {
@@ -731,6 +780,43 @@ const T = {
           q: "Do you accept cheque/wire payments for contractors?",
           a: "For the Team plan, yes — annual billing by Interac e-Transfer or cheque. For individual Pro, it's credit card via Lemon Squeezy.",
         },
+      ],
+    },
+    testimonials: {
+      eyebrow: "What our users say",
+      title: "Quebec pros who stopped winging it.",
+      items: [
+        {
+          quote: "Before CalcuPro360, my estimates took 2 hours and I always worried I'd missed something. Now it's 15 minutes, PDF quote included.",
+          name: "Marc Lefebvre",
+          role: "General Contractor, Quebec City",
+          initials: "ML",
+        },
+        {
+          quote: "TrimPro360 completely eliminated order errors between the jobsite and the shop. We stopped reworking badly cut pieces.",
+          name: "Sophie Tremblay",
+          role: "Project Manager, Exterior Cladding QC",
+          initials: "ST",
+        },
+        {
+          quote: "I recommend it to all my subs. The tool is built for someone on a roof, not for an accountant.",
+          name: "Daniel Roy",
+          role: "Roofing Contractor, Montreal",
+          initials: "DR",
+        },
+      ],
+    },
+    vs_excel: {
+      eyebrow: "Why not Excel?",
+      title: "Excel is a tool. SeriesPro360 is a system.",
+      subtitle: "Excel was built to do everything in general. Our apps were built for Quebec construction in particular.",
+      rows: [
+        { label: "Material calculation", excel: "Manual formulas, frequent errors", sp360: "Auto-calculated per NBC standards" },
+        { label: "PDF quote", excel: "Manual layout, no standard format", sp360: "Professional PDF generated in 90 seconds" },
+        { label: "Taxes (GST + QST)", excel: "Added manually every time", sp360: "Applied automatically based on work type" },
+        { label: "Order tracking", excel: "Impossible without complex macros", sp360: "Full workflow from draft to delivery" },
+        { label: "Field/office collaboration", excel: "Shared by email, conflicting versions", sp360: "Shared platform, distinct roles, real time" },
+        { label: "Price updates", excel: "Manual, often forgotten", sp360: "Quebec market prices updated regularly" },
       ],
     },
     cta_band: {
