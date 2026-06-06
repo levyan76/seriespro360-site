@@ -39,12 +39,12 @@ const T = {
     trust: {
       heading: "Adopté par des pros qui n'ont pas le temps pour les surprises de chantier",
       logos: [
-        "Construction Lapointe",
-        "Groupe Béton-Pro",
-        "Coffrages St-Jean",
-        "Toiture Demers",
-        "Charpenterie Tremblay",
-        "Excavations Royer",
+        "Entrepreneurs généraux",
+        "Ateliers de tôle",
+        "Estimateurs indépendants",
+        "Couvreurs & bardagistes",
+        "Charpentiers-menuisiers",
+        "Entrepreneurs spécialisés",
       ],
       stats: [
         { value: "90 s", label: "Pour générer un devis PDF complet" },
@@ -464,12 +464,12 @@ const T = {
     trust: {
       heading: "Used by pros who have no time for jobsite surprises",
       logos: [
-        "Construction Lapointe",
-        "Groupe Béton-Pro",
-        "Coffrages St-Jean",
-        "Toiture Demers",
-        "Charpenterie Tremblay",
-        "Excavations Royer",
+        "General contractors",
+        "Sheet metal shops",
+        "Independent estimators",
+        "Roofers & cladders",
+        "Carpenters & framers",
+        "Specialty contractors",
       ],
       stats: [
         { value: "90 s", label: "To generate a full professional PDF quote" },
