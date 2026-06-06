@@ -4405,3 +4405,224 @@ html.sp-light .sp-login-tab.is-active {
   .pp-pricing-note { flex-direction: column; }
   .pp-footer { flex-direction: column; gap: 12px; text-align: center; }
 }
+
+/* ── Hero split Procore-style */
+.pp-hero.pp-hero-split {
+  padding: 64px 0 56px;
+  background: #08090B;
+}
+
+.pp-hero-split-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.pp-hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pp-hero-title {
+  font-family: var(--sp-font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #F0F2F5;
+  margin: 16px 0 0;
+}
+
+.pp-hero-about {
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(240,242,245,0.65);
+  margin: 20px 0 0;
+  max-width: 52ch;
+}
+
+.pp-hero-ctas {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pp-hero-meta {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pp-hero-meta li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(240,242,245,0.55);
+  line-height: 1.4;
+}
+
+.pp-hero-meta li svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #34D399;
+}
+
+.pp-ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  color: rgba(240,242,245,0.8);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.pp-ghost-btn:hover {
+  border-color: rgba(255,255,255,0.3);
+  color: #F0F2F5;
+  background: rgba(255,255,255,0.04);
+}
+
+/* ── Hero right — quote card */
+.pp-hero-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pp-hero-quote-card {
+  position: relative;
+  background: #131418;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 36px 32px 28px;
+  max-width: 420px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.pp-hero-quote-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 18px 18px 0 0;
+}
+
+.pp-hero-quote-text {
+  font-family: var(--sp-font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: 600;
+  line-height: 1.4;
+  color: #F0F2F5;
+  margin: 12px 0 24px;
+  letter-spacing: -0.01em;
+}
+
+.pp-hero-quote-label {
+  font-family: var(--sp-font-mono, monospace);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.85;
+}
+
+@media (max-width: 900px) {
+  .pp-hero-split-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 0 24px;
+  }
+  .pp-hero-right { justify-content: flex-start; }
+  .pp-hero-quote-card { max-width: 100%; }
+}
+
+/* ── Stats strip sous le hero */
+.pp-stats-strip {
+  background: #0E0F12;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0;
+}
+
+.pp-stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.pp-stat-item {
+  padding: 28px 24px;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.pp-stat-item:last-child { border-right: none; }
+
+.pp-stat-value {
+  font-family: var(--sp-font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(28px, 3.5vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.pp-stat-label {
+  font-size: 12px;
+  color: rgba(240,242,245,0.45);
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .pp-stats-inner {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 16px;
+  }
+  .pp-stat-item:nth-child(2) { border-right: none; }
+  .pp-stat-item:nth-child(1),
+  .pp-stat-item:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.06); }
+}
+
+/* ── Section démo CalcuPro360 */
+.pp-section-demo {
+  background: #0A0B0E;
+}
+
+.pp-demo-head {
+  margin-bottom: 40px;
+}
+
+.pp-section-sub {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(240,242,245,0.55);
+  margin-top: 10px;
+  max-width: 60ch;
+}
+
+.pp-eyebrow {
+  font-family: var(--sp-font-mono, monospace);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}

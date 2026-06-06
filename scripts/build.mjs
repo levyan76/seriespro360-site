@@ -56,8 +56,8 @@ buildBundle('app.min.js', files);
 // ── Bundle 2: i18n seul (partagé par les pages produit)
 buildBundle('i18n.min.js', ['i18n.jsx']);
 
-// ── Bundle 3: page produit (logos + product-page)
-buildBundle('product-page.min.js', ['logos.jsx', 'product-page.jsx']);
+// ── Bundle 3: page produit (logos + calculator + product-page)
+buildBundle('product-page.min.js', ['logos.jsx', 'calculator.jsx', 'product-page.jsx']);
 
 const ms = (performance.now() - t0).toFixed(0);
 

@@ -1,5 +1,6 @@
 // product-page.jsx — Page de présentation complète d'un produit SeriesPro360
 // Utilisé par: trimpro360.html, calcupro360.html, mesuropro360.html, devispro360.html
+// Style: Procore-inspired — Hero split, stats, features, comparaison, calculateur (CalcuPro360 seulement)
 
 const { useState: uS, useEffect: uE } = React;
 const { createRoot } = ReactDOM;
@@ -98,7 +99,85 @@ function FeatCard({ f, colors, expanded, onToggle }) {
   );
 }
 
-// ── Page produit complète
+// ── Stats par produit (chiffres clés visibles sous le hero)
+const PRODUCT_STATS = {
+  calcupro360: {
+    fr: [
+      { value: "90 s", label: "Pour générer un devis PDF complet" },
+      { value: "±2 %", label: "Précision des estimés matériaux" },
+      { value: "0 $", label: "Pour commencer — aucune carte" },
+      { value: "100 %", label: "Conforme TPS+TVQ · CNB · CCQ" },
+    ],
+    en: [
+      { value: "90 s", label: "To generate a full PDF quote" },
+      { value: "±2 %", label: "Material estimate accuracy" },
+      { value: "$0", label: "To start — no credit card" },
+      { value: "100 %", label: "GST+QST · NBC · CCQ compliant" },
+    ],
+  },
+  trimpro360: {
+    fr: [
+      { value: "56", label: "Profils standards dans le catalogue" },
+      { value: "100 %", label: "Bilingue FR / EN natif" },
+      { value: "0 $", label: "Accès gratuit clients & installateurs" },
+      { value: "7", label: "Statuts de commande de brouillon à livraison" },
+    ],
+    en: [
+      { value: "56", label: "Standard profiles in the catalog" },
+      { value: "100 %", label: "Native FR / EN bilingual" },
+      { value: "$0", label: "Free access for clients & installers" },
+      { value: "7", label: "Order statuses from draft to delivered" },
+    ],
+  },
+};
+
+// ── Demo translations pour le calculateur
+const DEMO_T = {
+  fr: {
+    eyebrow: "Démo en direct",
+    title: "Calculez votre dalle maintenant.",
+    subtitle: "Essayez CalcuPro360 directement ici. Modifiez les dimensions et voyez les coûts se recalculer en temps réel.",
+    title: "Dalle de béton — estimé en direct",
+    length: "Longueur", width: "Largeur", thickness: "Épaisseur",
+    waste: "Pertes %", price: "Prix béton",
+    reinforce: "Armature",
+    rebar_none: "Aucune", rebar_mesh: "Treillis", rebar_bars: "Barres #4",
+    gravel: "Gravier 4\"", vapor: "Pare-vapeur",
+    explain: "Comment sont calculés les prix?",
+    explain_body: "Les prix sont basés sur les tarifs 2026 des fournisseurs québécois (Béton Provincial, Holcim, Home Depot CA, RONA). Tu peux modifier le prix du béton manuellement.",
+    result_title: "Résultat",
+    vol_label: "Volume net", vol_waste: "Volume commandé",
+    subtotal: "Sous-total", tps: "TPS 5%", tvq: "TVQ 9,975%", total: "Total TTC",
+    generate: "Générer le devis PDF",
+    reset: "Réinitialiser",
+    saved: "Devis généré ✓",
+    unit_metric: "Métrique", unit_imperial: "Impérial",
+    mock_title: "", mock_volume: "", mock_with_waste: "", mock_total: "",
+  },
+  en: {
+    eyebrow: "Live demo",
+    title: "Calculate your slab now.",
+    subtitle: "Try CalcuPro360 right here. Change the dimensions and watch costs recalculate in real time.",
+    title: "Concrete slab — live estimate",
+    length: "Length", width: "Width", thickness: "Thickness",
+    waste: "Waste %", price: "Concrete price",
+    reinforce: "Reinforcement",
+    rebar_none: "None", rebar_mesh: "Mesh", rebar_bars: "#4 Rebar",
+    gravel: "4\" Gravel", vapor: "Vapour barrier",
+    explain: "How are prices calculated?",
+    explain_body: "Prices are based on 2026 Quebec supplier rates (Béton Provincial, Holcim, Home Depot CA, RONA). You can override the concrete price manually.",
+    result_title: "Result",
+    vol_label: "Net volume", vol_waste: "Volume ordered",
+    subtotal: "Subtotal", tps: "GST 5%", tvq: "QST 9.975%", total: "Total incl. tax",
+    generate: "Generate PDF quote",
+    reset: "Reset",
+    saved: "Quote generated ✓",
+    unit_metric: "Metric", unit_imperial: "Imperial",
+    mock_title: "", mock_volume: "", mock_with_waste: "", mock_total: "",
+  },
+};
+
+// ── Page produit complète — style Procore
 function ProductPage() {
   const [lang, setLang] = uS(() => {
     try { return localStorage.getItem("sp-lang") || "fr"; } catch { return "fr"; }
@@ -114,6 +193,9 @@ function ProductPage() {
   const fr = lang === "fr";
   const colors = COLOR_MAP[product?.color] || COLOR_MAP.orange;
   const isLive = product?.tag === "Actif" || product?.tag === "En ligne" || product?.tag === "Live";
+  const slug = document.getElementById("root")?.dataset?.product || "";
+  const stats = (PRODUCT_STATS[slug] || {})[lang] || null;
+  const isCalcu = slug === "calcupro360";
 
   if (!product || !m) return null;
 
@@ -133,40 +215,82 @@ function ProductPage() {
             fr ? "Retour" : "Back"
           ),
           isLive && React.createElement("a", {
-            href: product.url,
-            target: "_blank",
-            rel: "noopener",
+            href: product.url, target: "_blank", rel: "noopener",
             className: "pp-cta-btn",
             style: { background: colors.accent }
           },
-            product.cta,
-            React.createElement(Icon, { name: "external-link", size: 14 })
+            product.cta, React.createElement(Icon, { name: "external-link", size: 14 })
           ),
         )
       )
     ),
 
-    // ── HERO PRODUIT
-    React.createElement("header", { className: "pp-hero", style: { background: colors.grad } },
-      React.createElement("div", { className: "pp-hero-inner" },
-        React.createElement("div", { className: "pp-hero-badge", style: { color: colors.accent, background: colors.soft } },
-          product.tag
-        ),
-        React.createElement("h1", { className: "pp-hero-title" }, product.name),
-        React.createElement("p", { className: "pp-hero-tagline" }, product.tagline),
-        React.createElement("p", { className: "pp-hero-headline" }, m.headline),
-        React.createElement("p", { className: "pp-hero-about" }, m.about),
-        isLive
-          ? React.createElement("a", {
-              href: product.url, target: "_blank", rel: "noopener",
-              className: "pp-hero-cta",
-              style: { background: colors.accent }
+    // ── HERO SPLIT (Procore-style)
+    React.createElement("header", { className: "pp-hero pp-hero-split" },
+      React.createElement("div", { className: "pp-hero-split-inner" },
+
+        // LEFT — copy
+        React.createElement("div", { className: "pp-hero-left" },
+          React.createElement("div", { className: "pp-hero-badge", style: { color: colors.accent, background: colors.soft } },
+            product.tag
+          ),
+          React.createElement("h1", { className: "pp-hero-title" }, product.name),
+          React.createElement("p", { className: "pp-hero-tagline" }, product.tagline),
+          React.createElement("p", { className: "pp-hero-about" }, m.about),
+          React.createElement("div", { className: "pp-hero-ctas" },
+            isLive
+              ? React.createElement("a", {
+                  href: product.url, target: "_blank", rel: "noopener",
+                  className: "pp-cta-btn",
+                  style: { background: colors.accent }
+                },
+                  product.cta, " ", React.createElement(Icon, { name: "external-link", size: 16 })
+                )
+              : React.createElement("div", { className: "pp-coming-soon-badge" },
+                  fr ? "Lancement à venir" : "Coming soon"
+                ),
+            isLive && isCalcu && React.createElement("a", {
+              href: "#demo",
+              className: "pp-ghost-btn"
             },
-              product.cta, " ", React.createElement(Icon, { name: "external-link", size: 16 })
+              fr ? "Voir la démo" : "Try demo",
+              React.createElement(Icon, { name: "arrow-down", size: 14 })
             )
-          : React.createElement("div", { className: "pp-coming-soon-badge" },
-              fr ? "Lancement à venir" : "Coming soon"
+          ),
+          React.createElement("ul", { className: "pp-hero-meta" },
+            m.steps && m.steps.slice(0, 3).map((s, i) =>
+              React.createElement("li", { key: i },
+                React.createElement(Icon, { name: "check", size: 14 }),
+                s
+              )
+            )
+          ),
+        ),
+
+        // RIGHT — headline quote visuelle
+        React.createElement("div", { className: "pp-hero-right" },
+          React.createElement("div", { className: "pp-hero-quote-card", style: { borderColor: colors.soft } },
+            React.createElement("div", { className: "pp-hero-quote-accent", style: { background: colors.accent } }),
+            React.createElement("blockquote", { className: "pp-hero-quote-text" },
+              "\u201c", m.headline, "\u201d"
             ),
+            React.createElement("div", { className: "pp-hero-quote-label", style: { color: colors.accent } },
+              product.name, " · ", fr ? "Promesse produit" : "Product promise"
+            ),
+          )
+        )
+      )
+    ),
+
+    // ── STATS (si disponibles)
+    stats && React.createElement("section", { className: "pp-stats-strip" },
+      React.createElement("div", { className: "pp-stats-inner" },
+        stats.map((s) =>
+          React.createElement("div", { key: s.value, className: "pp-stat-item" },
+            React.createElement("div", { className: "pp-stat-value", style: { color: colors.accent } }, s.value),
+            React.createElement("div", { className: "pp-stat-label" }, s.label),
+          )
+        )
       )
     ),
 
@@ -179,9 +303,7 @@ function ProductPage() {
         React.createElement("div", { className: "pp-features-grid" },
           m.features.map((f, i) =>
             React.createElement(FeatCard, {
-              key: f.title,
-              f,
-              colors,
+              key: f.title, f, colors,
               expanded: openFeat === i,
               onToggle: () => setOpenFeat(openFeat === i ? null : i),
             })
@@ -190,8 +312,20 @@ function ProductPage() {
       )
     ),
 
+    // ── CALCULATEUR INTERACTIF (CalcuPro360 seulement)
+    isCalcu && typeof SlabEstimator !== "undefined" && React.createElement("section", { id: "demo", className: "pp-section pp-section-alt pp-section-demo" },
+      React.createElement("div", { className: "pp-section-inner" },
+        React.createElement("div", { className: "pp-demo-head" },
+          React.createElement("div", { className: "pp-eyebrow", style: { color: colors.accent } }, DEMO_T[lang].eyebrow),
+          React.createElement("h2", { className: "pp-section-title" }, fr ? "Essayez CalcuPro360 maintenant." : "Try CalcuPro360 right now."),
+          React.createElement("p", { className: "pp-section-sub" }, DEMO_T[lang].subtitle),
+        ),
+        React.createElement(SlabEstimator, { lang, t: DEMO_T[lang] })
+      )
+    ),
+
     // ── MODULES COMPLETS
-    m.modules && m.modules.length > 0 && React.createElement("section", { className: "pp-section pp-section-alt" },
+    m.modules && m.modules.length > 0 && React.createElement("section", { className: "pp-section" },
       React.createElement("div", { className: "pp-section-inner" },
         React.createElement("h2", { className: "pp-section-title" },
           fr ? "Tous les modules" : "All modules"
@@ -216,7 +350,7 @@ function ProductPage() {
     ),
 
     // ── COMMENT ÇA MARCHE
-    m.steps && m.steps.length > 0 && React.createElement("section", { className: "pp-section" },
+    m.steps && m.steps.length > 0 && React.createElement("section", { className: "pp-section pp-section-alt" },
       React.createElement("div", { className: "pp-section-inner" },
         React.createElement("h2", { className: "pp-section-title" },
           fr ? "Comment ça marche" : "How it works"
@@ -235,7 +369,7 @@ function ProductPage() {
     ),
 
     // ── COMPARAISON
-    m.comparison && React.createElement("section", { className: "pp-section pp-section-alt" },
+    m.comparison && React.createElement("section", { className: "pp-section" },
       React.createElement("div", { className: "pp-section-inner" },
         React.createElement("h2", { className: "pp-section-title" }, m.comparison.title),
         React.createElement("div", { className: "pp-compare-table" },
@@ -260,7 +394,7 @@ function ProductPage() {
     ),
 
     // ── TARIFICATION / NOTE
-    React.createElement("section", { className: "pp-section" },
+    React.createElement("section", { className: "pp-section pp-section-alt" },
       React.createElement("div", { className: "pp-section-inner pp-pricing-note" },
         React.createElement("div", { className: "pp-pricing-icon", style: { color: colors.accent } },
           React.createElement(Icon, { name: "tag", size: 20 })
@@ -297,7 +431,7 @@ function ProductPage() {
       )
     ),
 
-    // ── FOOTER SIMPLE
+    // ── FOOTER
     React.createElement("footer", { className: "pp-footer" },
       React.createElement("a", { href: "/", className: "pp-footer-back" },
         React.createElement(Icon, { name: "arrow-left", size: 14 }),
