@@ -98,27 +98,23 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
 function Hero({ lang }) {
   const t = window.T[lang].hero;
   return (
-    <section id="top" className="sp-hero sp-hero-split">
-      <div className="sp-container sp-hero-split-inner">
-        <div className="sp-hero-left">
-          <div className="sp-hero-badge">
-            <span className="sp-hero-badge-dot" />{t.badge}
-          </div>
-          <h1 className="sp-hero-headline">{t.headline}</h1>
-          <p className="sp-hero-sub">{t.subtitle}</p>
-          <div className="sp-hero-ctas">
-            <a href="#suite" className="sp-btn sp-btn-primary sp-btn-lg">{t.cta_primary} <Icon name="arrow-right" size={16} /></a>
-            <a href="#demo" className="sp-btn sp-btn-ghost-sm sp-btn-lg">{lang === "fr" ? "Voir la démo" : "Watch demo"}</a>
-          </div>
-          <ul className="sp-hero-meta">
-            <li><Icon name="check" size={14} />{t.meta_1}</li>
-            <li><Icon name="check" size={14} />{t.meta_2}</li>
-            <li><Icon name="check" size={14} />{t.meta_3}</li>
-          </ul>
+    <section id="top" className="sp-hero sp-hero-centered">
+      <div className="sp-hero-grid-bg" aria-hidden="true" />
+      <div className="sp-container sp-hero-center-inner">
+        <div className="sp-hero-badge">
+          <span className="sp-hero-badge-dot" />{t.badge}
         </div>
-        <div className="sp-hero-right">
-          <HeroMock lang={lang} t={t} />
+        <h1 className="sp-hero-headline" style={{ textAlign: "center", maxWidth: "22ch" }}>{t.headline}</h1>
+        <p className="sp-hero-sub-centered">{t.subtitle}</p>
+        <div className="sp-hero-ctas-centered">
+          <a href="#suite" className="sp-btn sp-btn-primary sp-btn-lg">{t.cta_primary} <Icon name="arrow-right" size={16} /></a>
+          <a href="#demo" className="sp-btn sp-btn-ghost-sm sp-btn-lg">{lang === "fr" ? "Voir la démo" : "Watch demo"}</a>
         </div>
+        <ul className="sp-hero-meta sp-hero-meta-centered">
+          <li><Icon name="check" size={14} />{t.meta_1}</li>
+          <li><Icon name="check" size={14} />{t.meta_2}</li>
+          <li><Icon name="check" size={14} />{t.meta_3}</li>
+        </ul>
       </div>
     </section>
   );
