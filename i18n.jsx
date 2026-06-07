@@ -40,12 +40,12 @@ const T = {
     trust: {
       heading: "Adopté par des pros qui n'ont pas le temps pour les surprises de chantier",
       logos: [
-        "Entrepreneurs généraux",
-        "Ateliers de tôle",
-        "Estimateurs indépendants",
-        "Couvreurs & bardagistes",
-        "Charpentiers-menuisiers",
-        "Entrepreneurs spécialisés",
+        { icon: "hard-hat", label: "Entrepreneurs généraux" },
+        { icon: "wrench", label: "Ateliers de tôle" },
+        { icon: "calculator", label: "Estimateurs indépendants" },
+        { icon: "home", label: "Couvreurs & bardagistes" },
+        { icon: "hammer", label: "Charpentiers-menuisiers" },
+        { icon: "briefcase", label: "Entrepreneurs spécialisés" },
       ],
       stats: [
         { value: "90 s", label: "Pour générer un devis PDF complet" },
@@ -395,10 +395,10 @@ const T = {
       cta: "Découvrir TrimPro360",
     },
     cta_band: {
-      title: "Arrêtez de calculer dans Excel à 22h.",
-      subtitle: "Essaie CalcuPro360 maintenant. 5 estimés gratuits, aucune carte requise.",
-      primary: "Démarrer gratuitement",
-      secondary: "Voir un devis exemple →",
+      title: "Votre métier mérite un outil fait pour lui.",
+      subtitle: "Essaie TrimPro360 ou CalcuPro360 gratuitement. Aucune carte, aucune formation requise.",
+      primary: "Explorer les applications",
+      secondary: "Voir TrimPro360 →",
     },
     footer: {
       tagline: "La suite chantier intelligente pour le marché québécois.",
@@ -465,12 +465,12 @@ const T = {
     trust: {
       heading: "Used by pros who have no time for jobsite surprises",
       logos: [
-        "General contractors",
-        "Sheet metal shops",
-        "Independent estimators",
-        "Roofers & cladders",
-        "Carpenters & framers",
-        "Specialty contractors",
+        { icon: "hard-hat", label: "General contractors" },
+        { icon: "wrench", label: "Sheet metal shops" },
+        { icon: "calculator", label: "Independent estimators" },
+        { icon: "home", label: "Roofers & cladders" },
+        { icon: "hammer", label: "Carpenters & framers" },
+        { icon: "briefcase", label: "Specialty contractors" },
       ],
       stats: [
         { value: "90 s", label: "To generate a full professional PDF quote" },
@@ -820,10 +820,10 @@ const T = {
       cta: "Discover TrimPro360",
     },
     cta_band: {
-      title: "Stop calculating in Excel at 10pm.",
-      subtitle: "Try CalcuPro360 now. 5 free estimates, no card required.",
-      primary: "Start free",
-      secondary: "See a sample quote →",
+      title: "Your trade deserves a tool built for it.",
+      subtitle: "Try TrimPro360 or CalcuPro360 for free. No card, no training required.",
+      primary: "Explore the apps",
+      secondary: "See TrimPro360 →",
     },
     footer: {
       tagline: "The smart jobsite suite for the Quebec market.",

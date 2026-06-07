@@ -186,75 +186,6 @@ function Hero({ lang, heroLogoSize, heroTopPad }) {
   );
 }
 
-function HeroMock({ lang, t }) {
-  // Mini live estimate visible in hero card
-  const est = calcSlab({
-    length: 24, width: 22, thickness: 4, system: "imperial",
-    waste: 10, concretePrice: 185, mesh: true, rebar: false, gravel: true, vapor: true,
-  });
-  return (
-    <div className="sp-hero-mock">
-      <div className="sp-hero-mock-frame">
-        <div className="sp-hero-mock-grid" aria-hidden="true" />
-        <div className="sp-hero-mock-windowbar">
-          <span className="sp-hero-mock-dots"><i /><i /><i /></span>
-          <span className="sp-hero-mock-url mono">calcupro360.seriespro360.com</span>
-          <span className="sp-hero-mock-stat"><span className="sp-hero-mock-stat-dot" /> Pro</span>
-        </div>
-
-        <div className="sp-hero-mock-body">
-          <div className="sp-hero-mock-eyebrow mono">CalcuPro360 · {lang === "fr" ? "Béton / Dalle" : "Concrete / Slab"}</div>
-          <div className="sp-hero-mock-title">{t.mock_title}</div>
-
-          <div className="sp-hero-mock-dims">
-            <Dim label="L" value="24′ 0″" />
-            <Dim label="l" value="22′ 0″" />
-            <Dim label="ép." value="4″" accent />
-          </div>
-
-          <div className="sp-hero-mock-results">
-            <div className="sp-hero-mock-row">
-              <span>{t.mock_volume}</span>
-              <strong className="mono">{fmtNum(est.volM3, 2)} m³</strong>
-            </div>
-            <div className="sp-hero-mock-row">
-              <span>{t.mock_with_waste}</span>
-              <strong className="mono">{fmtNum(est.volOrdered, 2)} m³</strong>
-            </div>
-            <div className="sp-hero-mock-row sp-hero-mock-row-grand">
-              <span>{t.mock_total}</span>
-              <strong className="mono">{fmtCAD(est.total, lang)}</strong>
-            </div>
-          </div>
-
-          <div className="sp-hero-mock-pdf">
-            <Icon name="file" size={14} />
-            <span>{lang === "fr" ? "Devis PDF prêt" : "PDF quote ready"}</span>
-            <span className="sp-hero-mock-pdf-time mono">· 1.8 s</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="sp-hero-mock-float sp-hero-mock-float-1">
-        <Icon name="zap" size={14} />
-        <span>{lang === "fr" ? "Calcul instantané" : "Instant calc"}</span>
-      </div>
-      <div className="sp-hero-mock-float sp-hero-mock-float-2">
-        <Icon name="shield" size={14} />
-        <span>{lang === "fr" ? "Code CNB / CCQ" : "NBC / CCQ"}</span>
-      </div>
-    </div>
-  );
-}
-
-function Dim({ label, value, accent }) {
-  return (
-    <div className={"sp-dim" + (accent ? " sp-dim-accent" : "")}>
-      <span className="sp-dim-label">{label}</span>
-      <span className="sp-dim-value mono">{value}</span>
-    </div>
-  );
-}
 
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — TRUST STRIP
@@ -275,8 +206,11 @@ function TrustStrip({ lang }) {
         </div>
         <div className="sp-trust-heading">{t.heading}</div>
         <div className="sp-trust-row sp-reveal-stagger">
-          {t.logos.map((name) => (
-            <div className="sp-trust-logo" key={name}>{name}</div>
+          {t.logos.map((item) => (
+            <div className="sp-trust-logo" key={item.label || item} style={{ display: "flex", alignItems: "center", gap: 7 }}>
+              {item.icon && <Icon name={item.icon} size={14} />}
+              {item.label || item}
+            </div>
           ))}
         </div>
       </div>
@@ -521,22 +455,6 @@ function ProductModal({ product, lang, onClose }) {
   return createPortal(content, document.body);
 }
 
-// ──────────────────────────────────────────────────────────────────────────────
-// SECTION — INTERACTIVE DEMO
-// ──────────────────────────────────────────────────────────────────────────────
-function Demo({ lang }) {
-  const t = window.T[lang].demo;
-  const r1 = useReveal();
-  const r2 = useReveal({ threshold: 0.05, rootMargin: "0px 0px -20px 0px" });
-  return (
-    <section id="demo" className="sp-demo">
-      <div className="sp-container">
-        <div className="sp-reveal" ref={r1}><SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} align="center" /></div>
-        <div className="sp-reveal" ref={r2}><SlabEstimator lang={lang} t={t} /></div>
-      </div>
-    </section>
-  );
-}
 
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — FEATURES
@@ -729,8 +647,8 @@ function CTABand({ lang }) {
         <h2 className="sp-cta-title">{t.title}</h2>
         <p className="sp-cta-sub">{t.subtitle}</p>
         <div className="sp-cta-actions">
-          <a href="#demo" className="sp-btn sp-btn-primary sp-btn-lg">{t.primary} <Icon name="arrow-right" size={16} /></a>
-          <a href="#demo" className="sp-btn sp-btn-ghost-on-dark sp-btn-lg">{t.secondary}</a>
+          <a href="#suite" className="sp-btn sp-btn-primary sp-btn-lg">{t.primary} <Icon name="arrow-right" size={16} /></a>
+          <a href="/trimpro360" className="sp-btn sp-btn-ghost-on-dark sp-btn-lg">{t.secondary}</a>
         </div>
       </div>
     </section>
