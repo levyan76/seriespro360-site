@@ -122,6 +122,13 @@ const T = {
                 descFr: "Importez votre inventaire actuel depuis un fichier Excel directement dans TrimPro360 — sans ressaisie manuelle.",
                 descEn: "Import your current inventory from an Excel file directly into TrimPro360 — no manual re-entry.",
               },
+              {
+                id: "dkfscdElgQw",
+                titleFr: "Catalogue — passer une commande en moins de 2 minutes",
+                titleEn: "Catalogue — place an order in under 2 minutes",
+                descFr: "56 profils standards disponibles — J-trim, solin, noue, bardage, faîtière. Sélectionne un profil, entre tes dimensions et soumet ta commande directement à la production.",
+                descEn: "56 standard profiles available — J-trim, flashing, valley, cladding, ridge cap. Select a profile, enter your dimensions and submit your order straight to production.",
+              },
             ],
             origin: {
               story: "J'ai passé des années à coordonner entre AutoCAD, les courriels de commandes et un ERP trop lourd pour une PME. TrimPro360 est né du besoin concret de connecter le dessin, la commande client et l'atelier — sans friction, sans oubli.",
