@@ -107,6 +107,15 @@ const T = {
               ],
               note: "* Données Paradigm ERP issues de leur grille tarifaire publique.",
             },
+            demoVideos: [
+              {
+                id: "YdTywKqRv1c",
+                titleFr: "Canvas vectoriel — dessiner un profilé en quelques clics",
+                titleEn: "Vector Canvas — draw a profile in a few clicks",
+                descFr: "Découvrez comment dessiner un profilé personnalisé segment par segment, avec calcul du développé en temps réel et export DXF/PDF.",
+                descEn: "See how to draw a custom profile segment by segment, with real-time flat pattern calculation and DXF/PDF export.",
+              },
+            ],
             origin: {
               story: "J'ai passé des années à coordonner entre AutoCAD, les courriels de commandes et un ERP trop lourd pour une PME. TrimPro360 est né du besoin concret de connecter le dessin, la commande client et l'atelier — sans friction, sans oubli.",
               positioning: [

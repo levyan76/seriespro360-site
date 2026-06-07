@@ -382,6 +382,37 @@ function ProductPage() {
       )
     ),
 
+    // ── VIDÉOS DÉMO
+    m.demoVideos && m.demoVideos.length > 0 && React.createElement("section", { className: "pp-section pp-section-alt" },
+      React.createElement("div", { className: "pp-section-inner" },
+        React.createElement("div", { className: "pp-eyebrow", style: { color: colors.accent, textAlign: "center", marginBottom: 8 } },
+          fr ? "Démos" : "Demos"
+        ),
+        React.createElement("h2", { className: "pp-section-title" },
+          fr ? "Voir l'app en action" : "See the app in action"
+        ),
+        React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 40 } },
+          m.demoVideos.map((v) =>
+            React.createElement("div", { key: v.id, style: { display: "flex", flexDirection: "column", gap: 14 } },
+              React.createElement("div", { style: { fontSize: 15, fontWeight: 600, color: "#0F1C35" } }, fr ? v.titleFr : v.titleEn),
+              v.descFr && React.createElement("p", { style: { fontSize: 13.5, color: "rgba(15,28,53,0.55)", margin: "0 0 4px", lineHeight: 1.6 } },
+                fr ? v.descFr : v.descEn
+              ),
+              React.createElement("div", { style: { position: "relative", paddingBottom: "56.25%", borderRadius: 16, overflow: "hidden", background: "#0F1C35", boxShadow: "0 4px 24px rgba(15,28,53,0.12)" } },
+                React.createElement("iframe", {
+                  src: "https://www.youtube.com/embed/" + v.id + "?rel=0&modestbranding=1",
+                  title: fr ? v.titleFr : v.titleEn,
+                  style: { position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" },
+                  allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+                  allowFullScreen: true
+                })
+              )
+            )
+          )
+        )
+      )
+    ),
+
     // ── FONCTIONNALITÉS
     React.createElement("section", { className: "pp-section" },
       React.createElement("div", { className: "pp-section-inner" },
