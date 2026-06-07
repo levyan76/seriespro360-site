@@ -365,17 +365,17 @@ function ProductPage() {
         React.createElement("h2", { className: "pp-section-title" },
           fr ? "Conçu par quelqu'un qui a vécu le problème." : "Built by someone who lived the problem."
         ),
-        React.createElement("p", { style: { textAlign: "center", fontSize: 15, color: "rgba(240,242,245,0.55)", maxWidth: 600, margin: "0 auto 40px", lineHeight: 1.65 } },
+        React.createElement("p", { style: { textAlign: "center", fontSize: 15, color: "rgba(15,28,53,0.55)", maxWidth: 600, margin: "0 auto 40px", lineHeight: 1.65 } },
           window.T[lang].origin.story
         ),
         React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 } },
           window.T[lang].origin.positioning.map((pt) =>
-            React.createElement("div", { key: pt.label, style: { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 12, padding: 20, display: "flex", flexDirection: "column", gap: 10 } },
+            React.createElement("div", { key: pt.label, style: { background: "#FFFFFF", border: "1px solid rgba(15,28,53,0.09)", borderRadius: 12, padding: 20, display: "flex", flexDirection: "column", gap: 10, boxShadow: "0 2px 8px rgba(15,28,53,0.04)" } },
               React.createElement("div", { style: { width: 38, height: 38, borderRadius: 8, background: colors.soft, color: colors.accent, display: "flex", alignItems: "center", justifyContent: "center" } },
                 React.createElement(Icon, { name: pt.icon, size: 18 })
               ),
-              React.createElement("div", { style: { fontSize: 14, fontWeight: 600, color: "#F0F2F5", lineHeight: 1.4 } }, pt.label),
-              React.createElement("div", { style: { fontSize: 13, color: "rgba(240,242,245,0.5)", lineHeight: 1.55 } }, pt.sub)
+              React.createElement("div", { style: { fontSize: 14, fontWeight: 600, color: "#0F1C35", lineHeight: 1.4 } }, pt.label),
+              React.createElement("div", { style: { fontSize: 13, color: "rgba(15,28,53,0.55)", lineHeight: 1.55 } }, pt.sub)
             )
           )
         )
