@@ -115,6 +115,13 @@ const T = {
                 descFr: "Découvrez comment dessiner un profilé personnalisé segment par segment, avec calcul du développé en temps réel et export DXF/PDF.",
                 descEn: "See how to draw a custom profile segment by segment, with real-time flat pattern calculation and DXF/PDF export.",
               },
+              {
+                id: "H7DHtr0_K5A",
+                titleFr: "Import Excel — transférer votre inventaire existant",
+                titleEn: "Excel Import — migrate your existing inventory",
+                descFr: "Importez votre inventaire actuel depuis un fichier Excel directement dans TrimPro360 — sans ressaisie manuelle.",
+                descEn: "Import your current inventory from an Excel file directly into TrimPro360 — no manual re-entry.",
+              },
             ],
             origin: {
               story: "J'ai passé des années à coordonner entre AutoCAD, les courriels de commandes et un ERP trop lourd pour une PME. TrimPro360 est né du besoin concret de connecter le dessin, la commande client et l'atelier — sans friction, sans oubli.",
