@@ -112,8 +112,8 @@ const T = {
                 id: "YdTywKqRv1c",
                 titleFr: "Canvas vectoriel — dessiner un profilé en quelques clics",
                 titleEn: "Vector Canvas — draw a profile in a few clicks",
-                descFr: "Découvrez comment dessiner un profilé personnalisé segment par segment, avec calcul du développé en temps réel et export DXF/PDF.",
-                descEn: "See how to draw a custom profile segment by segment, with real-time flat pattern calculation and DXF/PDF export.",
+                descFr: "Avec TrimPro360, tu n'as plus besoin d'AutoCAD pour dessiner tes profilés. Tu cliques segment par segment — l'app calcule le développé en temps réel, vérifie les angles, les replis, la largeur de bobine. En 2 minutes, ton dessin est prêt pour la production. Export DXF ou PDF technique d'un clic.",
+                descEn: "With TrimPro360, you no longer need AutoCAD to draw your profiles. Click segment by segment — the app calculates the flat pattern in real time, checks angles, bends, and coil width. In 2 minutes, your drawing is production-ready. One-click DXF or technical PDF export.",
               },
               {
                 id: "H7DHtr0_K5A",
