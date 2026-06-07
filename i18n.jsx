@@ -369,13 +369,13 @@ const T = {
           initials: "ML",
         },
         {
-          quote: "TrimPro360 a complètement éliminé les erreurs de commandes entre le chantier et l'atelier. On a arrêté de retravailler des pièces mal coupées.",
+          quote: "On a branché le chantier et l'atelier sur la même plateforme. Les erreurs de communication ont presque disparu. C'est exactement ce qu'il nous manquait.",
           name: "Sophie Tremblay",
           role: "Chargée de projet, Revêtement Exterior QC",
           initials: "ST",
         },
         {
-          quote: "Je recommande à tous mes sous-traitants. L'outil est fait pour quelqu'un qui est sur un toit, pas pour un comptable.",
+          quote: "J'ai essayé plusieurs logiciels généraux — aucun ne comprenait le réel de mon métier. Avec SeriesPro360, l'outil parle ma langue dès le premier jour.",
           name: "Daniel Roy",
           role: "Couvreur entrepreneur, Montréal",
           initials: "DR",
