@@ -655,9 +655,114 @@ function CTABand({ lang }) {
   );
 }
 
-function Footer({ lang, logoVariant, setActivePage }) {
+// ──────────────────────────────────────────────────────────────────────────────
+// FEEDBACK MODAL
+// ──────────────────────────────────────────────────────────────────────────────
+function FeedbackModal({ lang, onClose }) {
+  const fr = lang === "fr";
+  const [metier, setMetier] = uS("");
+  const [irritant, setIrritant] = uS("");
+  const [aide, setAide] = uS("");
+  const [sent, setSent] = uS(false);
+  const [sending, setSending] = uS(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSending(true);
+    const sb = getSupabase();
+    if (sb) {
+      await sb.from("feedback").insert({ metier, irritant, aide, lang, created_at: new Date().toISOString() });
+      setSent(true);
+    } else {
+      const body = encodeURIComponent(`Métier: ${metier}\n\nIrritant: ${irritant}\n\nCe qui aiderait: ${aide}`);
+      window.open(`mailto:yan@seriespro360.com?subject=Feedback SeriesPro360&body=${body}`);
+      setSent(true);
+    }
+    setSending(false);
+  };
+
+  const content = (
+    <div className="sp-modal-backdrop" onClick={onClose} style={{ zIndex: 9500 }}>
+      <div className="sp-product-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true" style={{ maxWidth: 480 }}>
+        <button className="sp-login-close" onClick={onClose} aria-label="Close"><Icon name="x" size={16} /></button>
+        {sent ? (
+          <div style={{ textAlign: "center", padding: "40px 24px" }}>
+            <div style={{ fontSize: 40, marginBottom: 16 }}>🙏</div>
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: "#0F1C35", margin: "0 0 8px" }}>
+              {fr ? "Merci pour votre retour !" : "Thanks for your feedback!"}
+            </h2>
+            <p style={{ color: "#3D4F6E", fontSize: 15 }}>
+              {fr ? "Vos commentaires nous aident à améliorer nos outils." : "Your input helps us improve our tools."}
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="sp-pm-header" style={{ borderBottom: "1px solid rgba(27,42,74,0.08)" }}>
+              <div className="sp-pm-header-left">
+                <div style={{ fontSize: 24 }}>💬</div>
+                <div>
+                  <h2 className="sp-pm-name">{fr ? "Donnez votre avis" : "Share your feedback"}</h2>
+                  <div className="sp-pm-tagline">{fr ? "3 questions, 2 minutes — ça nous aide vraiment." : "3 questions, 2 minutes — it really helps."}</div>
+                </div>
+              </div>
+            </div>
+            <div className="sp-pm-body">
+              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                <div>
+                  <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#0F1C35", marginBottom: 6 }}>
+                    {fr ? "Votre métier dans la construction" : "Your construction trade"}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={metier}
+                    onChange={e => setMetier(e.target.value)}
+                    placeholder={fr ? "ex: charpentier, estimateur, contremaître…" : "e.g. carpenter, estimator, foreman…"}
+                    style={{ width: "100%", padding: "10px 12px", borderRadius: 8, border: "1px solid rgba(27,42,74,0.2)", fontSize: 14, outline: "none", boxSizing: "border-box" }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#0F1C35", marginBottom: 6 }}>
+                    {fr ? "Votre principal irritant au quotidien" : "Your main daily frustration"}
+                  </label>
+                  <textarea
+                    required
+                    value={irritant}
+                    onChange={e => setIrritant(e.target.value)}
+                    rows={3}
+                    placeholder={fr ? "Ce qui vous fait perdre du temps, ce qui est flou, ce qui manque…" : "What wastes your time, what's unclear, what's missing…"}
+                    style={{ width: "100%", padding: "10px 12px", borderRadius: 8, border: "1px solid rgba(27,42,74,0.2)", fontSize: 14, resize: "vertical", outline: "none", boxSizing: "border-box" }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#0F1C35", marginBottom: 6 }}>
+                    {fr ? "Ce qui vous aiderait le plus" : "What would help you most"}
+                  </label>
+                  <textarea
+                    value={aide}
+                    onChange={e => setAide(e.target.value)}
+                    rows={3}
+                    placeholder={fr ? "Un outil, une fonctionnalité… ou rien si vous n'avez pas d'idée." : "A tool, a feature… or nothing if you have no idea."}
+                    style={{ width: "100%", padding: "10px 12px", borderRadius: 8, border: "1px solid rgba(27,42,74,0.2)", fontSize: 14, resize: "vertical", outline: "none", boxSizing: "border-box" }}
+                  />
+                </div>
+                <button type="submit" disabled={sending} className="sp-btn sp-btn-primary" style={{ alignSelf: "flex-end", minWidth: 140 }}>
+                  {sending ? (fr ? "Envoi…" : "Sending…") : (fr ? "Envoyer" : "Submit")} <Icon name="arrow-right" size={14} />
+                </button>
+              </form>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+  return createPortal(content, document.body);
+}
+
+function Footer({ lang, logoVariant, setActivePage, onFeedback }) {
   const t = window.T[lang].footer;
   const pages = window.T[lang].pages;
+  const fr = lang === "fr";
 
   const handlePageClick = (e, linkName) => {
     e.preventDefault();
@@ -684,7 +789,10 @@ function Footer({ lang, logoVariant, setActivePage }) {
           </div>
           <div>
             <div className="sp-footer-col-title">{t.company}</div>
-            <ul>{t.company_links.map((l) => <li key={l}><a href="#!" onClick={(e) => handlePageClick(e, l)}>{l}</a></li>)}</ul>
+            <ul>
+              {t.company_links.map((l) => <li key={l}><a href="#!" onClick={(e) => handlePageClick(e, l)}>{l}</a></li>)}
+              <li><a href="#!" onClick={(e) => { e.preventDefault(); onFeedback && onFeedback(); }} style={{ color: "#E8420A", fontWeight: 600 }}>💬 {fr ? "Donner mon avis" : "Share feedback"}</a></li>
+            </ul>
           </div>
           <div>
             <div className="sp-footer-col-title">{t.legal}</div>
@@ -789,6 +897,7 @@ function App() {
   const [loginOpen, setLoginOpen] = uS(false);
   const [activeProduct, setActiveProduct] = uS(null);
   const [user, setUser] = uS(null);
+  const [feedbackOpen, setFeedbackOpen] = uS(false);
 
   uE(() => {
     const sb = getSupabase();
@@ -829,7 +938,7 @@ function App() {
         <WhySpecialized lang={t.lang} />
         <Testimonials lang={t.lang} />
       </main>
-      <Footer lang={t.lang} logoVariant={t.logoVariant} setActivePage={setActivePage} />
+      <Footer lang={t.lang} logoVariant={t.logoVariant} setActivePage={setActivePage} onFeedback={() => setFeedbackOpen(true)} />
 
       <PageModal
         title={activePage}
@@ -837,6 +946,7 @@ function App() {
         onClose={() => setActivePage(null)}
       />
       <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} lang={t.lang} user={user} setUser={setUser} />
+      {feedbackOpen && <FeedbackModal lang={t.lang} onClose={() => setFeedbackOpen(false)} />}
       <ProductModal product={activeProduct} lang={t.lang} onClose={() => setActiveProduct(null)} />
 
       <TweaksPanel title="Tweaks">

@@ -189,6 +189,29 @@ function ProductPage() {
     try { return localStorage.getItem("sp-lang") || "fr"; } catch { return "fr"; }
   });
   const [openFeat, setOpenFeat] = uS(null);
+  const [feedbackOpen, setFeedbackOpen] = uS(false);
+  const [fbMetier, setFbMetier] = uS("");
+  const [fbIrritant, setFbIrritant] = uS("");
+  const [fbAide, setFbAide] = uS("");
+  const [fbSent, setFbSent] = uS(false);
+  const [fbSending, setFbSending] = uS(false);
+
+  const handleFeedback = async (e) => {
+    e.preventDefault();
+    setFbSending(true);
+    const sb = (window.supabase && window.SP_CONFIG && window.SP_CONFIG.supabaseUrl && !window.SP_CONFIG.supabaseUrl.includes("VOTRE"))
+      ? (window._sb || (window._sb = window.supabase.createClient(window.SP_CONFIG.supabaseUrl, window.SP_CONFIG.supabaseKey)))
+      : null;
+    if (sb) {
+      await sb.from("feedback").insert({ metier: fbMetier, irritant: fbIrritant, aide: fbAide, lang, created_at: new Date().toISOString() });
+      setFbSent(true);
+    } else {
+      const body = encodeURIComponent(`Métier: ${fbMetier}\n\nIrritant: ${fbIrritant}\n\nCe qui aiderait: ${fbAide}`);
+      window.open(`mailto:yan@seriespro360.com?subject=Feedback SeriesPro360&body=${body}`);
+      setFbSent(true);
+    }
+    setFbSending(false);
+  };
   uE(() => {
     try { localStorage.setItem("sp-lang", lang); } catch {}
     document.documentElement.lang = lang === "fr" ? "fr-CA" : "en-CA";
@@ -448,7 +471,57 @@ function ProductPage() {
         React.createElement(Icon, { name: "arrow-left", size: 14 }),
         fr ? "Retour à SeriesPro360" : "Back to SeriesPro360"
       ),
+      React.createElement("a", { href: "#!", onClick: (e) => { e.preventDefault(); setFeedbackOpen(true); }, style: { color: "#E8420A", fontWeight: 600, fontSize: 14, textDecoration: "none" } },
+        "💬 ", fr ? "Donner mon avis" : "Share feedback"
+      ),
       React.createElement("span", null, "© 2026 SeriesPro360")
+    ),
+
+    // ── FEEDBACK MODAL
+    feedbackOpen && ReactDOM.createPortal(
+      React.createElement("div", { className: "sp-modal-backdrop", onClick: () => setFeedbackOpen(false), style: { zIndex: 9500 } },
+        React.createElement("div", { className: "sp-product-modal", onClick: e => e.stopPropagation(), role: "dialog", style: { maxWidth: 480 } },
+          React.createElement("button", { className: "sp-login-close", onClick: () => setFeedbackOpen(false) }, React.createElement(Icon, { name: "x", size: 16 })),
+          fbSent
+            ? React.createElement("div", { style: { textAlign: "center", padding: "40px 24px" } },
+                React.createElement("div", { style: { fontSize: 40, marginBottom: 16 } }, "🙏"),
+                React.createElement("h2", { style: { fontSize: 20, fontWeight: 700, color: "#0F1C35", margin: "0 0 8px" } }, fr ? "Merci pour votre retour !" : "Thanks for your feedback!"),
+                React.createElement("p", { style: { color: "#3D4F6E", fontSize: 15 } }, fr ? "Vos commentaires nous aident à améliorer nos outils." : "Your input helps us improve our tools.")
+              )
+            : React.createElement(React.Fragment, null,
+                React.createElement("div", { className: "sp-pm-header", style: { borderBottom: "1px solid rgba(27,42,74,0.08)" } },
+                  React.createElement("div", { className: "sp-pm-header-left" },
+                    React.createElement("div", { style: { fontSize: 24 } }, "💬"),
+                    React.createElement("div", null,
+                      React.createElement("h2", { className: "sp-pm-name" }, fr ? "Donnez votre avis" : "Share your feedback"),
+                      React.createElement("div", { className: "sp-pm-tagline" }, fr ? "3 questions, 2 minutes — ça nous aide vraiment." : "3 questions, 2 minutes — it really helps.")
+                    )
+                  )
+                ),
+                React.createElement("div", { className: "sp-pm-body" },
+                  React.createElement("form", { onSubmit: handleFeedback, style: { display: "flex", flexDirection: "column", gap: 20 } },
+                    React.createElement("div", null,
+                      React.createElement("label", { style: { display: "block", fontSize: 13, fontWeight: 600, color: "#0F1C35", marginBottom: 6 } }, fr ? "Votre métier dans la construction" : "Your construction trade"),
+                      React.createElement("input", { type: "text", required: true, value: fbMetier, onChange: e => setFbMetier(e.target.value), placeholder: fr ? "ex: charpentier, estimateur…" : "e.g. carpenter, estimator…", style: { width: "100%", padding: "10px 12px", borderRadius: 8, border: "1px solid rgba(27,42,74,0.2)", fontSize: 14, outline: "none", boxSizing: "border-box" } })
+                    ),
+                    React.createElement("div", null,
+                      React.createElement("label", { style: { display: "block", fontSize: 13, fontWeight: 600, color: "#0F1C35", marginBottom: 6 } }, fr ? "Votre principal irritant au quotidien" : "Your main daily frustration"),
+                      React.createElement("textarea", { required: true, value: fbIrritant, onChange: e => setFbIrritant(e.target.value), rows: 3, placeholder: fr ? "Ce qui vous fait perdre du temps…" : "What wastes your time…", style: { width: "100%", padding: "10px 12px", borderRadius: 8, border: "1px solid rgba(27,42,74,0.2)", fontSize: 14, resize: "vertical", outline: "none", boxSizing: "border-box" } })
+                    ),
+                    React.createElement("div", null,
+                      React.createElement("label", { style: { display: "block", fontSize: 13, fontWeight: 600, color: "#0F1C35", marginBottom: 6 } }, fr ? "Ce qui vous aiderait le plus" : "What would help you most"),
+                      React.createElement("textarea", { value: fbAide, onChange: e => setFbAide(e.target.value), rows: 3, placeholder: fr ? "Un outil, une fonctionnalité…" : "A tool, a feature…", style: { width: "100%", padding: "10px 12px", borderRadius: 8, border: "1px solid rgba(27,42,74,0.2)", fontSize: 14, resize: "vertical", outline: "none", boxSizing: "border-box" } })
+                    ),
+                    React.createElement("button", { type: "submit", disabled: fbSending, className: "sp-btn sp-btn-primary", style: { alignSelf: "flex-end", minWidth: 140 } },
+                      fbSending ? (fr ? "Envoi…" : "Sending…") : (fr ? "Envoyer" : "Submit"),
+                      " ", React.createElement(Icon, { name: "arrow-right", size: 14 })
+                    )
+                  )
+                )
+              )
+        )
+      ),
+      document.body
     )
   );
 }
