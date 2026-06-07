@@ -4650,6 +4650,81 @@ html.sp-light .sp-login-tab.is-active {
   .pp-stat-item:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.06); }
 }
 
+/* ── Hero visual card (enrichi) */
+.pp-hero-visual-card {
+  position: relative;
+  background: #131418;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 36px 32px 28px;
+  max-width: 440px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Workflow statuts */
+.pp-hero-workflow {
+  margin-bottom: 24px;
+}
+.pp-hero-workflow-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+.pp-hero-workflow-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.pp-wf-step {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: rgba(240,242,245,0.7);
+  font-weight: 500;
+}
+.pp-wf-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.pp-wf-line {
+  width: 16px;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+  flex-shrink: 0;
+}
+
+/* ── Feature badges hero */
+.pp-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pp-hero-feat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ── Eyebrow sections produit */
+.pp-section .pp-eyebrow {
+  margin-bottom: 8px;
+}
+
 /* ── Section démo CalcuPro360 */
 .pp-section-demo {
   background: #0A0B0E;

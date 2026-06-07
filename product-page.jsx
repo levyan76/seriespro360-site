@@ -292,7 +292,7 @@ function ProductPage() {
             )
           ),
           React.createElement("ul", { className: "pp-hero-meta" },
-            m.steps && m.steps.slice(0, 3).map((s, i) =>
+            (m.bullets || (m.steps && m.steps.slice(0, 3)) || []).map((s, i) =>
               React.createElement("li", { key: i },
                 React.createElement(Icon, { name: "check", size: 14 }),
                 s
@@ -301,16 +301,44 @@ function ProductPage() {
           ),
         ),
 
-        // RIGHT — headline quote visuelle
+        // RIGHT — visual mock enrichi
         React.createElement("div", { className: "pp-hero-right" },
-          React.createElement("div", { className: "pp-hero-quote-card", style: { borderColor: colors.soft } },
+          React.createElement("div", { className: "pp-hero-visual-card", style: { borderColor: "rgba(255,255,255,0.08)" } },
             React.createElement("div", { className: "pp-hero-quote-accent", style: { background: colors.accent } }),
+
+            // Headline quote
             React.createElement("blockquote", { className: "pp-hero-quote-text" },
               "\u201c", m.headline, "\u201d"
             ),
-            React.createElement("div", { className: "pp-hero-quote-label", style: { color: colors.accent } },
+            React.createElement("div", { className: "pp-hero-quote-label", style: { color: colors.accent, marginBottom: 28 } },
               product.name, " · ", fr ? "Promesse produit" : "Product promise"
             ),
+
+            // Workflow statuts (TrimPro uniquement)
+            slug === "trimpro360" && React.createElement("div", { className: "pp-hero-workflow" },
+              React.createElement("div", { className: "pp-hero-workflow-label", style: { color: "rgba(240,242,245,0.35)" } },
+                fr ? "Workflow commandes" : "Order workflow"
+              ),
+              React.createElement("div", { className: "pp-hero-workflow-steps" },
+                [fr ? "Brouillon" : "Draft", fr ? "Soumise" : "Submitted", fr ? "Approuvée" : "Approved", fr ? "Production" : "In Production", fr ? "Livrée" : "Delivered"].map((label, i, arr) =>
+                  React.createElement("div", { key: i, className: "pp-wf-step", style: { opacity: i === 3 ? 1 : (i === 4 ? 0.45 : 0.5 + i * 0.1) } },
+                    React.createElement("div", { className: "pp-wf-dot", style: { background: i === 3 ? colors.accent : "rgba(255,255,255,0.15)" } }),
+                    React.createElement("span", null, label),
+                    i < arr.length - 1 && React.createElement("div", { className: "pp-wf-line" })
+                  )
+                )
+              )
+            ),
+
+            // Mini feature badges
+            React.createElement("div", { className: "pp-hero-badges" },
+              (m.modules || m.features || []).slice(0, 3).map((f) =>
+                React.createElement("div", { key: f.title, className: "pp-hero-feat-badge", style: { background: colors.soft, color: colors.accent } },
+                  React.createElement(Icon, { name: f.icon, size: 13 }),
+                  React.createElement("span", null, f.title)
+                )
+              )
+            )
           )
         )
       )
@@ -328,9 +356,38 @@ function ProductPage() {
       )
     ),
 
+    // ── POSITIONNEMENT (origine du produit)
+    window.T[lang].origin && window.T[lang].origin.positioning && React.createElement("section", { className: "pp-section pp-section-alt" },
+      React.createElement("div", { className: "pp-section-inner" },
+        React.createElement("div", { className: "pp-eyebrow", style: { color: colors.accent, textAlign: "center", marginBottom: 8 } },
+          fr ? "Pourquoi " + product.name + " ?" : "Why " + product.name + "?"
+        ),
+        React.createElement("h2", { className: "pp-section-title" },
+          fr ? "Conçu par quelqu'un qui a vécu le problème." : "Built by someone who lived the problem."
+        ),
+        React.createElement("p", { style: { textAlign: "center", fontSize: 15, color: "rgba(240,242,245,0.55)", maxWidth: 600, margin: "0 auto 40px", lineHeight: 1.65 } },
+          window.T[lang].origin.story
+        ),
+        React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 } },
+          window.T[lang].origin.positioning.map((pt) =>
+            React.createElement("div", { key: pt.label, style: { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 12, padding: 20, display: "flex", flexDirection: "column", gap: 10 } },
+              React.createElement("div", { style: { width: 38, height: 38, borderRadius: 8, background: colors.soft, color: colors.accent, display: "flex", alignItems: "center", justifyContent: "center" } },
+                React.createElement(Icon, { name: pt.icon, size: 18 })
+              ),
+              React.createElement("div", { style: { fontSize: 14, fontWeight: 600, color: "#F0F2F5", lineHeight: 1.4 } }, pt.label),
+              React.createElement("div", { style: { fontSize: 13, color: "rgba(240,242,245,0.5)", lineHeight: 1.55 } }, pt.sub)
+            )
+          )
+        )
+      )
+    ),
+
     // ── FONCTIONNALITÉS
     React.createElement("section", { className: "pp-section" },
       React.createElement("div", { className: "pp-section-inner" },
+        React.createElement("div", { className: "pp-eyebrow", style: { color: colors.accent, textAlign: "center", marginBottom: 8 } },
+          fr ? "Ce que ça fait" : "What it does"
+        ),
         React.createElement("h2", { className: "pp-section-title" },
           fr ? "Fonctionnalités" : "Features"
         ),
@@ -361,6 +418,9 @@ function ProductPage() {
     // ── MODULES COMPLETS
     m.modules && m.modules.length > 0 && React.createElement("section", { className: "pp-section" },
       React.createElement("div", { className: "pp-section-inner" },
+        React.createElement("div", { className: "pp-eyebrow", style: { color: colors.accent, textAlign: "center", marginBottom: 8 } },
+          fr ? "Vue d'ensemble" : "Full overview"
+        ),
         React.createElement("h2", { className: "pp-section-title" },
           fr ? "Tous les modules" : "All modules"
         ),
@@ -386,6 +446,9 @@ function ProductPage() {
     // ── COMMENT ÇA MARCHE
     m.steps && m.steps.length > 0 && React.createElement("section", { className: "pp-section pp-section-alt" },
       React.createElement("div", { className: "pp-section-inner" },
+        React.createElement("div", { className: "pp-eyebrow", style: { color: colors.accent, textAlign: "center", marginBottom: 8 } },
+          fr ? "Prise en main" : "Getting started"
+        ),
         React.createElement("h2", { className: "pp-section-title" },
           fr ? "Comment ça marche" : "How it works"
         ),
