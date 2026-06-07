@@ -81,9 +81,26 @@ function LogoBracket({ size = 28, color = "currentColor", accent = "var(--sp-acc
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// VARIANT D — "Real" (vrai logo PNG officiel FR)
+// ─────────────────────────────────────────────────────────────────────────────
+function LogoReal({ orientation = "horizontal" }) {
+  const src = orientation === "vertical"
+    ? "/logos/logo-sp360-transp-1.png"
+    : "/logos/logo-sp360-transp-2.png";
+  return (
+    <img
+      src={src}
+      alt="SeriesPro360"
+      style={{ height: "100%", width: "auto", maxWidth: 240, objectFit: "contain", display: "block" }}
+    />
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Logo router (driven by tweaks)
 // ─────────────────────────────────────────────────────────────────────────────
 function Logo({ variant = "strata", ...rest }) {
+  if (variant === "real")    return <LogoReal {...rest} />;
   if (variant === "compass") return <LogoCompass {...rest} />;
   if (variant === "bracket") return <LogoBracket {...rest} />;
   return <LogoStrata {...rest} />;

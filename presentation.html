@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+ param($m) $html=$m.Groups[1].Value; $cls=$m.Groups[2].Value -replace 'sp-light','sp-light'; if ($cls -notmatch 'sp-light') { $cls="sp-light $cls" }; "<html$html class=`"$cls`">" >
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
 
-<link rel="stylesheet" href="dist/app.min.css" />
+<link rel="stylesheet" href="dist/app.min.css?v=mq45plcu" />
 </head>
 <body>
 

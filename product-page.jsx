@@ -5,6 +5,12 @@
 const { useState: uS, useEffect: uE } = React;
 const { createRoot } = ReactDOM;
 
+// ── Map logos produit
+const PRODUCT_LOGOS = {
+  "TrimPro360": "/logos/logo-trimpro360.png",
+  "CalcuPro360": "/logos/logo-calcupro360.png",
+};
+
 // ── Détecte le produit depuis l'attribut data-product sur #root
 function getProduct(lang) {
   const slug = document.getElementById("root")?.dataset?.product || "";
@@ -231,6 +237,11 @@ function ProductPage() {
 
         // LEFT — copy
         React.createElement("div", { className: "pp-hero-left" },
+          PRODUCT_LOGOS[product.name] && React.createElement("img", {
+            src: PRODUCT_LOGOS[product.name],
+            alt: product.name,
+            style: { height: 72, width: "auto", objectFit: "contain", marginBottom: 20 }
+          }),
           React.createElement("div", { className: "pp-hero-badge", style: { color: colors.accent, background: colors.soft } },
             product.tag
           ),

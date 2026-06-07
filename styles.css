@@ -2,24 +2,24 @@
      TOKENS
      ================================================================ */
 :root {
-  --sp-accent: #F05A1A;
-  --sp-accent-soft: rgba(240, 90, 26, 0.14);
+  --sp-accent: #E8420A;
+  --sp-accent-soft: rgba(232, 66, 10, 0.15);
 
-  /* DARK (default) */
-  --sp-bg: #07080A;
-  --sp-bg-2: #0D0E11;
-  --sp-surface: #111318;
-  --sp-card: #14161C;
-  --sp-card-hi: #191C24;
-  --sp-border: rgba(255, 255, 255, 0.07);
-  --sp-border-2: rgba(255, 255, 255, 0.13);
-  --sp-text: #F2F3F5;
-  --sp-text-2: #B8BAC0;
-  --sp-muted: #6E7078;
-  --sp-blueprint: #4A8DF7;
-  --sp-green: #2DD4A0;
-  --sp-yellow: #EAB308;
-  --sp-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 16px 48px rgba(0,0,0,0.45);
+  /* LIGHT — couleurs alignées logo SeriesPro360 */
+  --sp-bg: #F8F7F4;
+  --sp-bg-2: #FFFFFF;
+  --sp-surface: #FFFFFF;
+  --sp-card: #FFFFFF;
+  --sp-card-hi: #F2F1EE;
+  --sp-border: rgba(27, 42, 74, 0.10);
+  --sp-border-2: rgba(27, 42, 74, 0.18);
+  --sp-text: #0F1C35;
+  --sp-text-2: #1B2A4A;
+  --sp-muted: #3D4F6E;
+  --sp-blueprint: #1B2A4A;
+  --sp-green: #047857;
+  --sp-yellow: #B45309;
+  --sp-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 8px 30px rgba(27, 42, 74, 0.08);
 
   --sp-font-display: 'Space Grotesk', system-ui, sans-serif;
   --sp-font-body: 'Inter', system-ui, sans-serif;
@@ -34,20 +34,20 @@
 }
 
 html.sp-light {
-  --sp-bg: #FAFAF7;
-  --sp-bg-2: #F2F2EE;
+  --sp-bg: #F8F7F4;
+  --sp-bg-2: #FFFFFF;
   --sp-surface: #FFFFFF;
   --sp-card: #FFFFFF;
-  --sp-card-hi: #F7F6F2;
-  --sp-border: rgba(15, 15, 16, 0.08);
-  --sp-border-2: rgba(15, 15, 16, 0.16);
-  --sp-text: #0E0F10;
-  --sp-text-2: #2A2B2F;
-  --sp-muted: #6A6B70;
-  --sp-blueprint: #1E40AF;
+  --sp-card-hi: #F2F1EE;
+  --sp-border: rgba(27, 42, 74, 0.10);
+  --sp-border-2: rgba(27, 42, 74, 0.18);
+  --sp-text: #0F1C35;
+  --sp-text-2: #1B2A4A;
+  --sp-muted: #3D4F6E;
+  --sp-blueprint: #1B2A4A;
   --sp-green: #047857;
   --sp-yellow: #B45309;
-  --sp-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 8px 30px rgba(20, 20, 30, 0.06);
+  --sp-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 8px 30px rgba(27, 42, 74, 0.08);
 }
 
 /* DENSITY */
@@ -149,8 +149,8 @@ html {
      SCROLL REVEAL SYSTEM
      ================================================================ */
 .sp-reveal {
-  opacity: 0;
-  transform: translateY(28px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
@@ -163,8 +163,8 @@ html {
 
 /* Stagger children */
 .sp-reveal-stagger>* {
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -285,7 +285,7 @@ html {
 .sp-section-title {
   font-size: clamp(28px, 3.8vw, 46px);
   font-weight: 700;
-  color: var(--sp-text);
+  color: #0F1C35;
   max-width: 20ch;
   line-height: 1.08;
   letter-spacing: -0.028em;
@@ -309,7 +309,7 @@ html {
 }
 
 .sp-section-sub {
-  color: var(--sp-muted);
+  color: #3D4F6E;
   font-size: 16px;
   line-height: 1.65;
   max-width: 54ch;
@@ -429,13 +429,28 @@ html {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
-  gap: 32px;
+  height: 52px;
+  position: relative;
 }
 
 .sp-nav-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
+  pointer-events: auto;
+}
+
+.sp-nav-brand img {
+  height: 72px;
+  width: auto;
+  max-width: 300px;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  padding: 6px 16px;
+  background: transparent;
 }
 
 .sp-nav-links {
@@ -586,8 +601,9 @@ html.sp-light .sp-unit-toggle button.is-on {
 }
 
 .sp-hero.sp-hero-centered {
-  padding: 80px 0 72px;
+  padding: 0 0 72px;
   text-align: center;
+  background: #FFFFFF;
 }
 
 .sp-hero-center-inner {
@@ -598,6 +614,7 @@ html.sp-light .sp-unit-toggle button.is-on {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0;
 }
 
 /* ── Hero split (Procore-style) */
@@ -633,7 +650,7 @@ html.sp-light .sp-unit-toggle button.is-on {
   color: var(--sp-text);
   letter-spacing: -0.035em;
   line-height: 1.08;
-  margin: 24px 0 0;
+  margin: 0;
 }
 
 .sp-hero-sub {
@@ -732,7 +749,7 @@ html.sp-light .sp-unit-toggle button.is-on {
   gap: 6px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--sp-muted);
+  color: #3D4F6E;
   transition: color 0.18s, gap 0.18s;
 }
 
@@ -978,7 +995,7 @@ html.sp-light .sp-unit-toggle button.is-on {
   background-position: -1px -1px;
   -webkit-mask-image: radial-gradient(ellipse 70% 60% at 60% 40%, #000 0%, transparent 75%);
   mask-image: radial-gradient(ellipse 70% 60% at 60% 40%, #000 0%, transparent 75%);
-  opacity: 0.7;
+  opacity: 0;
   pointer-events: none;
 }
 
@@ -1600,7 +1617,7 @@ html.sp-light .sp-unit-toggle button.is-on {
 .sp-product-name {
   font-size: 20px;
   font-weight: 700;
-  color: var(--sp-text);
+  color: #0F1C35;
   margin-bottom: 6px;
   letter-spacing: -0.02em;
 }
@@ -1610,13 +1627,13 @@ html.sp-light .sp-unit-toggle button.is-on {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--sp-muted);
+  color: #3D4F6E;
   margin-bottom: 14px;
 }
 
 .sp-product-desc {
   font-size: 13px;
-  color: var(--sp-muted);
+  color: #3D4F6E;
   line-height: 1.65;
   margin-bottom: 20px;
 }

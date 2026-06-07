@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+ param($m) $html=$m.Groups[1].Value; $cls=$m.Groups[2].Value -replace 'sp-light','sp-light'; if ($cls -notmatch 'sp-light') { $cls="sp-light $cls" }; "<html$html class=`"$cls`">" >
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -1245,12 +1245,12 @@
   }
 
   /* Tweaks panel overrides */
-  html.sp-dark .twk-panel { background: rgba(20,20,24,0.88); color: #F4F4F5; border-color: rgba(255,255,255,0.12); }
-  html.sp-dark .twk-hd b { color: #F4F4F5; }
-  html.sp-dark .twk-lbl { color: rgba(244,244,245,0.72); }
-  html.sp-dark .twk-val { color: rgba(244,244,245,0.5); }
-  html.sp-dark .twk-x { color: rgba(244,244,245,0.55); }
-  html.sp-dark .twk-x:hover { background: rgba(255,255,255,0.06); color: #F4F4F5; }
+  html.sp-light .twk-panel { background: rgba(20,20,24,0.88); color: #F4F4F5; border-color: rgba(255,255,255,0.12); }
+  html.sp-light .twk-hd b { color: #F4F4F5; }
+  html.sp-light .twk-lbl { color: rgba(244,244,245,0.72); }
+  html.sp-light .twk-val { color: rgba(244,244,245,0.5); }
+  html.sp-light .twk-x { color: rgba(244,244,245,0.55); }
+  html.sp-light .twk-x:hover { background: rgba(255,255,255,0.06); color: #F4F4F5; }
 </style>
 </head>
 <body>
@@ -1262,7 +1262,7 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 
 <!-- Pre-compiled JSX bundle (no Babel runtime needed) -->
-<script src="dist/app.min.js?v=8"></script>
+<script src="dist/app.min.js?v=mq45plcu"></script>
 
 </body>
 </html>

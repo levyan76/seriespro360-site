@@ -61,12 +61,19 @@ buildBundle('product-page.min.js', ['logos.jsx', 'calculator.jsx', 'product-page
 
 const ms = (performance.now() - t0).toFixed(0);
 
-// Auto-update cache-buster in index.html
+// Auto-update cache-buster in ALL html files
 const hash = Date.now().toString(36);
-const indexPath = join(root, 'index.html');
-let html = readFileSync(indexPath, 'utf-8');
-html = html.replace(/dist\/app\.min\.js\?v=[^"]+/, `dist/app.min.js?v=${hash}`);
-html = html.replace(/dist\/landing\.js[^"]*/, `dist/app.min.js?v=${hash}`);
-writeFileSync(indexPath, html);
-console.log(`✅ index.html cache-buster → v=${hash}`);
+const { readdirSync } = await import('fs');
+const htmlFiles = readdirSync(root).filter(f => f.endsWith('.html'));
+for (const file of htmlFiles) {
+  const filePath = join(root, file);
+  let html = readFileSync(filePath, 'utf-8');
+  html = html.replace(/dist\/app\.min\.css(\?v=[^"']+)?/g, `dist/app.min.css?v=${hash}`);
+  html = html.replace(/dist\/app\.min\.js(\?v=[^"']+)?/g, `dist/app.min.js?v=${hash}`);
+  html = html.replace(/dist\/i18n\.min\.js(\?v=[^"']+)?/g, `dist/i18n.min.js?v=${hash}`);
+  html = html.replace(/dist\/product-page\.min\.js(\?v=[^"']+)?/g, `dist/product-page.min.js?v=${hash}`);
+  html = html.replace(/dist\/landing\.js[^"']*/g, `dist/app.min.js?v=${hash}`);
+  writeFileSync(filePath, html);
+}
+console.log(`✅ cache-buster → v=${hash} (${htmlFiles.length} fichiers HTML)`);
 console.log(`⚡ Done in ${ms}ms`);

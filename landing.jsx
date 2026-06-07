@@ -12,12 +12,7 @@ function useReveal(opts) {
   uE(() => {
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { el.classList.add("is-visible"); obs.disconnect(); } },
-      { threshold: (opts && opts.threshold) || 0.1, rootMargin: (opts && opts.rootMargin) || "0px 0px -48px 0px" }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
+    el.classList.add("is-visible");
   }, []);
   return ref;
 }
@@ -27,16 +22,17 @@ function useReveal(opts) {
 // ──────────────────────────────────────────────────────────────────────────────
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "lang": "fr",
-  "dark": true,
-  "accent": "#FF6B1A",
-  "logoVariant": "strata",
-  "density": "regular"
+  "accent": "#E8420A",
+  "logoVariant": "real",
+  "density": "regular",
+  "heroLogoSize": 500,
+  "heroTopPad": 0
 }/*EDITMODE-END*/;
 
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — NAV
 // ──────────────────────────────────────────────────────────────────────────────
-function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMobile, openLogin, user }) {
+function Nav({ lang, setLang, logoVariant, openMobile, setOpenMobile, openLogin, user }) {
   const t = window.T[lang].nav;
   const [scrolled, setScrolled] = uS(false);
   uE(() => {
@@ -47,9 +43,7 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
   return (
     <header className={"sp-nav" + (scrolled ? " is-scrolled" : "")}>
       <div className="sp-container sp-nav-inner">
-        <a href="#top" className="sp-nav-brand">
-          <Logo variant={logoVariant} size={28} />
-        </a>
+        <a href="#top" className="sp-nav-brand" style={{ width: 0, overflow: "hidden" }} aria-hidden="true" />
         <nav className="sp-nav-links">
           <a href="#suite">{t.products}</a>
           <a href="#demo">{t.demo}</a>
@@ -61,9 +55,6 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
             <button onClick={() => setLang("fr")} className={lang === "fr" ? "is-on" : ""}>FR</button>
             <button onClick={() => setLang("en")} className={lang === "en" ? "is-on" : ""}>EN</button>
           </div>
-          <button className="sp-theme-toggle" onClick={() => setDark(!dark)} aria-label="Theme">
-            <Icon name={dark ? "sun" : "moon"} size={16} />
-          </button>
           {user ? (
             <button className="sp-btn sp-btn-ghost-sm sp-nav-login sp-nav-user" onClick={openLogin}>
               <span className="sp-nav-avatar">{(user.email || "?")[0].toUpperCase()}</span>
@@ -92,17 +83,92 @@ function Nav({ lang, setLang, dark, setDark, logoVariant, openMobile, setOpenMob
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────────────────────
+// INTERACTIVE LOGO — zones cliquables sur les feuilles orange
+// ──────────────────────────────────────────────────────────────────────────────
+function InteractiveLogo({ lang, height }) {
+  const [tooltip, setTooltip] = React.useState(null);
+  const leaves = [
+    {
+      id: "trimpro",
+      url: "/trimpro360",
+      left: "34%", top: "22%", width: "5%", height: "8%",
+      label: "TrimPro360",
+      desc: lang === "fr" ? "Commande & production de profilés métalliques" : "Metal cladding order & production",
+    },
+    {
+      id: "calcupro",
+      url: "/calcupro360",
+      left: "38%", top: "35%", width: "5%", height: "8%",
+      label: "CalcuPro360",
+      desc: lang === "fr" ? "Calcul, estimation et devis PDF" : "Calculation, estimation & PDF quote",
+    },
+  ];
+  return (
+    <div style={{ position: "relative", display: "inline-block", lineHeight: 0 }}>
+      <img
+        src="/logos/logo_seriespro360_ FR..png"
+        alt="SeriesPro360"
+        style={{ height: height || 500, width: "auto", maxWidth: "90vw", objectFit: "contain", display: "block" }}
+      />
+      <p style={{ position: "absolute", bottom: "23%", left: 0, right: "55%", fontSize: 12, color: "#94A3B8", margin: 0, textAlign: "center", letterSpacing: "0.02em", zIndex: 2, pointerEvents: "none" }}>
+        {lang === "fr" ? "🍂 Cliquez sur une feuille orange pour explorer une app" : "🍂 Click an orange leaf to explore an app"}
+      </p>
+      {leaves.map((leaf) => (
+        <div
+          key={leaf.id}
+          onClick={() => { window.location.href = leaf.url; }}
+          onMouseEnter={() => setTooltip(leaf.id)}
+          onMouseLeave={() => setTooltip(null)}
+          style={{
+            position: "absolute",
+            left: leaf.left, top: leaf.top,
+            width: leaf.width, height: leaf.height,
+            cursor: "pointer",
+            borderRadius: "50%",
+          }}
+        >
+          {tooltip === leaf.id && (
+            <div style={{
+              position: "absolute",
+              top: "calc(100% + 8px)",
+              left: "50%",
+              transform: "translateX(-50%)",
+              background: "#0F1C35",
+              color: "#FFFFFF",
+              borderRadius: 10,
+              padding: "10px 14px",
+              minWidth: 180,
+              maxWidth: 220,
+              boxShadow: "0 4px 20px rgba(0,0,0,0.18)",
+              zIndex: 100,
+              pointerEvents: "none",
+              whiteSpace: "normal",
+            }}>
+              <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 4, color: "#E8420A" }}>{leaf.label}</div>
+              <div style={{ fontSize: 12, lineHeight: 1.5, color: "#CBD5E1" }}>{leaf.desc}</div>
+              <div style={{ fontSize: 11, marginTop: 6, color: "#94A3B8", fontWeight: 600 }}>
+                {lang === "fr" ? "Cliquer pour voir →" : "Click to view →"}
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // SECTION — HERO
 // Left: copy. Right: technical mockup card with grid, dimensions, live mini-estimate.
 // ──────────────────────────────────────────────────────────────────────────────
-function Hero({ lang }) {
+function Hero({ lang, heroLogoSize, heroTopPad }) {
   const t = window.T[lang].hero;
   return (
     <section id="top" className="sp-hero sp-hero-centered">
       <div className="sp-hero-grid-bg" aria-hidden="true" />
       <div className="sp-container sp-hero-center-inner">
-        <div className="sp-hero-badge">
-          <span className="sp-hero-badge-dot" />{t.badge}
+        <div style={{ marginBottom: 0, display: "flex", flexDirection: "column", alignItems: "center", marginTop: -75 + (heroTopPad || 0) }}>
+          <InteractiveLogo lang={lang} height={heroLogoSize || 500} />
         </div>
         <h1 className="sp-hero-headline" style={{ textAlign: "center", maxWidth: "22ch" }}>{t.headline}</h1>
         <p className="sp-hero-sub-centered">{t.subtitle}</p>
@@ -223,31 +289,34 @@ function TrustStrip({ lang }) {
 // ──────────────────────────────────────────────────────────────────────────────
 function Origin({ lang }) {
   const t = window.T[lang].origin;
-  const r1 = useReveal();
-  const r2 = useReveal({ threshold: 0.05 });
   return (
-    <section className="sp-origin">
-      <div className="sp-container">
-        <div className="sp-reveal" ref={r1}>
-          <SectionHeader eyebrow={t.eyebrow} title={t.headline} />
-          <p className="sp-origin-story">{t.story}</p>
+    <section style={{ background: "#FFFFFF", padding: "80px 0", borderTop: "1px solid rgba(27,42,74,0.08)" }}>
+      <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 32px", textAlign: "center" }}>
+        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#E8420A", marginBottom: 12 }}>
+          {t.eyebrow}
         </div>
-        <div className="sp-origin-grid sp-reveal sp-reveal-stagger" ref={r2}>
+        <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 700, color: "#0F1C35", lineHeight: 1.1, margin: "0 0 24px", letterSpacing: "-0.02em" }}>
+          {t.headline}
+        </h2>
+        <p style={{ fontSize: 17, color: "#3D4F6E", lineHeight: 1.75, margin: "0 0 48px" }}>
+          {t.story}
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginBottom: 40, textAlign: "left" }}>
           {t.positioning.map((p) => (
-            <div key={p.label} className="sp-origin-card">
-              <div className="sp-origin-icon"><Icon name={p.icon} size={20} /></div>
+            <div key={p.label} style={{ background: "#F8F7F4", borderRadius: 12, padding: "20px 20px", display: "flex", gap: 14, alignItems: "flex-start" }}>
+              <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(232,66,10,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <Icon name={p.icon} size={18} />
+              </div>
               <div>
-                <div className="sp-origin-label">{p.label}</div>
-                <div className="sp-origin-sub">{p.sub}</div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: "#0F1C35", marginBottom: 4 }}>{p.label}</div>
+                <div style={{ fontSize: 13, color: "#3D4F6E", lineHeight: 1.5 }}>{p.sub}</div>
               </div>
             </div>
           ))}
         </div>
-        <div className="sp-reveal sp-origin-cta" ref={useReveal()}>
-          <a href="/trimpro360" className="sp-btn sp-btn-primary">
-            {t.cta} <Icon name="arrow-right" size={14} />
-          </a>
-        </div>
+        <a href="/trimpro360" className="sp-btn sp-btn-primary">
+          {t.cta} <Icon name="arrow-right" size={14} />
+        </a>
       </div>
     </section>
   );
@@ -256,6 +325,61 @@ function Origin({ lang }) {
 // ──────────────────────────────────────────────────────────────────────────────
 // SECTION — SUITE
 // ──────────────────────────────────────────────────────────────────────────────
+function AppGrid({ lang }) {
+  const t = window.T[lang].suite;
+  const slugMap = { "TrimPro360": "trimpro360", "CalcuPro360": "calcupro360", "MesurePro360": "mesurepro360", "DevisPro360": "devispro360" };
+  const logoMap = { "TrimPro360": "/logos/logo-trimpro360.png", "CalcuPro360": "/logos/logo-calcupro360.png" };
+  const accentByColor = { yellow: "#E8420A", blue: "#3B82F6", green: "#10B981", orange: "#E8420A" };
+  return (
+    <section id="suite" style={{ background: "#F8F7F4", padding: "80px 0" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px" }}>
+        <div style={{ marginBottom: 48 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#E8420A", marginBottom: 12 }}>
+            {t.eyebrow}
+          </div>
+          <h2 style={{ fontSize: "clamp(28px, 3.8vw, 42px)", fontWeight: 700, color: "#0F1C35", lineHeight: 1.1, margin: "0 0 16px", letterSpacing: "-0.02em" }}>
+            {t.title}
+          </h2>
+          <p style={{ fontSize: 16, color: "#3D4F6E", lineHeight: 1.65, maxWidth: 600, margin: 0 }}>
+            {t.subtitle}
+          </p>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
+          {t.products.map((p) => {
+            const accent = accentByColor[p.color] || "#E8420A";
+            const url = "/" + (slugMap[p.name] || p.name.toLowerCase().replace(/[^a-z0-9]/g, ""));
+            const isLive = p.tag === "En ligne" || p.tag === "Actif" || p.tag === "Live";
+            return (
+              <a key={p.name} href={url} style={{ textDecoration: "none", display: "flex", flexDirection: "column", background: "#FFFFFF", borderRadius: 16, padding: "28px 24px 24px", border: "1px solid rgba(27,42,74,0.10)", boxShadow: "0 2px 12px rgba(27,42,74,0.06)", transition: "transform 0.2s, box-shadow 0.2s", minHeight: 220 }}
+                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(27,42,74,0.12)"; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(27,42,74,0.06)"; }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
+                  <div style={{ width: 56, height: 56, borderRadius: 12, background: "#FFFFFF", border: "1px solid rgba(27,42,74,0.08)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", padding: 4 }}>
+                    {logoMap[p.name]
+                      ? <img src={logoMap[p.name]} alt={p.name} style={{ width: 46, height: 46, objectFit: "contain" }} />
+                      : <span style={{ fontSize: 22 }}>{p.icon || "🔧"}</span>}
+                  </div>
+                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", padding: "3px 8px", borderRadius: 999, background: isLive ? "rgba(16,185,129,0.12)" : "rgba(59,130,246,0.12)", color: isLive ? "#047857" : "#1B2A4A", border: isLive ? "1px solid rgba(16,185,129,0.25)" : "1px solid rgba(59,130,246,0.2)" }}>
+                    {p.tag}
+                  </span>
+                </div>
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: "#0F1C35", margin: "0 0 6px", letterSpacing: "-0.01em" }}>{p.name}</h3>
+                <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#6B7A96", marginBottom: 12 }}>{p.tagline}</div>
+                <p style={{ fontSize: 13, color: "#3D4F6E", lineHeight: 1.6, margin: "0 0 20px", flex: 1 }}>{p.desc}</p>
+                <div style={{ fontSize: 13, fontWeight: 600, color: accent, display: "flex", alignItems: "center", gap: 6 }}>
+                  {lang === "fr" ? "En savoir plus" : "Learn more"} →
+                </div>
+                <div style={{ height: 3, borderRadius: 999, background: accent, marginTop: 16, opacity: 0.7 }} />
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Suite({ lang }) {
   const t = window.T[lang].suite;
   const r1 = useReveal();
@@ -282,12 +406,12 @@ function Suite({ lang }) {
                   <span className={"sp-product-tag sp-product-tag-" + tagClass}>{p.tag}</span>
                 </header>
                 <div className="sp-product-body">
-                  <h3 className="sp-product-name">{p.name}</h3>
-                  <div className="sp-product-tagline">{p.tagline}</div>
-                  <p className="sp-product-desc">{p.desc}</p>
+                  <h3 className="sp-product-name" style={{ color: "#0F1C35" }}>{p.name}</h3>
+                  <div className="sp-product-tagline" style={{ color: "#3D4F6E" }}>{p.tagline}</div>
+                  <p className="sp-product-desc" style={{ color: "#3D4F6E" }}>{p.desc}</p>
                 </div>
                 <div className="sp-product-footer">
-                  <span className="sp-product-learn">
+                  <span className="sp-product-learn" style={{ color: "#3D4F6E" }}>
                     {lang === "fr" ? "En savoir plus" : "Learn more"} <Icon name="arrow-right" size={13} />
                   </span>
                 </div>
@@ -690,39 +814,31 @@ function Testimonials({ lang }) {
   );
 }
 
-function VsExcel({ lang }) {
-  const t = window.T[lang].vs_excel;
-  const r1 = useReveal();
-  const r2 = useReveal({ threshold: 0.05 });
+function WhySpecialized({ lang }) {
+  const t = window.T[lang].why_specialized;
   return (
-    <section className="sp-vs-excel">
-      <div className="sp-container">
-        <div className="sp-reveal" ref={r1}>
-          <SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} align="center" />
+    <section style={{ background: "#F8F7F4", padding: "80px 0", borderTop: "1px solid rgba(27,42,74,0.08)" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 32px" }}>
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#E8420A", marginBottom: 12 }}>{t.eyebrow}</div>
+          <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 700, color: "#0F1C35", lineHeight: 1.1, margin: "0 0 16px", letterSpacing: "-0.02em" }}>{t.title}</h2>
+          <p style={{ fontSize: 16, color: "#3D4F6E", lineHeight: 1.65, maxWidth: 580, margin: "0 auto" }}>{t.subtitle}</p>
         </div>
-        <div className="sp-vs-table sp-reveal" ref={r2}>
-          <div className="sp-vs-header">
-            <div className="sp-vs-col-label"></div>
-            <div className="sp-vs-col sp-vs-col-excel">
-              <Icon name="file" size={16} /> Excel
-            </div>
-            <div className="sp-vs-col sp-vs-col-sp360">
-              <Logo variant="strata" wordmark={false} size={18} color="#fff" accent="#FF6B1A" /> SeriesPro360
-            </div>
-          </div>
-          {t.rows.map((row, i) => (
-            <div key={i} className="sp-vs-row">
-              <div className="sp-vs-col-label">{row.label}</div>
-              <div className="sp-vs-col sp-vs-col-excel">
-                <Icon name="x" size={14} className="sp-vs-no" />
-                {row.excel}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 24 }}>
+          {t.points.map((pt) => (
+            <div key={pt.title} style={{ background: "#FFFFFF", borderRadius: 16, padding: "28px 24px", border: "1px solid rgba(27,42,74,0.08)", boxShadow: "0 2px 12px rgba(27,42,74,0.05)" }}>
+              <div style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(232,66,10,0.10)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
+                <Icon name={pt.icon} size={18} />
               </div>
-              <div className="sp-vs-col sp-vs-col-sp360">
-                <Icon name="check" size={14} className="sp-vs-yes" />
-                {row.sp360}
-              </div>
+              <h3 style={{ fontSize: 16, fontWeight: 700, color: "#0F1C35", margin: "0 0 8px" }}>{pt.title}</h3>
+              <p style={{ fontSize: 14, color: "#3D4F6E", lineHeight: 1.6, margin: 0 }}>{pt.desc}</p>
             </div>
           ))}
+        </div>
+        <div style={{ textAlign: "center", marginTop: 48 }}>
+          <a href="/trimpro360" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 14, fontWeight: 700, color: "#E8420A", textDecoration: "none" }}>
+            {t.cta} <Icon name="arrow-right" size={14} />
+          </a>
         </div>
       </div>
     </section>
@@ -732,9 +848,9 @@ function VsExcel({ lang }) {
 function SectionHeader({ eyebrow, title, subtitle, align = "left" }) {
   return (
     <header className={"sp-section-head sp-section-head-" + align}>
-      <div className="sp-eyebrow">{eyebrow}</div>
-      <h2 className="sp-section-title">{title}</h2>
-      {subtitle && <p className="sp-section-sub">{subtitle}</p>}
+      <div className="sp-eyebrow" style={{ color: "#E8420A" }}>{eyebrow}</div>
+      <h2 className="sp-section-title" style={{ color: "#0F1C35" }}>{title}</h2>
+      {subtitle && <p className="sp-section-sub" style={{ color: "#3D4F6E" }}>{subtitle}</p>}
     </header>
   );
 }
@@ -764,23 +880,23 @@ function App() {
     return () => listener.subscription.unsubscribe();
   }, []);
 
-  // Apply theme + accent CSS vars to html
+  // Apply accent + density CSS vars
   uE(() => {
     const html = document.documentElement;
-    html.classList.toggle("sp-dark", !!t.dark);
-    html.classList.toggle("sp-light", !t.dark);
+    html.classList.add("sp-light");
+    html.classList.remove("sp-dark");
     html.style.setProperty("--sp-accent", t.accent);
     html.style.setProperty("--sp-accent-soft", hexAlpha(t.accent, 0.18));
     html.style.setProperty("--sp-density", t.density);
-  }, [t.dark, t.accent, t.density]);
+    window._heroLogoSize = t.heroLogoSize;
+    window._heroTopPad = t.heroTopPad;
+  }, [t.accent, t.density, t.heroLogoSize, t.heroTopPad]);
 
   return (
     <div className={"sp-app sp-density-" + t.density}>
       <Nav
         lang={t.lang}
         setLang={(v) => setTweak("lang", v)}
-        dark={t.dark}
-        setDark={(v) => setTweak("dark", v)}
         logoVariant={t.logoVariant}
         openMobile={openMobile}
         setOpenMobile={setOpenMobile}
@@ -788,11 +904,11 @@ function App() {
         user={user}
       />
       <main>
-        <Hero lang={t.lang} />
-        <TrustStrip lang={t.lang} />
-        <Suite lang={t.lang} />
-        <VsExcel lang={t.lang} />
+        <Hero lang={t.lang} heroLogoSize={t.heroLogoSize} heroTopPad={t.heroTopPad} />
         <Origin lang={t.lang} />
+        <TrustStrip lang={t.lang} />
+        <AppGrid lang={t.lang} />
+        <WhySpecialized lang={t.lang} />
         <Testimonials lang={t.lang} />
       </main>
       <Footer lang={t.lang} logoVariant={t.logoVariant} setActivePage={setActivePage} />
@@ -807,22 +923,25 @@ function App() {
 
       <TweaksPanel title="Tweaks">
         <TweakSection label={t.lang === "fr" ? "Apparence" : "Appearance"} />
-        <TweakToggle label={t.lang === "fr" ? "Mode sombre" : "Dark mode"} value={t.dark} onChange={(v) => setTweak("dark", v)} />
         <TweakRadio label={t.lang === "fr" ? "Langue" : "Language"} value={t.lang} options={["fr", "en"]} onChange={(v) => setTweak("lang", v)} />
         <TweakRadio label={t.lang === "fr" ? "Densité" : "Density"} value={t.density} options={["compact", "regular", "comfy"]} onChange={(v) => setTweak("density", v)} />
         <TweakColor label={t.lang === "fr" ? "Couleur d'accent" : "Accent"}
           value={t.accent}
-          options={["#FF6B1A", "#EAB308", "#3B82F6", "#10B981", "#EF4444"]}
+          options={["#E8420A", "#FF6B1A", "#EAB308", "#3B82F6", "#10B981"]}
           onChange={(v) => setTweak("accent", v)} />
 
-        <TweakSection label={t.lang === "fr" ? "Logo SeriesPro360" : "SeriesPro360 logo"} />
+        <TweakSection label={t.lang === "fr" ? "Hero — Logo & Espacement" : "Hero — Logo & Spacing"} />
+        <TweakSlider label={t.lang === "fr" ? "Taille logo (px)" : "Logo size (px)"} value={t.heroLogoSize} min={100} max={700} step={10} onChange={(v) => setTweak("heroLogoSize", v)} />
+        <TweakSlider label={t.lang === "fr" ? "Espace haut (px)" : "Top padding (px)"} value={t.heroTopPad} min={0} max={120} step={4} onChange={(v) => setTweak("heroTopPad", v)} />
+        <TweakSection label={t.lang === "fr" ? "Logo variante" : "Logo variant"} />
         <TweakRadio
           label={t.lang === "fr" ? "Variante" : "Variant"}
           value={t.logoVariant}
-          options={["strata", "compass", "bracket"]}
+          options={["real", "strata", "compass", "bracket"]}
           onChange={(v) => setTweak("logoVariant", v)}
         />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 6, padding: "4px 0" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 6, padding: "4px 0" }}>
+          <LogoPreview kind="real" active={t.logoVariant === "real"} onClick={() => setTweak("logoVariant", "real")} />
           <LogoPreview kind="strata" active={t.logoVariant === "strata"} onClick={() => setTweak("logoVariant", "strata")} />
           <LogoPreview kind="compass" active={t.logoVariant === "compass"} onClick={() => setTweak("logoVariant", "compass")} />
           <LogoPreview kind="bracket" active={t.logoVariant === "bracket"} onClick={() => setTweak("logoVariant", "bracket")} />

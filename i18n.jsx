@@ -29,6 +29,7 @@ const T = {
       eyebrow: "Pourquoi SeriesPro360 existe",
       headline: "Né sur le chantier. Testé dans l'atelier.",
       story: "Je m'appelle Yan. J'ai passé près de 10 ans dans le revêtement extérieur — dessinateur, chargé de projet, opérateur de plieuses. Moi-même, j'ai oublié des dessins, oublié d'envoyer le courriel à la production, envoyé des commandes incomplètes. SeriesPro360 est né de ces erreurs — pour que ça n'arrive plus, à moi comme à vous.",
+      logo_meaning: "Notre logo représente ce que nous construisons ensemble : un arbre enraciné dans le développement, la construction et les résultats concrets. Chaque feuille orange est une nouvelle application disponible sur la plateforme — une nouvelle capacité ajoutée à vos mains.",
       positioning: [
         { icon: "cpu", label: "AutoCAD fait le dessin. Un ERP gère la production.", sub: "TrimPro360 fait les deux — connectés — pour une PME, sans budget entreprise." },
         { icon: "users", label: "Le client commande. L'atelier produit. Les deux suivent.", sub: "Même endroit, en temps réel. Comme les grandes plateformes, appliqué au revêtement extérieur." },
@@ -381,18 +382,17 @@ const T = {
         },
       ],
     },
-    vs_excel: {
-      eyebrow: "Pourquoi pas Excel ?",
-      title: "Excel est un outil. SeriesPro360 est un système.",
-      subtitle: "Excel a été conçu pour tout faire en général. Nos apps ont été conçues pour la construction québécoise en particulier.",
-      rows: [
-        { label: "Calcul des matériaux", excel: "Formules manuelles, erreurs fréquentes", sp360: "Calculé automatiquement selon les normes CNB" },
-        { label: "Devis PDF", excel: "Mise en page manuelle, aucun standard", sp360: "PDF professionnel généré en 90 secondes" },
-        { label: "Taxes (TPS + TVQ)", excel: "À ajouter manuellement à chaque fois", sp360: "Appliquées automatiquement selon le type de travaux" },
-        { label: "Suivi des commandes", excel: "Impossible sans macro complexe", sp360: "Workflow complet de brouillon à livraison" },
-        { label: "Collaboration terrain/bureau", excel: "Partage par courriel, versions conflictuelles", sp360: "Plateforme partagée, rôles distincts, temps réel" },
-        { label: "Mise à jour des prix", excel: "Manuelle, souvent oubliée", sp360: "Prix du marché québécois mis à jour régulièrement" },
+    why_specialized: {
+      eyebrow: "Pourquoi SeriesPro360 ?",
+      title: "Un outil générique ne connaît pas ton métier.",
+      subtitle: "Chaque app de la suite est conçue pour un métier précis de la construction québécoise — pas pour tout le monde en général.",
+      points: [
+        { icon: "cpu", title: "Conçu pour ton métier, pas pour le monde entier", desc: "TrimPro360 connaît les profilés métalliques. CalcuPro360 connaît les normes CNB. Pas besoin de configurer — c'est déjà là." },
+        { icon: "zap", title: "Opérationnel en minutes, pas en semaines", desc: "Aucune formation, aucun consultant, aucun frais d'implantation. Tu ouvres l'app et tu travailles." },
+        { icon: "users", title: "Terrain et bureau sur la même page", desc: "TrimPro360 relie le chargé de projet, l'atelier et le client en temps réel — sans courriel, sans version conflictuelle." },
+        { icon: "package", title: "Une suite qui grandit avec toi", desc: "Chaque nouvelle app s'intègre à la plateforme. Tu démarres avec une, tu ajoutes les autres quand tu en as besoin." },
       ],
+      cta: "Découvrir TrimPro360",
     },
     cta_band: {
       title: "Arrêtez de calculer dans Excel à 22h.",
@@ -413,7 +413,7 @@ const T = {
       made_in: "Conçu au Québec ⚜",
     },
     pages: {
-      "À propos": "SeriesPro360 est une entreprise québécoise dédiée à la création d'outils numériques robustes et précis pour l'industrie de la construction. Notre mission est de numériser les processus d'estimation et de gestion de chantier tout en respectant strictement les normes locales (CNB, CCQ, RBQ).",
+      "À propos": "SeriesPro360 est une entreprise québécoise dédiée à la création d'outils numériques robustes et précis pour l'industrie de la construction. Notre mission est de numériser les processus d'estimation et de gestion de chantier tout en respectant strictement les normes locales (CNB, CCQ, RBQ).\n\nNotre logo représente ce que nous construisons ensemble : un arbre enraciné dans le développement, la construction et les résultats concrets. Chaque feuille orange est une nouvelle application disponible sur la plateforme — une nouvelle capacité ajoutée à vos mains.",
       "Blogue chantier": "Le blogue de SeriesPro360 sera bientôt disponible. Nous y partagerons des astuces d'estimation, des mises à jour sur les normes québécoises et des études de cas de nos utilisateurs sur le terrain.",
       "Carrières": "Nous sommes toujours à la recherche de talents passionnés par la construction et la technologie. Bien que nous n'ayons pas de postes ouverts pour le moment, n'hésitez pas à nous contacter.",
       "Contact": "Besoin d'aide ou envie de discuter ?\n\nÉcrivez-nous à : support@seriespro360.com\nTéléphone : 1-800-555-3600\nAdresse : Québec, QC, Canada.",
@@ -454,6 +454,7 @@ const T = {
       eyebrow: "Why SeriesPro360 exists",
       headline: "Born on the jobsite. Tested in the shop.",
       story: "My name is Yan. I spent nearly 10 years in exterior cladding — drafter, project manager, brake press operator and programmer. I myself forgot drawings, forgot to send the email to production, sent incomplete orders. SeriesPro360 was born from those mistakes — so they don't happen again, to me or to you.",
+      logo_meaning: "Our logo represents what we build together: a tree rooted in development, construction, and real results. Each orange leaf is a new application available on the platform — a new capability added to your hands.",
       positioning: [
         { icon: "cpu", label: "AutoCAD handles drawings. An ERP handles production.", sub: "TrimPro360 does both — connected — for a small shop, without an enterprise budget." },
         { icon: "users", label: "Client orders. Shop produces. Both track it.", sub: "Same place, in real time. Like the big platforms, applied to exterior cladding." },
@@ -806,18 +807,17 @@ const T = {
         },
       ],
     },
-    vs_excel: {
-      eyebrow: "Why not Excel?",
-      title: "Excel is a tool. SeriesPro360 is a system.",
-      subtitle: "Excel was built to do everything in general. Our apps were built for Quebec construction in particular.",
-      rows: [
-        { label: "Material calculation", excel: "Manual formulas, frequent errors", sp360: "Auto-calculated per NBC standards" },
-        { label: "PDF quote", excel: "Manual layout, no standard format", sp360: "Professional PDF generated in 90 seconds" },
-        { label: "Taxes (GST + QST)", excel: "Added manually every time", sp360: "Applied automatically based on work type" },
-        { label: "Order tracking", excel: "Impossible without complex macros", sp360: "Full workflow from draft to delivery" },
-        { label: "Field/office collaboration", excel: "Shared by email, conflicting versions", sp360: "Shared platform, distinct roles, real time" },
-        { label: "Price updates", excel: "Manual, often forgotten", sp360: "Quebec market prices updated regularly" },
+    why_specialized: {
+      eyebrow: "Why SeriesPro360?",
+      title: "A generic tool doesn't know your trade.",
+      subtitle: "Each app in the suite is built for a specific construction trade in Quebec — not for everyone in general.",
+      points: [
+        { icon: "cpu", title: "Built for your trade, not the whole world", desc: "TrimPro360 knows metal cladding profiles. CalcuPro360 knows NBC standards. No setup needed — it's already there." },
+        { icon: "zap", title: "Running in minutes, not weeks", desc: "No training, no consultant, no implementation fees. Open the app and get to work." },
+        { icon: "users", title: "Field and office on the same page", desc: "TrimPro360 connects the project manager, shop, and client in real time — no email chains, no conflicting versions." },
+        { icon: "package", title: "A suite that grows with you", desc: "Each new app integrates into the platform. Start with one, add more when you need them." },
       ],
+      cta: "Discover TrimPro360",
     },
     cta_band: {
       title: "Stop calculating in Excel at 10pm.",
