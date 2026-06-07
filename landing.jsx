@@ -111,7 +111,7 @@ function InteractiveLogo({ lang, height }) {
         alt="SeriesPro360"
         style={{ height: height || 500, width: "auto", maxWidth: "90vw", objectFit: "contain", display: "block" }}
       />
-      <p style={{ position: "absolute", bottom: "30%", left: "50%", transform: "translateX(-50%)", fontSize: 12, color: "#94A3B8", margin: 0, textAlign: "center", letterSpacing: "0.02em", zIndex: 2, pointerEvents: "none", whiteSpace: "nowrap" }}>
+      <p style={{ position: "absolute", bottom: "23%", right: "52%", fontSize: 12, color: "#94A3B8", margin: 0, textAlign: "center", letterSpacing: "0.02em", zIndex: 2, pointerEvents: "none", whiteSpace: "nowrap" }}>
         {lang === "fr" ? "🍂 Cliquez sur une feuille orange pour explorer une app" : "🍂 Click an orange leaf to explore an app"}
       </p>
       {leaves.map((leaf) => (
