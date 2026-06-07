@@ -100,14 +100,15 @@
 
   <div id="root"></div>
 
-  <!-- Supabase config — remplacer par les vraies valeurs de production -->
+  <!-- Supabase config — partage le projet TrimPro360 (SSO entre site + apps) -->
   <script>
     window.SP_CONFIG = {
-      supabaseUrl: "https://VOTRE_PROJECT_REF.supabase.co",
-      supabaseKey: "VOTRE_ANON_KEY",
+      supabaseUrl: "https://mebtthvzzlnmqbzunijf.supabase.co",
+      supabaseKey: "sb_publishable_0DTZiYw_fg3FrjeIURU64w_m6BLMUd8",
       apps: [
-        { name: "CalcuPro360", url: "https://calcupro360.seriespro360.com", color: "#FF6B1A", icon: "calculator", plan: "calcupro360" },
-        { name: "TrimPro360",  url: "https://trimpro360.seriespro360.com",  color: "#3B82F6", icon: "package",    plan: "trimpro360"  },
+        // URLs Vercel directes en attendant le DNS subdomain (trimpro360.seriespro360.com)
+        { name: "CalcuPro360", url: "https://calcupro360.seriespro360.com",  color: "#FF6B1A", icon: "calculator", plan: "calcupro360" },
+        { name: "TrimPro360",  url: "https://trimpro360-v3.vercel.app",      color: "#3B82F6", icon: "package",    plan: "trimpro360"  },
       ]
     };
   </script>
