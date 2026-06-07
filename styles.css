@@ -3918,8 +3918,8 @@ html.sp-light .sp-login-tab.is-active {
    ================================================================ */
 .pp-root {
   min-height: 100vh;
-  background: #0E0F12;
-  color: #F0F2F5;
+  background: #F8F7F4;
+  color: #0F1C35;
   font-family: var(--sp-font-body, "Inter", sans-serif);
 }
 
@@ -3928,9 +3928,9 @@ html.sp-light .sp-login-tab.is-active {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(14,15,18,0.9);
+  background: rgba(248,247,244,0.95);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(15,28,53,0.08);
 }
 .pp-nav-inner {
   max-width: 1100px;
@@ -3946,7 +3946,7 @@ html.sp-light .sp-login-tab.is-active {
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: #F0F2F5;
+  color: #0F1C35;
   font-weight: 600;
   font-size: 15px;
   font-family: var(--sp-font-display, "Space Grotesk", sans-serif);
@@ -3958,14 +3958,14 @@ html.sp-light .sp-login-tab.is-active {
 }
 .pp-lang-toggle {
   display: flex;
-  background: rgba(255,255,255,0.06);
+  background: rgba(15,28,53,0.06);
   border-radius: 6px;
   overflow: hidden;
 }
 .pp-lang-toggle button {
   border: none;
   background: transparent;
-  color: rgba(240,242,245,0.5);
+  color: rgba(15,28,53,0.45);
   padding: 5px 10px;
   font-size: 12px;
   font-weight: 600;
@@ -3973,8 +3973,8 @@ html.sp-light .sp-login-tab.is-active {
   transition: all 0.15s;
 }
 .pp-lang-toggle button.active {
-  background: rgba(255,255,255,0.1);
-  color: #F0F2F5;
+  background: rgba(15,28,53,0.1);
+  color: #0F1C35;
 }
 .pp-back-btn {
   display: flex;
@@ -3982,14 +3982,14 @@ html.sp-light .sp-login-tab.is-active {
   gap: 6px;
   padding: 7px 14px;
   border-radius: 8px;
-  background: rgba(255,255,255,0.06);
-  color: rgba(240,242,245,0.7);
+  background: rgba(15,28,53,0.06);
+  color: rgba(15,28,53,0.6);
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
   transition: all 0.15s;
 }
-.pp-back-btn:hover { background: rgba(255,255,255,0.1); color: #F0F2F5; }
+.pp-back-btn:hover { background: rgba(15,28,53,0.1); color: #0F1C35; }
 .pp-cta-btn {
   display: inline-flex;
   align-items: center;
@@ -4036,14 +4036,14 @@ html.sp-light .sp-login-tab.is-active {
   letter-spacing: -0.03em;
   line-height: 1.05;
   margin: 0;
-  color: #F0F2F5;
+  color: #0F1C35;
 }
 .pp-hero-tagline {
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(240,242,245,0.45);
+  color: rgba(15,28,53,0.45);
   margin: 0;
 }
 .pp-hero-headline {
@@ -4078,8 +4078,8 @@ html.sp-light .sp-login-tab.is-active {
   margin-top: 8px;
   padding: 8px 20px;
   border-radius: 8px;
-  background: rgba(255,255,255,0.06);
-  color: rgba(240,242,245,0.5);
+  background: rgba(15,28,53,0.06);
+  color: rgba(15,28,53,0.5);
   font-size: 14px;
   font-weight: 500;
 }
@@ -4089,7 +4089,7 @@ html.sp-light .sp-login-tab.is-active {
   padding: 64px 24px;
 }
 .pp-section-alt {
-  background: rgba(255,255,255,0.025);
+  background: #F0EDE8;
 }
 .pp-section-inner {
   max-width: 1000px;
@@ -4100,7 +4100,7 @@ html.sp-light .sp-login-tab.is-active {
   font-size: clamp(22px, 3vw, 32px);
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #F0F2F5;
+  color: #0F1C35;
   margin: 0 0 40px;
   text-align: center;
 }
@@ -4112,16 +4112,17 @@ html.sp-light .sp-login-tab.is-active {
   gap: 20px;
 }
 .pp-feat-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
+  background: #FFFFFF;
+  border: 1px solid rgba(15,28,53,0.09);
   border-radius: 14px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(15,28,53,0.04);
 }
-.pp-feat-card:hover { border-color: rgba(255,255,255,0.14); }
+.pp-feat-card:hover { border-color: rgba(15,28,53,0.18); box-shadow: 0 4px 16px rgba(15,28,53,0.08); }
 .pp-feat-icon {
   width: 44px;
   height: 44px;
@@ -4134,19 +4135,19 @@ html.sp-light .sp-login-tab.is-active {
 .pp-feat-title {
   font-size: 15px;
   font-weight: 600;
-  color: #F0F2F5;
+  color: #0F1C35;
   margin: 0;
 }
 .pp-feat-desc {
   font-size: 13.5px;
-  color: rgba(240,242,245,0.55);
+  color: rgba(15,28,53,0.55);
   line-height: 1.6;
   margin: 0;
 }
 
 /* ── COMPARE TABLE ── */
 .pp-compare-table {
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(15,28,53,0.1);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -4154,32 +4155,33 @@ html.sp-light .sp-login-tab.is-active {
   display: grid;
   grid-template-columns: 1fr 1.1fr 1.1fr;
   padding: 12px 20px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(15,28,53,0.04);
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .06em;
-  color: rgba(240,242,245,0.4);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: rgba(15,28,53,0.4);
+  border-bottom: 1px solid rgba(15,28,53,0.08);
 }
 .pp-compare-row {
   display: grid;
   grid-template-columns: 1fr 1.1fr 1.1fr;
   padding: 14px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(15,28,53,0.05);
   font-size: 13.5px;
   align-items: center;
+  background: #FFFFFF;
 }
 .pp-compare-row:last-child { border-bottom: none; }
-.pp-compare-row:hover { background: rgba(255,255,255,0.03); }
-.pp-compare-col-feature { color: rgba(240,242,245,0.6); font-weight: 500; }
-.pp-compare-col-us { color: #F0F2F5; font-weight: 500; }
-.pp-compare-col-other { color: rgba(240,242,245,0.4); }
+.pp-compare-row:hover { background: rgba(15,28,53,0.02); }
+.pp-compare-col-feature { color: rgba(15,28,53,0.6); font-weight: 500; }
+.pp-compare-col-us { color: #0F1C35; font-weight: 500; }
+.pp-compare-col-other { color: rgba(15,28,53,0.4); }
 .pp-compare-check { font-weight: 700; }
 .pp-compare-note {
   margin-top: 12px;
   font-size: 12px;
-  color: rgba(240,242,245,0.3);
+  color: rgba(15,28,53,0.3);
   text-align: right;
 }
 
@@ -4246,7 +4248,7 @@ html.sp-light .sp-login-tab.is-active {
   cursor: pointer;
   user-select: none;
 }
-.pp-feat-card-clickable:hover { border-color: rgba(255,255,255,0.18); }
+.pp-feat-card-clickable:hover { border-color: rgba(15,28,53,0.2); }
 .pp-feat-card-top {
   display: flex;
   align-items: flex-start;
@@ -4272,7 +4274,7 @@ html.sp-light .sp-login-tab.is-active {
   align-items: flex-start;
   gap: 10px;
   font-size: 13px;
-  color: rgba(240,242,245,0.65);
+  color: rgba(15,28,53,0.65);
   line-height: 1.55;
   margin: 0;
 }
@@ -4288,14 +4290,14 @@ html.sp-light .sp-login-tab.is-active {
 .pp-modules-sub {
   text-align: center;
   font-size: 15px;
-  color: rgba(240,242,245,0.5);
+  color: rgba(15,28,53,0.5);
   margin: -24px 0 36px;
 }
 .pp-modules-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 2px;
-  border: 1px solid rgba(255,255,255,0.07);
+  border: 1px solid rgba(15,28,53,0.08);
   border-radius: 14px;
   overflow: hidden;
 }
@@ -4304,11 +4306,11 @@ html.sp-light .sp-login-tab.is-active {
   align-items: flex-start;
   gap: 14px;
   padding: 18px 20px;
-  background: rgba(255,255,255,0.025);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: #FFFFFF;
+  border-bottom: 1px solid rgba(15,28,53,0.05);
   transition: background 0.15s;
 }
-.pp-module-row:hover { background: rgba(255,255,255,0.05); }
+.pp-module-row:hover { background: rgba(15,28,53,0.02); }
 .pp-module-icon {
   width: 36px;
   height: 36px;
@@ -4321,12 +4323,12 @@ html.sp-light .sp-login-tab.is-active {
 .pp-module-title {
   font-size: 14px;
   font-weight: 600;
-  color: #F0F2F5;
+  color: #0F1C35;
   margin-bottom: 3px;
 }
 .pp-module-desc {
   font-size: 13px;
-  color: rgba(240,242,245,0.5);
+  color: rgba(15,28,53,0.5);
   line-height: 1.5;
 }
 
@@ -4358,7 +4360,7 @@ html.sp-light .sp-login-tab.is-active {
 }
 .pp-step-text {
   font-size: 16px;
-  color: rgba(240,242,245,0.75);
+  color: rgba(15,28,53,0.75);
   line-height: 1.5;
   padding-top: 4px;
 }
@@ -4368,25 +4370,26 @@ html.sp-light .sp-login-tab.is-active {
   display: flex;
   align-items: center;
   gap: 16px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #FFFFFF;
+  border: 1px solid rgba(15,28,53,0.1);
   border-radius: 14px;
   padding: 24px 28px;
   flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(15,28,53,0.04);
 }
 .pp-pricing-icon { flex-shrink: 0; }
 .pp-pricing-note p {
   flex: 1;
   margin: 0;
   font-size: 15px;
-  color: rgba(240,242,245,0.65);
+  color: rgba(15,28,53,0.65);
 }
 
 /* NOTIFY FORM */
 .pp-section-notify { text-align: center; }
 .pp-notify-sub {
   font-size: 15px;
-  color: rgba(240,242,245,0.55);
+  color: rgba(15,28,53,0.55);
   margin: -24px 0 32px;
   max-width: 480px;
   margin-left: auto;
@@ -4405,9 +4408,9 @@ html.sp-light .sp-login-tab.is-active {
   min-width: 220px;
   padding: 11px 16px;
   border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  color: #F0F2F5;
+  border: 1px solid rgba(15,28,53,0.15);
+  background: #FFFFFF;
+  color: #0F1C35;
   font-size: 14px;
 }
 .pp-notify-form button {
@@ -4428,25 +4431,25 @@ html.sp-light .sp-login-tab.is-active {
 /* FOOTER */
 .pp-footer {
   padding: 28px 24px;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(15,28,53,0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: 1100px;
   margin: 0 auto;
-  color: rgba(240,242,245,0.35);
+  color: rgba(15,28,53,0.35);
   font-size: 13px;
 }
 .pp-footer-back {
   display: flex;
   align-items: center;
   gap: 7px;
-  color: rgba(240,242,245,0.45);
+  color: rgba(15,28,53,0.45);
   text-decoration: none;
   font-size: 13px;
   transition: color 0.15s;
 }
-.pp-footer-back:hover { color: rgba(240,242,245,0.8); }
+.pp-footer-back:hover { color: #0F1C35; }
 
 @media (max-width: 600px) {
   .pp-hero { padding: 48px 16px 56px; }
@@ -4458,7 +4461,7 @@ html.sp-light .sp-login-tab.is-active {
 /* ── Hero split Procore-style */
 .pp-hero.pp-hero-split {
   padding: 64px 0 56px;
-  background: #08090B;
+  background: #F8F7F4;
 }
 
 .pp-hero-split-inner {
@@ -4483,14 +4486,14 @@ html.sp-light .sp-login-tab.is-active {
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  color: #F0F2F5;
+  color: #0F1C35;
   margin: 16px 0 0;
 }
 
 .pp-hero-about {
   font-size: 16px;
   line-height: 1.65;
-  color: rgba(240,242,245,0.65);
+  color: rgba(15,28,53,0.6);
   margin: 20px 0 0;
   max-width: 52ch;
 }
@@ -4517,7 +4520,7 @@ html.sp-light .sp-login-tab.is-active {
   align-items: flex-start;
   gap: 8px;
   font-size: 13px;
-  color: rgba(240,242,245,0.55);
+  color: rgba(15,28,53,0.55);
   line-height: 1.4;
 }
 
@@ -4532,9 +4535,9 @@ html.sp-light .sp-login-tab.is-active {
   align-items: center;
   gap: 8px;
   padding: 10px 18px;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(15,28,53,0.2);
   border-radius: 10px;
-  color: rgba(240,242,245,0.8);
+  color: rgba(15,28,53,0.7);
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
@@ -4542,9 +4545,9 @@ html.sp-light .sp-login-tab.is-active {
 }
 
 .pp-ghost-btn:hover {
-  border-color: rgba(255,255,255,0.3);
-  color: #F0F2F5;
-  background: rgba(255,255,255,0.04);
+  border-color: rgba(15,28,53,0.4);
+  color: #0F1C35;
+  background: rgba(15,28,53,0.04);
 }
 
 /* ── Hero right — quote card */
@@ -4555,13 +4558,14 @@ html.sp-light .sp-login-tab.is-active {
 
 .pp-hero-quote-card {
   position: relative;
-  background: #131418;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #FFFFFF;
+  border: 1px solid rgba(15,28,53,0.1);
   border-radius: 18px;
   padding: 36px 32px 28px;
   max-width: 420px;
   width: 100%;
   overflow: hidden;
+  box-shadow: 0 4px 24px rgba(15,28,53,0.06);
 }
 
 .pp-hero-quote-accent {
@@ -4578,7 +4582,7 @@ html.sp-light .sp-login-tab.is-active {
   font-size: clamp(18px, 2.2vw, 24px);
   font-weight: 600;
   line-height: 1.4;
-  color: #F0F2F5;
+  color: #0F1C35;
   margin: 12px 0 24px;
   letter-spacing: -0.01em;
 }
@@ -4603,9 +4607,9 @@ html.sp-light .sp-login-tab.is-active {
 
 /* ── Stats strip sous le hero */
 .pp-stats-strip {
-  background: #0E0F12;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: #FFFFFF;
+  border-top: 1px solid rgba(15,28,53,0.08);
+  border-bottom: 1px solid rgba(15,28,53,0.08);
   padding: 0;
 }
 
@@ -4620,7 +4624,7 @@ html.sp-light .sp-login-tab.is-active {
 .pp-stat-item {
   padding: 28px 24px;
   text-align: center;
-  border-right: 1px solid rgba(255,255,255,0.06);
+  border-right: 1px solid rgba(15,28,53,0.07);
 }
 
 .pp-stat-item:last-child { border-right: none; }
@@ -4636,7 +4640,7 @@ html.sp-light .sp-login-tab.is-active {
 
 .pp-stat-label {
   font-size: 12px;
-  color: rgba(240,242,245,0.45);
+  color: rgba(15,28,53,0.5);
   line-height: 1.4;
 }
 
@@ -4653,8 +4657,8 @@ html.sp-light .sp-login-tab.is-active {
 /* ── Hero visual card (enrichi) */
 .pp-hero-visual-card {
   position: relative;
-  background: #131418;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #FFFFFF;
+  border: 1px solid rgba(15,28,53,0.1);
   border-radius: 18px;
   padding: 36px 32px 28px;
   max-width: 440px;
@@ -4663,6 +4667,7 @@ html.sp-light .sp-login-tab.is-active {
   display: flex;
   flex-direction: column;
   gap: 0;
+  box-shadow: 0 4px 24px rgba(15,28,53,0.08);
 }
 
 /* ── Workflow statuts */
@@ -4727,7 +4732,7 @@ html.sp-light .sp-login-tab.is-active {
 
 /* ── Section démo CalcuPro360 */
 .pp-section-demo {
-  background: #0A0B0E;
+  background: #F0EDE8;
 }
 
 .pp-demo-head {
@@ -4737,7 +4742,7 @@ html.sp-light .sp-login-tab.is-active {
 .pp-section-sub {
   font-size: 15px;
   line-height: 1.65;
-  color: rgba(240,242,245,0.55);
+  color: rgba(15,28,53,0.55);
   margin-top: 10px;
   max-width: 60ch;
 }
