@@ -107,6 +107,14 @@ const T = {
               ],
               note: "* Données Paradigm ERP issues de leur grille tarifaire publique.",
             },
+            origin: {
+              story: "J'ai passé des années à coordonner entre AutoCAD, les courriels de commandes et un ERP trop lourd pour une PME. TrimPro360 est né du besoin concret de connecter le dessin, la commande client et l'atelier — sans friction, sans oubli.",
+              positioning: [
+                { icon: "cpu", label: "AutoCAD fait le dessin. Un ERP gère la production.", sub: "TrimPro360 fait les deux — connectés — pour une PME, sans budget entreprise." },
+                { icon: "users", label: "Le client commande. L'atelier produit. Les deux suivent.", sub: "Même endroit, en temps réel. Comme les grandes plateformes, appliqué au revêtement extérieur." },
+                { icon: "zap", label: "Démarrez en quelques minutes.", sub: "Pas de formation de semaines. Pas de frais d'implantation. Juste l'outil." },
+              ],
+            },
           },
         },
         {

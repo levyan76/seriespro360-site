@@ -357,7 +357,7 @@ function ProductPage() {
     ),
 
     // ── POSITIONNEMENT (origine du produit)
-    window.T[lang].origin && window.T[lang].origin.positioning && React.createElement("section", { className: "pp-section pp-section-alt" },
+    (m.origin || (window.T[lang].origin && window.T[lang].origin.positioning)) && React.createElement("section", { className: "pp-section pp-section-alt" },
       React.createElement("div", { className: "pp-section-inner" },
         React.createElement("div", { className: "pp-eyebrow", style: { color: colors.accent, textAlign: "center", marginBottom: 8 } },
           fr ? "Pourquoi " + product.name + " ?" : "Why " + product.name + "?"
@@ -366,10 +366,10 @@ function ProductPage() {
           fr ? "Conçu par quelqu'un qui a vécu le problème." : "Built by someone who lived the problem."
         ),
         React.createElement("p", { style: { textAlign: "center", fontSize: 15, color: "rgba(15,28,53,0.55)", maxWidth: 600, margin: "0 auto 40px", lineHeight: 1.65 } },
-          window.T[lang].origin.story
+          (m.origin || window.T[lang].origin || {}).story
         ),
         React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 } },
-          window.T[lang].origin.positioning.map((pt) =>
+          ((m.origin || window.T[lang].origin || {}).positioning || []).map((pt) =>
             React.createElement("div", { key: pt.label, style: { background: "#FFFFFF", border: "1px solid rgba(15,28,53,0.09)", borderRadius: 12, padding: 20, display: "flex", flexDirection: "column", gap: 10, boxShadow: "0 2px 8px rgba(15,28,53,0.04)" } },
               React.createElement("div", { style: { width: 38, height: 38, borderRadius: 8, background: colors.soft, color: colors.accent, display: "flex", alignItems: "center", justifyContent: "center" } },
                 React.createElement(Icon, { name: pt.icon, size: 18 })
