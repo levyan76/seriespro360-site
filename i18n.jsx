@@ -124,10 +124,10 @@ const T = {
               },
               {
                 id: "dkfscdElgQw",
-                titleFr: "Catalogue — passer une commande en moins de 2 minutes",
-                titleEn: "Catalogue — place an order in under 2 minutes",
-                descFr: "56 profils standards disponibles — J-trim, solin, noue, bardage, faîtière. Sélectionne un profil, entre tes dimensions et soumet ta commande directement à la production.",
-                descEn: "56 standard profiles available — J-trim, flashing, valley, cladding, ridge cap. Select a profile, enter your dimensions and submit your order straight to production.",
+                titleFr: "Module Commandes — du besoin client à la production, sans friction",
+                titleEn: "Orders Module — from client request to production, without friction",
+                descFr: "Chaque commande téléphonée, chaque courriel griffonné, chaque feuille papier — c'est une information incomplète qui finit en appel de clarification ou en reprise de production. Le module Commandes de TrimPro360 transforme ça en dossiers structurés, complets et immédiatement exploitables. Matériau, calibre, couleur, quantité — rien ne peut être soumis si c'est incomplet. La validation est appliquée côté serveur, peu importe le rôle ou le chemin utilisé. Zéro commande incomplète. Zéro reprise.",
+                descEn: "Every phone order, every scribbled email, every paper sheet — it's incomplete information that ends up as a clarification call or a production redo. TrimPro360's Orders module turns that into structured, complete, immediately actionable files. Material, gauge, color, quantity — nothing can be submitted if it's incomplete. Validation is enforced server-side, regardless of role or path. Zero incomplete orders. Zero redos.",
               },
             ],
             origin: {
