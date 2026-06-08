@@ -287,15 +287,20 @@ function ProductPage() {
 
     // ── HERO SPLIT (Procore-style)
     React.createElement("header", { className: "pp-hero pp-hero-split" },
+
+      // Bande logo centrée
+      PRODUCT_LOGOS[product.name] && React.createElement("div", { className: "pp-hero-logo-band" },
+        React.createElement("img", {
+          src: PRODUCT_LOGOS[product.name],
+          alt: product.name,
+          className: "pp-hero-logo-centered"
+        })
+      ),
+
       React.createElement("div", { className: "pp-hero-split-inner" },
 
         // LEFT — copy
         React.createElement("div", { className: "pp-hero-left" },
-          PRODUCT_LOGOS[product.name] && React.createElement("img", {
-            src: PRODUCT_LOGOS[product.name],
-            alt: product.name,
-            style: { height: 96, width: "auto", objectFit: "contain", marginBottom: 24 }
-          }),
           React.createElement("div", { className: "pp-hero-badge", style: { color: colors.accent, background: colors.soft, fontWeight: 700, letterSpacing: "0.08em" } },
             product.tag
           ),

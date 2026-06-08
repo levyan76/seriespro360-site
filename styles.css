@@ -4474,6 +4474,20 @@ html.sp-light .sp-login-tab.is-active {
   align-items: center;
 }
 
+/* ── Bande logo centrée au-dessus du hero split */
+.pp-hero-logo-band {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 0 0;
+  width: 100%;
+}
+.pp-hero-logo-centered {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+}
+
 .pp-hero-left {
   display: flex;
   flex-direction: column;
