@@ -403,14 +403,10 @@ function ProductPage() {
         React.createElement("h2", { className: "pp-section-title" },
           fr ? "Voir l'app en action" : "See the app in action"
         ),
-        React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 40 } },
+        React.createElement("div", { className: "pp-demo-grid" },
           m.demoVideos.map((v) =>
-            React.createElement("div", { key: v.id, style: { display: "flex", flexDirection: "column", gap: 14 } },
-              React.createElement("div", { style: { fontSize: 15, fontWeight: 600, color: "#0F1C35" } }, fr ? v.titleFr : v.titleEn),
-              v.descFr && React.createElement("p", { style: { fontSize: 13.5, color: "rgba(15,28,53,0.55)", margin: "0 0 4px", lineHeight: 1.6 } },
-                fr ? v.descFr : v.descEn
-              ),
-              React.createElement("div", { style: { position: "relative", paddingBottom: "56.25%", borderRadius: 16, overflow: "hidden", background: "#0F1C35", boxShadow: "0 4px 24px rgba(15,28,53,0.12)" } },
+            React.createElement("div", { key: v.id, className: "pp-demo-item" },
+              React.createElement("div", { className: "pp-demo-video-wrap" },
                 React.createElement("iframe", {
                   src: "https://www.youtube.com/embed/" + v.id + "?rel=0&modestbranding=1",
                   title: fr ? v.titleFr : v.titleEn,
@@ -418,6 +414,12 @@ function ProductPage() {
                   allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
                   allowFullScreen: true
                 })
+              ),
+              React.createElement("div", { className: "pp-demo-caption" },
+                React.createElement("div", { className: "pp-demo-title" }, fr ? v.titleFr : v.titleEn),
+                v.descFr && React.createElement("p", { className: "pp-demo-desc" },
+                  fr ? v.descFr : v.descEn
+                )
               )
             )
           )
