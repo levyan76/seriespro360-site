@@ -4725,6 +4725,55 @@ html.sp-light .sp-login-tab.is-active {
   font-weight: 600;
 }
 
+/* ── Hero hook — une ligne d'impact sous le tagline */
+.pp-hero-hook {
+  font-size: 17px;
+  font-weight: 600;
+  color: #0F1C35;
+  line-height: 1.5;
+  margin: 18px 0 0;
+  max-width: 44ch;
+}
+
+/* ── Trust line sous CTA */
+.pp-hero-trust-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 12px;
+  color: rgba(15,28,53,0.45);
+  font-weight: 500;
+  flex-wrap: wrap;
+}
+.pp-hero-trust-line svg {
+  color: #34D399;
+  flex-shrink: 0;
+}
+.pp-trust-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(15,28,53,0.25);
+  display: inline-block;
+}
+
+/* ── Workflow dot pulse sur step actif */
+@keyframes pp-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(234,179,8,0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(234,179,8,0); }
+}
+.pp-wf-dot.active {
+  animation: pp-pulse 1.8s ease-in-out infinite;
+}
+
+/* ── Hero meta bullets — icône verte */
+.pp-hero-meta li svg {
+  color: #34D399;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
 /* ── Eyebrow sections produit */
 .pp-section .pp-eyebrow {
   margin-bottom: 8px;

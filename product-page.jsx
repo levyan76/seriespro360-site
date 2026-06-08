@@ -263,14 +263,18 @@ function ProductPage() {
           PRODUCT_LOGOS[product.name] && React.createElement("img", {
             src: PRODUCT_LOGOS[product.name],
             alt: product.name,
-            style: { height: 72, width: "auto", objectFit: "contain", marginBottom: 20 }
+            style: { height: 96, width: "auto", objectFit: "contain", marginBottom: 24 }
           }),
-          React.createElement("div", { className: "pp-hero-badge", style: { color: colors.accent, background: colors.soft } },
+          React.createElement("div", { className: "pp-hero-badge", style: { color: colors.accent, background: colors.soft, fontWeight: 700, letterSpacing: "0.08em" } },
             product.tag
           ),
           React.createElement("h1", { className: "pp-hero-title" }, product.name),
           React.createElement("p", { className: "pp-hero-tagline" }, product.tagline),
-          React.createElement("p", { className: "pp-hero-about" }, m.about),
+          React.createElement("p", { className: "pp-hero-hook" },
+            fr
+              ? "Du dessin à la livraison — sans papier, sans oublis, sans ressaisie."
+              : "From drawing to delivery — no paper, no missed specs, no re-entry."
+          ),
           React.createElement("div", { className: "pp-hero-ctas" },
             isLive
               ? React.createElement("a", {
@@ -290,6 +294,14 @@ function ProductPage() {
               fr ? "Voir la démo" : "Try demo",
               React.createElement(Icon, { name: "arrow-down", size: 14 })
             )
+          ),
+          React.createElement("div", { className: "pp-hero-trust-line" },
+            React.createElement(Icon, { name: "check", size: 12 }),
+            fr ? "Essai gratuit 14 jours" : "14-day free trial",
+            React.createElement("span", { className: "pp-trust-dot" }),
+            fr ? "Aucune carte de crédit" : "No credit card",
+            React.createElement("span", { className: "pp-trust-dot" }),
+            fr ? "FR / EN natif" : "Native FR / EN"
           ),
           React.createElement("ul", { className: "pp-hero-meta" },
             (m.bullets || (m.steps && m.steps.slice(0, 3)) || []).map((s, i) =>
@@ -316,13 +328,13 @@ function ProductPage() {
 
             // Workflow statuts (TrimPro uniquement)
             slug === "trimpro360" && React.createElement("div", { className: "pp-hero-workflow" },
-              React.createElement("div", { className: "pp-hero-workflow-label", style: { color: "rgba(240,242,245,0.35)" } },
+              React.createElement("div", { className: "pp-hero-workflow-label", style: { color: "rgba(15,28,53,0.35)" } },
                 fr ? "Workflow commandes" : "Order workflow"
               ),
               React.createElement("div", { className: "pp-hero-workflow-steps" },
                 [fr ? "Brouillon" : "Draft", fr ? "Soumise" : "Submitted", fr ? "Approuvée" : "Approved", fr ? "Production" : "In Production", fr ? "Livrée" : "Delivered"].map((label, i, arr) =>
                   React.createElement("div", { key: i, className: "pp-wf-step", style: { opacity: i === 3 ? 1 : (i === 4 ? 0.45 : 0.5 + i * 0.1) } },
-                    React.createElement("div", { className: "pp-wf-dot", style: { background: i === 3 ? colors.accent : "rgba(255,255,255,0.15)" } }),
+                    React.createElement("div", { className: "pp-wf-dot" + (i === 3 ? " active" : ""), style: { background: i === 3 ? colors.accent : "rgba(15,28,53,0.12)" } }),
                     React.createElement("span", null, label),
                     i < arr.length - 1 && React.createElement("div", { className: "pp-wf-line" })
                   )
