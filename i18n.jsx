@@ -399,7 +399,7 @@ const T = {
       title: "Des pros québécois qui ont arrêté d'improviser.",
       items: [
         {
-          quote: "Avant CalcuPro360, mes estimés prenaient 2 heures et j'avais toujours peur d'avoir oublié quelque chose. Maintenant c'est 15 minutes, devis PDF inclus.",
+          quote: "Avant CalcuPro360, mes estimés prenaient 2 heures et j'avais toujours peur d'avoir oublié quelque chose. Maintenant c'est 15 minutes, devis PDF inclus, directement sur le chantier.",
           name: "Marc Lefebvre",
           role: "Entrepreneur général, Québec",
           initials: "ML",
