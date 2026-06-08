@@ -111,7 +111,7 @@ function InteractiveLogo({ lang, height }) {
         alt="SeriesPro360"
         style={{ height: height || 500, width: "auto", maxWidth: "90vw", objectFit: "contain", display: "block" }}
       />
-      <svg style={{ position: "absolute", bottom: "19%", left: "50%", transform: "translateX(-50%)", width: "52%", pointerEvents: "none", zIndex: 2, overflow: "visible" }} viewBox="0 0 300 60">
+      <svg style={{ position: "absolute", bottom: "19%", left: 0, right: 0, margin: "0 auto", width: "52%", display: "block", pointerEvents: "none", zIndex: 2, overflow: "visible" }} viewBox="0 0 300 60">
         <defs>
           <path id="arc-hint" d="M 10,5 Q 150,60 290,5" />
         </defs>
