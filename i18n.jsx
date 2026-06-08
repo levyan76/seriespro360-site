@@ -119,8 +119,8 @@ const T = {
                 id: "H7DHtr0_K5A",
                 titleFr: "Import Excel — transférer votre inventaire existant",
                 titleEn: "Excel Import — migrate your existing inventory",
-                descFr: "Importez votre inventaire actuel depuis un fichier Excel directement dans TrimPro360 — sans ressaisie manuelle.",
-                descEn: "Import your current inventory from an Excel file directly into TrimPro360 — no manual re-entry.",
+                descFr: "Ton inventaire est dans un Excel — colonnes à toi, noms à toi, format à toi. L'import intelligent de TrimPro360 reconnaît tes matériaux, te propose les correspondances, et apprend de tes corrections pour les prochains imports. Le stock est à jour en quelques clics. Et dès qu'une commande est créée, l'allocation se fait automatiquement — fini les ruptures de stock surprises en plein milieu d'un chantier.",
+                descEn: "Your inventory is in a spreadsheet — your columns, your names, your format. TrimPro360's smart import recognizes your materials, suggests matches, and learns from your corrections for next time. Stock is updated in a few clicks. And as soon as an order is created, allocation happens automatically — no more surprise stockouts in the middle of a job.",
               },
               {
                 id: "dkfscdElgQw",
