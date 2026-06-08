@@ -413,9 +413,18 @@ function ProductPage() {
         React.createElement("h2", { className: "pp-section-title" },
           fr ? "Conçu par quelqu'un qui a vécu le problème." : "Built by someone who lived the problem."
         ),
-        React.createElement("p", { style: { textAlign: "center", fontSize: 15, color: "rgba(15,28,53,0.55)", maxWidth: 600, margin: "0 auto 40px", lineHeight: 1.65 } },
-          (m.origin || window.T[lang].origin || {}).story
-        ),
+        (() => {
+          const o = m.origin || window.T[lang].origin || {};
+          return [
+            o.story2 && React.createElement("p", { key: "s2", style: { textAlign: "center", fontSize: 15, color: "rgba(15,28,53,0.55)", maxWidth: 640, margin: "0 auto 12px", lineHeight: 1.65 } }, o.story2),
+            o.story3 && React.createElement("p", { key: "s3", style: { textAlign: "center", fontSize: 14, color: "rgba(15,28,53,0.45)", maxWidth: 640, margin: "0 auto 32px", lineHeight: 1.65, fontStyle: "italic" } }, o.story3),
+            o.platform_title && React.createElement("div", { key: "plat", style: { background: "#FFFFFF", border: "1px solid rgba(15,28,53,0.09)", borderRadius: 12, padding: "20px 24px", maxWidth: 640, margin: "0 auto 40px", boxShadow: "0 2px 8px rgba(15,28,53,0.04)" } },
+              React.createElement("div", { style: { fontSize: 11, fontWeight: 700, color: colors.accent, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 8 } }, o.platform_title),
+              React.createElement("p", { style: { fontSize: 14, color: "rgba(15,28,53,0.65)", lineHeight: 1.65, margin: "0 0 6px" } }, o.platform_desc),
+              React.createElement("p", { style: { fontSize: 14, color: "rgba(15,28,53,0.55)", lineHeight: 1.65, margin: 0 } }, o.logo_meaning)
+            )
+          ];
+        })(),
         React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 } },
           ((m.origin || window.T[lang].origin || {}).positioning || []).map((pt) =>
             React.createElement("div", { key: pt.label, style: { background: "#FFFFFF", border: "1px solid rgba(15,28,53,0.09)", borderRadius: 12, padding: 20, display: "flex", flexDirection: "column", gap: 10, boxShadow: "0 2px 8px rgba(15,28,53,0.04)" } },

@@ -232,32 +232,15 @@ function Origin({ lang }) {
         <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 700, color: "#0F1C35", lineHeight: 1.1, margin: "0 0 24px", letterSpacing: "-0.02em" }}>
           {t.headline}
         </h2>
-        {t.founder_title && (
-          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", color: "#3D4F6E", marginBottom: 16 }}>
-            {t.founder_title}
-          </div>
-        )}
-        <p style={{ fontSize: 17, color: "#3D4F6E", lineHeight: 1.75, margin: "0 0 16px", textAlign: "left" }}>
-          {t.story}
-        </p>
         {t.story2 && (
           <p style={{ fontSize: 17, color: "#3D4F6E", lineHeight: 1.75, margin: "0 0 16px", textAlign: "left" }}>
             {t.story2}
           </p>
         )}
         {t.story3 && (
-          <p style={{ fontSize: 16, color: "#3D4F6E", lineHeight: 1.75, margin: "0 0 32px", textAlign: "left", fontStyle: "italic" }}>
+          <p style={{ fontSize: 16, color: "#3D4F6E", lineHeight: 1.75, margin: "0 0 40px", textAlign: "left", fontStyle: "italic" }}>
             {t.story3}
           </p>
-        )}
-        {t.platform_title && (
-          <div style={{ background: "#F8F7F4", borderRadius: 14, padding: "24px 28px", marginBottom: 40, textAlign: "left" }}>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#E8420A", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 8 }}>
-              {t.platform_title}
-            </div>
-            <p style={{ fontSize: 15, color: "#3D4F6E", lineHeight: 1.7, margin: "0 0 8px" }}>{t.platform_desc}</p>
-            <p style={{ fontSize: 15, color: "#3D4F6E", lineHeight: 1.7, margin: 0 }}>{t.logo_meaning}</p>
-          </div>
         )}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginBottom: 40, textAlign: "left" }}>
           {t.positioning.map((p) => (
