@@ -4808,12 +4808,8 @@ html.sp-light .sp-login-tab.is-active {
 .pp-demo-desc {
   font-size: 12.5px;
   color: rgba(15,28,53,0.5);
-  line-height: 1.55;
+  line-height: 1.6;
   margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 /* ── Eyebrow sections produit */
