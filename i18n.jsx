@@ -112,8 +112,8 @@ const T = {
                 id: "YdTywKqRv1c",
                 titleFr: "Canvas vectoriel — dessiner un profilé en quelques clics",
                 titleEn: "Vector Canvas — draw a profile in a few clicks",
-                descFr: "Avec TrimPro360, tu n'as plus besoin d'AutoCAD pour dessiner tes profilés. Tu cliques segment par segment — l'app calcule le développé en temps réel, vérifie les angles, les replis, la largeur de bobine. En 2 minutes, ton dessin est prêt pour la production. Export DXF ou PDF technique d'un clic.",
-                descEn: "With TrimPro360, you no longer need AutoCAD to draw your profiles. Click segment by segment — the app calculates the flat pattern in real time, checks angles, bends, and coil width. In 2 minutes, your drawing is production-ready. One-click DXF or technical PDF export.",
+                descFr: "AutoCAD dessine des replis — en 3 étapes, avec des outils complexes, à 600$ à 4 000$ par an. Sans aucun lien avec ta commande ou ta production. Le Canvas TrimPro360, c'est le seul outil qui combine dessin de profilés avec replis, commande intégrée, validation automatique et workflow de production — dans un navigateur web, en quelques minutes, sans formation technique. Tu dessines segment par segment, tu ajoutes tes replis, tu remplis matériau, calibre, couleur. La commande part, le chargé de projet est notifié, le dossier est prêt pour l'atelier. Zéro ressaisie. Zéro oubli. Du dessin à la production : 5 minutes, 1 outil.",
+                descEn: "AutoCAD can draw bends — in 3 steps, with complex tools, at $600–$4,000/year. With no connection to your orders or your production. TrimPro360's Canvas is the only tool that combines profile drawing with bends, integrated ordering, automatic validation and production workflow — in a web browser, in minutes, with no technical training. Draw segment by segment, add your bends, fill in material, gauge, color. The order goes out, the project manager is notified, the file is ready for the shop. Zero re-entry. Zero missed specs. Drawing to production: 5 minutes, 1 tool.",
               },
               {
                 id: "H7DHtr0_K5A",
