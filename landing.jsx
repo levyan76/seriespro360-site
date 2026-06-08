@@ -105,22 +105,15 @@ function InteractiveLogo({ lang, height }) {
     },
   ];
   return (
-    <div style={{ position: "relative", display: "inline-block", lineHeight: 0 }}>
+    <div style={{ position: "relative", display: "inline-block", lineHeight: 0, overflow: "visible" }}>
       <img
         src="/logos/logo_seriespro360_ FR..png"
         alt="SeriesPro360"
         style={{ height: height || 500, width: "auto", maxWidth: "90vw", objectFit: "contain", display: "block" }}
       />
-      <svg style={{ position: "absolute", bottom: "19%", left: 0, right: 0, margin: "0 auto", width: "52%", display: "block", pointerEvents: "none", zIndex: 2, overflow: "visible" }} viewBox="0 0 300 60">
-        <defs>
-          <path id="arc-hint" d="M 10,5 Q 150,60 290,5" />
-        </defs>
-        <text fontSize="11" fill="#94A3B8" letterSpacing="0.5" fontFamily="inherit">
-          <textPath href="#arc-hint" startOffset="50%" textAnchor="middle">
-            {lang === "fr" ? "🍂 Cliquez sur une feuille orange pour explorer une app" : "🍂 Click an orange leaf to explore an app"}
-          </textPath>
-        </text>
-      </svg>
+      <p style={{ position: "absolute", bottom: "24%", left: "2%", fontSize: 11, color: "#94A3B8", margin: 0, textAlign: "left", letterSpacing: "0.02em", zIndex: 2, pointerEvents: "none", whiteSpace: "nowrap" }}>
+        {lang === "fr" ? "🍂 Cliquez sur une feuille orange pour explorer une app" : "🍂 Click an orange leaf to explore an app"}
+      </p>
       {leaves.map((leaf) => (
         <div
           key={leaf.id}
