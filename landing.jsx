@@ -242,22 +242,6 @@ function Origin({ lang }) {
             {t.story3}
           </p>
         )}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginBottom: 40, textAlign: "left" }}>
-          {t.positioning.map((p) => (
-            <div key={p.label} style={{ background: "#F8F7F4", borderRadius: 12, padding: "20px 20px", display: "flex", gap: 14, alignItems: "flex-start" }}>
-              <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(232,66,10,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <Icon name={p.icon} size={18} />
-              </div>
-              <div>
-                <div style={{ fontSize: 14, fontWeight: 700, color: "#0F1C35", marginBottom: 4 }}>{p.label}</div>
-                <div style={{ fontSize: 13, color: "#3D4F6E", lineHeight: 1.5 }}>{p.sub}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <a href="/trimpro360" className="sp-btn sp-btn-primary">
-          {t.cta} <Icon name="arrow-right" size={14} />
-        </a>
       </div>
     </section>
   );
