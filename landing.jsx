@@ -225,7 +225,7 @@ function TrustStrip({ lang }) {
 function Origin({ lang }) {
   const t = window.T[lang].origin;
   return (
-    <section style={{ background: "#FFFFFF", padding: "80px 0", borderTop: "1px solid rgba(27,42,74,0.08)" }}>
+    <section style={{ background: "#FFFFFF", padding: "80px 0 40px" }}>
       <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 32px", textAlign: "center" }}>
         <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#E8420A", marginBottom: 12 }}>
           {t.eyebrow}

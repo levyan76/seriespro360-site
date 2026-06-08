@@ -1418,10 +1418,10 @@ html.sp-light .sp-unit-toggle button.is-on {
      TRUST STRIP
      ================================================================ */
 .sp-trust {
-  padding: 64px 0;
-  background: var(--sp-bg-2);
-  border-top: 1px solid var(--sp-border);
-  border-bottom: 1px solid var(--sp-border);
+  padding: 0 0 64px;
+  background: #FFFFFF;
+  border-top: none;
+  border-bottom: none;
 }
 
 .sp-trust-stats {
