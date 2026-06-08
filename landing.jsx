@@ -113,7 +113,7 @@ function InteractiveLogo({ lang, height }) {
       />
       <svg style={{ position: "absolute", bottom: "19%", left: "5%", width: "52%", pointerEvents: "none", zIndex: 2, overflow: "visible" }} viewBox="0 0 300 60">
         <defs>
-          <path id="arc-hint" d="M 10,55 Q 150,0 290,55" />
+          <path id="arc-hint" d="M 10,5 Q 150,60 290,5" />
         </defs>
         <text fontSize="11" fill="#94A3B8" letterSpacing="0.5" fontFamily="inherit">
           <textPath href="#arc-hint" startOffset="50%" textAnchor="middle">
