@@ -196,7 +196,8 @@ function TrustStrip({ lang }) {
   return (
     <section className="sp-trust">
       <div className="sp-container sp-reveal" ref={r}>
-        <div className="sp-trust-stats">
+        {/* STATS MASQUÉES — retirer style display:none pour réactiver */}
+        <div className="sp-trust-stats" style={{ display: "none" }}>
           {t.stats.map((s) => (
             <div key={s.value} className="sp-trust-stat">
               <div className="sp-trust-stat-value">{s.value}</div>
