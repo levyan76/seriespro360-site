@@ -4811,6 +4811,29 @@ html.sp-light .sp-login-tab.is-active {
   line-height: 1.6;
   margin: 0;
 }
+.pp-demo-desc--clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pp-demo-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(15,28,53,0.45);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.pp-demo-toggle:hover {
+  color: #0F1C35;
+}
 
 /* ── Eyebrow sections produit */
 .pp-section .pp-eyebrow {

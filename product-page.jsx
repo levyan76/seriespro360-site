@@ -3,6 +3,37 @@
 // Style: Procore-inspired — Hero split, stats, features, comparaison, calculateur (CalcuPro360 seulement)
 
 const { useState: uS, useEffect: uE } = React;
+
+function DemoCard({ v, fr }) {
+  const [open, setOpen] = uS(false);
+  return React.createElement("div", { className: "pp-demo-item" },
+    React.createElement("div", { className: "pp-demo-video-wrap" },
+      React.createElement("iframe", {
+        src: "https://www.youtube.com/embed/" + v.id + "?rel=0&modestbranding=1",
+        title: fr ? v.titleFr : v.titleEn,
+        style: { position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" },
+        allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+        allowFullScreen: true
+      })
+    ),
+    React.createElement("div", { className: "pp-demo-caption" },
+      React.createElement("div", { className: "pp-demo-title" }, fr ? v.titleFr : v.titleEn),
+      (v.descFr || v.descEn) && React.createElement(React.Fragment, null,
+        React.createElement("p", { className: "pp-demo-desc" + (open ? "" : " pp-demo-desc--clamped") },
+          fr ? v.descFr : v.descEn
+        ),
+        React.createElement("button", {
+          className: "pp-demo-toggle",
+          onClick: () => setOpen(!open)
+        },
+          open
+            ? (fr ? "Réduire ↑" : "Show less ↑")
+            : (fr ? "Afficher plus ↓" : "Show more ↓")
+        )
+      )
+    )
+  );
+}
 const { createRoot } = ReactDOM;
 
 // ── Map logos produit
@@ -405,23 +436,7 @@ function ProductPage() {
         ),
         React.createElement("div", { className: "pp-demo-grid" },
           m.demoVideos.map((v) =>
-            React.createElement("div", { key: v.id, className: "pp-demo-item" },
-              React.createElement("div", { className: "pp-demo-video-wrap" },
-                React.createElement("iframe", {
-                  src: "https://www.youtube.com/embed/" + v.id + "?rel=0&modestbranding=1",
-                  title: fr ? v.titleFr : v.titleEn,
-                  style: { position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" },
-                  allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
-                  allowFullScreen: true
-                })
-              ),
-              React.createElement("div", { className: "pp-demo-caption" },
-                React.createElement("div", { className: "pp-demo-title" }, fr ? v.titleFr : v.titleEn),
-                v.descFr && React.createElement("p", { className: "pp-demo-desc" },
-                  fr ? v.descFr : v.descEn
-                )
-              )
-            )
+            React.createElement(DemoCard, { key: v.id, v, fr })
           )
         )
       )
