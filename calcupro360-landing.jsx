@@ -2,21 +2,25 @@
 // Structure: Hero, Stats, Features, Workflow, Demo, Pricing, FAQ
 
 const { createElement: h } = React;
+const { createRoot } = ReactDOM;
 
 // ── Icon component
 function Icon({ name, size = 20 }) {
   const icons = {
-    check: <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>,
-    chevron: <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>,
-    package: <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 5v5m0 0v5m0-5l5-2.5m-5 2.5L7 9.5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>,
-    cpu: <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
-    file: <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>,
-    wifiOff: <path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0121 12.55M5 12.55a10.94 10.94 0 011.72-1.49m12.56 5.39a5.77 5.77 0 00-1.64-1.18M5.42 16.45A5.77 5.77 0 016 15.45m6.27 6.79a.75.75 0 00.46.77.7.7 0 00.94-.34.75.75 0 00-.46-.77.7.7 0 00-.94.34z" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>,
-    calculator: <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
-    globe: <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
-    menu: <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+    check: { el: "path", d: "M20 6L9 17l-5-5", stroke: "currentColor", strokeWidth: "2", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" },
+    chevron: { el: "path", d: "M6 9l6 6 6-6", stroke: "currentColor", strokeWidth: "2", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" },
+    package: { el: "path", d: "M12 2L2 7v10l10 5 10-5V7L12 2zm0 5v5m0 0v5m0-5l5-2.5m-5 2.5L7 9.5", stroke: "currentColor", strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" },
+    cpu: { el: "rect", x: "4", y: "4", width: "16", height: "16", rx: "2", stroke: "currentColor", strokeWidth: "1.5", fill: "none" },
+    file: { el: "path", d: "M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM14 2v6h6M16 13H8M16 17H8M10 9H8", stroke: "currentColor", strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" },
+    wifiOff: { el: "path", d: "M1 1l22 22M16.72 11.06A10.94 10.94 0 0121 12.55M5 12.55a10.94 10.94 0 011.72-1.49m12.56 5.39a5.77 5.77 0 00-1.64-1.18M5.42 16.45A5.77 5.77 0 016 15.45m6.27 6.79a.75.75 0 00.46.77.7.7 0 00.94-.34.75.75 0 00-.46-.77.7.7 0 00-.94.34z", stroke: "currentColor", strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" },
+    calculator: { el: "rect", x: "4", y: "2", width: "16", height: "20", rx: "2", stroke: "currentColor", strokeWidth: "1.5", fill: "none" },
+    globe: { el: "circle", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "1.5", fill: "none" },
+    menu: { el: "path", d: "M3 12h18M3 6h18M3 18h18", stroke: "currentColor", strokeWidth: "2", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }
   };
-  return h("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none" }, icons[name] || null);
+  const icon = icons[name];
+  if (!icon) return null;
+  const { el, ...props } = icon;
+  return h("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none" }, h(el, props));
 }
 
 // ── Navigation
@@ -348,5 +352,4 @@ function App() {
 }
 
 // Mount
-const { createRoot } = React;
 createRoot(document.getElementById("root")).render(h(App));
