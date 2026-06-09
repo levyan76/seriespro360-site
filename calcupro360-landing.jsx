@@ -344,7 +344,6 @@ function App() {
       h(StatsStrip, { lang }),
       h(Features, { lang }),
       h(Workflow, { lang }),
-      h(DemoVideos, { lang }),
       h(Pricing, { lang })
     ),
     h(Footer, { lang })
