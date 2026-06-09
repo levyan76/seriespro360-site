@@ -63,7 +63,7 @@ function Nav({ lang, setLang, isScrolled }) {
           React.createElement("button", { onClick: () => setLang("fr"), className: lang === "fr" ? "is-on" : "" }, "FR"),
           React.createElement("button", { onClick: () => setLang("en"), className: lang === "en" ? "is-on" : "" }, "EN")
         ),
-        React.createElement("button", { className: "tp-btn tp-btn-primary", disabled: true, style: { opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" } }, t.cta)
+        React.createElement("a", { href: "https://trimpro360-v3.vercel.app", className: "tp-btn tp-btn-primary" }, t.cta)
       )
     )
   );
@@ -99,7 +99,7 @@ function Hero({ lang }) {
       React.createElement("h1", { className: "tp-hero-headline" }, t.headline),
       React.createElement("p", { className: "tp-hero-subtitle" }, t.subtitle),
       React.createElement("div", { className: "tp-hero-ctas" },
-        React.createElement("button", { className: "tp-btn tp-btn-primary tp-btn-lg", disabled: true, style: { opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" } }, t.cta)
+        React.createElement("a", { href: "https://trimpro360-v3.vercel.app", className: "tp-btn tp-btn-primary tp-btn-lg" }, t.cta)
       )
     )
   );
@@ -365,7 +365,7 @@ function CTASection({ lang }) {
     React.createElement("div", { className: "tp-container tp-cta-inner" },
       React.createElement("h2", { className: "tp-cta-title" }, t.title),
       React.createElement("p", { className: "tp-cta-subtitle" }, t.subtitle),
-      React.createElement("button", { className: "tp-btn tp-btn-primary tp-btn-lg", disabled: true, style: { opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" } }, t.cta)
+      React.createElement("a", { href: "https://trimpro360-v3.vercel.app", className: "tp-btn tp-btn-primary tp-btn-lg" }, t.cta)
     )
   );
 }

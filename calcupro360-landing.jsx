@@ -47,7 +47,7 @@ function Nav({ lang, setLang, isScrolled }) {
           h("button", { className: lang === "fr" ? "active" : "", onClick: () => setLang("fr") }, "FR"),
           h("button", { className: lang === "en" ? "active" : "", onClick: () => setLang("en") }, "EN")
         ),
-        h("button", { className: "cp-btn cp-btn-primary", disabled: true, style: { opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" } }, t.cta)
+        h("a", { href: "https://app.seriespro360.com", className: "cp-btn cp-btn-primary" }, t.cta)
       )
     )
   );
@@ -77,7 +77,7 @@ function Hero({ lang }) {
       h("h1", { className: "cp-hero-headline" }, t.headline),
       h("p", { className: "cp-hero-subtitle" }, t.subtitle),
       h("div", { className: "cp-hero-ctas" },
-        h("button", { className: "cp-btn cp-btn-primary cp-btn-lg", disabled: true, style: { opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" } }, t.cta)
+        h("a", { href: "https://app.seriespro360.com", className: "cp-btn cp-btn-primary cp-btn-lg" }, t.cta)
       )
     )
   );
