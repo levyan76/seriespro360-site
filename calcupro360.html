@@ -1,6 +1,5 @@
 <!doctype html>
- param($m) $html=$m.Groups[1].Value; $cls=$m.Groups[2].Value -replace 'sp-light','sp-light'; if ($cls -notmatch 'sp-light') { $cls="sp-light $cls" }; "<html$html class=`"$cls`">" >
-
+<html lang="fr" class="sp-light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,16 +20,15 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="/dist/app.min.css?v=mq5znepv" />
+  <link rel="stylesheet" href="/dist/app.min.css?v=mq5zurar" />
 </head>
 
 <body>
-  <div id="root" data-product="calcupro360"></div>
+  <div id="root"></div>
   <script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
   <script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"
     crossorigin="anonymous"></script>
-  <script defer src="/dist/i18n.min.js?v=mq5znepv"></script>
-  <script defer src="/dist/product-page.min.js?v=mq5znepv"></script>
+  <script defer src="/dist/calcupro360-landing.min.js?v=mq5zurar"></script>
 </body>
 
 </html>
