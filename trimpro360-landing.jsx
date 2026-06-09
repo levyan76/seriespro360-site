@@ -76,19 +76,13 @@ function Hero({ lang }) {
       eyebrow: "TRIMPRO360",
       headline: "Du dessin à la livraison — sans papier, sans oublis.",
       subtitle: "La plateforme de gestion pour fabricants de profilés métalliques. Canvas vectoriel, catalogue 56 profils, workflow commandes complet.",
-      cta: "Accéder à l'app",
-      meta1: "Essai gratuit 14 jours",
-      meta2: "Aucune carte de crédit",
-      meta3: "FR / EN natif"
+      cta: "Accéder à l'app"
     },
     en: {
       eyebrow: "TRIMPRO360",
       headline: "From drawing to delivery — no paper, no missed specs.",
       subtitle: "The management platform for metal cladding manufacturers. Vector canvas, 56-profile catalog, complete order workflow.",
-      cta: "Access the app",
-      meta1: "14-day free trial",
-      meta2: "No credit card",
-      meta3: "Native FR / EN"
+      cta: "Access the app"
     }
   }[lang];
 
@@ -106,11 +100,6 @@ function Hero({ lang }) {
       React.createElement("p", { className: "tp-hero-subtitle" }, t.subtitle),
       React.createElement("div", { className: "tp-hero-ctas" },
         React.createElement("button", { className: "tp-btn tp-btn-primary tp-btn-lg", disabled: true, style: { opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" } }, t.cta)
-      ),
-      React.createElement("ul", { className: "tp-hero-meta" },
-        React.createElement("li", null, React.createElement(Icon, { name: "check", size: 14 }), t.meta1),
-        React.createElement("li", null, React.createElement(Icon, { name: "check", size: 14 }), t.meta2),
-        React.createElement("li", null, React.createElement(Icon, { name: "check", size: 14 }), t.meta3)
       )
     )
   );
