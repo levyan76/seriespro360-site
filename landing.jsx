@@ -174,7 +174,7 @@ function Hero({ lang, heroLogoSize, heroTopPad }) {
         <p className="sp-hero-sub-centered">{t.subtitle}</p>
         <div className="sp-hero-ctas-centered">
           <a href="#suite" className="sp-btn sp-btn-primary sp-btn-lg">{t.cta_primary} <Icon name="arrow-right" size={16} /></a>
-          <a href="#demo" className="sp-btn sp-btn-ghost-sm sp-btn-lg">{lang === "fr" ? "Voir la démo" : "Watch demo"}</a>
+          <a href="#demo" className="sp-btn sp-btn-ghost-sm sp-btn-lg" style={{ display: "none" }}>{lang === "fr" ? "Voir la démo" : "Watch demo"}</a>
         </div>
         <ul className="sp-hero-meta sp-hero-meta-centered">
           <li><Icon name="check" size={14} />{t.meta_1}</li>

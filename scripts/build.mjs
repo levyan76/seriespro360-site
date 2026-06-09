@@ -59,6 +59,9 @@ buildBundle('i18n.min.js', ['i18n.jsx']);
 // ── Bundle 3: page produit (logos + calculator + product-page)
 buildBundle('product-page.min.js', ['logos.jsx', 'calculator.jsx', 'product-page.jsx']);
 
+// ── Bundle 4: TrimPro360 landing page style SeriesPro360
+buildBundle('trimpro360-landing.min.js', ['trimpro360-landing.jsx']);
+
 const ms = (performance.now() - t0).toFixed(0);
 
 // Auto-update cache-buster in ALL html files
@@ -72,6 +75,7 @@ for (const file of htmlFiles) {
   html = html.replace(/dist\/app\.min\.js(\?v=[^"']+)?/g, `dist/app.min.js?v=${hash}`);
   html = html.replace(/dist\/i18n\.min\.js(\?v=[^"']+)?/g, `dist/i18n.min.js?v=${hash}`);
   html = html.replace(/dist\/product-page\.min\.js(\?v=[^"']+)?/g, `dist/product-page.min.js?v=${hash}`);
+  html = html.replace(/dist\/trimpro360-landing\.min\.js(\?v=[^"']+)?/g, `dist/trimpro360-landing.min.js?v=${hash}`);
   html = html.replace(/dist\/landing\.js[^"']*/g, `dist/app.min.js?v=${hash}`);
   writeFileSync(filePath, html);
 }

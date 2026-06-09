@@ -34,11 +34,47 @@ function DemoCard({ v, fr }) {
     )
   );
 }
+// ── Compteur de places restantes (connecté à l'API /api/founder-spots)
+function SpotsCounter({ initialSpots, spotsText, accentColor }) {
+  const [spots, setSpots] = uS(initialSpots);
+  const [loading, setLoading] = uS(true);
+
+  uE(() => {
+    // Récupère le nombre réel de places depuis le backend
+    fetch('/api/founder-spots')
+      .then(r => r.json())
+      .then(data => {
+        if (data.spotsLeft !== undefined) {
+          setSpots(data.spotsLeft);
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        // En cas d'erreur, garde la valeur statique
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return React.createElement("div", { className: "pp-pricing-spots", style: { color: accentColor } },
+      React.createElement("span", { className: "pp-pricing-spots-number" }, "..."),
+      " ",
+      spotsText
+    );
+  }
+
+  return React.createElement("div", { className: "pp-pricing-spots", style: { color: accentColor } },
+    React.createElement("span", { className: "pp-pricing-spots-number" }, spots),
+    " ",
+    spotsText
+  );
+}
+
 const { createRoot } = ReactDOM;
 
 // ── Map logos produit
 const PRODUCT_LOGOS = {
-  "TrimPro360": "/logos/logo-trimpro360.png",
+  "TrimPro360": "/logos/TrimPro360-transparent.png",
   "CalcuPro360": "/logos/logo-calcupro360.png",
 };
 
@@ -154,16 +190,16 @@ const PRODUCT_STATS = {
   },
   trimpro360: {
     fr: [
-      { value: "56", label: "Profils standards dans le catalogue" },
-      { value: "100 %", label: "Bilingue FR / EN natif" },
-      { value: "0 $", label: "Accès gratuit clients & installateurs" },
-      { value: "7", label: "Statuts de commande de brouillon à livraison" },
+      { value: "56", label: "Profilés standard paramétrables" },
+      { value: "Canvas", label: "Dessin vectoriel intégré" },
+      { value: "Temps réel", label: "Suivi de production live" },
+      { value: "Mobile", label: "App lite pour installateurs" },
     ],
     en: [
-      { value: "56", label: "Standard profiles in the catalog" },
-      { value: "100 %", label: "Native FR / EN bilingual" },
-      { value: "$0", label: "Free access for clients & installers" },
-      { value: "7", label: "Order statuses from draft to delivered" },
+      { value: "56", label: "Parametrable standard profiles" },
+      { value: "Canvas", label: "Built-in vector drawing" },
+      { value: "Real-time", label: "Live production tracking" },
+      { value: "Mobile", label: "Lite app for installers" },
     ],
   },
 };
@@ -274,6 +310,19 @@ function ProductPage() {
             React.createElement(Icon, { name: "arrow-left", size: 15 }),
             fr ? "Retour" : "Back"
           ),
+          React.createElement("span", {
+            className: "pp-nav-status",
+            style: {
+              color: isLive ? "#10B981" : colors.accent,
+              background: isLive ? "rgba(16,185,129,0.12)" : colors.soft,
+              fontWeight: 700,
+              letterSpacing: "0.08em",
+              fontSize: "11px",
+              padding: "4px 10px",
+              borderRadius: "20px",
+              textTransform: "uppercase"
+            }
+          }, isLive ? "● " + (fr ? "En ligne" : "Live") : product.tag),
           isLive && React.createElement("a", {
             href: product.url, target: "_blank", rel: "noopener",
             className: "pp-cta-btn",
@@ -301,35 +350,12 @@ function ProductPage() {
 
         // LEFT — copy
         React.createElement("div", { className: "pp-hero-left" },
-          React.createElement("div", { className: "pp-hero-badge", style: { color: colors.accent, background: colors.soft, fontWeight: 700, letterSpacing: "0.08em" } },
-            product.tag
-          ),
           React.createElement("h1", { className: "pp-hero-title" }, product.name),
           React.createElement("p", { className: "pp-hero-tagline" }, product.tagline),
           React.createElement("p", { className: "pp-hero-hook" },
             fr
               ? "Du dessin à la livraison — sans papier, sans oublis, sans ressaisie."
               : "From drawing to delivery — no paper, no missed specs, no re-entry."
-          ),
-          React.createElement("div", { className: "pp-hero-ctas" },
-            isLive
-              ? React.createElement("a", {
-                  href: product.url, target: "_blank", rel: "noopener",
-                  className: "pp-cta-btn",
-                  style: { background: colors.accent }
-                },
-                  product.cta, " ", React.createElement(Icon, { name: "external-link", size: 16 })
-                )
-              : React.createElement("div", { className: "pp-coming-soon-badge" },
-                  fr ? "Lancement à venir" : "Coming soon"
-                ),
-            isLive && isCalcu && React.createElement("a", {
-              href: "#demo",
-              className: "pp-ghost-btn"
-            },
-              fr ? "Voir la démo" : "Try demo",
-              React.createElement(Icon, { name: "arrow-down", size: 14 })
-            )
           ),
           React.createElement("div", { className: "pp-hero-trust-line" },
             React.createElement(Icon, { name: "check", size: 12 }),
@@ -339,56 +365,7 @@ function ProductPage() {
             React.createElement("span", { className: "pp-trust-dot" }),
             fr ? "FR / EN natif" : "Native FR / EN"
           ),
-          React.createElement("ul", { className: "pp-hero-meta" },
-            (m.bullets || (m.steps && m.steps.slice(0, 3)) || []).map((s, i) =>
-              React.createElement("li", { key: i },
-                React.createElement(Icon, { name: "check", size: 14 }),
-                s
-              )
-            )
-          ),
         ),
-
-        // RIGHT — visual mock enrichi
-        React.createElement("div", { className: "pp-hero-right" },
-          React.createElement("div", { className: "pp-hero-visual-card", style: { borderColor: "rgba(255,255,255,0.08)" } },
-            React.createElement("div", { className: "pp-hero-quote-accent", style: { background: colors.accent } }),
-
-            // Headline quote
-            React.createElement("blockquote", { className: "pp-hero-quote-text" },
-              "\u201c", m.headline, "\u201d"
-            ),
-            React.createElement("div", { className: "pp-hero-quote-label", style: { color: colors.accent, marginBottom: 28 } },
-              product.name, " · ", fr ? "Promesse produit" : "Product promise"
-            ),
-
-            // Workflow statuts (TrimPro uniquement)
-            slug === "trimpro360" && React.createElement("div", { className: "pp-hero-workflow" },
-              React.createElement("div", { className: "pp-hero-workflow-label", style: { color: "rgba(15,28,53,0.35)" } },
-                fr ? "Workflow commandes" : "Order workflow"
-              ),
-              React.createElement("div", { className: "pp-hero-workflow-steps" },
-                [fr ? "Brouillon" : "Draft", fr ? "Soumise" : "Submitted", fr ? "Approuvée" : "Approved", fr ? "Production" : "In Production", fr ? "Livrée" : "Delivered"].map((label, i, arr) =>
-                  React.createElement("div", { key: i, className: "pp-wf-step", style: { opacity: i === 3 ? 1 : (i === 4 ? 0.45 : 0.5 + i * 0.1) } },
-                    React.createElement("div", { className: "pp-wf-dot" + (i === 3 ? " active" : ""), style: { background: i === 3 ? colors.accent : "rgba(15,28,53,0.12)" } }),
-                    React.createElement("span", null, label),
-                    i < arr.length - 1 && React.createElement("div", { className: "pp-wf-line" })
-                  )
-                )
-              )
-            ),
-
-            // Mini feature badges
-            React.createElement("div", { className: "pp-hero-badges" },
-              (m.modules || m.features || []).slice(0, 3).map((f) =>
-                React.createElement("div", { key: f.title, className: "pp-hero-feat-badge", style: { background: colors.soft, color: colors.accent } },
-                  React.createElement(Icon, { name: f.icon, size: 13 }),
-                  React.createElement("span", null, f.title)
-                )
-              )
-            )
-          )
-        )
       )
     ),
 
@@ -489,34 +466,6 @@ function ProductPage() {
       )
     ),
 
-    // ── MODULES COMPLETS
-    m.modules && m.modules.length > 0 && React.createElement("section", { className: "pp-section" },
-      React.createElement("div", { className: "pp-section-inner" },
-        React.createElement("div", { className: "pp-eyebrow", style: { color: colors.accent, textAlign: "center", marginBottom: 8 } },
-          fr ? "Vue d'ensemble" : "Full overview"
-        ),
-        React.createElement("h2", { className: "pp-section-title" },
-          fr ? "Tous les modules" : "All modules"
-        ),
-        React.createElement("p", { className: "pp-modules-sub" },
-          fr ? "Une plateforme complète. Chaque module est fonctionnel et intégré." : "A complete platform. Every module is live and fully integrated."
-        ),
-        React.createElement("div", { className: "pp-modules-grid" },
-          m.modules.map((mod) =>
-            React.createElement("div", { key: mod.title, className: "pp-module-row" },
-              React.createElement("div", { className: "pp-module-icon", style: { background: colors.soft, color: colors.accent } },
-                React.createElement(Icon, { name: mod.icon, size: 18 })
-              ),
-              React.createElement("div", null,
-                React.createElement("div", { className: "pp-module-title" }, mod.title),
-                React.createElement("div", { className: "pp-module-desc" }, mod.desc),
-              )
-            )
-          )
-        )
-      )
-    ),
-
     // ── COMMENT ÇA MARCHE
     m.steps && m.steps.length > 0 && React.createElement("section", { className: "pp-section pp-section-alt" },
       React.createElement("div", { className: "pp-section-inner" },
@@ -564,20 +513,60 @@ function ProductPage() {
       )
     ),
 
-    // ── TARIFICATION / NOTE
-    React.createElement("section", { className: "pp-section pp-section-alt" },
-      React.createElement("div", { className: "pp-section-inner pp-pricing-note" },
-        React.createElement("div", { className: "pp-pricing-icon", style: { color: colors.accent } },
-          React.createElement(Icon, { name: "tag", size: 20 })
+    // ── TARIFS
+    m.pricing && React.createElement("section", { className: "pp-section pp-section-alt", id: "tarifs" },
+      React.createElement("div", { className: "pp-section-inner" },
+        React.createElement("div", { className: "pp-eyebrow", style: { color: colors.accent, textAlign: "center", marginBottom: 8 } },
+          m.pricing.eyebrow
         ),
-        React.createElement("p", null, m.pricing_note),
-        isLive && React.createElement("a", {
-          href: product.url, target: "_blank", rel: "noopener",
-          className: "pp-cta-btn",
-          style: { background: colors.accent }
-        },
-          product.cta, " ", React.createElement(Icon, { name: "external-link", size: 14 })
+        React.createElement("h2", { className: "pp-section-title" }, m.pricing.title),
+        React.createElement("p", { className: "pp-section-sub", style: { textAlign: "center", marginBottom: 40 } }, m.pricing.subtitle),
+        React.createElement("div", { className: "pp-pricing-grid" },
+          m.pricing.plans.map((plan, i) =>
+            React.createElement("div", {
+              key: plan.name,
+              className: "pp-pricing-card" + (plan.highlight ? " pp-pricing-card--highlight" : ""),
+              style: plan.highlight ? { borderColor: colors.accent } : {}
+            },
+              plan.highlight && React.createElement("div", { className: "pp-pricing-badge", style: { background: colors.accent } },
+                fr ? "Populaire" : "Popular"
+              ),
+              React.createElement("h3", { className: "pp-pricing-name" }, plan.name),
+              React.createElement("div", { className: "pp-pricing-price" },
+                React.createElement("span", { className: "pp-pricing-amount" }, plan.price),
+                React.createElement("span", { className: "pp-pricing-cadence" }, plan.cadence)
+              ),
+              React.createElement("p", { className: "pp-pricing-desc" }, plan.desc),
+              plan.spotsLeft !== undefined && React.createElement(SpotsCounter, {
+                initialSpots: plan.spotsLeft,
+                spotsText: plan.spotsLeftText || (fr ? "places restantes" : "spots left"),
+                accentColor: colors.accent
+              }),
+              React.createElement("ul", { className: "pp-pricing-features" },
+                plan.features.map((feat, j) =>
+                  React.createElement("li", { key: j },
+                    React.createElement("span", { className: "pp-pricing-check", style: { color: colors.accent } }, "✓ "),
+                    feat
+                  )
+                )
+              ),
+              React.createElement("a", {
+                href: product.url,
+                className: "pp-pricing-cta" + (plan.highlight ? " pp-pricing-cta--primary" : "") + " pp-pricing-cta--disabled",
+                style: plan.highlight ? { background: colors.accent, opacity: 0.5, pointerEvents: "none" } : { opacity: 0.5, pointerEvents: "none" }
+              }, plan.cta)
+            )
+          )
         ),
+        m.pricing.faq && React.createElement("div", { className: "pp-pricing-faq" },
+          React.createElement("h3", { className: "pp-pricing-faq-title" }, fr ? "Questions fréquentes" : "FAQ"),
+          m.pricing.faq.map((item, i) =>
+            React.createElement("details", { key: i, className: "pp-pricing-faq-item" },
+              React.createElement("summary", null, item.q),
+              React.createElement("p", null, item.a)
+            )
+          )
+        )
       )
     ),
 
