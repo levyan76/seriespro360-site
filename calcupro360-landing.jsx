@@ -288,7 +288,7 @@ function Pricing({ lang }) {
       ),
       h("div", { className: "cp-pricing-grid" },
         t.plans.map((plan, i) => h("div", { key: i, className: "cp-pricing-card" + (plan.highlight ? " cp-pricing-card--highlight" : "") },
-          plan.highlight && h("div", { className: "cp-pricing-badge" }, "POPULAIRE"),
+          h("div", { className: "cp-pricing-badge" }, lang === "fr" ? "Offre bientôt disponible" : "Coming soon"),
           h("h3", { className: "cp-pricing-name" }, plan.name),
           h("div", { className: "cp-pricing-price" },
             h("span", { className: "cp-pricing-amount" }, plan.price),

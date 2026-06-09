@@ -321,7 +321,7 @@ function Pricing({ lang }) {
       React.createElement("div", { className: "tp-pricing-grid" },
         t.plans.map((plan, i) =>
           React.createElement("div", { key: i, className: "tp-pricing-card" + (plan.highlight ? " tp-pricing-card--highlight" : "") },
-            plan.highlight && React.createElement("div", { className: "tp-pricing-badge" }, lang === "fr" ? "Offre bientôt disponible" : "Coming soon"),
+            React.createElement("div", { className: "tp-pricing-badge" }, lang === "fr" ? "Offre bientôt disponible" : "Coming soon"),
             React.createElement("h3", { className: "tp-pricing-name" }, plan.name),
             React.createElement("div", { className: "tp-pricing-price" },
               React.createElement("span", { className: "tp-pricing-amount" }, plan.price),
