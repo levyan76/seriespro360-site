@@ -72,7 +72,7 @@ function Hero({ lang }) {
     h("div", { className: "cp-hero-grid-bg" }),
     h("div", { className: "cp-container cp-hero-inner" },
       h("div", { className: "cp-hero-logo-wrap" },
-        h("img", { src: "/logos/CalcuPro360-transparent.png", alt: "CalcuPro360", className: "cp-hero-logo" })
+        h("img", { src: "/logos/logo-calcupro360.png", alt: "CalcuPro360", className: "cp-hero-logo" })
       ),
       h("h1", { className: "cp-hero-headline" }, t.headline),
       h("p", { className: "cp-hero-subtitle" }, t.subtitle),
