@@ -282,7 +282,7 @@ function Pricing({ lang }) {
       title: "Simple. Transparent. Sans surprise.",
       subtitle: "Deux options claires. Choisissez celle qui correspond à votre situation.",
       plans: [
-        { name: "Offre Fondateur", price: "149$", cadence: "/ mois à vie", desc: "Limité aux 10 premières entreprises.", spotsLeft: 10, features: ["Toutes les fonctionnalités", "Mises à jour incluses", "Support inclus", "Futures améliorations incluses"], cta: "Réserver ma place", highlight: true },
+        { name: "Offre Fondateur", price: "149$", cadence: "/ mois à vie", desc: "Bientôt disponible — inscrivez-vous pour être informé.", features: ["Toutes les fonctionnalités", "Mises à jour incluses", "Support inclus", "Futures améliorations incluses"], cta: "M'informer", highlight: true },
         { name: "Tarif Régulier", price: "299$", cadence: "/ mois", desc: "Après la période de lancement.", features: ["Toutes les fonctionnalités", "Mises à jour incluses", "Support inclus", "Futures améliorations incluses"], cta: "M'inscrire", highlight: false },
         { name: "Besoins particuliers ?", price: "Sur mesure", cadence: "", desc: "Contactez-nous pour une solution entreprise.", features: ["Intégrations ERP personnalisées", "Branding sur mesure", "Formations dédiées", "SLA garanti"], cta: "Nous contacter", highlight: false }
       ],
@@ -298,7 +298,7 @@ function Pricing({ lang }) {
       title: "Simple. Transparent. No surprises.",
       subtitle: "Two clear options. Choose what fits your situation.",
       plans: [
-        { name: "Founder Offer", price: "149$", cadence: "/ month for life", desc: "Limited to first 10 companies.", spotsLeft: 10, features: ["All features", "Updates included", "Support included", "Future improvements included"], cta: "Reserve my spot", highlight: true },
+        { name: "Founder Offer", price: "149$", cadence: "/ month for life", desc: "Coming soon — sign up to be notified.", features: ["All features", "Updates included", "Support included", "Future improvements included"], cta: "Notify me", highlight: true },
         { name: "Regular Price", price: "299$", cadence: "/ month", desc: "After launch period.", features: ["All features", "Updates included", "Support included", "Future improvements included"], cta: "Sign up", highlight: false },
         { name: "Custom needs?", price: "Custom", cadence: "", desc: "Contact us for an enterprise solution.", features: ["Custom ERP integrations", "Custom branding", "Dedicated training", "Guaranteed SLA"], cta: "Contact us", highlight: false }
       ],
@@ -321,18 +321,14 @@ function Pricing({ lang }) {
       React.createElement("div", { className: "tp-pricing-grid" },
         t.plans.map((plan, i) =>
           React.createElement("div", { key: i, className: "tp-pricing-card" + (plan.highlight ? " tp-pricing-card--highlight" : "") },
-            plan.highlight && React.createElement("div", { className: "tp-pricing-badge" }, "LIMITÉ"),
+            plan.highlight && React.createElement("div", { className: "tp-pricing-badge" }, lang === "fr" ? "Offre bientôt disponible" : "Coming soon"),
             React.createElement("h3", { className: "tp-pricing-name" }, plan.name),
             React.createElement("div", { className: "tp-pricing-price" },
               React.createElement("span", { className: "tp-pricing-amount" }, plan.price),
               React.createElement("span", { className: "tp-pricing-cadence" }, plan.cadence)
             ),
             React.createElement("p", { className: "tp-pricing-desc" }, plan.desc),
-            plan.spotsLeft && React.createElement("div", { className: "tp-pricing-spots" },
-              React.createElement("span", { className: "tp-pricing-spots-number" }, plan.spotsLeft),
-              " ", lang === "fr" ? "places restantes" : "spots left"
-            ),
-            React.createElement("ul", { className: "tp-pricing-features" },
+                        React.createElement("ul", { className: "tp-pricing-features" },
               plan.features.map((f, j) =>
                 React.createElement("li", { key: j }, React.createElement("span", { className: "tp-pricing-check" }, "✓ "), f)
               )
