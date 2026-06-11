@@ -90,13 +90,13 @@ function StatsStrip({ lang }) {
       { value: "21", label: "Matériaux complets" },
       { value: "90s", label: "Devis PDF généré" },
       { value: "∞", label: "Calculs pi-po ↔ métrique" },
-      { value: "0$", label: "Gratuit 5/mois" }
+      { value: "14j", label: "Essai gratuit" }
     ],
     en: [
       { value: "21", label: "Full materials" },
       { value: "90s", label: "PDF quote ready" },
       { value: "∞", label: "Ft-mtr conversions" },
-      { value: "$0", label: "Free 5/month" }
+      { value: "14d", label: "Free trial" }
     ]
   }[lang];
 
@@ -250,14 +250,14 @@ function Pricing({ lang }) {
     fr: {
       eyebrow: "TARIFS",
       title: "Simple. Transparent. Sans surprise.",
-      subtitle: "Gratuit pour démarrer. Pro pour les équipes actives.",
+      subtitle: "Essai gratuit de 14 jours. Puis 24,99$ CAD/mois pour les pros.",
       plans: [
-        { name: "Gratuit", price: "0$", cadence: "/ mois", desc: "Parfait pour tester ou usage ponctuel.", features: ["Jusqu'à 5 estimés/mois", "21 matériaux complets", "Calculs pi-po ↔ métrique", "Devis PDF basique"], cta: "Commencer", highlight: false },
-        { name: "Pro", price: "14,99$", cadence: "CAD / mois", desc: "Pour les professionnels qui estiment tous les jours.", features: ["Estimés illimités", "21 matériaux complets", "Assistant IA Gemini 2.5", "Devis PDF personnalisé", "Hors-ligne natif", "Support prioritaire"], cta: "Passer Pro", highlight: true }
+        { name: "Essai gratuit", price: "0$", cadence: "/ 14 jours", desc: "Toutes les fonctionnalités sans engagement.", features: ["Estimés illimités pendant 14 jours", "21 matériaux complets", "Assistant IA Gemini 2.5", "Devis PDF personnalisé", "Support inclus"], cta: "Démarrer l'essai", highlight: false },
+        { name: "Pro", price: "24,99$", cadence: "CAD / mois", desc: "Pour les professionnels qui estiment tous les jours.", features: ["Estimés illimités", "21 matériaux complets", "Assistant IA Gemini 2.5", "Devis PDF personnalisé", "Hors-ligne natif", "Support prioritaire"], cta: "Passer Pro", highlight: true }
       ],
       faqTitle: "Questions fréquentes",
       faq: [
-        { q: "Que comprend la version gratuite ?", a: "5 estimés complets par mois avec tous les matériaux et la génération PDF. Parfait pour tester ou un usage ponctuel." },
+        { q: "Que comprend l'essai gratuit ?", a: "14 jours d'accès complet avec estimés illimités, tous les matériaux et la génération PDF. Parfait pour tester toutes les fonctionnalités sans engagement." },
         { q: "Dois-je installer l'application ?", a: "Non. CalcuPro360 fonctionne dans votre navigateur. Installez-le comme PWA pour le mode hors-ligne." },
         { q: "Puis-je annuler mon abonnement ?", a: "Oui, à tout moment. Vous gardez l'accès jusqu'à la fin de la période payée." }
       ]
@@ -265,14 +265,14 @@ function Pricing({ lang }) {
     en: {
       eyebrow: "PRICING",
       title: "Simple. Transparent. No surprises.",
-      subtitle: "Free to start. Pro for active teams.",
+      subtitle: "Free trial for 14 days. Then $24.99 CAD/month for pros.",
       plans: [
-        { name: "Free", price: "$0", cadence: "/ month", desc: "Perfect for testing or occasional use.", features: ["Up to 5 estimates/month", "21 complete materials", "Ft-in ↔ metric conversions", "Basic PDF quotes"], cta: "Get started", highlight: false },
-        { name: "Pro", price: "$14.99", cadence: "CAD / month", desc: "For professionals who estimate daily.", features: ["Unlimited estimates", "21 complete materials", "Gemini 2.5 AI Assistant", "Custom branded PDFs", "Native offline mode", "Priority support"], cta: "Go Pro", highlight: true }
+        { name: "Free trial", price: "$0", cadence: "/ 14 days", desc: "All features with no commitment.", features: ["Unlimited estimates for 14 days", "21 complete materials", "Gemini 2.5 AI Assistant", "Custom branded PDFs", "Support included"], cta: "Start trial", highlight: false },
+        { name: "Pro", price: "$24.99", cadence: "CAD / month", desc: "For professionals who estimate daily.", features: ["Unlimited estimates", "21 complete materials", "Gemini 2.5 AI Assistant", "Custom branded PDFs", "Native offline mode", "Priority support"], cta: "Go Pro", highlight: true }
       ],
       faqTitle: "Frequently asked questions",
       faq: [
-        { q: "What's included in the free version?", a: "5 complete estimates per month with all materials and PDF generation. Perfect for testing or occasional use." },
+        { q: "What's included in the free trial?", a: "14 days of full access with unlimited estimates, all materials and PDF generation. Perfect for testing all features without commitment." },
         { q: "Do I need to install the app?", a: "No. CalcuPro360 works in your browser. Install as PWA for offline mode." },
         { q: "Can I cancel my subscription?", a: "Yes, anytime. You keep access until the end of the paid period." }
       ]
