@@ -6443,3 +6443,8 @@ html.sp-light .sp-login-tab.is-active {
     text-align: center;
   }
 }
+
+/* ── FAKE TRANSPARENCY FIX ── */
+.pp-hero-logo-centered, .cp-hero-logo, .tp-hero-logo {
+  mix-blend-mode: multiply;
+}
