@@ -74,8 +74,9 @@ const { createRoot } = ReactDOM;
 
 // ── Map logos produit
 const PRODUCT_LOGOS = {
-  "TrimPro360": "/logos/TrimPro360-transparent.png",
-  "CalcuPro360": "/logos/logo-calcupro360.png",
+  "TrimPro360": "/logos/trimpro360-transparent.png",
+  "CalcuPro360": "/logos/calcupro360-transparent.png",
+  "MesurePro360": "/logos/measurepro360-transparent.png",
 };
 
 // ── Détecte le produit depuis l'attribut data-product sur #root

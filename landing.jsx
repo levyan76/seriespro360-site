@@ -254,7 +254,7 @@ function Origin({ lang }) {
 function AppGrid({ lang }) {
   const t = window.T[lang].suite;
   const slugMap = { "TrimPro360": "trimpro360", "CalcuPro360": "calcupro360", "MesurePro360": "mesurepro360", "DevisPro360": "devispro360" };
-  const logoMap = { "TrimPro360": "/logos/logo-trimpro360.png", "CalcuPro360": "/logos/logo-calcupro360.png" };
+  const logoMap = { "TrimPro360": "/logos/trimpro360-transparent.png", "CalcuPro360": "/logos/calcupro360-transparent.png", "MesurePro360": "/logos/measurepro360-transparent.png" };
   const accentByColor = { yellow: "#E8420A", blue: "#3B82F6", green: "#10B981", orange: "#E8420A" };
   return (
     <section id="suite" style={{ background: "#F8F7F4", padding: "80px 0" }}>

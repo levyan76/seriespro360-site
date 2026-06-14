@@ -91,7 +91,7 @@ function Hero({ lang }) {
     React.createElement("div", { className: "tp-container tp-hero-inner" },
       React.createElement("div", { className: "tp-hero-logo-wrap" },
         React.createElement("img", {
-          src: "/logos/TrimPro360-transparent.png",
+          src: "/logos/trimpro360-transparent.png",
           alt: "TrimPro360",
           className: "tp-hero-logo"
         })

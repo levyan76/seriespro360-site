@@ -117,29 +117,34 @@ const PRODUCT_COLORS = {
   yellow: { bg: "#EAB308", on: "#0a0a0a" },
 };
 
+// PNG logo map for products with official transparent logos
+const PRODUCT_LOGO_MAP = {
+  "CalcuPro360":  "/logos/calcupro360-transparent.png",
+  "TrimPro360":   "/logos/trimpro360-transparent.png",
+  "MesurePro360": "/logos/measurepro360-transparent.png",
+};
+
 function ProductMark({ kind, color, size = 40 }) {
+  // Use official PNG transparent logo if available
+  const pngSrc = PRODUCT_LOGO_MAP[kind];
+  if (pngSrc) {
+    return (
+      <img
+        src={pngSrc}
+        alt={kind}
+        style={{
+          width: size,
+          height: size,
+          objectFit: "contain",
+          borderRadius: size * 0.12,
+          display: "block",
+        }}
+      />
+    );
+  }
+
+  // SVG fallback for products without a PNG logo
   const map = {
-    // CalcuPro360 — 2×2 keypad
-    CalcuPro360: { color: "orange", glyph: (c) => (
-      <g stroke={c} strokeWidth="1.6" strokeLinecap="round">
-        <circle cx="9" cy="9" r="1.4" fill={c} stroke="none" />
-        <circle cx="15" cy="9" r="1.4" fill={c} stroke="none" opacity="0.6" />
-        <circle cx="9" cy="15" r="1.4" fill={c} stroke="none" opacity="0.6" />
-        <circle cx="15" cy="15" r="1.4" fill={c} stroke="none" />
-        <line x1="6.5" y1="5" x2="17.5" y2="5" />
-      </g>
-    )},
-    // MesurePro360 — soundwave + ruler ticks (voice → measurement)
-    MesurePro360: { color: "blue", glyph: (c) => (
-      <g stroke={c} strokeWidth="1.6" strokeLinecap="round" fill="none">
-        {/* Soundwave bars */}
-        <line x1="6"  y1="11" x2="6"  y2="13" />
-        <line x1="9"  y1="8"  x2="9"  y2="16" />
-        <line x1="12" y1="5"  x2="12" y2="19" />
-        <line x1="15" y1="8"  x2="15" y2="16" opacity="0.7" />
-        <line x1="18" y1="10" x2="18" y2="14" opacity="0.5" />
-      </g>
-    )},
     // DevisPro360 — document with search lens
     DevisPro360: { color: "green", glyph: (c) => (
       <g stroke={c} strokeWidth="1.6" strokeLinecap="round" fill="none">
@@ -164,7 +169,7 @@ function ProductMark({ kind, color, size = 40 }) {
       </g>
     )},
   };
-  const def = map[kind] || map.CalcuPro360;
+  const def = map[kind] || map.DevisPro360;
   const palette = PRODUCT_COLORS[color || def.color] || PRODUCT_COLORS.orange;
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
