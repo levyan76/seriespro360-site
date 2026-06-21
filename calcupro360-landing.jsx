@@ -1,8 +1,48 @@
 // calcupro360-landing.jsx — Page de présentation CalcuPro360 style SeriesPro360
 // Structure: Hero, Stats, Features, Workflow, Demo, Pricing, FAQ
 
+// ============================================================
+// ⚙️ MODE PRÉ-LANCEMENT
+// Mettre à `false` quand CalcuPro360 est prêt à ouvrir les ventes.
+// Effets quand `true` :
+//   - Banner pre-launch en haut de la page
+//   - Tous les CTAs d'achat / essai → mailto liste d'attente (avec subject du plan)
+//   - Tableau pricing reste visible (création d'anchor + capture intérêt)
+// ============================================================
+const PRELAUNCH_MODE = true;
+const WAITLIST_EMAIL = "yan@seriespro360.com";
+const PRODUCT_NAME = "CalcuPro360";
+
+const WAITLIST_LABEL = {
+  fr: "Rejoindre la liste d'attente",
+  en: "Join the waitlist"
+};
+
+function waitlistHref(lang, planLabel) {
+  const subject = encodeURIComponent(`[Waitlist ${PRODUCT_NAME}] ${planLabel || ""}`.trim());
+  const body = encodeURIComponent(
+    lang === "fr"
+      ? `Bonjour Yan,\n\nJe souhaite être informé(e) du lancement officiel de ${PRODUCT_NAME}.\n\nNom de l'entreprise : \nVille : \nTéléphone : \nPlan d'intérêt : ${planLabel || "Pas encore décidé"}\n\nMerci !`
+      : `Hi Yan,\n\nI'd like to be notified when ${PRODUCT_NAME} officially launches.\n\nCompany name: \nCity: \nPhone: \nPlan of interest: ${planLabel || "Not yet decided"}\n\nThanks!`
+  );
+  return `mailto:${WAITLIST_EMAIL}?subject=${subject}&body=${body}`;
+}
+
 const { createElement: h } = React;
 const { createRoot } = ReactDOM;
+
+// ── Banner pré-lancement
+function PrelaunchBanner({ lang }) {
+  const t = {
+    fr: { text: "CalcuPro360 — lancement officiel bientôt.", cta: "Rejoignez la liste d'attente pour être notifié en premier →" },
+    en: { text: "CalcuPro360 — official launch coming soon.", cta: "Join the waitlist to be notified first →" }
+  }[lang];
+  return h("a", { href: waitlistHref(lang, ""), className: "cp-prelaunch-banner" },
+    h("span", { className: "cp-prelaunch-dot" }),
+    h("span", { className: "cp-prelaunch-text" }, t.text),
+    h("span", { className: "cp-prelaunch-cta" }, t.cta)
+  );
+}
 
 // ── Icon component
 function Icon({ name, size = 20 }) {
@@ -33,7 +73,7 @@ function Nav({ lang, setLang, isScrolled }) {
   return h("header", { className: "cp-nav" + (isScrolled ? " is-scrolled" : "") },
     h("div", { className: "cp-container cp-nav-inner" },
       h("a", { href: "/", className: "cp-nav-brand" },
-        h("img", { src: "/logos/icone-SeriesPro360.png", alt: "SeriesPro360", className: "cp-nav-logo-img", width: 28, height: 28 }),
+        h("img", { src: "/logos/SeriesPro360/icone-SeriesPro360.png", alt: "SeriesPro360", className: "cp-nav-logo-img", width: 28, height: 28 }),
         h("span", null, "SeriesPro360")
       ),
       h("nav", { className: "cp-nav-links" },
@@ -47,7 +87,9 @@ function Nav({ lang, setLang, isScrolled }) {
           h("button", { className: lang === "fr" ? "active" : "", onClick: () => setLang("fr") }, "FR"),
           h("button", { className: lang === "en" ? "active" : "", onClick: () => setLang("en") }, "EN")
         ),
-        h("a", { href: "https://app.seriespro360.com", className: "cp-btn cp-btn-primary" }, t.cta)
+        PRELAUNCH_MODE
+          ? h("a", { href: waitlistHref(lang, ""), className: "cp-btn cp-btn-primary" }, WAITLIST_LABEL[lang])
+          : h("a", { href: "https://app.seriespro360.com", className: "cp-btn cp-btn-primary" }, t.cta)
       )
     )
   );
@@ -72,12 +114,14 @@ function Hero({ lang }) {
     h("div", { className: "cp-hero-grid-bg" }),
     h("div", { className: "cp-container cp-hero-inner" },
       h("div", { className: "cp-hero-logo-wrap" },
-        h("img", { src: "/logos/calcupro360-transparent.png", alt: "CalcuPro360", className: "cp-hero-logo" })
+        h("img", { src: "/logos/Logos CalculPro360/calcupro360-transparent.png", alt: "CalcuPro360", className: "cp-hero-logo" })
       ),
       h("h1", { className: "cp-hero-headline" }, t.headline),
       h("p", { className: "cp-hero-subtitle" }, t.subtitle),
       h("div", { className: "cp-hero-ctas" },
-        h("a", { href: "https://app.seriespro360.com", className: "cp-btn cp-btn-primary cp-btn-lg" }, t.cta)
+        PRELAUNCH_MODE
+          ? h("a", { href: waitlistHref(lang, ""), className: "cp-btn cp-btn-primary cp-btn-lg" }, WAITLIST_LABEL[lang])
+          : h("a", { href: "https://app.seriespro360.com", className: "cp-btn cp-btn-primary cp-btn-lg" }, t.cta)
       )
     )
   );
@@ -288,7 +332,7 @@ function Pricing({ lang }) {
       ),
       h("div", { className: "cp-pricing-grid" },
         t.plans.map((plan, i) => h("div", { key: i, className: "cp-pricing-card" + (plan.highlight ? " cp-pricing-card--highlight" : "") },
-          h("div", { className: "cp-pricing-badge" }, lang === "fr" ? "Offre bientôt disponible" : "Coming soon"),
+          PRELAUNCH_MODE && plan.highlight && h("div", { className: "cp-pricing-badge" }, lang === "fr" ? "Offre bientôt disponible" : "Coming soon"),
           h("h3", { className: "cp-pricing-name" }, plan.name),
           h("div", { className: "cp-pricing-price" },
             h("span", { className: "cp-pricing-amount" }, plan.price),
@@ -298,7 +342,9 @@ function Pricing({ lang }) {
           h("ul", { className: "cp-pricing-features" },
             plan.features.map((f, j) => h("li", { key: j }, h(Icon, { name: "check", size: 14 }), f))
           ),
-          h("button", { className: "cp-pricing-cta cp-btn" + (plan.highlight ? " cp-btn-primary" : " cp-btn-secondary"), disabled: true, style: { opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" } }, plan.cta)
+          PRELAUNCH_MODE
+            ? h("a", { href: waitlistHref(lang, plan.name), className: "cp-pricing-cta cp-btn" + (plan.highlight ? " cp-btn-primary" : " cp-btn-secondary") }, WAITLIST_LABEL[lang])
+            : h("a", { href: "https://app.seriespro360.com", className: "cp-pricing-cta cp-btn" + (plan.highlight ? " cp-btn-primary" : " cp-btn-secondary") }, plan.cta)
         ))
       ),
       h("div", { className: "cp-faq" },
@@ -337,7 +383,8 @@ function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return h("div", { className: "cp-app" },
+  return h("div", { className: "cp-app" + (PRELAUNCH_MODE ? " cp-app--prelaunch" : "") },
+    PRELAUNCH_MODE && h(PrelaunchBanner, { lang }),
     h(Nav, { lang, setLang, isScrolled: scrolled }),
     h("main", null,
       h(Hero, { lang }),

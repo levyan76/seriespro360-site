@@ -6448,3 +6448,516 @@ html.sp-light .sp-login-tab.is-active {
 .pp-hero-logo-centered, .cp-hero-logo, .tp-hero-logo {
   mix-blend-mode: multiply;
 }
+/* ============================================================
+   TrimPro360 — V2 (2026-06-20) — nouvelles sections de la landing
+   Hero eyebrow · Problem · Solution · OriginStory · RiskReversal · CTA dual
+   ============================================================ */
+
+/* Hero — eyebrow ajouté au-dessus du headline */
+.tp-hero-eyebrow {
+  margin: 12px auto 16px;
+  text-align: center;
+}
+
+/* Hero — CTA secondaire à côté du primaire */
+.tp-hero-ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Problem section ── */
+.tp-problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+@media (max-width: 900px) {
+  .tp-problem-grid { grid-template-columns: 1fr; }
+}
+.tp-problem-card {
+  background: var(--sp-card);
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-rad-lg);
+  padding: 28px;
+  box-shadow: var(--sp-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.tp-problem-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--sp-accent-soft);
+  color: var(--sp-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tp-problem-context {
+  font-family: var(--sp-font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sp-muted);
+}
+.tp-problem-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-left: 3px solid var(--sp-accent);
+  padding-left: 14px;
+}
+.tp-problem-line {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--sp-text);
+}
+.tp-problem-line em {
+  font-style: italic;
+  color: var(--sp-text-2);
+}
+.tp-problem-who {
+  font-weight: 600;
+  color: var(--sp-blueprint);
+  margin-right: 4px;
+}
+.tp-problem-cost {
+  font-size: 14px;
+  color: var(--sp-muted);
+  font-weight: 500;
+  margin-top: auto;
+}
+
+/* ── Solution / Features V2 — format problème → solution ── */
+.tp-solution-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 48px;
+}
+.tp-solution-list {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 18px;
+}
+.tp-solution-card {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0;
+  background: var(--sp-card);
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-rad-lg);
+  box-shadow: var(--sp-shadow);
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.tp-solution-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 12px 36px rgba(27, 42, 74, 0.12);
+}
+.tp-solution-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sp-font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--sp-accent);
+  background: var(--sp-card-hi);
+  border-right: 1px solid var(--sp-border);
+}
+.tp-solution-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 800px) {
+  .tp-solution-card { grid-template-columns: 60px 1fr; }
+  .tp-solution-num { font-size: 24px; }
+  .tp-solution-split { grid-template-columns: 1fr; }
+}
+.tp-solution-side {
+  display: flex;
+  gap: 14px;
+  padding: 22px 24px;
+  align-items: flex-start;
+}
+.tp-solution-side--problem {
+  background: rgba(232, 66, 10, 0.04);
+  border-right: 1px solid var(--sp-border);
+}
+.tp-solution-side--fix {
+  background: rgba(4, 120, 87, 0.04);
+}
+@media (max-width: 800px) {
+  .tp-solution-side--problem {
+    border-right: none;
+    border-bottom: 1px solid var(--sp-border);
+  }
+}
+.tp-solution-mark {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.tp-solution-mark--bad {
+  background: var(--sp-accent);
+  color: #fff;
+}
+.tp-solution-mark--good {
+  background: var(--sp-green);
+  color: #fff;
+}
+.tp-solution-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+.tp-solution-content p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--sp-text);
+}
+.tp-solution-label {
+  font-family: var(--sp-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sp-muted);
+  font-weight: 600;
+}
+.tp-solution-label--green {
+  color: var(--sp-green);
+}
+.tp-solution-lead {
+  color: var(--sp-blueprint);
+  font-weight: 700;
+}
+
+/* ── Origin Story ── */
+.tp-origin {
+  background: var(--sp-blueprint);
+  color: #fff;
+}
+.tp-origin .tp-eyebrow {
+  color: rgba(255, 255, 255, 0.7);
+}
+.tp-origin .tp-section-title {
+  color: #fff;
+}
+.tp-origin-inner {
+  max-width: 760px;
+  text-align: left;
+}
+.tp-origin-quote {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.tp-origin-quote p {
+  font-size: 18px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+}
+.tp-origin-signature {
+  margin-top: 28px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+}
+.tp-origin-signature strong {
+  color: #fff;
+  font-style: normal;
+}
+
+/* ── Risk Reversal ── */
+.tp-risk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+.tp-risk-item {
+  display: flex;
+  gap: 14px;
+  padding: 20px;
+  background: var(--sp-card);
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-rad-lg);
+  box-shadow: var(--sp-shadow);
+}
+.tp-risk-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--sp-accent-soft);
+  color: var(--sp-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tp-risk-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--sp-text);
+}
+
+/* ── CTA Section V2 — deux boutons ── */
+.tp-cta-ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+/* ============================================================
+   TrimPro360 — V3 Pricing (2026-06-20)
+   Toggle mensuel/annuel · grille 4 plans · tagline · badge Reco
+   ============================================================ */
+
+/* Toggle mensuel/annuel */
+.tp-billing-toggle {
+  display: inline-flex;
+  margin: 32px auto 40px;
+  background: var(--sp-card-hi);
+  border: 1px solid var(--sp-border);
+  border-radius: 999px;
+  padding: 4px;
+  gap: 4px;
+  justify-self: center;
+  align-self: center;
+  width: fit-content;
+}
+.tp-section-head + .tp-billing-toggle,
+.tp-pricing-grid--four > .tp-billing-toggle {
+  margin-left: auto;
+  margin-right: auto;
+}
+.tp-billing-toggle {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+.tp-billing-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--sp-muted);
+  font-family: var(--sp-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+.tp-billing-option:hover {
+  color: var(--sp-text);
+}
+.tp-billing-option.is-active {
+  background: var(--sp-card);
+  color: var(--sp-blueprint);
+  box-shadow: 0 2px 8px rgba(27, 42, 74, 0.08);
+}
+.tp-billing-savings {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--sp-green);
+  color: #fff;
+  text-transform: uppercase;
+}
+
+/* Grille 4 plans (responsive : 4 → 2 → 1) */
+.tp-pricing-grid--four {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1100px) {
+  .tp-pricing-grid--four { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .tp-pricing-grid--four { grid-template-columns: 1fr; }
+}
+
+/* Carte pricing — ajustements V3 pour densité */
+.tp-pricing-grid--four .tp-pricing-card {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.tp-pricing-tagline {
+  font-family: var(--sp-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sp-muted);
+  margin-top: -4px;
+}
+.tp-pricing-annual-note {
+  font-size: 12px;
+  color: var(--sp-muted);
+  font-style: italic;
+  margin-top: -4px;
+}
+.tp-pricing-grid--four .tp-pricing-cta {
+  margin-top: auto;
+}
+
+/* Badge Recommandé (Pro) — différent du badge fondateur */
+.tp-pricing-badge--reco {
+  background: var(--sp-blueprint) !important;
+  color: #fff !important;
+}
+
+/* ============================================================
+   TrimPro360 — Banner pré-lancement (2026-06-20)
+   Affiché tant que PRELAUNCH_MODE = true dans trimpro360-landing.jsx
+   ============================================================ */
+.tp-prelaunch-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 20px;
+  background: var(--sp-blueprint);
+  color: #fff;
+  font-family: var(--sp-font-body);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background 160ms ease;
+}
+.tp-prelaunch-banner:hover {
+  background: #0F1C35;
+}
+.tp-prelaunch-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sp-accent);
+  flex-shrink: 0;
+  animation: tp-prelaunch-pulse 2s ease-in-out infinite;
+}
+@keyframes tp-prelaunch-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+.tp-prelaunch-text {
+  font-weight: 600;
+}
+.tp-prelaunch-cta {
+  color: var(--sp-accent);
+  font-weight: 600;
+  text-decoration: underline;
+}
+@media (max-width: 700px) {
+  .tp-prelaunch-banner {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 12px;
+  }
+}
+
+/* Décalage nav si banner sticky */
+.tp-app--prelaunch .tp-nav { top: 0; }
+
+/* ============================================================
+   CalcuPro360 — Banner pré-lancement (2026-06-20)
+   Affiché tant que PRELAUNCH_MODE = true dans calcupro360-landing.jsx
+   ============================================================ */
+.cp-prelaunch-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 20px;
+  background: var(--sp-blueprint, #0F1C35);
+  color: #fff;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  position: sticky;
+  top: 0;
+  z-index: 101;
+  transition: background 160ms ease;
+}
+.cp-prelaunch-banner:hover {
+  background: #0A1428;
+}
+.cp-prelaunch-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sp-accent, #E8420A);
+  flex-shrink: 0;
+  animation: cp-prelaunch-pulse 2s ease-in-out infinite;
+}
+@keyframes cp-prelaunch-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+.cp-prelaunch-text {
+  font-weight: 600;
+}
+.cp-prelaunch-cta {
+  color: var(--sp-accent, #E8420A);
+  font-weight: 600;
+  text-decoration: underline;
+}
+@media (max-width: 700px) {
+  .cp-prelaunch-banner {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 12px;
+  }
+}
+
+/* Push la nav fixed CalcuPro360 sous le banner pré-lancement */
+.cp-app--prelaunch .cp-nav {
+  top: 40px;
+}
+@media (max-width: 700px) {
+  .cp-app--prelaunch .cp-nav {
+    top: 64px; /* banner devient plus haut sur mobile (2 lignes) */
+  }
+}
+
+/* En mode pré-lancement : retirer le style disabled des CTA Pricing CalcuPro360 */
+.cp-app--prelaunch .cp-pricing-cta {
+  opacity: 1 !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}

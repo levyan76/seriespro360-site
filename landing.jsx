@@ -107,7 +107,7 @@ function InteractiveLogo({ lang, height }) {
   return (
     <div style={{ position: "relative", display: "inline-block", lineHeight: 0, overflow: "visible" }}>
       <img
-        src="/logos/logo_seriespro360_ FR..png"
+        src="/logos/SeriesPro360/logo_seriespro360_ FR..png"
         alt="SeriesPro360"
         style={{ height: height || 500, width: "auto", maxWidth: "90vw", objectFit: "contain", display: "block" }}
       />
@@ -254,7 +254,7 @@ function Origin({ lang }) {
 function AppGrid({ lang }) {
   const t = window.T[lang].suite;
   const slugMap = { "TrimPro360": "trimpro360", "CalcuPro360": "calcupro360", "MesurePro360": "mesurepro360", "DevisPro360": "devispro360" };
-  const logoMap = { "TrimPro360": "/logos/trimpro360-transparent.png", "CalcuPro360": "/logos/calcupro360-transparent.png", "MesurePro360": "/logos/measurepro360-transparent.png" };
+  const logoMap = { "TrimPro360": "/logos/Logos TrimPro360/trimpro360-transparent.png", "CalcuPro360": "/logos/Logos CalculPro360/calcupro360-transparent.png", "MesurePro360": "/logos/Logo MeasurePro360/measurepro360-transparent.png" };
   const accentByColor = { yellow: "#E8420A", blue: "#3B82F6", green: "#10B981", orange: "#E8420A" };
   return (
     <section id="suite" style={{ background: "#F8F7F4", padding: "80px 0" }}>
