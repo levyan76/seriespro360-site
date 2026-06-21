@@ -1007,17 +1007,26 @@ function LogoPreview({ kind, active, onClick }) {
 function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
   const [tab, setTab] = uS(initialTab === "signup" ? "signup" : "login");
 
-  // Si la modal s'ouvre suite a un changement de initialTab (ex: nav vers /?signup=1),
-  // forcer le tab correspondant.
-  uE(() => {
-    if (open && initialTab) {
-      setTab(initialTab === "signup" ? "signup" : "login");
-    }
-  }, [open, initialTab]);
   const [email, setEmail] = uS("");
   const [pwd, setPwd] = uS("");
   const [loading, setLoading] = uS(false);
   const [error, setError] = uS(null);
+
+  // Si la modal s'ouvre suite a un changement de initialTab (ex: nav vers /?signup=1),
+  // forcer le tab correspondant + reset error.
+  uE(() => {
+    if (open && initialTab) {
+      setTab(initialTab === "signup" ? "signup" : "login");
+      setError(null);
+    }
+  }, [open, initialTab]);
+
+  // Reset l'erreur + mdp quand on switch d'onglet (sinon erreur "Invalid login
+  // credentials" de l'onglet Connexion persiste en passant sur Creer un compte).
+  uE(() => {
+    setError(null);
+    setPwd("");
+  }, [tab]);
   if (!open) return null;
 
   const fr = lang === "fr";
