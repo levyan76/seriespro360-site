@@ -887,6 +887,7 @@ function App() {
   const [openMobile, setOpenMobile] = uS(false);
   const [activePage, setActivePage] = uS(null);
   const [loginOpen, setLoginOpen] = uS(false);
+  const [initialLoginTab, setInitialLoginTab] = uS("login");
   const [activeProduct, setActiveProduct] = uS(null);
   const [user, setUser] = uS(null);
   const [feedbackOpen, setFeedbackOpen] = uS(false);
@@ -897,6 +898,22 @@ function App() {
     sb.auth.getSession().then(({ data }) => { if (data.session) setUser(data.session.user); });
     const { data: listener } = sb.auth.onAuthStateChange((_e, session) => setUser(session ? session.user : null));
     return () => listener.subscription.unsubscribe();
+  }, []);
+
+  // Auto-ouverture de la modal via URL params (?signup=1 ou ?login=1)
+  // Permet aux apps externes (TrimPro360, CalcuPro360) de pointer un user
+  // vers le hub d'auth SeriesPro360 directement sur le bon onglet.
+  uE(() => {
+    const params = new URLSearchParams(window.location.search);
+    const signup = params.get("signup");
+    const login = params.get("login");
+    if (signup === "1" || signup === "true") {
+      setInitialLoginTab("signup");
+      setLoginOpen(true);
+    } else if (login === "1" || login === "true") {
+      setInitialLoginTab("login");
+      setLoginOpen(true);
+    }
   }, []);
 
   // Apply accent + density CSS vars
@@ -937,7 +954,7 @@ function App() {
         content={activePage ? window.T[t.lang].pages[activePage] : null}
         onClose={() => setActivePage(null)}
       />
-      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} lang={t.lang} user={user} setUser={setUser} />
+      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} lang={t.lang} user={user} setUser={setUser} initialTab={initialLoginTab} />
       {feedbackOpen && <FeedbackModal lang={t.lang} onClose={() => setFeedbackOpen(false)} />}
       <ProductModal product={activeProduct} lang={t.lang} onClose={() => setActiveProduct(null)} />
 
@@ -987,8 +1004,16 @@ function LogoPreview({ kind, active, onClick }) {
   );
 }
 
-function LoginModal({ open, onClose, lang, user, setUser }) {
-  const [tab, setTab] = uS("login");
+function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
+  const [tab, setTab] = uS(initialTab === "signup" ? "signup" : "login");
+
+  // Si la modal s'ouvre suite a un changement de initialTab (ex: nav vers /?signup=1),
+  // forcer le tab correspondant.
+  uE(() => {
+    if (open && initialTab) {
+      setTab(initialTab === "signup" ? "signup" : "login");
+    }
+  }, [open, initialTab]);
   const [email, setEmail] = uS("");
   const [pwd, setPwd] = uS("");
   const [loading, setLoading] = uS(false);
