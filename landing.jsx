@@ -1108,14 +1108,10 @@ function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
           </div>
         ) : (
           <>
-            <div className="sp-login-tabs">
-              <button className={"sp-login-tab" + (tab === "login" ? " is-active" : "")} onClick={() => { setTab("login"); setError(null); }}>
-                {fr ? "Connexion" : "Sign in"}
-              </button>
-              <button className={"sp-login-tab" + (tab === "register" ? " is-active" : "")} onClick={() => { setTab("register"); setError(null); }}>
-                {fr ? "Créer un compte" : "Create account"}
-              </button>
-            </div>
+            {/* Tabs Connexion / Créer un compte retirés (J22 - Option A).
+                Le hub ne gère QUE la connexion. La création de compte se fait
+                via l'achat Lemon d'un produit (le webhook gere ensuite). Cf
+                idees-yan.md pour Options B/C plus tard. */}
 
             {error && <div className="sp-login-error">{error}</div>}
 
@@ -1143,19 +1139,17 @@ function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
                   onChange={e => setEmail(e.target.value)}
                 />
               </div>
-              {tab === "login" && (
-                <div className="sp-login-field">
-                  <label>{fr ? "Mot de passe" : "Password"}</label>
-                  <input
-                    type="password" required
-                    placeholder="••••••••"
-                    value={pwd}
-                    onChange={e => setPwd(e.target.value)}
-                  />
-                </div>
-              )}
+              <div className="sp-login-field">
+                <label>{fr ? "Mot de passe" : "Password"}</label>
+                <input
+                  type="password" required
+                  placeholder="••••••••"
+                  value={pwd}
+                  onChange={e => setPwd(e.target.value)}
+                />
+              </div>
               <button type="submit" className="sp-btn sp-btn-primary" disabled={loading} style={{ width: "100%", justifyContent: "center", padding: "13px 16px", fontSize: 14 }}>
-                {loading ? (fr ? "Connexion…" : "Signing in…") : tab === "login" ? (fr ? "Se connecter" : "Sign in") : (fr ? "Créer mon compte" : "Create my account")}
+                {loading ? (fr ? "Connexion…" : "Signing in…") : (fr ? "Se connecter" : "Sign in")}
                 {!loading && <Icon name="arrow-right" size={15} />}
               </button>
             </form>
