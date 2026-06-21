@@ -1,0 +1,23 @@
+# Cloudflare Workers — fichiers a NE PAS uploader comme assets
+# Wrangler 4.x n'exclut plus automatiquement node_modules (workerd = 119 MiB > limite 25 MiB)
+# Doc : https://developers.cloudflare.com/workers/static-assets/binding/#ignoring-assets
+
+# Dependances installees au build (workerd, esbuild, etc.)
+**/node_modules
+**/.git
+**/.DS_Store
+**/.claude
+
+# Sources et outils dev (les bundles compiles sont dans dist/)
+*.jsx
+scripts/
+*.py
+package.json
+package-lock.json
+
+# Documentation (pas servie publiquement)
+*.md
+docs/
+
+# Logs / fichiers temporaires
+*.log
