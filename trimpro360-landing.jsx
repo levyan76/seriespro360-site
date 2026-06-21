@@ -10,7 +10,7 @@
 //   - Tous les CTAs d'achat / essai → mailto liste d'attente (avec subject du plan)
 //   - Tableau pricing reste visible (création d'anchor + capture intérêt)
 // ============================================================
-const PRELAUNCH_MODE = true;
+const PRELAUNCH_MODE = false;
 const WAITLIST_EMAIL = "yan@seriespro360.com";
 
 const WAITLIST_LABEL = {
