@@ -13,6 +13,12 @@
 const PRELAUNCH_MODE = false;
 const WAITLIST_EMAIL = "yan@seriespro360.com";
 
+// URL checkout Lemon Live (tous les 6 variants actives) — le user choisit son
+// plan + sa recurrence (mensuel/annuel) sur la page Lemon.
+// TODO Option B : remplacer par 6 URLs distinctes par variant pour pre-selection
+// automatique depuis le toggle Mensuel/Annuel du site.
+const LEMON_CHECKOUT_URL = "https://seriespro-360.lemonsqueezy.com/checkout/buy/0f8458e9-8b4e-41c6-997f-0cb3199233c8";
+
 const WAITLIST_LABEL = {
   fr: "Rejoindre la liste d'attente",
   en: "Join the waitlist"
@@ -123,7 +129,7 @@ function Nav({ lang, setLang, isScrolled }) {
         ),
         PRELAUNCH_MODE
           ? React.createElement("a", { href: waitlistHref(lang, ""), className: "tp-btn tp-btn-primary" }, WAITLIST_LABEL[lang])
-          : React.createElement("a", { href: "https://trimpro360-v3.vercel.app", className: "tp-btn tp-btn-primary" }, t.cta)
+          : React.createElement("a", { href: LEMON_CHECKOUT_URL, className: "tp-btn tp-btn-primary" }, t.cta)
       )
     )
   );
@@ -164,7 +170,7 @@ function Hero({ lang }) {
       React.createElement("div", { className: "tp-hero-ctas" },
         PRELAUNCH_MODE
           ? React.createElement("a", { href: waitlistHref(lang, ""), className: "tp-btn tp-btn-primary tp-btn-lg" }, WAITLIST_LABEL[lang])
-          : React.createElement("a", { href: "https://trimpro360-v3.vercel.app", className: "tp-btn tp-btn-primary tp-btn-lg" }, t.ctaPrimary),
+          : React.createElement("a", { href: LEMON_CHECKOUT_URL, className: "tp-btn tp-btn-primary tp-btn-lg" }, t.ctaPrimary),
         React.createElement("a", { href: "#demo", className: "tp-btn tp-btn-ghost tp-btn-lg" }, t.ctaSecondary)
       )
     )
@@ -508,8 +514,8 @@ function Pricing({ lang }) {
             "Aucune augmentation, jamais",
             "Aucun frais d'implantation"
           ],
-          cta: "Réserver ma place (essai 14 j)",
-          ctaHref: "mailto:yan@seriespro360.com?subject=Place%20Fondateur%20TrimPro360&body=Bonjour%20Yan%2C%0A%0AJe%20souhaite%20r%C3%A9server%20une%20place%20au%20programme%20Fondateur%20TrimPro360.%0A%0ANom%20de%20l'entreprise%20%3A%20%0AVille%20%3A%20%0AT%C3%A9l%C3%A9phone%20%3A%20%0A%0AMerci%21",
+          cta: "Démarrer mon essai 14 j",
+          ctaHref: LEMON_CHECKOUT_URL,
           highlight: true,
           badge: "foundersBadge"
         },
@@ -529,7 +535,7 @@ function Pricing({ lang }) {
             "Support par courriel (48 h)"
           ],
           cta: "Démarrer mon essai 14 j",
-          ctaHref: "https://trimpro360-v3.vercel.app",
+          ctaHref: LEMON_CHECKOUT_URL,
           highlight: false
         },
         {
@@ -549,7 +555,7 @@ function Pricing({ lang }) {
             "Support prioritaire par courriel (24 h)"
           ],
           cta: "Démarrer mon essai 14 j",
-          ctaHref: "https://trimpro360-v3.vercel.app",
+          ctaHref: LEMON_CHECKOUT_URL,
           highlight: false,
           badge: "recommendedBadge"
         },
@@ -615,8 +621,8 @@ function Pricing({ lang }) {
             "Price never increases, ever",
             "No setup fees"
           ],
-          cta: "Claim my spot (14-day trial)",
-          ctaHref: "mailto:yan@seriespro360.com?subject=TrimPro360%20Founder%20Spot&body=Hi%20Yan%2C%0A%0AI%20want%20to%20claim%20a%20Founder%20spot.%0A%0ACompany%20name%3A%20%0ACity%3A%20%0APhone%3A%20%0A%0AThanks%21",
+          cta: "Start my 14-day trial",
+          ctaHref: LEMON_CHECKOUT_URL,
           highlight: true,
           badge: "foundersBadge"
         },
@@ -636,7 +642,7 @@ function Pricing({ lang }) {
             "Email support (48 h)"
           ],
           cta: "Start my 14-day trial",
-          ctaHref: "https://trimpro360-v3.vercel.app",
+          ctaHref: LEMON_CHECKOUT_URL,
           highlight: false
         },
         {
@@ -656,7 +662,7 @@ function Pricing({ lang }) {
             "Priority email support (24 h)"
           ],
           cta: "Start my 14-day trial",
-          ctaHref: "https://trimpro360-v3.vercel.app",
+          ctaHref: LEMON_CHECKOUT_URL,
           highlight: false,
           badge: "recommendedBadge"
         },
@@ -839,7 +845,7 @@ function CTASection({ lang }) {
       React.createElement("div", { className: "tp-cta-ctas" },
         PRELAUNCH_MODE
           ? React.createElement("a", { href: waitlistHref(lang, ""), className: "tp-btn tp-btn-primary tp-btn-lg" }, WAITLIST_LABEL[lang])
-          : React.createElement("a", { href: "https://trimpro360-v3.vercel.app", className: "tp-btn tp-btn-primary tp-btn-lg" }, t.ctaPrimary),
+          : React.createElement("a", { href: LEMON_CHECKOUT_URL, className: "tp-btn tp-btn-primary tp-btn-lg" }, t.ctaPrimary),
         React.createElement("a", { href: "mailto:yan@seriespro360.com?subject=Demande%20de%20d%C3%A9mo%20TrimPro360", className: "tp-btn tp-btn-ghost tp-btn-lg" }, t.ctaSecondary)
       )
     )
