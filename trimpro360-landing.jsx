@@ -570,8 +570,8 @@ function Pricing({ lang }) {
           features: [
             "Tout du plan Pro",
             "Multi-sites / multi-ateliers (roadmap Q4)",
-            "API publique + intégrations BuilderTrend, JobNimbus, ERP",
-            "SSO (SAML/OIDC)",
+            "API publique + intégrations BuilderTrend, JobNimbus, ERP (roadmap)",
+            "SSO (SAML/OIDC) (roadmap)",
             "Utilisateurs illimités",
             "SLA garanti + onboarding personnalisé",
             "Support téléphonique direct"
@@ -677,8 +677,8 @@ function Pricing({ lang }) {
           features: [
             "Everything in Pro",
             "Multi-site / multi-shop (roadmap Q4)",
-            "Public API + BuilderTrend, JobNimbus, ERP integrations",
-            "SSO (SAML/OIDC)",
+            "Public API + BuilderTrend, JobNimbus, ERP integrations (roadmap)",
+            "SSO (SAML/OIDC) (roadmap)",
             "Unlimited users",
             "Guaranteed SLA + custom onboarding",
             "Direct phone support"
