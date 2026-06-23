@@ -789,9 +789,7 @@ function RiskReversal({ lang }) {
       items: [
         { icon: "check", text: "14 jours gratuits — aucun débit avant. Carte requise au checkout pour confirmer votre essai, annulez en 1 clic avant la fin." },
         { icon: "file", text: "Vos données exportables en CSV/PDF en tout temps — vous repartez avec." },
-        { icon: "zap", text: "Aucun frais d'implantation — vous démarrez avec Yan au téléphone." },
-        { icon: "rotate-ccw", text: "Annulation en 1 clic, pas de contrat, pas de pénalité." },
-        { icon: "shield", text: "Stack open-source (Supabase, Next.js) — si Yan disparaît demain, un autre dev peut reprendre." }
+        { icon: "rotate-ccw", text: "Annulation en 1 clic, pas de contrat, pas de pénalité." }
       ]
     },
     en: {
@@ -800,9 +798,7 @@ function RiskReversal({ lang }) {
       items: [
         { icon: "check", text: "14 days free — no charge until then. Card required at checkout to start your trial, cancel in 1 click before it ends." },
         { icon: "file", text: "Your data is exportable as CSV/PDF anytime — you leave with it." },
-        { icon: "zap", text: "No setup fees — you start with Yan on the phone." },
-        { icon: "rotate-ccw", text: "One-click cancel, no contract, no penalty." },
-        { icon: "shield", text: "Open-source stack (Supabase, Next.js) — if Yan disappears tomorrow, another dev can take over." }
+        { icon: "rotate-ccw", text: "One-click cancel, no contract, no penalty." }
       ]
     }
   }[lang];
