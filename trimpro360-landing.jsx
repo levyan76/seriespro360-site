@@ -497,6 +497,7 @@ function Pricing({ lang }) {
       pricePer: { monthly: "/ mois", annual: "/ an" },
       lifetimeNote: "à vie",
       annualSubtitle: "Soit l'équivalent de 10 mois sur 12",
+      ctaReassurance: "Aucun débit avant 14 jours · Annulez en 1 clic",
       plans: [
         {
           key: "founder",
@@ -604,6 +605,7 @@ function Pricing({ lang }) {
       pricePer: { monthly: "/ month", annual: "/ year" },
       lifetimeNote: "for life",
       annualSubtitle: "Equivalent to 10 months out of 12",
+      ctaReassurance: "No charge for 14 days · Cancel in 1 click",
       plans: [
         {
           key: "founder",
@@ -757,7 +759,11 @@ function Pricing({ lang }) {
             React.createElement("a", {
               href: PRELAUNCH_MODE ? waitlistHref(lang, plan.name) : plan.ctaHref,
               className: "tp-btn tp-pricing-cta" + (plan.highlight ? " tp-btn-primary" : " tp-btn-ghost")
-            }, PRELAUNCH_MODE ? WAITLIST_LABEL[lang] : plan.cta)
+            }, PRELAUNCH_MODE ? WAITLIST_LABEL[lang] : plan.cta),
+            !PRELAUNCH_MODE && plan.key !== "enterprise" && React.createElement("div", {
+              className: "tp-pricing-reassurance",
+              style: { fontSize: "0.78rem", color: "#6b7280", marginTop: "0.5rem", textAlign: "center" }
+            }, t.ctaReassurance)
           );
         })
       ),
@@ -781,7 +787,7 @@ function RiskReversal({ lang }) {
       eyebrow: "ESSAYEZ SANS PEUR",
       title: "Pourquoi vous pouvez essayer sans peur",
       items: [
-        { icon: "check", text: "14 jours d'essai gratuit, aucune carte de crédit pour la démo." },
+        { icon: "check", text: "14 jours gratuits — aucun débit avant. Carte requise au checkout pour confirmer votre essai, annulez en 1 clic avant la fin." },
         { icon: "file", text: "Vos données exportables en CSV/PDF en tout temps — vous repartez avec." },
         { icon: "zap", text: "Aucun frais d'implantation — vous démarrez avec Yan au téléphone." },
         { icon: "rotate-ccw", text: "Annulation en 1 clic, pas de contrat, pas de pénalité." },
@@ -792,7 +798,7 @@ function RiskReversal({ lang }) {
       eyebrow: "TRY WITHOUT FEAR",
       title: "Why you can try without fear",
       items: [
-        { icon: "check", text: "14-day free trial, no credit card for the demo." },
+        { icon: "check", text: "14 days free — no charge until then. Card required at checkout to start your trial, cancel in 1 click before it ends." },
         { icon: "file", text: "Your data is exportable as CSV/PDF anytime — you leave with it." },
         { icon: "zap", text: "No setup fees — you start with Yan on the phone." },
         { icon: "rotate-ccw", text: "One-click cancel, no contract, no penalty." },
@@ -826,13 +832,13 @@ function CTASection({ lang }) {
   const t = {
     fr: {
       title: "Prêt à ne plus jamais entendre « C'est-tu 1/2 ou 1/8 ? »",
-      subtitle: "14 jours d'essai gratuit. Aucune carte requise pour la démo. Si on n'est pas la bonne solution pour votre atelier, on vous le dira en premier.",
+      subtitle: "14 jours gratuits, aucun débit avant la fin de l'essai. Annulez en 1 clic à tout moment. Si on n'est pas la bonne solution pour votre atelier, on vous le dira en premier.",
       ctaPrimary: "Démarrer mon essai gratuit",
       ctaSecondary: "Demander une démo avec Yan"
     },
     en: {
       title: "Ready to never hear \"Is that 1/2 or 1/8?\" again?",
-      subtitle: "14-day free trial. No card required for the demo. If we're not the right fit for your shop, we'll tell you first.",
+      subtitle: "14 days free, no charge until the trial ends. Cancel in 1 click anytime. If we're not the right fit for your shop, we'll tell you first.",
       ctaPrimary: "Start my free trial",
       ctaSecondary: "Request a demo with Yan"
     }
