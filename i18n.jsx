@@ -260,23 +260,19 @@ const T = {
         },
         {
           tag: "Bientôt",
-          name: "DevisPro360",
-          tagline: "Gestion de devis",
-          desc: "Un outil spécialisé pour les cahiers des charges en construction. Détails à venir.",
+          name: "PanelPro360",
+          tagline: "Revêtement de panneaux métalliques",
+          desc: "Outil spécialisé pour le revêtement de panneaux d'acier, d'aluminium et d'ACM. Exactement comme TrimPro360, mais pour les panneaux.",
           color: "green",
           cta: "Être notifié",
           url: "#",
           placeholder: true,
           modal: {
-            headline: "Des devis professionnels. Sans les maux de tête.",
-            about: "DevisPro360 centralisera la gestion des devis de construction — des cahiers de charges aux soumissions formelles, avec suivi client intégré.",
-            features: [
-              { icon: "file", title: "Gabarits de devis CCQ", desc: "Modèles conformes aux exigences de la Commission de la construction du Québec." },
-              { icon: "users", title: "Suivi client intégré", desc: "Statuts, révisions, approbations — tout en un seul endroit." },
-              { icon: "zap", title: "Intégration CalcuPro360", desc: "Importe les estimations directement depuis CalcuPro360." },
-            ],
+            headline: "Comme TrimPro360. Pour les panneaux.",
+            about: "PanelPro360 est le pendant de TrimPro360 dédié au revêtement de panneaux métalliques — acier, aluminium et ACM. Même approche : commande, production et suivi en un seul flux, conçu par et pour les ateliers québécois.",
+            features: [],
             steps: [],
-            pricing_note: "Tarification à annoncer au lancement.",
+            pricing_note: "Détails et tarification à annoncer au lancement.",
           },
         },
       ],
@@ -512,7 +508,7 @@ const T = {
       "Conditions d'utilisation": "En utilisant SeriesPro360, vous acceptez de vous conformer à nos règles. Nos outils sont fournis « tels quels » pour vous aider dans vos estimations, mais la validation finale des calculs et la conformité au code demeurent la responsabilité du professionnel (entrepreneur, architecte ou ingénieur) responsable du projet.",
       "Politique de confidentialité": "Vos données vous appartiennent. SeriesPro360 stocke vos estimations et données clients localement dans votre navigateur par défaut. Si vous optez pour la synchronisation Cloud, nous utilisons un cryptage de bout en bout et ne revendons jamais vos informations à des tiers.",
       "Accessibilité": "Nous nous engageons à rendre SeriesPro360 accessible à tous. Nos applications respectent les standards WCAG 2.1 AA, offrent un mode sombre natif pour réduire la fatigue visuelle, et supportent la navigation au clavier et par lecteur d'écran.",
-      "Statut": "Tous les systèmes sont opérationnels.\n\n• CalcuPro360 : En ligne (100% uptime)\n• MesurePro360 : En développement\n• DevisPro360 : En développement\n• ThermoPro : En développement"
+      "Statut": "Tous les systèmes sont opérationnels.\n\n• CalcuPro360 : En ligne (100% uptime)\n• MesurePro360 : En développement\n• PanelPro360 : En développement\n• ThermoPro : En développement"
     },
   },
 
@@ -690,23 +686,19 @@ const T = {
         },
         {
           tag: "Soon",
-          name: "DevisPro360",
-          tagline: "Quote management",
-          desc: "A specialized tool for construction bid documents. Details coming soon.",
+          name: "PanelPro360",
+          tagline: "Metal panel cladding",
+          desc: "Specialized tool for steel, aluminum and ACM panel cladding. Just like TrimPro360, but for panels.",
           color: "green",
           cta: "Get notified",
           url: "#",
           placeholder: true,
           modal: {
-            headline: "Professional quotes. Without the headaches.",
-            about: "DevisPro360 will centralize construction quote management — from scope documents to formal bids, with integrated client tracking.",
-            features: [
-              { icon: "file", title: "CCQ-compliant templates", desc: "Templates that meet Commission de la construction du Québec requirements." },
-              { icon: "users", title: "Integrated client tracking", desc: "Statuses, revisions, approvals — all in one place." },
-              { icon: "zap", title: "CalcuPro360 integration", desc: "Import estimates directly from CalcuPro360." },
-            ],
+            headline: "Like TrimPro360. For panels.",
+            about: "PanelPro360 is the TrimPro360 counterpart dedicated to metal panel cladding — steel, aluminum and ACM. Same approach: order, production and tracking in one flow, designed by and for Quebec shops.",
+            features: [],
             steps: [],
-            pricing_note: "Pricing to be announced at launch.",
+            pricing_note: "Details and pricing to be announced at launch.",
           },
         },
       ],
@@ -942,7 +934,7 @@ const T = {
       "Terms of service": "By using SeriesPro360, you agree to our rules. Our tools are provided 'as is' to assist you in estimating, but final validation of calculations and code compliance remains the responsibility of the professional (contractor, architect or engineer) signing off on the project.",
       "Privacy policy": "Your data is yours. SeriesPro360 stores your estimates and client data locally in your browser by default. If you opt for Cloud sync, we use end-to-end encryption and never sell your information to third parties.",
       "Accessibility": "We are committed to making SeriesPro360 accessible to everyone. Our apps meet WCAG 2.1 AA standards, offer a native dark mode to reduce eye strain, and support full keyboard and screen reader navigation.",
-      "Status": "All systems operational.\n\n• CalcuPro360: Online (100% uptime)\n• MesurePro360: In development\n• DevisPro360: In development\n• ThermoPro: In development"
+      "Status": "All systems operational.\n\n• CalcuPro360: Online (100% uptime)\n• MesurePro360: In development\n• PanelPro360: In development\n• ThermoPro: In development"
     },
   },
 };

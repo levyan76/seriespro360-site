@@ -253,7 +253,7 @@ function Origin({ lang }) {
 // ──────────────────────────────────────────────────────────────────────────────
 function AppGrid({ lang }) {
   const t = window.T[lang].suite;
-  const slugMap = { "TrimPro360": "trimpro360", "CalcuPro360": "calcupro360", "MesurePro360": "mesurepro360", "DevisPro360": "devispro360" };
+  const slugMap = { "TrimPro360": "trimpro360", "CalcuPro360": "calcupro360", "MesurePro360": "mesurepro360", "PanelPro360": "panelpro360" };
   const logoMap = { "TrimPro360": "/logos/Logos TrimPro360/trimpro360-transparent.png", "CalcuPro360": "/logos/Logos CalculPro360/calcupro360-transparent.png", "MesurePro360": "/logos/Logo MeasurePro360/measurepro360-transparent.png" };
   const accentByColor = { yellow: "#E8420A", blue: "#3B82F6", green: "#10B981", orange: "#E8420A" };
   return (
@@ -310,7 +310,7 @@ function Suite({ lang }) {
   const t = window.T[lang].suite;
   const r1 = useReveal();
   const r2 = useReveal({ threshold: 0.05 });
-  const slugMap = { "TrimPro360": "trimpro360", "CalcuPro360": "calcupro360", "MesurePro360": "mesurepro360", "DevisPro360": "devispro360" };
+  const slugMap = { "TrimPro360": "trimpro360", "CalcuPro360": "calcupro360", "MesurePro360": "mesurepro360", "PanelPro360": "panelpro360" };
   return (
     <section id="suite" className="sp-suite">
       <div className="sp-container">
