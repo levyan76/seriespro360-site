@@ -202,12 +202,20 @@ function Problem({ lang }) {
           cost: "Résultat : une bobine gaspillée, une commande à refaire."
         },
         {
-          icon: "moon",
-          context: "22 h, bureau du propriétaire",
+          icon: "wrench",
+          context: "Chantier",
           dialog: [
-            { who: null, says: "Vous rentrez les commandes dans Excel au lieu d'être avec votre famille." }
+            { who: "Installateur", says: "Les moulures n'ont pas les bonnes dimensions." }
           ],
-          cost: "Résultat : un atelier qui tourne, un proprio qui s'épuise."
+          cost: "Résultat : un retour à l'atelier, une journée d'installation perdue."
+        },
+        {
+          icon: "package",
+          context: "Production",
+          dialog: [
+            { who: "Opérateur", says: "Je n'ai plus assez de matière pour faire la commande." }
+          ],
+          cost: "Résultat : un délai client repoussé, une commande de matière en urgence."
         }
       ]
     },
@@ -233,12 +241,20 @@ function Problem({ lang }) {
           cost: "Result: a wasted coil, an order to redo."
         },
         {
-          icon: "moon",
-          context: "10 PM, owner's office",
+          icon: "wrench",
+          context: "Job site",
           dialog: [
-            { who: null, says: "Entering orders into Excel instead of being with your family." }
+            { who: "Installer", says: "These trims aren't the right dimensions." }
           ],
-          cost: "Result: a working shop, a burned-out owner."
+          cost: "Result: a trip back to the shop, a lost installation day."
+        },
+        {
+          icon: "package",
+          context: "Production",
+          dialog: [
+            { who: "Operator", says: "I don't have enough material left to finish the order." }
+          ],
+          cost: "Result: a delayed client, an emergency restocking order."
         }
       ]
     }
@@ -447,7 +463,7 @@ function OriginStory({ lang }) {
       paragraphs: [
         "Après bientôt 10 ans dans le revêtement extérieur — dessinateur, chargé de projet, programmeur/opérateur CNC et presse plieuse.",
         "J'ai vu mes employeurs perdre beaucoup de temps, de matériel et d'argent à cause de croquis mal interprétés. J'ai été le gars qui rappelait le client « en fait il manque une dimension ». J'ai aussi été le gars qui a fait des erreurs de dimension, de couleur, de calibre dans ses propres commandes.",
-        "Les solutions ERP existantes pour notre industrie demandent généralement plusieurs milliers de dollars d'implantation et des centaines de dollars par mois, et sont conçues par des gens qui n'ont jamais touché à une plieuse. J'ai décidé de bâtir l'outil que j'aurais voulu avoir."
+        "Les solutions ERP existantes pour notre industrie demandent des frais d'implantation importants et plusieurs centaines de dollars par mois, et sont conçues par des gens qui n'ont jamais touché à une plieuse. J'ai décidé de bâtir l'outil que j'aurais voulu avoir."
       ],
       signature: "Yan Levasseur, fondateur de TrimPro360"
     },
@@ -457,7 +473,7 @@ function OriginStory({ lang }) {
       paragraphs: [
         "Nearly 10 years in metal cladding — drafter, project manager, CNC and brake-press programmer/operator.",
         "I watched my employers lose time, material and money to misread sketches. I was the guy calling clients back to say \"actually, a dimension is missing.\" I was also the guy who made dimension, color and gauge mistakes on his own orders.",
-        "Existing ERP solutions for our industry typically require thousands of dollars in setup and hundreds per month, and are built by people who've never touched a brake. I decided to build the tool I wished I'd had."
+        "Existing ERP solutions for our industry require significant setup costs and several hundred dollars per month, and are built by people who've never touched a brake. I decided to build the tool I wished I'd had."
       ],
       signature: "Yan Levasseur, founder of TrimPro360"
     }
