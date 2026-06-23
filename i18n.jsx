@@ -202,7 +202,7 @@ const T = {
           },
         },
         {
-          tag: "Actif",
+          tag: "En prod",
           name: "CalcuPro360",
           tagline: "Calcul, estimation, devis PDF",
           desc: "Bibliothèque de matériaux en expansion, calculatrice pi-po, assistant IA, devis prêt-client en 90 sec.",

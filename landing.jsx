@@ -274,7 +274,7 @@ function AppGrid({ lang }) {
           {t.products.map((p) => {
             const accent = accentByColor[p.color] || "#E8420A";
             const url = "/" + (slugMap[p.name] || p.name.toLowerCase().replace(/[^a-z0-9]/g, ""));
-            const isLive = p.tag === "En ligne" || p.tag === "Actif" || p.tag === "Live";
+            const isLive = p.tag === "En prod" || p.tag === "En ligne" || p.tag === "Actif" || p.tag === "Live";
             return (
               <a key={p.name} href={url} style={{ textDecoration: "none", display: "flex", flexDirection: "column", background: "#FFFFFF", borderRadius: 16, padding: "28px 24px 24px", border: "1px solid rgba(27,42,74,0.10)", boxShadow: "0 2px 12px rgba(27,42,74,0.06)", transition: "transform 0.2s, box-shadow 0.2s", minHeight: 220 }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(27,42,74,0.12)"; }}
@@ -317,16 +317,12 @@ function Suite({ lang }) {
         <div className="sp-reveal" ref={r1}><SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} /></div>
         <div className="sp-suite-grid sp-reveal sp-reveal-stagger" ref={r2}>
           {t.products.map((p) => {
-            const isLive = p.tag === "Actif" || p.tag === "En ligne" || p.tag === "Live";
+            const isLive = p.tag === "En prod" || p.tag === "Actif" || p.tag === "En ligne" || p.tag === "Live";
             const tagClass = isLive ? "live" : (p.placeholder ? "soon" : "beta");
             const pageUrl = "/" + (slugMap[p.name] || p.name.toLowerCase().replace(/[^a-z0-9]/g, ""));
-            return (
-              <a
-                key={p.name}
-                href={pageUrl}
-                className={"sp-product sp-product-" + p.color + (p.placeholder ? " sp-product-placeholder" : "") + " sp-product-clickable"}
-                style={{ textDecoration: "none", display: "block" }}
-              >
+            const cardClass = "sp-product sp-product-" + p.color + (p.placeholder ? " sp-product-placeholder" : " sp-product-clickable");
+            const innerContent = (
+              <React.Fragment>
                 <header className="sp-product-head">
                   <ProductMark kind={p.name} color={p.color} size={44} />
                   <span className={"sp-product-tag sp-product-tag-" + tagClass}>{p.tag}</span>
@@ -338,10 +334,24 @@ function Suite({ lang }) {
                 </div>
                 <div className="sp-product-footer">
                   <span className="sp-product-learn" style={{ color: "#3D4F6E" }}>
-                    {lang === "fr" ? "En savoir plus" : "Learn more"} <Icon name="arrow-right" size={13} />
+                    {p.placeholder
+                      ? (lang === "fr" ? "Disponible bientôt" : "Available soon")
+                      : <React.Fragment>{lang === "fr" ? "En savoir plus" : "Learn more"} <Icon name="arrow-right" size={13} /></React.Fragment>}
                   </span>
                 </div>
                 <div className={"sp-product-bar sp-product-bar-" + p.color} />
+              </React.Fragment>
+            );
+            if (p.placeholder) {
+              return (
+                <div key={p.name} className={cardClass} style={{ display: "block", cursor: "default" }}>
+                  {innerContent}
+                </div>
+              );
+            }
+            return (
+              <a key={p.name} href={pageUrl} className={cardClass} style={{ textDecoration: "none", display: "block" }}>
+                {innerContent}
               </a>
             );
           })}
