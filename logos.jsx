@@ -122,7 +122,7 @@ const PRODUCT_LOGO_MAP = {
   "CalcuPro360":  "/logos/calcupro360-transparent.png",
   "TrimPro360":   "/logos/trimpro360-transparent.png",
   "MesurePro360": "/logos/measurepro360-transparent.png",
-  "PanelPro360":  "/logos/panelpro360-transparent.png",
+  "PanelPro360":  "/logos/panelpro360-transparent.png?v=1",
 };
 
 function ProductMark({ kind, color, size = 40 }) {
