@@ -6,7 +6,7 @@
 
 ## Identité du projet
 
-**seriespro360-site** — Site marketing de la suite SeriesPro360. Contient les landing pages de chaque application (CalcuPro360, DevisPro360, MesurePro360, etc.) ainsi que la page principale seriespro360.com.
+**seriespro360-site** — Site marketing de la suite SeriesPro360. Contient les landing pages de chaque application (CalcuPro360, PanelPro360, MesurePro360, etc.) ainsi que la page principale seriespro360.com.
 
 - **Stack :** HTML statique + CSS + JavaScript + React JSX (landing pages)
 - **Répertoire :** `D:\Applications\SeriesPro360_Suite\seriespro360-site-repo\`
@@ -24,7 +24,7 @@ seriespro360-site-repo/
 ├── calculator.jsx          ← Composant calculatrice
 ├── calcupro360-landing.jsx ← Landing CalcuPro360
 ├── calcupro360.html        ← Version HTML CalcuPro360
-├── devispro360.html        ← Landing DevisPro360
+├── panelpro360.html        ← Landing PanelPro360
 ├── mesurePro360.html       ← Landing MesurePro360
 ├── logos/                  ← Logos des apps
 ├── logos.jsx               ← Composant logos

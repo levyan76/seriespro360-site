@@ -1,5 +1,5 @@
 // product-page.jsx — Page de présentation complète d'un produit SeriesPro360
-// Utilisé par: trimpro360.html, calcupro360.html, mesuropro360.html, devispro360.html
+// Utilisé par: trimpro360.html, calcupro360.html, mesuropro360.html, panelpro360.html
 // Style: Procore-inspired — Hero split, stats, features, comparaison, calculateur (CalcuPro360 seulement)
 
 const { useState: uS, useEffect: uE } = React;

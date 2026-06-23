@@ -146,19 +146,6 @@ function ProductMark({ kind, color, size = 40 }) {
 
   // SVG fallback for products without a PNG logo
   const map = {
-    // DevisPro360 — document with search lens
-    DevisPro360: { color: "green", glyph: (c) => (
-      <g stroke={c} strokeWidth="1.6" strokeLinecap="round" fill="none">
-        {/* Document folded corner */}
-        <path d="M6 4.5 H13 L17 8.5 V19.5 H6 Z" />
-        <path d="M13 4.5 V8.5 H17" opacity="0.6" />
-        <line x1="8" y1="11" x2="14.5" y2="11" opacity="0.55" />
-        <line x1="8" y1="13.5" x2="13" y2="13.5" opacity="0.55" />
-        {/* Magnifier overlay on lower-right */}
-        <circle cx="14.5" cy="16" r="2.2" fill={c} stroke="none" opacity="0.95" />
-        <line x1="16.1" y1="17.6" x2="17.8" y2="19.3" stroke={c} strokeWidth="1.6" />
-      </g>
-    )},
     // ThermoPro — thermometer + heat dot
     ThermoPro: { color: "yellow", glyph: (c) => (
       <g stroke={c} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none">
@@ -170,7 +157,7 @@ function ProductMark({ kind, color, size = 40 }) {
       </g>
     )},
   };
-  const def = map[kind] || map.DevisPro360;
+  const def = map[kind] || map.ThermoPro;
   const palette = PRODUCT_COLORS[color || def.color] || PRODUCT_COLORS.orange;
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
