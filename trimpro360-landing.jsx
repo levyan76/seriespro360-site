@@ -446,8 +446,8 @@ function OriginStory({ lang }) {
       title: "Je l'ai créé parce que je l'ai vécu",
       paragraphs: [
         "Après bientôt 10 ans dans le revêtement extérieur — dessinateur, chargé de projet, programmeur/opérateur CNC et presse plieuse.",
-        "J'ai vu mes employeurs perdre beaucoup de temps, de matériel et d'argent à cause de croquis mal interprétés. J'ai été le gars qui rappelait le client « en fait il manque une dimension ». J'ai aussi été le gars qui a fait des erreurs de dimension, de couleur, de calibre dans ses propres commandes. Et j'ai rentré des commandes dans Excel à 22 h le vendredi soir.",
-        "Les ERP existants pour notre industrie coûtent 8 000 $ d'implantation + 500 $/mois et sont conçus par des gens qui n'ont jamais touché à une plieuse. J'ai décidé de bâtir l'outil que j'aurais voulu avoir."
+        "J'ai vu mes employeurs perdre beaucoup de temps, de matériel et d'argent à cause de croquis mal interprétés. J'ai été le gars qui rappelait le client « en fait il manque une dimension ». J'ai aussi été le gars qui a fait des erreurs de dimension, de couleur, de calibre dans ses propres commandes.",
+        "Les solutions ERP existantes pour notre industrie demandent généralement plusieurs milliers de dollars d'implantation et des centaines de dollars par mois, et sont conçues par des gens qui n'ont jamais touché à une plieuse. J'ai décidé de bâtir l'outil que j'aurais voulu avoir."
       ],
       signature: "Yan Levasseur, fondateur de TrimPro360"
     },
@@ -456,8 +456,8 @@ function OriginStory({ lang }) {
       title: "I built this because I lived it",
       paragraphs: [
         "Nearly 10 years in metal cladding — drafter, project manager, CNC and brake-press programmer/operator.",
-        "I watched my employers lose time, material and money to misread sketches. I was the guy calling clients back to say \"actually, a dimension is missing.\" I was also the guy who made dimension, color and gauge mistakes on his own orders. And I entered orders into Excel at 10 PM on Friday nights.",
-        "Existing ERPs for our industry cost $8,000 setup + $500/month and are built by people who've never touched a brake. I decided to build the tool I wished I'd had."
+        "I watched my employers lose time, material and money to misread sketches. I was the guy calling clients back to say \"actually, a dimension is missing.\" I was also the guy who made dimension, color and gauge mistakes on his own orders.",
+        "Existing ERP solutions for our industry typically require thousands of dollars in setup and hundreds per month, and are built by people who've never touched a brake. I decided to build the tool I wished I'd had."
       ],
       signature: "Yan Levasseur, founder of TrimPro360"
     }
