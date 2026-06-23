@@ -195,14 +195,6 @@ function Problem({ lang }) {
         },
         {
           icon: "wrench",
-          context: "Production",
-          dialog: [
-            { who: "Opérateur de plieuse", says: "C'est-tu 1/2 ou 1/8 qui est écrit ???" }
-          ],
-          cost: "Résultat : une bobine gaspillée, une commande à refaire."
-        },
-        {
-          icon: "wrench",
           context: "Chantier",
           dialog: [
             { who: "Installateur", says: "Les moulures n'ont pas les bonnes dimensions." }
@@ -231,14 +223,6 @@ function Problem({ lang }) {
             { who: "Installer", says: "I sent the email at 10 this morning..." }
           ],
           cost: "Result: 2 hours wasted, a client waiting."
-        },
-        {
-          icon: "wrench",
-          context: "Production",
-          dialog: [
-            { who: "Brake operator", says: "Is that 1/2 or 1/8 written there???" }
-          ],
-          cost: "Result: a wasted coil, an order to redo."
         },
         {
           icon: "wrench",
