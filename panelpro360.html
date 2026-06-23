@@ -4,31 +4,154 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PanelPro360 — Commande & production de panneaux métalliques | SeriesPro360</title>
+  <title>PanelPro360 — En construction | SeriesPro360</title>
   <meta name="description"
-    content="PanelPro360 : plateforme SaaS pour la fabrication, la commande et le suivi des panneaux d'acier, d'aluminium et d'ACM. Conçu par et pour les entrepreneurs de la construction. Bientôt disponible." />
+    content="PanelPro360 : plateforme SaaS pour la fabrication, la commande et le suivi des panneaux d'acier, d'aluminium et d'ACM. En cours de développement, disponible prochainement." />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="canonical" href="https://www.seriespro360.com/panelpro360" />
-  <meta property="og:title" content="PanelPro360 — Commande & production de panneaux métalliques" />
-  <meta property="og:image" content="https://www.seriespro360.com/og-image.webp" />
-  <meta property="og:url" content="https://www.seriespro360.com/panelpro360" />
   <link rel="icon" type="image/svg+xml"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E0F12'/%3E%3Crect x='6' y='8' width='20' height='2.5' rx='1' fill='%2310B981'/%3E%3Crect x='6' y='14.75' width='14' height='2.5' rx='1' fill='%2310B981' opacity='.55'/%3E%3Crect x='6' y='21.5' width='8' height='2.5' rx='1' fill='%2310B981' opacity='.85'/%3E%3C/svg%3E" />
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-    rel="stylesheet" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="/dist/app.min.css?v=mqq0kdfo" />
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #ecfdf5 100%);
+      color: #0F1C35;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      background: #fff;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #0F1C35;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .brand img { height: 32px; width: auto; }
+    .back-link {
+      color: #3D4F6E;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .back-link:hover { background: #f1f5f9; }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .product-logo {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .tagline {
+      font-size: 1.15rem;
+      color: #3D4F6E;
+      margin-bottom: 2rem;
+      max-width: 520px;
+    }
+    .badge {
+      display: inline-block;
+      background: #10B981;
+      color: white;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      padding: 0.55rem 1.25rem;
+      border-radius: 999px;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+    .message {
+      font-size: 1.05rem;
+      color: #3D4F6E;
+      max-width: 540px;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #FF6B1A;
+      color: white;
+      padding: 0.85rem 1.75rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .cta:hover { background: #E85A0E; transform: translateY(-1px); }
+    footer {
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #94A3B8;
+      border-top: 1px solid #e2e8f0;
+    }
+    @media (max-width: 640px) {
+      h1 { font-size: 2rem; }
+      .product-logo { width: 100px; height: 100px; }
+      header { padding: 1rem; }
+      main { padding: 2rem 1rem; }
+    }
+  </style>
 </head>
 
 <body>
-  <div id="root" data-product="panelpro360"></div>
-  <script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-  <script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"
-    crossorigin="anonymous"></script>
-  <script defer src="/dist/i18n.min.js?v=mqq0kdfo"></script>
-  <script defer src="/dist/product-page.min.js?v=mqq0kdfo"></script>
+  <header>
+    <a href="/" class="brand">
+      <img src="/logos/SeriesPro360/logo-sp360-transp-original.png" alt="SeriesPro360" />
+      <span>SeriesPro360</span>
+    </a>
+    <a href="/" class="back-link">← Retour</a>
+  </header>
+  <main>
+    <img src="/logos/panelpro360-transparent.png" alt="PanelPro360" class="product-logo" />
+    <h1>PanelPro360</h1>
+    <p class="tagline">Revêtement de panneaux métalliques — acier, aluminium, ACM</p>
+    <div class="badge">🚧 En construction</div>
+    <p class="message">
+      Cette application est en cours de développement. Elle sera disponible prochainement.
+      D'ici là, explorez les autres outils de la suite SeriesPro360.
+    </p>
+    <a href="/" class="cta">← Retour à seriespro360.com</a>
+  </main>
+  <footer>
+    © SeriesPro360 — Outils pour les entrepreneurs de la construction
+  </footer>
 </body>
 
 </html>
