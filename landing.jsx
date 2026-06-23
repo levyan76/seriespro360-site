@@ -317,7 +317,7 @@ function Suite({ lang }) {
         <div className="sp-reveal" ref={r1}><SectionHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} /></div>
         <div className="sp-suite-grid sp-reveal sp-reveal-stagger" ref={r2}>
           {t.products.map((p) => {
-            const isLive = p.tag === "En prod" || p.tag === "Actif" || p.tag === "En ligne" || p.tag === "Live";
+            const isLive = p.tag === "En prod" || p.tag === "Actif" || p.tag === "En ligne" || p.tag === "In Prod" || p.tag === "Live";
             const tagClass = isLive ? "live" : (p.placeholder ? "soon" : "beta");
             const pageUrl = "/" + (slugMap[p.name] || p.name.toLowerCase().replace(/[^a-z0-9]/g, ""));
             const cardClass = "sp-product sp-product-" + p.color + (p.placeholder ? " sp-product-placeholder" : " sp-product-clickable");
@@ -366,7 +366,7 @@ function ProductModal({ product, lang, onClose }) {
   const m = product.modal;
   const content = (() => {
     if (!m) {
-      const isLive = product.tag === "Actif" || product.tag === "Live";
+      const isLive = product.tag === "En prod" || product.tag === "Actif" || product.tag === "In Prod" || product.tag === "Live";
       return (
         <div className="sp-modal-backdrop" onClick={onClose} style={{ zIndex: 9000 }}>
           <div className="sp-product-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
@@ -382,7 +382,7 @@ function ProductModal({ product, lang, onClose }) {
         </div>
       );
     }
-    const isLive = product.tag === "Actif" || product.tag === "Live";
+    const isLive = product.tag === "En prod" || product.tag === "Actif" || product.tag === "In Prod" || product.tag === "Live";
     const fr = lang === "fr";
     const colorMap = { orange: "#FF6B1A", blue: "#3B82F6", green: "#10B981", yellow: "#EAB308" };
     const accentColor = colorMap[product.color] || "#FF6B1A";

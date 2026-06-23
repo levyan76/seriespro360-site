@@ -632,7 +632,7 @@ const T = {
           },
         },
         {
-          tag: "Live",
+          tag: "In Prod",
           name: "CalcuPro360",
           tagline: "Calc, estimating, PDF quotes",
           desc: "Expanding materials library, ft-in calculator, AI assistant, client-ready quote in 90 sec.",
