@@ -5,9 +5,11 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "npm run build && npx -y serve . -l 3000 --no-clipboard",
-    "preview": "npx -y serve . -l 3000 --no-clipboard"
+    "preview": "wrangler dev",
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.25.0",
+    "wrangler": "^4.104.0"
   }
 }
