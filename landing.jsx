@@ -819,7 +819,7 @@ function Footer({ lang, logoVariant, setActivePage, onFeedback }) {
           <div>
             <div className="sp-footer-col-title">{t.product}</div>
             <ul>{t.product_links.map((l) => {
-              const appUrls = { "TrimPro360": "https://trimpro360.seriespro360.com", "CalcuPro360": "https://calcupro360.seriespro360.com" };
+              const appUrls = { "TrimPro360": "https://trimpro360-v3.vercel.app", "CalcuPro360": "https://calcupro360.seriespro360.com" };
               return appUrls[l]
                 ? <li key={l}><a href={appUrls[l]} target="_blank" rel="noopener">{l}</a></li>
                 : <li key={l}><a href="#!" onClick={(e) => handlePageClick(e, l)}>{l}</a></li>;
@@ -1103,7 +1103,7 @@ function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
     if (!sb) return;
     setForgotLoading(true); setError(null);
     const { error: err } = await sb.auth.resetPasswordForEmail(forgotEmail, {
-      redirectTo: "https://trimpro360.seriespro360.com/reset-password",
+      redirectTo: "https://trimpro360-v3.vercel.app/reset-password",
     });
     setForgotLoading(false);
     if (err) { setError(err.message); return; }

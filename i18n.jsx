@@ -71,7 +71,7 @@ const T = {
           desc: "Plateforme SaaS complète pour la fabrication, la commande et le suivi des profilés de construction métalliques. Conçu par et pour les entrepreneurs de la construction.",
           color: "yellow",
           cta: "Accéder à l'app",
-          url: "https://trimpro360.seriespro360.com",
+          url: "https://trimpro360-v3.vercel.app",
           modal: {
             headline: "Du dessin à la livraison. Sans papier, sans oublis.",
             about: "TrimPro360 est une plateforme de gestion spécialisée pour les fabricants de profilés de construction. Elle regroupe un éditeur vectoriel de profilés (Canvas), un catalogue de 56 profils standards, un système de commandes avec workflow complet, et une gestion de production et inventaire — le tout bilingue FR/EN.",
@@ -584,7 +584,7 @@ const T = {
           desc: "Full SaaS platform for manufacturing, ordering and tracking construction metal profiles. Built by and for construction contractors.",
           color: "yellow",
           cta: "Open app",
-          url: "https://trimpro360.seriespro360.com",
+          url: "https://trimpro360-v3.vercel.app",
           modal: {
             headline: "From drawing to delivery. No paper, no missed orders.",
             about: "TrimPro360 is a specialized management platform for construction profile manufacturers. It combines a vector profile editor (Canvas), a 56-profile catalog, a full-featured order workflow, and production & inventory management — fully bilingual FR/EN.",
