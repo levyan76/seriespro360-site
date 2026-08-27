@@ -362,6 +362,26 @@ function Suite({ lang }) {
 }
 
 function ProductModal({ product, lang, onClose }) {
+  const [notifyEmail, setNotifyEmail] = uS("");
+  const [notifySent, setNotifySent] = uS(false);
+  const [notifySending, setNotifySending] = uS(false);
+
+  const handleNotify = async (e) => {
+    e.preventDefault();
+    if (!notifyEmail) return;
+    setNotifySending(true);
+    const sb = getSupabase();
+    if (sb) {
+      await sb.from("waitlist").insert({ email: notifyEmail, product: product && product.name, lang, created_at: new Date().toISOString() });
+    } else {
+      const subject = encodeURIComponent(`Avertir au lancement : ${product ? product.name : ""}`);
+      const body = encodeURIComponent(`Email: ${notifyEmail}\nProduit: ${product ? product.name : ""}`);
+      window.open(`mailto:yan@seriespro360.com?subject=${subject}&body=${body}`);
+    }
+    setNotifySent(true);
+    setNotifySending(false);
+  };
+
   if (!product) return null;
   const m = product.modal;
   const content = (() => {
@@ -442,11 +462,27 @@ function ProductModal({ product, lang, onClose }) {
             <div className="sp-pm-pricing-note"><Icon name="tag" size={14} />{m.pricing_note}</div>
             {!isLive && (
               <div className="sp-pm-notify">
-                <p>{fr ? "Sois parmi les premiers informés du lancement." : "Be among the first to know when it launches."}</p>
-                <form className="sp-pm-notify-form" onSubmit={e => e.preventDefault()}>
-                  <input type="email" placeholder={fr ? "ton@courriel.com" : "your@email.com"} required />
-                  <button type="submit" className="sp-btn sp-btn-primary">{fr ? "M'avertir" : "Notify me"} <Icon name="bell" size={14} /></button>
-                </form>
+                {notifySent ? (
+                  <p style={{ color: "#10B981", fontWeight: 600 }}>
+                    {fr ? "✅ Tu seras parmi les premiers avertis !" : "✅ You'll be among the first to know!"}
+                  </p>
+                ) : (
+                  <>
+                    <p>{fr ? "Sois parmi les premiers informés du lancement." : "Be among the first to know when it launches."}</p>
+                    <form className="sp-pm-notify-form" onSubmit={handleNotify}>
+                      <input
+                        type="email"
+                        placeholder={fr ? "ton@courriel.com" : "your@email.com"}
+                        required
+                        value={notifyEmail}
+                        onChange={e => setNotifyEmail(e.target.value)}
+                      />
+                      <button type="submit" className="sp-btn sp-btn-primary" disabled={notifySending}>
+                        {notifySending ? "…" : <>{fr ? "M'avertir" : "Notify me"} <Icon name="bell" size={14} /></>}
+                      </button>
+                    </form>
+                  </>
+                )}
               </div>
             )}
           </div>
@@ -783,7 +819,7 @@ function Footer({ lang, logoVariant, setActivePage, onFeedback }) {
           <div>
             <div className="sp-footer-col-title">{t.product}</div>
             <ul>{t.product_links.map((l) => {
-              const appUrls = { "TrimPro360": "https://trimpro360-v3.vercel.app", "CalcuPro360": "https://calcupro360.seriespro360.com" };
+              const appUrls = { "TrimPro360": "https://trimpro360.seriespro360.com", "CalcuPro360": "https://calcupro360.seriespro360.com" };
               return appUrls[l]
                 ? <li key={l}><a href={appUrls[l]} target="_blank" rel="noopener">{l}</a></li>
                 : <li key={l}><a href="#!" onClick={(e) => handlePageClick(e, l)}>{l}</a></li>;
@@ -1021,6 +1057,10 @@ function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
   const [pwd, setPwd] = uS("");
   const [loading, setLoading] = uS(false);
   const [error, setError] = uS(null);
+  const [showForgot, setShowForgot] = uS(false);
+  const [forgotEmail, setForgotEmail] = uS("");
+  const [forgotSent, setForgotSent] = uS(false);
+  const [forgotLoading, setForgotLoading] = uS(false);
 
   // Si la modal s'ouvre suite a un changement de initialTab (ex: nav vers /?signup=1),
   // forcer le tab correspondant + reset error.
@@ -1028,6 +1068,11 @@ function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
     if (open && initialTab) {
       setTab(initialTab === "signup" ? "signup" : "login");
       setError(null);
+    }
+    if (!open) {
+      setShowForgot(false);
+      setForgotSent(false);
+      setForgotEmail("");
     }
   }, [open, initialTab]);
 
@@ -1051,6 +1096,18 @@ function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
     setLoading(false);
     if (err) { setError(err.message); return; }
     if (data.user) setUser(data.user);
+  };
+
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    if (!sb) return;
+    setForgotLoading(true); setError(null);
+    const { error: err } = await sb.auth.resetPasswordForEmail(forgotEmail, {
+      redirectTo: "https://trimpro360.seriespro360.com/reset-password",
+    });
+    setForgotLoading(false);
+    if (err) { setError(err.message); return; }
+    setForgotSent(true);
   };
 
   const handleMicrosoft = async () => {
@@ -1086,7 +1143,51 @@ function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
           <Logo variant="strata" size={28} />
         </div>
 
-        {user ? (
+        {showForgot ? (
+          <>
+            {error && <div className="sp-login-error">{error}</div>}
+            {forgotSent ? (
+              <>
+                <p className="sp-login-note" style={{ textAlign: "center", margin: "8px 0 16px" }}>
+                  {fr
+                    ? <>Courriel envoyé à <strong>{forgotEmail}</strong>. Le lien expire dans 1 heure.</>
+                    : <>Email sent to <strong>{forgotEmail}</strong>. The link expires in 1 hour.</>}
+                </p>
+                <button
+                  type="button"
+                  className="sp-btn sp-btn-primary"
+                  style={{ width: "100%", justifyContent: "center", padding: "13px 16px", fontSize: 14 }}
+                  onClick={() => { setShowForgot(false); setForgotSent(false); setForgotEmail(""); }}
+                >
+                  {fr ? "Retour à la connexion" : "Back to sign in"}
+                </button>
+              </>
+            ) : (
+              <form className="sp-login-form" onSubmit={handleForgotPassword}>
+                <div className="sp-login-field">
+                  <label>{fr ? "Adresse courriel" : "Email address"}</label>
+                  <input
+                    type="email" required
+                    placeholder={fr ? "vous@entreprise.com" : "you@company.com"}
+                    value={forgotEmail}
+                    onChange={e => setForgotEmail(e.target.value)}
+                  />
+                </div>
+                <button type="submit" className="sp-btn sp-btn-primary" disabled={forgotLoading || !forgotEmail} style={{ width: "100%", justifyContent: "center", padding: "13px 16px", fontSize: 14 }}>
+                  {forgotLoading ? (fr ? "Envoi…" : "Sending…") : (fr ? "Envoyer le lien" : "Send link")}
+                </button>
+                <button
+                  type="button"
+                  className="sp-login-note"
+                  style={{ background: "none", border: "none", cursor: "pointer", textAlign: "center", width: "100%", padding: "10px 0 0" }}
+                  onClick={() => { setShowForgot(false); setError(null); }}
+                >
+                  {fr ? "Retour à la connexion" : "Back to sign in"}
+                </button>
+              </form>
+            )}
+          </>
+        ) : user ? (
           <div className="sp-login-dashboard">
             <div className="sp-login-welcome">
               <div className="sp-login-avatar-lg">{(user.email || "?")[0].toUpperCase()}</div>
@@ -1150,7 +1251,16 @@ function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
                 />
               </div>
               <div className="sp-login-field">
-                <label>{fr ? "Mot de passe" : "Password"}</label>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                  <label>{fr ? "Mot de passe" : "Password"}</label>
+                  <button
+                    type="button"
+                    onClick={() => { setShowForgot(true); setError(null); setForgotEmail(email); }}
+                    style={{ background: "none", border: "none", cursor: "pointer", fontSize: 12, color: "var(--sp-text-2)", padding: 0 }}
+                  >
+                    {fr ? "Mot de passe oublié ?" : "Forgot password?"}
+                  </button>
+                </div>
                 <input
                   type="password" required
                   placeholder="••••••••"
