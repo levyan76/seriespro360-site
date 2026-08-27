@@ -75,7 +75,13 @@ function Nav({ lang, setLang, logoVariant, openMobile, setOpenMobile, openLogin,
           <a href="#demo" onClick={() => setOpenMobile(false)}>{t.demo}</a>
           <a href="#pricing" onClick={() => setOpenMobile(false)}>{t.pricing}</a>
           <a href="#faq" onClick={() => setOpenMobile(false)}>{t.faq}</a>
-          <a href="#" className="sp-btn sp-btn-primary" onClick={() => setOpenMobile(false)}>{t.cta}</a>
+          <button
+            className="sp-btn sp-btn-ghost-sm"
+            onClick={() => { setOpenMobile(false); openLogin(); }}
+          >
+            {user ? user.email : t.login}
+          </button>
+          <a href="#suite" className="sp-btn sp-btn-primary" onClick={() => setOpenMobile(false)}>{t.cta}</a>
         </div>
       )}
     </header>
