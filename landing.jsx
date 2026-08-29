@@ -1098,32 +1098,52 @@ function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
     e.preventDefault();
     if (!sb) return;
     setLoading(true); setError(null);
-    const { data, error: err } = await sb.auth.signInWithPassword({ email, password: pwd });
-    setLoading(false);
-    if (err) { setError(err.message); return; }
-    if (data.user) setUser(data.user);
+    try {
+      const { data, error: err } = await sb.auth.signInWithPassword({ email, password: pwd });
+      if (err) { setError(err.message); return; }
+      if (data.user) setUser(data.user);
+    } catch (ex) {
+      // Un rejet non-catch (reseau, CORS, etc.) laissait le bouton bloque sur
+      // "Connexion..." indefiniment sans aucun message — voir setLoading(false)
+      // dans le finally ci-dessous, garanti dans tous les cas desormais.
+      setError(fr ? "Erreur de connexion au serveur. Réessaie." : "Connection error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     if (!sb) return;
     setForgotLoading(true); setError(null);
-    const { error: err } = await sb.auth.resetPasswordForEmail(forgotEmail, {
-      redirectTo: "https://trimpro360-v3.vercel.app/reset-password",
-    });
-    setForgotLoading(false);
-    if (err) { setError(err.message); return; }
-    setForgotSent(true);
+    try {
+      const { error: err } = await sb.auth.resetPasswordForEmail(forgotEmail, {
+        redirectTo: "https://trimpro360-v3.vercel.app/reset-password",
+      });
+      if (err) { setError(err.message); return; }
+      setForgotSent(true);
+    } catch (ex) {
+      setError(fr ? "Erreur de connexion au serveur. Réessaie." : "Connection error. Please try again.");
+    } finally {
+      setForgotLoading(false);
+    }
   };
 
   const handleMicrosoft = async () => {
     if (!sb) return;
     setLoading(true); setError(null);
-    const { error: err } = await sb.auth.signInWithOAuth({
-      provider: "azure",
-      options: { scopes: "email", redirectTo: window.location.origin },
-    });
-    if (err) { setError(err.message); setLoading(false); }
+    try {
+      const { error: err } = await sb.auth.signInWithOAuth({
+        provider: "azure",
+        options: { scopes: "email", redirectTo: window.location.origin },
+      });
+      if (err) { setError(err.message); setLoading(false); }
+      // Pas de setLoading(false) sur succes : signInWithOAuth redirige la page,
+      // le composant est demonte avant qu'on puisse le faire de toute facon.
+    } catch (ex) {
+      setError(fr ? "Erreur de connexion au serveur. Réessaie." : "Connection error. Please try again.");
+      setLoading(false);
+    }
   };
 
   const handleLogout = async () => {
