@@ -226,7 +226,7 @@ const T = {
               "Ajuste les options (pertes, armature, gravier…)",
               "Génère le devis PDF et envoie par courriel",
             ],
-            pricing_note: "Gratuit jusqu'à 5 estimés/mois. Plan Pro à 14,99 $/mois CAD.",
+            pricing_note: "Tarification à annoncer au lancement.",
           },
         },
         {
@@ -652,7 +652,7 @@ const T = {
               "Adjust options (waste, reinforcement, gravel…)",
               "Generate the PDF quote and send by email",
             ],
-            pricing_note: "Free up to 5 estimates/month. Pro plan at $14.99/month CAD.",
+            pricing_note: "Pricing to be announced at launch.",
           },
         },
         {

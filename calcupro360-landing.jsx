@@ -10,6 +10,9 @@
 //   - Tableau pricing reste visible (création d'anchor + capture intérêt)
 // ============================================================
 const PRELAUNCH_MODE = true;
+// Mettre à `true` pour réafficher le tableau de prix + le lien "Tarifs" du menu.
+// La FAQ reste visible dans les deux cas.
+const SHOW_PRICING = false;
 const WAITLIST_EMAIL = "yan@seriespro360.com";
 const PRODUCT_NAME = "CalcuPro360";
 
@@ -78,7 +81,7 @@ function Nav({ lang, setLang, isScrolled }) {
       ),
       h("nav", { className: "cp-nav-links" },
         h("a", { href: "#features" }, t.produits),
-        h("a", { href: "#pricing" }, t.tarifs),
+        SHOW_PRICING && h("a", { href: "#pricing" }, t.tarifs),
         h("a", { href: "#demo" }, t.demo),
         h("a", { href: "#faq" }, t.faq)
       ),
@@ -323,14 +326,14 @@ function Pricing({ lang }) {
     }
   }[lang];
 
-  return h("section", { id: "pricing", className: "cp-section" },
+  return h("section", { id: SHOW_PRICING ? "pricing" : "faq", className: "cp-section" },
     h("div", { className: "cp-container" },
-      h("div", { className: "cp-section-head" },
+      SHOW_PRICING && h("div", { className: "cp-section-head" },
         h("div", { className: "cp-eyebrow" }, t.eyebrow),
         h("h2", { className: "cp-section-title" }, t.title),
         h("p", { className: "cp-section-sub" }, t.subtitle)
       ),
-      h("div", { className: "cp-pricing-grid" },
+      SHOW_PRICING && h("div", { className: "cp-pricing-grid" },
         t.plans.map((plan, i) => h("div", { key: i, className: "cp-pricing-card" + (plan.highlight ? " cp-pricing-card--highlight" : "") },
           PRELAUNCH_MODE && plan.highlight && h("div", { className: "cp-pricing-badge" }, lang === "fr" ? "Offre bientôt disponible" : "Coming soon"),
           h("h3", { className: "cp-pricing-name" }, plan.name),
@@ -347,7 +350,7 @@ function Pricing({ lang }) {
             : h("a", { href: "https://app.seriespro360.com", className: "cp-pricing-cta cp-btn" + (plan.highlight ? " cp-btn-primary" : " cp-btn-secondary") }, plan.cta)
         ))
       ),
-      h("div", { className: "cp-faq" },
+      h("div", { className: "cp-faq", id: SHOW_PRICING ? "faq" : undefined },
         h("h3", { className: "cp-faq-title" }, t.faqTitle),
         t.faq.map((item, i) => h("details", { key: i, className: "cp-faq-item" },
           h("summary", null, item.q, h(Icon, { name: "chevron", size: 16 })),
