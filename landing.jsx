@@ -1135,7 +1135,10 @@ function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
     try {
       const { error: err } = await sb.auth.signInWithOAuth({
         provider: "azure",
-        options: { scopes: "email", redirectTo: window.location.origin },
+        // ?login=1 rouvre la modal au retour → session détectée → choix de l'app.
+        // L'URL doit être dans les Redirect URLs du projet Supabase TrimPro360,
+        // sinon Supabase renvoie vers le Site URL (TrimPro360).
+        options: { scopes: "email", redirectTo: window.location.origin + "/?login=1" },
       });
       if (err) { setError(err.message); setLoading(false); }
       // Pas de setLoading(false) sur succes : signInWithOAuth redirige la page,
