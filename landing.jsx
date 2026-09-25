@@ -1164,6 +1164,9 @@ function LoginModal({ open, onClose, lang, user, setUser, initialTab }) {
   };
 
   const openApp = async (app) => {
+    // Apps sur un autre projet Supabase (ex: CalcuPro360 v3) : la session du
+    // hub n'y est pas valide et /auth/token n'existe pas → page de login.
+    if (!app.sso) { window.open(app.url + "/login", "_blank"); return; }
     if (!sb) { window.open(app.url, "_blank"); return; }
     const { data } = await sb.auth.getSession();
     const token = data?.session?.access_token;

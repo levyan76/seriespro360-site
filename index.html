@@ -44,9 +44,9 @@
       rel="stylesheet" />
   </noscript>
 
-  <link rel="preload" href="dist/app.min.css?v=mudbt7ft" as="style" />
-  <link rel="stylesheet" href="dist/app.min.css?v=mudbt7ft" />
-  <link rel="preload" href="dist/app.min.js?v=mudbt7ft" as="script" />
+  <link rel="preload" href="dist/app.min.css?v=mugc57wj" as="style" />
+  <link rel="stylesheet" href="dist/app.min.css?v=mugc57wj" />
+  <link rel="preload" href="dist/app.min.js?v=mugc57wj" as="script" />
 
   <script type="application/ld+json">
 {
@@ -90,9 +90,11 @@
     window.SP_CONFIG = {
       supabaseUrl: "https://mebtthvzzlnmqbzunijf.supabase.co",
       supabaseKey: "sb_publishable_0DTZiYw_fg3FrjeIURU64w_m6BLMUd8",
+      // sso: true = l'app partage CE projet Supabase et a la route /auth/token
+      // → le hub lui transmet la session. Sinon : ouverture sur sa page /login.
       apps: [
         { name: "CalcuPro360", url: "https://calcupro360.seriespro360.com",  color: "#FF6B1A", icon: "calculator", plan: "calcupro360" },
-        { name: "TrimPro360",  url: "https://trimpro360-v3.vercel.app",   color: "#3B82F6", icon: "package",    plan: "trimpro360"  },
+        { name: "TrimPro360",  url: "https://trimpro360-v3.vercel.app",   color: "#3B82F6", icon: "package",    plan: "trimpro360", sso: true },
       ]
     };
   </script>
@@ -106,7 +108,7 @@
     crossorigin="anonymous"></script>
 
   <!-- Pre-compiled JSX bundle (no Babel runtime needed) -->
-  <script defer src="dist/app.min.js?v=mudbt7ft"></script>
+  <script defer src="dist/app.min.js?v=mugc57wj"></script>
 
 </body>
 
