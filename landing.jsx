@@ -966,6 +966,15 @@ function App() {
       setInitialLoginTab("login");
       setLoginOpen(true);
     }
+    // Retirer le param de l'URL une fois lu, sinon chaque F5 rouvre la modal
+    // (ex: retour OAuth Microsoft sur /?login=1).
+    if (signup || login) {
+      params.delete("signup");
+      params.delete("login");
+      const qs = params.toString();
+      // Garder le hash : le retour OAuth Supabase y dépose la session.
+      window.history.replaceState(null, "", window.location.pathname + (qs ? "?" + qs : "") + window.location.hash);
+    }
   }, []);
 
   // Apply accent + density CSS vars
